@@ -13,7 +13,7 @@ useSeoMeta({
 
 const navItems = [
   { label: 'Home', to: '#top', icon: 'i-lucide-home' },
-  { label: 'Art Programs', to: '#programs', icon: 'i-lucide-palette' },
+  { label: 'Art Programs', to: '/art-programs', icon: 'i-lucide-palette' },
   { label: 'Wellness', to: '#programs', icon: 'i-lucide-leaf' },
   { label: 'Schedules', to: '#contact', icon: 'i-lucide-calendar-days' },
   { label: 'Resources', to: '/docs/manual/en/getting-started/installation', icon: 'i-lucide-book-open' },
@@ -41,6 +41,7 @@ const programs = [
     tint: 'rose',
     description: 'For children, teens, and adults',
     tagline: 'Create • Explore • Grow',
+    to: '/art-programs',
   },
   {
     title: 'Wellness Programs',
@@ -49,6 +50,7 @@ const programs = [
     tint: 'violet',
     description: 'Yoga, community, and well-being',
     tagline: 'Breathe • Connect • Flourish',
+    to: '#contact',
   },
 ]
 
@@ -103,7 +105,7 @@ const contactItems = [
 const footerLinks = [
   { label: 'Home', to: '#top' },
   { label: 'About', to: '#studio' },
-  { label: 'Art Programs', to: '#programs' },
+  { label: 'Art Programs', to: '/art-programs' },
   { label: 'Wellness', to: '#programs' },
   { label: 'Resources', to: '/docs/manual/en/getting-started/installation' },
   { label: 'Contact', to: '#contact' },
@@ -291,7 +293,7 @@ const isAssistantOpen = ref(false)
                 {{ program.tagline }}
               </p>
               <NuxtLink
-                to="#contact"
+                :to="program.to"
                 class="mt-7 inline-flex items-center gap-3 rounded-full px-10 py-3 text-lg font-bold text-white shadow-lg transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
                 :class="program.tint === 'rose' ? 'bg-[#df8f9a] shadow-[#df8f9a]/25' : 'bg-[#9678bd] shadow-[#9678bd]/25'"
               >
