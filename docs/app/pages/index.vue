@@ -140,17 +140,13 @@ const socialLinks = [
           aria-label="XinYi Class Home"
           class="flex items-center gap-2 text-[#4e3c71] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
         >
-          <span
-            class="petal-logo"
-            aria-hidden="true"
+          <img
+            src="/home/logo.png"
+            alt="XinYi Class"
+            class="h-14 w-auto object-contain sm:h-16"
+            loading="eager"
+            decoding="async"
           >
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-          </span>
-          <span class="hidden text-sm font-semibold tracking-[0.28em] sm:block">Xīn Yì</span>
         </NuxtLink>
 
         <div class="hidden items-center gap-1 rounded-full bg-white/50 p-1 md:flex">
@@ -200,7 +196,7 @@ const socialLinks = [
         </div>
 
         <div class="pb-2 text-center lg:pb-6">
-          <h1 class="font-serif text-4xl font-semibold tracking-tight text-[#4d4166] sm:text-5xl lg:text-6xl">
+          <h1 class="hero-title font-serif font-semibold tracking-tight text-[#4d4166]">
             Art <span class="mx-2 text-[#735d91]">•</span> Wellness <span class="mx-2 text-[#735d91]">•</span> Community
           </h1>
           <p class="mt-5 font-serif text-2xl italic text-[#8b6aa3] sm:text-3xl">
@@ -224,9 +220,9 @@ const socialLinks = [
           <div class="mt-10 rounded-3xl bg-white/75 p-4 text-left shadow-[0_18px_50px_rgba(128,91,145,0.16)] ring-1 ring-white/80 backdrop-blur sm:p-5">
             <div class="flex flex-col gap-4 sm:flex-row sm:items-center">
               <img
-                src="/logo/logo-dark.svg"
+                src="/home/logo.png"
                 alt="XinYi Class Logo"
-                class="h-20 w-20 rounded-2xl bg-[#fff8f8] p-3 ring-1 ring-[#eaddec]"
+                class="h-20 w-20 rounded-2xl bg-[#fff8f8] object-contain p-2 ring-1 ring-[#eaddec]"
               >
               <div class="min-w-0 text-sm leading-6 text-[#40335f]">
                 <p class="font-semibold">
@@ -311,7 +307,7 @@ const socialLinks = [
       class="relative px-4 py-14 sm:px-6 lg:px-8"
     >
       <div class="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[0.78fr_1.22fr]">
-        <div class="text-center lg:text-left">
+        <div class="text-center">
           <div
             class="mb-4 hidden text-[#c9a8d6] lg:block"
             aria-hidden="true"
@@ -322,8 +318,8 @@ const socialLinks = [
             Welcome to
             <span class="block text-[#df838d]">Our Studio</span>
           </h2>
-          <div class="section-divider mt-5 lg:mx-0" />
-          <p class="mx-auto mt-6 max-w-sm text-base leading-7 text-[#4f455b] lg:mx-0">
+          <div class="section-divider mx-auto mt-5" />
+          <p class="mx-auto mt-6 max-w-sm text-base leading-7 text-[#4f455b]">
             A warm, inspiring space designed for creativity, mindfulness, and meaningful connection.
           </p>
           <div class="mt-9 grid grid-cols-2 gap-5 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
@@ -480,16 +476,13 @@ const socialLinks = [
       <div class="relative mx-auto grid max-w-6xl gap-10 border-b border-[#dacbe6] pb-10 md:grid-cols-[1.1fr_0.8fr_1fr_0.8fr]">
         <div>
           <div class="flex items-center gap-3">
-            <span
-              class="petal-logo petal-logo-large"
-              aria-hidden="true"
+            <img
+              src="/home/logo.png"
+              alt=""
+              class="h-16 w-auto object-contain"
+              loading="lazy"
+              decoding="async"
             >
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-            </span>
             <div>
               <h2 class="font-serif text-2xl font-semibold text-[#594178]">
                 XinYi Class
@@ -598,6 +591,12 @@ const socialLinks = [
   font-family: Georgia, "Times New Roman", serif;
 }
 
+.hero-title {
+  font-size: clamp(1.45rem, 4.1vw, 3.2rem);
+  line-height: 1.05;
+  white-space: nowrap;
+}
+
 .watercolor {
   position: absolute;
   width: 22rem;
@@ -633,58 +632,5 @@ const socialLinks = [
   content: "";
   background: radial-gradient(circle at 50% 50%, #c8a9d8 0 28%, transparent 29%), radial-gradient(circle at 20% 30%, #e59aa5 0 18%, transparent 19%), radial-gradient(circle at 80% 30%, #e59aa5 0 18%, transparent 19%);
   transform: translate(-50%, -50%);
-}
-
-.petal-logo {
-  position: relative;
-  display: inline-block;
-  width: 2.5rem;
-  height: 2.5rem;
-}
-
-.petal-logo-large {
-  width: 3.25rem;
-  height: 3.25rem;
-}
-
-.petal-logo span {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 0.68rem;
-  height: 1.35rem;
-  border-radius: 9999px 9999px 0 9999px;
-  background: #df8f9a;
-  transform-origin: 50% 100%;
-}
-
-.petal-logo-large span {
-  width: 0.86rem;
-  height: 1.7rem;
-}
-
-.petal-logo span:nth-child(1) {
-  background: #e8949d;
-  transform: translate(-50%, -95%) rotate(0deg);
-}
-
-.petal-logo span:nth-child(2) {
-  background: #f1be6a;
-  transform: translate(-50%, -95%) rotate(72deg);
-}
-
-.petal-logo span:nth-child(3) {
-  background: #91b873;
-  transform: translate(-50%, -95%) rotate(144deg);
-}
-
-.petal-logo span:nth-child(4) {
-  background: #9f82bd;
-  transform: translate(-50%, -95%) rotate(216deg);
-}
-
-.petal-logo span:nth-child(5) {
-  background: #d5a1c6;
-  transform: translate(-50%, -95%) rotate(288deg);
 }
 </style>

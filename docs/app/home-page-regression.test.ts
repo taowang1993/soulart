@@ -12,6 +12,7 @@ const expectedAssets = [
   'art-program.png',
   'card-from-doris.jpg',
   'card-from-jasmine.jpg',
+  'logo.png',
   'musical-hero.jpg',
   'new-classroom.jpg',
   'qr-code.jpg',
@@ -42,9 +43,10 @@ test('home page owns its marketing chrome without changing docs routes', () => {
   const source = readHomePage()
 
   assert.match(source, /definePageMeta\(\{[\s\S]*header:\s*false[\s\S]*footer:\s*false[\s\S]*\}\)/)
-  assert.match(source, /Art[\s\S]*Wellness[\s\S]*Community/)
+  assert.match(source, /class="hero-title[^"]*"[\s\S]*Art[\s\S]*Wellness[\s\S]*Community/)
+  assert.match(source, /\.hero-title\s*\{[\s\S]*white-space:\s*nowrap/)
   assert.match(source, /Explore Our Programs/)
-  assert.match(source, /Welcome to\s*<[^>]+>\s*Our Studio/)
+  assert.match(source, /<div class="text-center">[\s\S]*Welcome to\s*<[^>]+>\s*Our Studio[\s\S]*A warm, inspiring space designed for creativity, mindfulness, and meaningful connection\./)
   assert.match(source, /Why Families Choose\s*<[^>]+>\s*XinYi/)
   assert.match(source, /Handwritten Memories/)
   assert.doesNotMatch(source, /<KnowledgeBaseDirectory/)
