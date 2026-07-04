@@ -153,6 +153,34 @@ onBeforeUnmount(() => {
         leave-from-class="translate-y-0 opacity-100"
         leave-to-class="translate-y-3 opacity-0"
       >
+        <button
+          v-if="!open"
+          type="button"
+          class="group fixed bottom-4 right-4 z-[70] flex size-16 items-center justify-center rounded-full border border-[#dccce8] bg-white/95 p-2 shadow-[0_16px_45px_rgba(64,51,95,0.24)] transition hover:-translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
+          aria-label="Talk with AI Assistant"
+          @click="open = true"
+        >
+          <img
+            src="/home/logo.png"
+            alt=""
+            class="h-full w-full object-contain"
+            loading="lazy"
+            decoding="async"
+          >
+          <span class="pointer-events-none absolute bottom-full right-0 mb-3 whitespace-nowrap rounded-full bg-[#594178] px-3 py-1.5 text-xs font-semibold text-white opacity-0 shadow-lg transition group-hover:opacity-100 group-focus-visible:opacity-100">
+            Talk with AI Assistant
+          </span>
+        </button>
+      </Transition>
+
+      <Transition
+        enter-active-class="transition duration-200 ease-out"
+        enter-from-class="translate-y-3 opacity-0"
+        enter-to-class="translate-y-0 opacity-100"
+        leave-active-class="transition duration-150 ease-in"
+        leave-from-class="translate-y-0 opacity-100"
+        leave-to-class="translate-y-3 opacity-0"
+      >
         <section
           v-if="open"
           class="fixed bottom-4 right-4 z-[70] flex h-[min(680px,calc(100dvh-2rem))] w-[min(420px,calc(100vw-2rem))] flex-col overflow-hidden rounded-3xl border border-[#dccce8] bg-white/95 text-[#40335f] shadow-[0_24px_80px_rgba(64,51,95,0.25)] backdrop-blur"
@@ -161,20 +189,18 @@ onBeforeUnmount(() => {
         >
           <header class="flex h-16 shrink-0 items-center justify-between border-b border-[#eaddec] px-4">
             <div class="flex items-center gap-2">
-              <span class="flex size-9 items-center justify-center rounded-full bg-[#f3e8ff] text-[#8b6bb0]">
-                <UIcon
-                  name="i-lucide-bot"
-                  class="size-5"
-                />
+              <span class="flex size-10 items-center justify-center rounded-full bg-white p-1 shadow-sm ring-1 ring-[#eaddec]">
+                <img
+                  src="/home/logo.png"
+                  alt=""
+                  class="h-full w-full object-contain"
+                  loading="lazy"
+                  decoding="async"
+                >
               </span>
-              <div>
-                <h2 class="text-base font-semibold leading-5 text-[#594178]">
-                  XinYi AI Assistant
-                </h2>
-                <p class="text-xs text-[#7a6b8b]">
-                  Searches all knowledge bases
-                </p>
-              </div>
+              <h2 class="text-base font-semibold leading-5 text-[#594178]">
+                XinYi AI Assistant
+              </h2>
             </div>
             <div class="flex items-center gap-1">
               <UButton
@@ -256,7 +282,7 @@ onBeforeUnmount(() => {
               </div>
             </div>
 
-            <div class="w-full shrink-0 border-t border-[#eaddec] p-3">
+            <div class="w-full shrink-0 p-3">
               <UChatPrompt
                 v-model="input"
                 :rows="1"

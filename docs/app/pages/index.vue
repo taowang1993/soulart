@@ -494,20 +494,6 @@ const isAssistantOpen = ref(false)
               </p>
             </div>
           </div>
-          <button
-            type="button"
-            class="mt-8 inline-flex items-center gap-2 rounded-full bg-[#a783c4] px-6 py-3 text-sm font-bold text-white shadow-lg shadow-[#a783c4]/25 transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
-            @click="isAssistantOpen = true"
-          >
-            <UIcon
-              name="i-lucide-bot"
-              class="size-4"
-            />
-            Talk with AI Assistant
-          </button>
-          <p class="mt-4 max-w-xs text-sm leading-6 text-[#7a6b8b]">
-            Ask about classes, schedules, age groups, and upcoming events.
-          </p>
         </div>
 
         <div>

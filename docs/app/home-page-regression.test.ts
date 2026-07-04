@@ -65,18 +65,22 @@ test('program images keep the design crop ratio', () => {
   assert.doesNotMatch(source, /class="h-72 w-full object-cover/)
 })
 
-test('home page opens a bottom-right site-wide assistant chat', () => {
+test('home page opens a floating bottom-right site-wide assistant chat', () => {
   const source = readHomePage()
   const assistant = readHomeAssistant()
 
   assert.match(source, /const isAssistantOpen = ref\(false\)/)
   assert.match(source, /<HomeAssistantChat\s+v-model:open="isAssistantOpen"\s+\/>/)
-  assert.match(source, /type="button"[\s\S]*@click="isAssistantOpen = true"[\s\S]*Talk with AI Assistant/)
+  assert.doesNotMatch(source, /Talk with AI Assistant/)
   assert.match(assistant, /new Chat\(/)
   assert.match(assistant, /DefaultChatTransport/)
   assert.match(assistant, /config\.public\.assistant\.apiPath/)
   assert.match(assistant, /'X-TockDocs-Scope': 'site'/)
+  assert.match(assistant, /aria-label="Talk with AI Assistant"/)
+  assert.match(assistant, /src="\/home\/logo\.png"/)
   assert.match(assistant, /fixed bottom-4 right-4/)
+  assert.doesNotMatch(assistant, /Searches all knowledge bases/)
+  assert.doesNotMatch(assistant, /border-t border-\[#eaddec\]/)
 })
 
 test('home page owns its marketing chrome without changing docs routes', () => {
