@@ -211,6 +211,7 @@ test('wellness page keeps reference image treatments', () => {
   assert.match(source, /md:w-\[64%\]/)
   assert.doesNotMatch(source, /wellness-hero-card/)
   assert.match(source, /class="wellness-card-photo aspect-\[585\/400\] w-full object-cover"/)
+  assert.match(source, /sm:grid-cols-\[9rem_1fr\]/)
   assert.match(source, /class="sound-photo-frame"/)
   assert.match(source, /class="silver-photo-frame"/)
   assert.match(source, /rounded-\[2rem\]/)

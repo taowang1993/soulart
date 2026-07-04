@@ -453,7 +453,7 @@ const isAssistantOpen = ref(false)
                 <div
                   v-for="item in retreatSchedule"
                   :key="item.label"
-                  class="grid gap-2 border-b border-[#dfd2bd] pb-4 last:border-b-0 last:pb-0 sm:grid-cols-[7rem_1fr]"
+                  class="grid gap-2 border-b border-[#dfd2bd] pb-4 last:border-b-0 last:pb-0 sm:grid-cols-[9rem_1fr]"
                 >
                   <dt class="font-bold uppercase tracking-[0.18em] text-[#8aa06f]">
                     {{ item.label }}
