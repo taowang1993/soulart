@@ -39,30 +39,31 @@ const referenceCopy = [
   'We offer a variety of yoga practices designed for all levels and all stages of life.',
   'Come as you are. Grow at your own pace.',
   'Yin Yoga',
-  'Slow down and soften deeply.',
-  'A gentle, floor-based practice with long-held poses that target fascia, joints, and deep connective tissues.',
-  'Great for relaxation, flexibility, and emotional release.',
+  'Slow down. Release tension. Restore balance.',
+  'Deep stretch & fascia release',
+  'Calms the nervous system',
   'Flow Yoga',
-  'Move with breath. Build strength and ease.',
-  'A dynamic, breath-led practice that links poses into smooth, flowing sequences.',
-  'Ideal for increasing energy, balance, mobility, and body awareness.',
+  'Build strength, flexibility and mindful movement.',
+  'Vinyasa flow',
+  'Energy & endurance',
   'Chair Yoga',
-  'Gentle movement with support.',
-  'A safe, accessible yoga practice using a chair for balance, stability, and comfort.',
-  'Perfect for seniors, beginners, people with limited mobility, or anyone seeking a softer practice.',
+  'Gentle movement for every body and every age.',
+  'Joint-friendly',
+  'Improve mobility & balance',
   'Inside Flow',
-  'Where music, movement and emotion meet.',
-  'A graceful flow practice that moves with modern music, building a seamless sequence breath by breath.',
-  'A beautiful class for expression, coordination, and emotional connection.',
-  'Meditation & Sound Healing',
+  'Yoga meets dance. Move, express, and flow from within.',
+  'Creative & expressive',
+  'Synchronize breath & movement',
+  'Pause. Breathe. Come Home to Yourself.',
   'You don’t need to silence the mind. You just need to listen with kindness.',
   'Meditation helps us slow down, breathe deeply, and reconnect with the present moment.',
   'Sound healing uses vibration from singing bowls, gentle instruments, and soothing tones to relax the body and calm the nervous system.',
   'Together, meditation and sound invite you into deep rest, inner clarity, and emotional balance.',
   'Every breath is a return. Every moment is enough.',
+  'Yoga Nidra',
   'Deep guided relaxation to restore body and mind while staying awake.',
+  'Sound Bath',
   'Healing vibrations that balance your energy and calm the nervous system.',
-  'Mindfulness Practice',
   'Simple practices to help you cultivate awareness, presence and peace.',
   '90 Minutes',
   'Time to unwind, reset and restore.',
@@ -164,7 +165,7 @@ test('wellness page owns its marketing chrome and preserves assistant', () => {
   assert.match(source, /definePageMeta\(\{[\s\S]*header:\s*false[\s\S]*footer:\s*false[\s\S]*\}\)/)
   assert.match(source, /Wellness[\s\S]*Move\. Breathe\. Create\./)
   assert.match(source, /Yoga Journey/)
-  assert.match(source, /Meditation & Sound Healing/)
+  assert.match(source, /Pause\. Breathe\. Come Home to Yourself\./)
   assert.match(source, /Day Retreat/)
   assert.match(source, /Silver Club[\s\S]*45\+/)
   assert.match(source, /Ready to Begin\?/)
@@ -193,16 +194,25 @@ test('home and art pages link to the wellness route', () => {
 test('wellness page keeps reference image treatments', () => {
   const source = readWellnessPage()
 
-  assert.match(source, /class="wellness-hero-card"/)
-  assert.match(source, /class="wellness-card-photo h-48 w-full object-cover"/)
+  assert.match(source, /wellness-hero-banner/)
+  assert.doesNotMatch(source, /wellness-hero-card/)
+  assert.match(source, /class="wellness-card-photo aspect-\[585\/400\] w-full object-cover"/)
   assert.match(source, /class="sound-photo-frame"/)
   assert.match(source, /class="silver-photo-frame"/)
   assert.match(source, /rounded-\[2rem\]/)
   assert.match(source, /object-cover/)
 })
 
+test('wellness page uses the reference section headings', () => {
+  const source = readWellnessPage()
+
+  assert.match(source, /<h2 class="[^"]*">\s*Practice With Us\s*<\/h2>/)
+  assert.match(source, /Pause\. Breathe\. Come Home to Yourself\./)
+  assert.doesNotMatch(source, /<h2 class="[^"]*">\s*Yoga Journey\s*<\/h2>/)
+})
+
 test('wellness card images are exact crops from the reference design', () => {
-  assert.deepEqual(readJpegSize('hero-wellness.jpg'), { width: 1300, height: 1040 })
+  assert.deepEqual(readJpegSize('hero-wellness.jpg'), { width: 2404, height: 1000 })
   assert.deepEqual(readJpegSize('yin-yoga.jpg'), { width: 585, height: 400 })
   assert.deepEqual(readJpegSize('flow-yoga.jpg'), { width: 585, height: 400 })
   assert.deepEqual(readJpegSize('chair-yoga.jpg'), { width: 585, height: 400 })

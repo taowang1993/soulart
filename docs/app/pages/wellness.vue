@@ -48,46 +48,42 @@ const yogaCards = [
   {
     title: 'Yin Yoga',
     image: '/wellness/yin-yoga.jpg',
-    lead: 'Slow down and soften deeply.',
-    text: 'A gentle, floor-based practice with long-held poses that target fascia, joints, and deep connective tissues.',
-    note: 'Great for relaxation, flexibility, and emotional release.',
+    lead: 'Slow down. Release tension. Restore balance.',
+    points: ['Deep stretch & fascia release', 'Calms the nervous system', 'All levels welcome'],
   },
   {
     title: 'Flow Yoga',
     image: '/wellness/flow-yoga.jpg',
-    lead: 'Move with breath. Build strength and ease.',
-    text: 'A dynamic, breath-led practice that links poses into smooth, flowing sequences.',
-    note: 'Ideal for increasing energy, balance, mobility, and body awareness.',
+    lead: 'Build strength, flexibility and mindful movement.',
+    points: ['Vinyasa flow', 'Energy & endurance', 'All levels welcome'],
   },
   {
     title: 'Chair Yoga',
     image: '/wellness/chair-yoga.jpg',
-    lead: 'Gentle movement with support.',
-    text: 'A safe, accessible yoga practice using a chair for balance, stability, and comfort.',
-    note: 'Perfect for seniors, beginners, people with limited mobility, or anyone seeking a softer practice.',
+    lead: 'Gentle movement for every body and every age.',
+    points: ['Joint-friendly', 'Improve mobility & balance', '50+ and beginners welcome'],
   },
   {
     title: 'Inside Flow',
     image: '/wellness/inside-flow.jpg',
-    lead: 'Where music, movement and emotion meet.',
-    text: 'A graceful flow practice that moves with modern music, building a seamless sequence breath by breath.',
-    note: 'A beautiful class for expression, coordination, and emotional connection.',
+    lead: 'Yoga meets dance. Move, express, and flow from within.',
+    points: ['Creative & expressive', 'Synchronize breath & movement', 'All levels welcome'],
   },
 ]
 
 const soundCards = [
   {
-    title: 'Meditation',
+    title: 'Yoga Nidra',
     text: 'Deep guided relaxation to restore body and mind while staying awake.',
     icon: 'i-lucide-sparkles',
   },
   {
-    title: 'Sound Healing',
+    title: 'Sound Bath',
     text: 'Healing vibrations that balance your energy and calm the nervous system.',
     icon: 'i-lucide-music-2',
   },
   {
-    title: 'Mindfulness Practice',
+    title: 'Meditation',
     text: 'Simple practices to help you cultivate awareness, presence and peace.',
     icon: 'i-lucide-leaf',
   },
@@ -207,8 +203,19 @@ const isAssistantOpen = ref(false)
         </NuxtLink>
       </nav>
 
-      <div class="mx-auto grid max-w-6xl items-center gap-12 pt-14 lg:grid-cols-[0.82fr_1.18fr] lg:pt-20">
-        <div class="text-center lg:text-left">
+      <div class="wellness-hero-banner -mx-4 mt-6 sm:-mx-6 lg:-mx-8">
+        <img
+          src="/wellness/hero-wellness.jpg"
+          alt="Woman practicing yoga in a peaceful studio"
+          class="absolute inset-0 h-full w-full object-cover object-[62%_50%]"
+          loading="eager"
+          decoding="async"
+        >
+        <div
+          class="absolute inset-0 bg-[linear-gradient(90deg,rgba(248,239,226,0.92)_0%,rgba(248,239,226,0.78)_34%,rgba(248,239,226,0.18)_62%,rgba(248,239,226,0)_100%)]"
+          aria-hidden="true"
+        />
+        <div class="relative z-10 max-w-xl px-6 py-20 text-center sm:px-12 sm:py-28 lg:px-20 lg:py-36 lg:text-left">
           <p class="text-sm font-bold uppercase tracking-[0.35em] text-[#7aa984]">
             XinYi Wellness
           </p>
@@ -236,19 +243,9 @@ const isAssistantOpen = ref(false)
             </NuxtLink>
           </div>
         </div>
-
-        <div class="wellness-hero-card">
-          <img
-            src="/wellness/hero-wellness.jpg"
-            alt="Woman practicing yoga in a peaceful studio"
-            class="h-full w-full object-cover object-center"
-            loading="eager"
-            decoding="async"
-          >
-        </div>
       </div>
 
-      <div class="mx-auto mt-14 grid max-w-6xl gap-5 md:grid-cols-2 lg:grid-cols-4">
+      <div class="mx-auto mt-12 grid max-w-[84rem] gap-5 md:grid-cols-2 lg:grid-cols-4">
         <article
           v-for="program in programCards"
           :key="program.title"
@@ -274,13 +271,14 @@ const isAssistantOpen = ref(false)
       id="practice"
       class="bg-[#f9f1e7] px-4 py-16 sm:px-6 lg:px-8"
     >
-      <div class="mx-auto max-w-6xl">
-        <div class="mx-auto max-w-3xl text-center">
-          <p class="text-sm font-bold uppercase tracking-[0.3em] text-[#8aa06f]">
-            Practice With Us
-          </p>
+      <div class="mx-auto max-w-[84rem]">
+        <div class="mx-auto max-w-4xl text-center">
+          <UIcon
+            name="i-lucide-sprout"
+            class="mx-auto size-10 text-[#8aa06f]"
+          />
           <h2 class="mt-3 font-serif text-4xl font-semibold text-[#4f4a64] sm:text-5xl">
-            Yoga Journey
+            Practice With Us
           </h2>
           <div class="wellness-divider mx-auto mt-5" />
           <p class="mt-6 text-lg leading-8 text-[#6b6071]">
@@ -294,7 +292,7 @@ const isAssistantOpen = ref(false)
           </p>
         </div>
 
-        <div class="mt-12 grid gap-7 md:grid-cols-2 lg:grid-cols-4">
+        <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           <article
             v-for="card in yogaCards"
             :key="card.title"
@@ -303,7 +301,7 @@ const isAssistantOpen = ref(false)
             <img
               :src="card.image"
               :alt="`${card.title} at XinYi Class`"
-              class="wellness-card-photo h-48 w-full object-cover"
+              class="wellness-card-photo aspect-[585/400] w-full object-cover"
               loading="lazy"
               decoding="async"
             >
@@ -311,15 +309,19 @@ const isAssistantOpen = ref(false)
               <h3 class="font-serif text-2xl font-semibold text-[#596d4f]">
                 {{ card.title }}
               </h3>
-              <p class="mt-3 font-semibold text-[#7a684b]">
+              <p class="mt-3 font-semibold leading-7 text-[#7a684b]">
                 {{ card.lead }}
               </p>
-              <p class="mt-3 text-sm leading-6 text-[#6b6071]">
-                {{ card.text }}
-              </p>
-              <p class="mt-3 text-sm leading-6 text-[#6b6071]">
-                {{ card.note }}
-              </p>
+              <ul class="mt-5 space-y-2 text-sm leading-6 text-[#6b6071]">
+                <li
+                  v-for="point in card.points"
+                  :key="point"
+                  class="flex gap-2"
+                >
+                  <span class="mt-2 size-1.5 shrink-0 rounded-full bg-[#8aa06f]" />
+                  <span>{{ point }}</span>
+                </li>
+              </ul>
             </div>
           </article>
         </div>
@@ -331,20 +333,13 @@ const isAssistantOpen = ref(false)
         class="absolute right-[-6rem] top-[-6rem] h-72 w-72 rounded-full bg-[#d8cbea]/40 blur-3xl"
         aria-hidden="true"
       />
-      <div class="relative mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[0.92fr_1.08fr]">
-        <div class="sound-photo-frame">
-          <img
-            src="/wellness/sound-healing-session.jpg"
-            alt="Sound healing session with singing bowls"
-            class="h-full w-full object-cover object-center"
-            loading="lazy"
-            decoding="async"
-          >
-        </div>
-
-        <div>
-          <h2 class="font-serif text-4xl font-semibold leading-tight text-[#4f4a64] sm:text-5xl">
-            Meditation & Sound Healing
+      <div class="relative mx-auto grid max-w-[84rem] items-center gap-10 lg:grid-cols-[1fr_0.95fr]">
+        <div class="rounded-[2rem] bg-white/72 p-8 shadow-[0_18px_50px_rgba(85,93,68,0.12)] ring-1 ring-white/80 lg:p-10">
+          <p class="text-sm font-bold uppercase tracking-[0.3em] text-[#8a7aae]">
+            Meditation
+          </p>
+          <h2 class="mt-3 font-serif text-4xl font-semibold leading-tight text-[#4f4a64] sm:text-5xl">
+            Pause. Breathe. Come Home to Yourself.
           </h2>
           <p class="mt-5 font-serif text-2xl italic text-[#7f9467]">
             You don’t need to silence the mind. You just need to listen with kindness.
@@ -361,6 +356,16 @@ const isAssistantOpen = ref(false)
           <p class="mt-6 font-serif text-2xl italic text-[#8a7aae]">
             Every breath is a return. Every moment is enough.
           </p>
+        </div>
+
+        <div class="sound-photo-frame">
+          <img
+            src="/wellness/sound-healing-session.jpg"
+            alt="Sound healing session with singing bowls"
+            class="h-full w-full object-cover object-center"
+            loading="lazy"
+            decoding="async"
+          >
         </div>
       </div>
 
@@ -684,13 +689,18 @@ const isAssistantOpen = ref(false)
   font-family: Georgia, "Times New Roman", serif;
 }
 
-.wellness-hero-card {
+.wellness-hero-banner {
   position: relative;
-  min-height: 34rem;
+  min-height: clamp(30rem, 39vw, 38rem);
   overflow: hidden;
-  border: 0.75rem solid rgba(255, 255, 255, 0.72);
-  border-radius: 2.5rem 2.5rem 7rem 2.5rem;
-  box-shadow: 0 2rem 5rem rgba(83, 98, 74, 0.18);
+  background: #e9dfd0;
+  box-shadow: 0 2rem 5rem rgba(83, 98, 74, 0.16);
+}
+
+@media (max-width: 767px) {
+  .wellness-hero-banner {
+    min-height: 42rem;
+  }
 }
 
 .wellness-divider {
