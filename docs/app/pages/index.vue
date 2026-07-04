@@ -14,7 +14,7 @@ useSeoMeta({
 const navItems = [
   { label: 'Home', to: '#top', icon: 'i-lucide-home' },
   { label: 'Art Programs', to: '/art-programs', icon: 'i-lucide-palette' },
-  { label: 'Wellness', to: '#programs', icon: 'i-lucide-leaf' },
+  { label: 'Wellness', to: '/wellness', icon: 'i-lucide-leaf' },
   { label: 'Schedules', to: '#contact', icon: 'i-lucide-calendar-days' },
   { label: 'Resources', to: '/docs/manual/en/getting-started/installation', icon: 'i-lucide-book-open' },
   { label: 'About', to: '#studio', icon: 'i-lucide-heart' },
@@ -50,7 +50,7 @@ const programs = [
     tint: 'violet',
     description: 'Yoga, community, and well-being',
     tagline: 'Breathe • Connect • Flourish',
-    to: '#contact',
+    to: '/wellness',
   },
 ]
 
@@ -106,7 +106,7 @@ const footerLinks = [
   { label: 'Home', to: '#top' },
   { label: 'About', to: '#studio' },
   { label: 'Art Programs', to: '/art-programs' },
-  { label: 'Wellness', to: '#programs' },
+  { label: 'Wellness', to: '/wellness' },
   { label: 'Resources', to: '/docs/manual/en/getting-started/installation' },
   { label: 'Contact', to: '#contact' },
 ]

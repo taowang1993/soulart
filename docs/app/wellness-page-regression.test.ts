@@ -1,0 +1,85 @@
+import assert from 'node:assert/strict'
+import { existsSync, readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
+import { test } from 'node:test'
+import { fileURLToPath } from 'node:url'
+
+const repoRoot = resolve(fileURLToPath(import.meta.url), '../../..')
+const wellnessPagePath = resolve(repoRoot, 'docs/app/pages/wellness.vue')
+const homePagePath = resolve(repoRoot, 'docs/app/pages/index.vue')
+const artPagePath = resolve(repoRoot, 'docs/app/pages/art-programs.vue')
+const wellnessAssetPath = resolve(repoRoot, 'docs/public/wellness')
+
+const expectedAssets = [
+  'meditation.png',
+  'yoga-program.jpg',
+  'sound-healing.png',
+  'outdoor-yoga.jpg',
+  'yoga-group.png',
+]
+
+function readWellnessPage() {
+  assert.ok(existsSync(wellnessPagePath), 'docs app must provide /wellness at docs/app/pages/wellness.vue')
+  return readFileSync(wellnessPagePath, 'utf8')
+}
+
+function readPngSize(asset: string) {
+  const source = readFileSync(resolve(wellnessAssetPath, asset))
+  assert.equal(source.subarray(1, 4).toString('ascii'), 'PNG')
+  return { width: source.readUInt32BE(16), height: source.readUInt32BE(20) }
+}
+
+test('wellness assets are copied into public wellness directory', () => {
+  for (const asset of expectedAssets) {
+    assert.ok(existsSync(resolve(wellnessAssetPath, asset)), `missing public wellness asset: ${asset}`)
+  }
+})
+
+test('wellness page uses copied public assets instead of local absolute paths', () => {
+  const source = readWellnessPage()
+
+  assert.doesNotMatch(source, /\/Users\/max\/projects\/resources/)
+  for (const asset of expectedAssets) {
+    assert.match(source, new RegExp(`/wellness/${asset.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`))
+  }
+})
+
+test('wellness page owns its marketing chrome and preserves assistant', () => {
+  const source = readWellnessPage()
+
+  assert.match(source, /definePageMeta\(\{[\s\S]*header:\s*false[\s\S]*footer:\s*false[\s\S]*\}\)/)
+  assert.match(source, /Wellness[\s\S]*Move\. Breathe\. Create\./)
+  assert.match(source, /Yoga Journey/)
+  assert.match(source, /Meditation & Sound Healing/)
+  assert.match(source, /Workshops & Retreats/)
+  assert.match(source, /Silver Circle 50\+/)
+  assert.match(source, /Begin Your Wellness Journey/)
+  assert.match(source, /<HomeAssistantChat\s+v-model:open="isAssistantOpen"\s+\/>/)
+  assert.doesNotMatch(source, /<KnowledgeBaseDirectory/)
+})
+
+test('home and art pages link to the wellness route', () => {
+  const home = readFileSync(homePagePath, 'utf8')
+  const art = readFileSync(artPagePath, 'utf8')
+
+  assert.match(home, /\{ label: 'Wellness', to: '\/wellness'/)
+  assert.match(home, /title: 'Wellness Programs',[\s\S]*to: '\/wellness'/)
+  assert.match(art, /\{ label: 'Wellness', to: '\/wellness'/)
+  assert.match(art, /\{ label: 'Wellness', to: '\/wellness' \}/)
+})
+
+test('wellness page keeps reference image treatments', () => {
+  const source = readWellnessPage()
+
+  assert.match(source, /class="wellness-hero-card"/)
+  assert.match(source, /class="wellness-photo-frame"/)
+  assert.match(source, /class="sound-photo-frame"/)
+  assert.match(source, /class="silver-photo-frame"/)
+  assert.match(source, /rounded-\[2rem\]/)
+  assert.match(source, /object-cover/)
+})
+
+test('padded wellness PNGs are trimmed before display', () => {
+  assert.deepEqual(readPngSize('sound-healing.png'), { width: 1080, height: 775 })
+  assert.deepEqual(readPngSize('yoga-group.png'), { width: 1080, height: 849 })
+})
