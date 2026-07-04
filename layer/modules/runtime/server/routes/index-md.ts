@@ -1,6 +1,6 @@
 import { join } from 'node:path'
 import type { H3Event } from 'h3'
-import type { TockDocsPublicRuntimeConfig } from '../../../../utils/docs'
+import { asTockDocsPublicRuntimeConfig } from '../../../../utils/docs'
 import { inferSiteURL } from '../../../../utils/meta'
 import {
   DEV_INDEX_CACHE_TTL_MS,
@@ -37,7 +37,7 @@ async function generateIndexOnDemand(event: H3Event, scopeId: string, locale: st
     return cached.content
   }
 
-  const config = useRuntimeConfig(event).public as TockDocsPublicRuntimeConfig
+  const config = asTockDocsPublicRuntimeConfig(useRuntimeConfig(event).public)
   const siteConfig = getSiteConfig(event)
   const siteName = siteConfig.name || 'Documentation'
   const candidates = getRootDirCandidates()

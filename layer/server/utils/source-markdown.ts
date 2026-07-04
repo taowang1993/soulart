@@ -15,6 +15,7 @@ import {
   normalizeContentExtension,
 } from '../../utils/content-source'
 import { buildAgentDocsDirectiveMarkdown } from '../../utils/agent-docs'
+import { asTockDocsPublicRuntimeConfig, getKnowledgeBases } from '../../utils/docs'
 
 const MARKDOWN_CONTENT_TYPE = 'text/markdown; charset=utf-8'
 const DEV_CACHE_CONTROL = 'no-store'
@@ -91,13 +92,12 @@ export async function serveSourceMarkdown(event: H3Event) {
   }
 
   const extension = normalizeContentExtension(page.extension)
-  const privateKnowledgeBases = Array.isArray(runtimeConfig.tockdocs?.knowledgeBases)
-    ? runtimeConfig.tockdocs.knowledgeBases
+  const privateKnowledgeBases: Array<{ id: string, sourceDir: string }> = Array.isArray(runtimeConfig.tockdocs?.knowledgeBases)
+    ? runtimeConfig.tockdocs.knowledgeBases as Array<{ id: string, sourceDir: string }>
     : []
-  const publicKnowledgeBaseSourceDirs = runtimeConfig.public?.tockdocs?.knowledgeBaseSourceDirs || {}
-  const publicKnowledgeBases = Array.isArray(runtimeConfig.public?.tockdocs?.knowledgeBases)
-    ? runtimeConfig.public.tockdocs.knowledgeBases.map(kb => [kb.id, kb.id] as const)
-    : []
+  const publicConfig = asTockDocsPublicRuntimeConfig(runtimeConfig.public)
+  const publicKnowledgeBaseSourceDirs = publicConfig.tockdocs?.knowledgeBaseSourceDirs || {}
+  const publicKnowledgeBases = getKnowledgeBases(publicConfig).map(kb => [kb.id, kb.id] as const)
   const knowledgeBaseSourceDirs = Object.fromEntries(
     [
       ...publicKnowledgeBases,

@@ -2,7 +2,7 @@ import { z } from 'zod'
 import { queryCollection } from '@nuxt/content/server'
 import type { Collections } from '@nuxt/content'
 import { getCollectionsToQuery, getScopedKnowledgeBaseAndLocale, isSearchableContentPath } from '../../utils/content'
-import { buildDocsPageUrl } from '../../../utils/docs'
+import { asTockDocsPublicRuntimeConfig, buildDocsPageUrl } from '../../../utils/docs'
 import { inferSiteURL } from '../../../utils/meta'
 
 export default defineMcpTool({
@@ -31,7 +31,7 @@ This tool is knowledge-base aware. In multi-KB sites you can scope results with 
   cache: '1h',
   handler: async ({ kb, locale }) => {
     const event = useEvent()
-    const config = useRuntimeConfig(event).public as Parameters<typeof getCollectionsToQuery>[1]
+    const config = asTockDocsPublicRuntimeConfig(useRuntimeConfig(event).public)
 
     const scoped = getScopedKnowledgeBaseAndLocale(event, { kb, locale })
     const origin = getRequestURL(event).origin || inferSiteURL()

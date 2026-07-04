@@ -9,7 +9,7 @@ import {
 } from '../server/utils/index-generator'
 import { buildAllSearchIndexAssets } from '../server/utils/search-index-generator'
 import { TOCKDOCS_SEARCH_INDEX_ASSET_BASE_NAME } from '../server/utils/search-index'
-import type { TockDocsPublicRuntimeConfig } from '../utils/docs'
+import { asTockDocsPublicRuntimeConfig } from '../utils/docs'
 
 const log = logger.withTag('TockDocs')
 const INDEX_OUTPUT_DIR = join('.data', 'index')
@@ -57,7 +57,7 @@ export default defineNuxtModule({
       return
     }
 
-    const publicConfig = nuxt.options.runtimeConfig.public as TockDocsPublicRuntimeConfig
+    const publicConfig = asTockDocsPublicRuntimeConfig(nuxt.options.runtimeConfig.public)
     const siteName = typeof nuxt.options.site === 'object' && typeof nuxt.options.site?.name === 'string'
       ? nuxt.options.site.name
       : 'Documentation'

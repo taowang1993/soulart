@@ -1,6 +1,6 @@
 import { queryCollection } from '@nuxt/content/server'
 import { joinURL } from 'ufo'
-import { getAllDocsCollectionNames, getDocsMode, hasSiteContent } from '../../utils/docs'
+import { asTockDocsPublicRuntimeConfig, getAllDocsCollectionNames, getDocsMode, hasSiteContent } from '../../utils/docs'
 import { inferSiteURL } from '../../utils/meta'
 
 interface SitemapUrl {
@@ -10,7 +10,7 @@ interface SitemapUrl {
 
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig(event)
-  const publicConfig = config.public as Parameters<typeof getDocsMode>[0]
+  const publicConfig = asTockDocsPublicRuntimeConfig(config.public)
   const siteUrl = getSiteConfig(event).url || inferSiteURL() || getRequestURL(event).origin || ''
   const urls: SitemapUrl[] = []
 

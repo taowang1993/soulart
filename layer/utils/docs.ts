@@ -32,6 +32,10 @@ export type TockDocsPublicRuntimeConfig = {
   }
 }
 
+export function asTockDocsPublicRuntimeConfig(config: unknown): TockDocsPublicRuntimeConfig {
+  return config as TockDocsPublicRuntimeConfig
+}
+
 export interface ResolvedDocsRoute {
   mode: 'legacy' | 'kb'
   isDocsRoute: boolean

@@ -4,6 +4,7 @@ import type { DocsCollectionItem } from '../types'
 import { findPageHeadline } from '@nuxt/content/utils'
 import { kebabCase } from 'scule'
 import { buildContentSourceFilePath, buildRawContentPath, buildSourceContentPath } from '../../utils/content-source'
+import { asTockDocsPublicRuntimeConfig, getKnowledgeBases } from '../../utils/docs'
 
 export async function useDocsPage(collectionName: Ref<string> | ComputedRef<string>) {
   const route = useRoute()
@@ -42,11 +43,9 @@ export async function useDocsPage(collectionName: Ref<string> | ComputedRef<stri
       return runtimeConfig.public.tockdocs.knowledgeBaseSourceDirs
     }
 
-    const knowledgeBases = Array.isArray(runtimeConfig.public?.tockdocs?.knowledgeBases)
-      ? runtimeConfig.public.tockdocs.knowledgeBases
-      : []
+    const publicConfig = asTockDocsPublicRuntimeConfig(runtimeConfig.public)
 
-    return Object.fromEntries(knowledgeBases.map(kb => [kb.id, kb.id]))
+    return Object.fromEntries(getKnowledgeBases(publicConfig).map(kb => [kb.id, kb.id]))
   })
 
   const editLink = computed(() => {

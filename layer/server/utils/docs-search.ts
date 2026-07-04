@@ -3,7 +3,7 @@ import { queryCollection } from '@nuxt/content/server'
 import type { Collections } from '@nuxt/content'
 import type { H3Event } from 'h3'
 import { buildSourceContentPath } from '../../utils/content-source'
-import { buildDocsPageUrl, getDocsCollectionName, getDocsMode, getFilteredLocaleCodes, getKnowledgeBases } from '../../utils/docs'
+import { asTockDocsPublicRuntimeConfig, buildDocsPageUrl, getDocsCollectionName, getDocsMode, getFilteredLocaleCodes, getKnowledgeBases } from '../../utils/docs'
 import { inferSiteURL } from '../../utils/meta'
 import { isSearchableContentPath } from './content'
 import {
@@ -105,7 +105,7 @@ function getCollectionDescriptors(
   event: H3Event,
   scope?: DocsSearchScope,
 ) {
-  const config = useRuntimeConfig(event).public as Parameters<typeof getDocsMode>[0]
+  const config = asTockDocsPublicRuntimeConfig(useRuntimeConfig(event).public)
   const mode = getDocsMode(config)
 
   if (mode === 'kb') {

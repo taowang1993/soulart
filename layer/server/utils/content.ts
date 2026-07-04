@@ -1,6 +1,7 @@
 import type { H3Event } from 'h3'
 import { getRenderedPathFromMarkdownAliasPath } from '../../utils/content-source'
 import {
+  asTockDocsPublicRuntimeConfig,
   getAllDocsCollectionNames,
   getCollectionFromPath as getResolvedCollectionFromPath,
   getDocsCollectionName,
@@ -10,9 +11,10 @@ import {
   getKnowledgeBases,
   resolveDocsRoute,
   resolveKnowledgeBaseLocale,
+  type TockDocsPublicRuntimeConfig,
 } from '../../utils/docs'
 
-type ConfigWithLocales = Parameters<typeof getDocsMode>[0]
+type ConfigWithLocales = TockDocsPublicRuntimeConfig
 
 export function isNavigationPath(path: string): boolean {
   return path.endsWith('.navigation') || path.includes('/.navigation')
@@ -162,7 +164,7 @@ function normalizeKnowledgeBaseAndLocale(
 
 export function getScopedKnowledgeBaseAndLocale(event: H3Event, explicit: { kb?: string, locale?: string } = {}) {
   const query = getQuery(event)
-  const config = useRuntimeConfig(event).public as ConfigWithLocales
+  const config = asTockDocsPublicRuntimeConfig(useRuntimeConfig(event).public)
 
   const kb = explicit.kb
     || (typeof query.kb === 'string' ? query.kb : undefined)

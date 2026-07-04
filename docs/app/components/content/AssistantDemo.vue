@@ -7,6 +7,14 @@ const { t, locale } = useTockDocsI18n()
 const isEnabled = computed(() => config.public.assistant?.enabled ?? false)
 
 const input = ref('')
+const chatUser = {
+  icon: undefined,
+  avatar: undefined,
+  variant: undefined,
+  side: undefined,
+  actions: undefined,
+  ui: { content: 'text-sm' },
+}
 
 const suggestedQuestionsMap: Record<string, string[]> = {
   en: [
@@ -118,7 +126,7 @@ function resetChat() {
           :messages="chat.messages"
           compact
           :status="chat.status"
-          :user="{ ui: { content: 'text-sm' } }"
+          :user="chatUser"
           :ui="{ indicator: '*:bg-accented', root: 'h-auto!' }"
           class="px-4 py-4"
         >

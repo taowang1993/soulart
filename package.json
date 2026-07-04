@@ -32,7 +32,7 @@
     "knip": "knip --no-progress || true",
     "jscpd:layer": "jscpd --min-tokens 50 --min-lines 5 layer/app/ layer/modules/ layer/server/ || true",
     "depcruise": "depcruise layer/modules/ || true",
-    "typecheck": "node scripts/with-env.mjs nuxt typecheck layer",
+    "typecheck": "node scripts/with-env.mjs nuxt typecheck docs --extends ../layer",
     "cli:build": "pnpm --dir cli run build",
     "verify": "pnpm run check:i18n && pnpm run dev:prepare && pnpm run lint && pnpm run typecheck && pnpm run cli:build && pnpm run docs:build",
     "layer:release": "release-it --config .release-it.layer.json && cd layer && npm publish",

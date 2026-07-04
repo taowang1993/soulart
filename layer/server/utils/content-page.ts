@@ -1,7 +1,7 @@
 import type { Collections } from '@nuxt/content'
 import type { H3Event } from 'h3'
 import { queryCollection } from '@nuxt/content/server'
-import { getFilteredLocaleCodes, getLandingCollectionName, getDocsMode, hasSiteContent } from '../../utils/docs'
+import { asTockDocsPublicRuntimeConfig, getFilteredLocaleCodes, getLandingCollectionName, getDocsMode, hasSiteContent, type TockDocsPublicRuntimeConfig } from '../../utils/docs'
 import { getRenderedPathFromMarkdownAliasPath } from '../../utils/content-source'
 import { getDocsContextFromPath } from './content'
 
@@ -18,7 +18,7 @@ export function normalizeContentPagePath(path: string) {
   return getRenderedPathFromMarkdownAliasPath(path)
 }
 
-function getCandidateCollections(path: string, config: Parameters<typeof getDocsMode>[0]) {
+function getCandidateCollections(path: string, config: TockDocsPublicRuntimeConfig) {
   const normalizedPath = normalizeContentPagePath(path)
   const docsContext = getDocsContextFromPath(normalizedPath, config)
   const collections = docsContext.collectionName ? [docsContext.collectionName] : []
@@ -56,7 +56,7 @@ export async function findContentPageByPath(
   path: string,
   fields: Array<'path' | 'stem' | 'extension' | 'title' | 'description'> = ['path', 'stem', 'extension'],
 ): Promise<ContentPageRecord | null> {
-  const config = useRuntimeConfig(event).public as Parameters<typeof getDocsMode>[0]
+  const config = asTockDocsPublicRuntimeConfig(useRuntimeConfig(event).public)
   const normalizedPath = normalizeContentPagePath(path)
   const collections = getCandidateCollections(normalizedPath, config)
 

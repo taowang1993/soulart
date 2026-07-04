@@ -15,6 +15,14 @@ const router = useRouter()
 const toast = useToast()
 const input = ref('')
 const isEnabled = computed(() => config.public.assistant?.enabled ?? false)
+const chatUser = {
+  icon: undefined,
+  avatar: undefined,
+  variant: undefined,
+  side: undefined,
+  actions: undefined,
+  ui: { content: 'text-sm' },
+}
 
 const chat = new Chat({
   transport: new DefaultChatTransport({
@@ -240,7 +248,7 @@ onBeforeUnmount(() => {
                 :messages="chat.messages"
                 compact
                 :status="chat.status"
-                :user="{ ui: { content: 'text-sm' } }"
+                :user="chatUser"
                 :ui="{ indicator: '*:bg-accented', root: 'h-auto!' }"
                 class="px-4 py-4"
               >

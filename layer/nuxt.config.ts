@@ -1,6 +1,8 @@
 import { existsSync } from 'node:fs'
 import { join } from 'node:path'
+import type { NitroConfig } from 'nitropack'
 import { extendViteConfig, createResolver, useNuxt } from '@nuxt/kit'
+import { defineNuxtConfig } from 'nuxt/config'
 import { resolveModulePath } from 'exsolve'
 import { CONTENT_SOURCE_ASSET_BASE_NAME, CONTENT_SOURCE_ASSET_PATTERN } from './utils/content-source'
 import { getKnowledgeBaseEntrySlug } from './utils/docs'
@@ -119,6 +121,12 @@ function resolveIconScanInclude(rootDir: string, srcDir: string) {
 }
 
 type TockDocsI18nOptions = { locales?: Array<string | { code: string }> }
+type IconOptions = {
+  customCollections?: Array<{ prefix: string, dir: string }>
+  clientBundle?: {
+    scan?: { globInclude?: string[] } | boolean
+  } & Record<string, unknown>
+}
 
 export default defineNuxtConfig({
   modules: [
@@ -130,23 +138,23 @@ export default defineNuxtConfig({
     resolve('./modules/css'),
     () => {
       const nuxt = useNuxt()
-      nuxt.options.icon ||= {}
-      nuxt.options.icon.customCollections ||= []
-      nuxt.options.icon.clientBundle ||= {}
+      const iconOptions = (nuxt.options as typeof nuxt.options & { icon?: IconOptions }).icon ||= {}
+      iconOptions.customCollections ||= []
+      iconOptions.clientBundle ||= {}
 
-      const existingScan = typeof nuxt.options.icon.clientBundle.scan === 'object' && nuxt.options.icon.clientBundle.scan
-        ? nuxt.options.icon.clientBundle.scan
+      const existingScan = typeof iconOptions.clientBundle.scan === 'object' && iconOptions.clientBundle.scan
+        ? iconOptions.clientBundle.scan
         : {}
       const existingGlobInclude = Array.isArray(existingScan.globInclude)
         ? existingScan.globInclude
         : []
 
-      nuxt.options.icon.customCollections.push({
+      iconOptions.customCollections.push({
         prefix: 'custom',
         dir: join(nuxt.options.srcDir, 'assets/icons'),
       })
 
-      nuxt.options.icon.clientBundle.scan = {
+      iconOptions.clientBundle.scan = {
         ...existingScan,
         globInclude: [...new Set([
           ...existingGlobInclude,
@@ -164,7 +172,7 @@ export default defineNuxtConfig({
     'nuxt-llms',
     () => {
       // Update @nuxt/content optimizeDeps options
-      extendViteConfig((config) => {
+      extendViteConfig((config: { optimizeDeps?: { include?: string[] } }) => {
         config.optimizeDeps ||= {}
         config.optimizeDeps.include ||= []
         config.optimizeDeps.include.push('slugify')
@@ -183,7 +191,7 @@ export default defineNuxtConfig({
   css: [resolve('./app/assets/css/main.css')],
   vue: {
     compilerOptions: {
-      isCustomElement: tag => tag.startsWith('mjx-'),
+      isCustomElement: (tag: string) => tag.startsWith('mjx-'),
     },
   },
   content: {
@@ -346,7 +354,7 @@ export default defineNuxtConfig({
     },
   },
   hooks: {
-    'vite:extendConfig'(config) {
+    'vite:extendConfig'(config: { optimizeDeps?: { include?: string[], needsInterop?: string[] } }) {
       if (!config.optimizeDeps) {
         return
       }
@@ -359,7 +367,7 @@ export default defineNuxtConfig({
         config.optimizeDeps.needsInterop = normalizeOptimizeDepList(config.optimizeDeps.needsInterop)
       }
     },
-    'nitro:config'(nitroConfig) {
+    'nitro:config'(nitroConfig: NitroConfig) {
       const nuxt = useNuxt()
       const contentDir = join(nuxt.options.rootDir, 'content')
 
@@ -484,4 +492,4 @@ export default defineNuxtConfig({
     ],
     sitemap: '/sitemap.xml',
   },
-})
+} as unknown as Parameters<typeof defineNuxtConfig>[0])

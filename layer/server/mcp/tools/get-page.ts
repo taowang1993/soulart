@@ -2,7 +2,7 @@ import type { Collections } from '@nuxt/content'
 import { queryCollection } from '@nuxt/content/server'
 import { z } from 'zod'
 import { buildSourceContentPath } from '../../../utils/content-source'
-import { buildDocsPageUrl } from '../../../utils/docs'
+import { asTockDocsPublicRuntimeConfig, buildDocsPageUrl } from '../../../utils/docs'
 import { inferSiteURL } from '../../../utils/meta'
 import { getCollectionFromPath, getScopedKnowledgeBaseAndLocale, isPathWithinDocsScope, isSearchableContentPath, normalizeRequestedContentPagePath } from '../../utils/content'
 
@@ -31,7 +31,7 @@ The path should include the full routed path. In KB-first sites that means paths
   cache: '1h',
   handler: async ({ path }) => {
     const event = useEvent()
-    const config = useRuntimeConfig(event).public as Parameters<typeof getCollectionFromPath>[1]
+    const config = asTockDocsPublicRuntimeConfig(useRuntimeConfig(event).public)
     const origin = getRequestURL(event).origin || inferSiteURL()
     if (!origin) {
       console.warn('[TockDocs] Could not resolve site URL for get-page; page URLs will be root-relative.')

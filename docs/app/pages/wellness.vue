@@ -6,7 +6,7 @@ definePageMeta({
 
 useSeoMeta({
   title: 'Wellness | XinYi Class',
-  description: 'Explore XinYi Class wellness programs with yoga, meditation, sound healing, retreats, and Silver Circle community gatherings.',
+  description: 'Explore XinYi Class wellness programs with yoga, meditation, sound healing, retreats, and Silver Club community gatherings.',
   ogTitle: 'Wellness | XinYi Class',
   ogDescription: 'Move. Breathe. Create. Wellness programs for calm, connection, and community.',
 })
@@ -21,52 +21,49 @@ const navItems = [
   { label: 'Contact', to: '#contact', icon: 'i-lucide-mail' },
 ]
 
-const heroPrograms = [
-  { title: 'Yoga Journey', text: 'Gentle practices for strength, balance, and ease.', icon: 'i-lucide-flower-2' },
-  { title: 'Meditation', text: 'Simple tools for presence, breath, and inner calm.', icon: 'i-lucide-sparkles' },
-  { title: 'Workshops & Retreats', text: 'Seasonal gatherings for rest and renewal.', icon: 'i-lucide-trees' },
-  { title: 'Silver Circle 50+', text: 'A warm wellness community for older adults.', icon: 'i-lucide-users-round' },
-]
-
-const practiceCards = [
+const yogaCards = [
   {
     title: 'Yin Yoga',
-    image: '/wellness/yoga-program.jpg',
-    text: 'Slow floor-based poses release tension and invite deep rest.',
+    image: '/wellness/yin-yoga.jpg',
+    description: 'A slow, grounding practice to open the body and calm the nervous system.',
+    points: ['Deep Stretch', 'Stillness', 'Rest'],
   },
   {
     title: 'Flow Yoga',
-    image: '/wellness/outdoor-yoga.jpg',
-    text: 'Breath-led movement builds steady energy and confidence.',
+    image: '/wellness/flow-yoga.jpg',
+    description: 'Breath-led movement that builds strength, balance, and steady energy.',
+    points: ['Movement', 'Balance', 'Vitality'],
   },
   {
     title: 'Chair Yoga',
-    image: '/wellness/yoga-group.png',
-    text: 'Accessible movement for mobility, balance, and daily comfort.',
+    image: '/wellness/chair-yoga.jpg',
+    description: 'Accessible movement for mobility, posture, and everyday comfort.',
+    points: ['Gentle', 'Adaptive', 'Supportive'],
   },
   {
     title: 'Inside Flow',
-    image: '/wellness/meditation.png',
-    text: 'Music, rhythm, and mindful movement become one gentle practice.',
+    image: '/wellness/inside-flow.jpg',
+    description: 'Music, rhythm, and mindful movement become one expressive practice.',
+    points: ['Music', 'Rhythm', 'Expression'],
   },
 ]
 
 const soundBenefits = [
   'Sound Bath Sessions',
   'Guided Meditation',
-  'Mindfulness Tools',
+  'Mindful Breathing',
 ]
 
 const retreatCards = [
-  { title: 'Seasonal Retreats', text: 'Half-day pauses with yoga, tea, reflection, and quiet creative practice.' },
-  { title: 'Mindful Art & Journaling', text: 'Blend art, writing, and breath to make space for your inner voice.' },
-  { title: 'Community Circles', text: 'Gather with others in a supportive space for conversation and renewal.' },
+  { title: 'Outdoor Practice', text: 'Move gently, breathe deeply, and reconnect with nature.' },
+  { title: 'Mindful Art', text: 'Use color, journaling, and simple making as restorative tools.' },
+  { title: 'Community Time', text: 'Share tea, conversation, and quiet moments with like-minded friends.' },
 ]
 
 const silverItems = [
   { title: 'Gentle Yoga', icon: 'i-lucide-leaf' },
-  { title: 'Tea & Conversation', icon: 'i-lucide-cup-soda' },
   { title: 'Creative Wellness', icon: 'i-lucide-palette' },
+  { title: 'Tea & Conversation', icon: 'i-lucide-cup-soda' },
   { title: 'Seasonal Outings', icon: 'i-lucide-sun' },
 ]
 
@@ -97,16 +94,12 @@ const isAssistantOpen = ref(false)
 </script>
 
 <template>
-  <main class="xinyi-wellness min-h-screen overflow-hidden bg-[#f8f3ed] text-[#3f3d55]">
-    <section class="relative isolate overflow-hidden bg-[linear-gradient(120deg,#fff7ef_0%,#eef7ef_48%,#f3edf8_100%)] px-4 pb-16 pt-5 sm:px-6 lg:px-8">
+  <main class="xinyi-wellness min-h-screen overflow-hidden bg-[#f6efe4] text-[#3f3d55]">
+    <section class="relative isolate overflow-hidden bg-[#f8efe2] px-4 pb-14 pt-5 sm:px-6 lg:px-8">
       <div
-        class="absolute inset-0 -z-10 opacity-80"
+        class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_14%_18%,rgba(201,220,185,0.62),transparent_30%),radial-gradient(circle_at_85%_22%,rgba(232,207,174,0.62),transparent_28%),linear-gradient(120deg,#fbf4e9_0%,#edf5e9_100%)]"
         aria-hidden="true"
-      >
-        <div class="wellness-watercolor bg-[#d8ead8] left-[-7rem] top-[-8rem]" />
-        <div class="wellness-watercolor bg-[#eed9bf] right-[-8rem] top-[7rem]" />
-        <div class="wellness-watercolor bg-[#d8cbea] bottom-[-9rem] left-1/3" />
-      </div>
+      />
 
       <nav
         aria-label="Main Navigation"
@@ -151,16 +144,19 @@ const isAssistantOpen = ref(false)
         </NuxtLink>
       </nav>
 
-      <div class="mx-auto grid max-w-6xl items-center gap-12 pt-14 lg:grid-cols-[0.95fr_1.05fr] lg:pt-20">
+      <div class="mx-auto grid max-w-6xl items-center gap-12 pt-14 lg:grid-cols-[0.82fr_1.18fr] lg:pt-20">
         <div class="text-center lg:text-left">
           <p class="text-sm font-bold uppercase tracking-[0.35em] text-[#7aa984]">
             XinYi Wellness
           </p>
           <h1 class="mt-5 font-serif text-5xl font-semibold leading-tight text-[#4d455f] sm:text-6xl lg:text-7xl">
-            Move. Breathe. Create.
+            Wellness
           </h1>
+          <p class="mt-5 font-serif text-3xl italic text-[#7f9467]">
+            Move. Breathe. Create.
+          </p>
           <p class="mt-6 text-xl leading-9 text-[#6b6071]">
-            Wellness programs that blend mindful movement, meditation, sound healing, and community care.
+            A calm path through yoga, meditation, sound healing, seasonal retreats, and community care.
           </p>
           <div class="mt-9 flex flex-col justify-center gap-4 sm:flex-row lg:justify-start">
             <NuxtLink
@@ -179,44 +175,20 @@ const isAssistantOpen = ref(false)
         </div>
 
         <div class="wellness-hero-card">
-          <div class="absolute -left-8 top-8 hidden rounded-full bg-white/55 px-5 py-3 text-sm font-bold text-[#527858] shadow-lg ring-1 ring-white/80 lg:block">
-            Breathe In
-          </div>
           <img
-            src="/wellness/meditation.png"
-            alt="Meditation teacher seated in a calm pose"
-            class="h-full w-full object-contain object-bottom"
+            src="/wellness/hero-wellness.jpg"
+            alt="Woman practicing yoga in a peaceful studio"
+            class="h-full w-full object-cover object-center"
             loading="eager"
             decoding="async"
           >
         </div>
       </div>
-
-      <div class="mx-auto mt-14 grid max-w-6xl gap-5 md:grid-cols-2 lg:grid-cols-4">
-        <article
-          v-for="program in heroPrograms"
-          :key="program.title"
-          class="rounded-[2rem] bg-white/80 p-6 text-center shadow-[0_18px_50px_rgba(85,93,68,0.12)] ring-1 ring-white/80 backdrop-blur"
-        >
-          <div class="mx-auto flex size-14 items-center justify-center rounded-full bg-[#edf6ea] text-[#6b946b]">
-            <UIcon
-              :name="program.icon"
-              class="size-7"
-            />
-          </div>
-          <h2 class="mt-4 font-serif text-2xl font-semibold text-[#4e5f47]">
-            {{ program.title }}
-          </h2>
-          <p class="mt-2 text-sm leading-6 text-[#6b6071]">
-            {{ program.text }}
-          </p>
-        </article>
-      </div>
     </section>
 
     <section
       id="practice"
-      class="px-4 py-16 sm:px-6 lg:px-8"
+      class="bg-[#f9f1e7] px-4 py-16 sm:px-6 lg:px-8"
     >
       <div class="mx-auto max-w-6xl">
         <div class="mx-auto max-w-3xl text-center">
@@ -228,32 +200,40 @@ const isAssistantOpen = ref(false)
           </h2>
           <div class="wellness-divider mx-auto mt-5" />
           <p class="mt-6 text-lg leading-8 text-[#6b6071]">
-            Choose a practice that meets your body today, from quiet stretching to flowing movement.
+            Choose the practice that meets your body today.
           </p>
         </div>
 
         <div class="mt-12 grid gap-7 md:grid-cols-2 lg:grid-cols-4">
           <article
-            v-for="card in practiceCards"
+            v-for="card in yogaCards"
             :key="card.title"
-            class="rounded-[2rem] bg-white/85 p-4 shadow-[0_20px_55px_rgba(73,79,62,0.14)] ring-1 ring-[#e2dccd]"
+            class="overflow-hidden rounded-[2rem] bg-white shadow-[0_20px_55px_rgba(73,79,62,0.14)] ring-1 ring-[#e2dccd]"
           >
-            <div class="wellness-photo-frame">
-              <img
-                :src="card.image"
-                :alt="`${card.title} at XinYi Class`"
-                class="h-full w-full object-cover"
-                :class="card.title === 'Inside Flow' ? 'object-contain bg-white' : 'object-center'"
-                loading="lazy"
-                decoding="async"
-              >
+            <img
+              :src="card.image"
+              :alt="`${card.title} at XinYi Class`"
+              class="wellness-card-photo h-48 w-full object-cover"
+              loading="lazy"
+              decoding="async"
+            >
+            <div class="p-6">
+              <h3 class="font-serif text-2xl font-semibold text-[#596d4f]">
+                {{ card.title }}
+              </h3>
+              <p class="mt-3 text-sm leading-6 text-[#6b6071]">
+                {{ card.description }}
+              </p>
+              <ul class="mt-5 flex flex-wrap gap-2 text-xs font-semibold text-[#6a7e5e]">
+                <li
+                  v-for="point in card.points"
+                  :key="point"
+                  class="rounded-full bg-[#edf4e8] px-3 py-1"
+                >
+                  {{ point }}
+                </li>
+              </ul>
             </div>
-            <h3 class="mt-5 font-serif text-2xl font-semibold text-[#596d4f]">
-              {{ card.title }}
-            </h3>
-            <p class="mt-3 text-sm leading-6 text-[#6b6071]">
-              {{ card.text }}
-            </p>
           </article>
         </div>
       </div>
@@ -267,9 +247,9 @@ const isAssistantOpen = ref(false)
       <div class="relative mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[0.92fr_1.08fr]">
         <div class="sound-photo-frame">
           <img
-            src="/wellness/sound-healing.png"
+            src="/wellness/sound-healing-session.jpg"
             alt="Sound healing session with singing bowls"
-            class="h-full w-full object-cover"
+            class="h-full w-full object-cover object-center"
             loading="lazy"
             decoding="async"
           >
@@ -298,7 +278,7 @@ const isAssistantOpen = ref(false)
       </div>
     </section>
 
-    <section class="px-4 py-16 sm:px-6 lg:px-8">
+    <section class="bg-[#fbf4ea] px-4 py-16 sm:px-6 lg:px-8">
       <div class="mx-auto max-w-6xl">
         <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
           <div>
@@ -311,43 +291,44 @@ const isAssistantOpen = ref(false)
             <div class="wellness-divider mt-5" />
           </div>
           <p class="text-lg leading-8 text-[#6b6071]">
-            Create space to rest, reconnect, and transform through seasonal wellness experiences.
+            Outdoor experiences to help you slow down, reconnect with nature, and nourish your body and soul.
           </p>
         </div>
 
-        <div class="mt-10 grid gap-7 md:grid-cols-3">
-          <article
-            v-for="card in retreatCards"
-            :key="card.title"
-            class="rounded-[2rem] bg-[#fffaf2] p-7 shadow-[0_18px_45px_rgba(92,78,56,0.12)] ring-1 ring-[#e7dcc8]"
+        <div class="mt-10 overflow-hidden rounded-[2rem] bg-white shadow-[0_24px_70px_rgba(73,79,62,0.18)] ring-1 ring-white/80">
+          <img
+            src="/wellness/outdoor-yoga.jpg"
+            alt="Outdoor yoga group practice by the water"
+            class="aspect-[16/7] w-full object-cover object-center"
+            loading="lazy"
+            decoding="async"
           >
-            <h3 class="font-serif text-2xl font-semibold text-[#7a684b]">
-              {{ card.title }}
-            </h3>
-            <p class="mt-4 leading-7 text-[#6b6071]">
-              {{ card.text }}
-            </p>
-          </article>
+          <div class="grid gap-px bg-[#e4dacb] md:grid-cols-3">
+            <article
+              v-for="card in retreatCards"
+              :key="card.title"
+              class="bg-[#fffaf2] p-7"
+            >
+              <h3 class="font-serif text-2xl font-semibold text-[#7a684b]">
+                {{ card.title }}
+              </h3>
+              <p class="mt-4 leading-7 text-[#6b6071]">
+                {{ card.text }}
+              </p>
+            </article>
+          </div>
         </div>
-
-        <img
-          src="/wellness/outdoor-yoga.jpg"
-          alt="Outdoor yoga group practice"
-          class="mt-10 aspect-[16/7] w-full rounded-[2rem] object-cover object-center shadow-[0_24px_70px_rgba(73,79,62,0.18)] ring-1 ring-white/80"
-          loading="lazy"
-          decoding="async"
-        >
       </div>
     </section>
 
     <section class="bg-[linear-gradient(180deg,#f8f3ed_0%,#eef5ec_100%)] px-4 py-16 sm:px-6 lg:px-8">
-      <div class="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1.08fr_0.92fr]">
+      <div class="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[0.95fr_1.05fr]">
         <div>
           <p class="text-sm font-bold uppercase tracking-[0.3em] text-[#8aa06f]">
             Community Care
           </p>
           <h2 class="mt-3 font-serif text-4xl font-semibold text-[#4f4a64] sm:text-5xl">
-            Silver Circle 50+
+            Silver Club 50+
           </h2>
           <p class="mt-6 text-lg leading-8 text-[#6b6071]">
             A gentle community for wisdom, movement, creativity, and friendship. Everyone is welcome, and every practice can be adapted.
@@ -369,9 +350,9 @@ const isAssistantOpen = ref(false)
 
         <div class="silver-photo-frame">
           <img
-            src="/wellness/yoga-group.png"
-            alt="XinYi wellness group smiling together"
-            class="h-full w-full object-cover"
+            src="/wellness/silver-club.jpg"
+            alt="Silver Club wellness activities"
+            class="h-full w-full object-cover object-center"
             loading="lazy"
             decoding="async"
           >
@@ -525,45 +506,13 @@ const isAssistantOpen = ref(false)
   font-family: Georgia, "Times New Roman", serif;
 }
 
-.wellness-watercolor {
-  position: absolute;
-  width: 23rem;
-  height: 23rem;
-  border-radius: 9999px;
-  filter: blur(32px);
-}
-
 .wellness-hero-card {
   position: relative;
   min-height: 34rem;
   overflow: hidden;
-  background: radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.95), rgba(241, 247, 236, 0.88) 56%, rgba(223, 236, 218, 0.8));
-  border: 1px solid rgba(255, 255, 255, 0.82);
+  border: 0.75rem solid rgba(255, 255, 255, 0.72);
   border-radius: 2.5rem 2.5rem 7rem 2.5rem;
   box-shadow: 0 2rem 5rem rgba(83, 98, 74, 0.18);
-}
-
-.wellness-hero-card::before,
-.wellness-hero-card::after {
-  position: absolute;
-  content: "";
-  border-radius: 9999px;
-}
-
-.wellness-hero-card::before {
-  inset: 10% 14% auto auto;
-  width: 12rem;
-  height: 12rem;
-  background: rgba(220, 201, 233, 0.45);
-  filter: blur(18px);
-}
-
-.wellness-hero-card::after {
-  inset: auto auto 8% 9%;
-  width: 10rem;
-  height: 10rem;
-  background: rgba(217, 232, 204, 0.65);
-  filter: blur(16px);
 }
 
 .wellness-divider {
@@ -583,18 +532,17 @@ const isAssistantOpen = ref(false)
   transform: translate(-50%, -50%);
 }
 
-.wellness-photo-frame,
+.wellness-card-photo,
 .sound-photo-frame,
 .silver-photo-frame {
   position: relative;
   overflow: hidden;
-  background: white;
-  box-shadow: 0 1.5rem 4rem rgba(73, 79, 62, 0.16);
 }
 
-.wellness-photo-frame {
-  aspect-ratio: 4 / 5;
-  border-radius: 1.5rem;
+.sound-photo-frame,
+.silver-photo-frame {
+  background: white;
+  box-shadow: 0 1.5rem 4rem rgba(73, 79, 62, 0.16);
 }
 
 .sound-photo-frame {
@@ -611,7 +559,7 @@ const isAssistantOpen = ref(false)
 }
 
 .silver-photo-frame {
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 9;
   padding: 0.55rem;
   background: linear-gradient(135deg, #d6c09b, #9caf88);
   border-radius: 2.2rem;

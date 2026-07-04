@@ -10,7 +10,7 @@ import {
   isRawMarkdownRequestPath,
   isSourceMarkdownRequestPath,
 } from '../../utils/content-source'
-import type { TockDocsPublicRuntimeConfig } from '../../utils/docs'
+import { asTockDocsPublicRuntimeConfig, type TockDocsPublicRuntimeConfig } from '../../utils/docs'
 import {
   canServeNegotiatedMarkdown,
   prefersMarkdownResponse,
@@ -80,7 +80,7 @@ export async function serveNegotiatedMarkdown(event: H3Event) {
   }
 
   const includeBody = method !== 'HEAD'
-  const publicConfig = useRuntimeConfig(event).public as PublicDocsConfig
+  const publicConfig = asTockDocsPublicRuntimeConfig(useRuntimeConfig(event).public) as PublicDocsConfig
 
   if (shouldServeLlmsIndexForMarkdown(requestPath, publicConfig)) {
     const upstreamResponse = await event.fetch(AGENT_DOCS_INDEX_PATH, { method })

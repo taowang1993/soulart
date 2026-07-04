@@ -114,7 +114,7 @@ export default defineNuxtModule({
         let localeCodes: string[] = []
 
         if (isI18nEnabled) {
-          const filteredLocales = (nuxt.options.runtimeConfig.public.tockdocs as PublicTockDocsConfig | undefined)?.filteredLocales
+          const filteredLocales = (nuxt.options.runtimeConfig.public.tockdocs as unknown as PublicTockDocsConfig | undefined)?.filteredLocales
           localeCodes = getMarkdownRewriteLocaleCodes({
             i18n: i18nOptions,
             filteredLocales,

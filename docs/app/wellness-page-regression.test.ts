@@ -11,11 +11,14 @@ const artPagePath = resolve(repoRoot, 'docs/app/pages/art-programs.vue')
 const wellnessAssetPath = resolve(repoRoot, 'docs/public/wellness')
 
 const expectedAssets = [
-  'meditation.png',
-  'yoga-program.jpg',
-  'sound-healing.png',
+  'hero-wellness.jpg',
+  'yin-yoga.jpg',
+  'flow-yoga.jpg',
+  'chair-yoga.jpg',
+  'inside-flow.jpg',
+  'sound-healing-session.jpg',
   'outdoor-yoga.jpg',
-  'yoga-group.png',
+  'silver-club.jpg',
 ]
 
 function readWellnessPage() {
@@ -23,10 +26,15 @@ function readWellnessPage() {
   return readFileSync(wellnessPagePath, 'utf8')
 }
 
-function readPngSize(asset: string) {
+function readJpegSize(asset: string) {
   const source = readFileSync(resolve(wellnessAssetPath, asset))
-  assert.equal(source.subarray(1, 4).toString('ascii'), 'PNG')
-  return { width: source.readUInt32BE(16), height: source.readUInt32BE(20) }
+  const text = source.toString('latin1')
+  const match = /\xFF\xC0[\s\S]{3}([\s\S]{4})/.exec(text)
+
+  assert.ok(match, `${asset} must be a baseline JPEG`)
+
+  const bytes = Buffer.from(match[1]!, 'latin1')
+  return { width: bytes.readUInt16BE(2), height: bytes.readUInt16BE(0) }
 }
 
 test('wellness assets are copied into public wellness directory', () => {
@@ -52,7 +60,7 @@ test('wellness page owns its marketing chrome and preserves assistant', () => {
   assert.match(source, /Yoga Journey/)
   assert.match(source, /Meditation & Sound Healing/)
   assert.match(source, /Workshops & Retreats/)
-  assert.match(source, /Silver Circle 50\+/)
+  assert.match(source, /Silver Club 50\+/)
   assert.match(source, /Begin Your Wellness Journey/)
   assert.match(source, /<HomeAssistantChat\s+v-model:open="isAssistantOpen"\s+\/>/)
   assert.doesNotMatch(source, /<KnowledgeBaseDirectory/)
@@ -72,14 +80,19 @@ test('wellness page keeps reference image treatments', () => {
   const source = readWellnessPage()
 
   assert.match(source, /class="wellness-hero-card"/)
-  assert.match(source, /class="wellness-photo-frame"/)
+  assert.match(source, /class="wellness-card-photo h-48 w-full object-cover"/)
   assert.match(source, /class="sound-photo-frame"/)
   assert.match(source, /class="silver-photo-frame"/)
   assert.match(source, /rounded-\[2rem\]/)
   assert.match(source, /object-cover/)
 })
 
-test('padded wellness PNGs are trimmed before display', () => {
-  assert.deepEqual(readPngSize('sound-healing.png'), { width: 1080, height: 775 })
-  assert.deepEqual(readPngSize('yoga-group.png'), { width: 1080, height: 849 })
+test('wellness card images are exact crops from the reference design', () => {
+  assert.deepEqual(readJpegSize('hero-wellness.jpg'), { width: 1300, height: 1040 })
+  assert.deepEqual(readJpegSize('yin-yoga.jpg'), { width: 585, height: 400 })
+  assert.deepEqual(readJpegSize('flow-yoga.jpg'), { width: 585, height: 400 })
+  assert.deepEqual(readJpegSize('chair-yoga.jpg'), { width: 585, height: 400 })
+  assert.deepEqual(readJpegSize('inside-flow.jpg'), { width: 585, height: 400 })
+  assert.deepEqual(readJpegSize('sound-healing-session.jpg'), { width: 1430, height: 1240 })
+  assert.deepEqual(readJpegSize('silver-club.jpg'), { width: 1820, height: 1050 })
 })

@@ -3,7 +3,7 @@ import { convertToModelMessages, createUIMessageStream, createUIMessageStreamRes
 import type { ToolCallPart, ToolSet, UIMessageStreamWriter } from 'ai'
 import { createMCPClient } from '@ai-sdk/mcp'
 import { assertMethod, createError, getRequestHeader, getRequestIP, getRequestURL, readValidatedBody, setHeader, type H3Event } from 'h3'
-import type { TockDocsPublicRuntimeConfig } from '../../../../../utils/docs'
+import { asTockDocsPublicRuntimeConfig } from '../../../../../utils/docs'
 import { INDEX_TOKEN_BUDGET, estimateIndexTokenCount, resolveIndexScope } from '../../../../../server/utils/index-generator'
 import { createAssistantChatModel, getAssistantProviderConfig } from '../utils/ai-provider'
 import { createBashTool, createGitFsBash, createGitFsUrlTransform, createRepoPathToUrlMapper } from '../utils/gitfs-bash'
@@ -124,7 +124,7 @@ async function readAssistantRequestBody(event: H3Event) {
 }
 
 function getAssistantScope(event: H3Event): AssistantScope {
-  const config = useRuntimeConfig(event).public as TockDocsPublicRuntimeConfig
+  const config = asTockDocsPublicRuntimeConfig(useRuntimeConfig(event).public)
   const result = resolveAssistantRequestScope({
     config,
     requestOrigin: getRequestURL(event).origin,
@@ -403,7 +403,7 @@ export default defineEventHandler(async (event) => {
     let indexContent = ''
 
     if (fsBackend === 'index') {
-      const indexScope = resolveIndexScope(config.public as TockDocsPublicRuntimeConfig, assistantScope)
+      const indexScope = resolveIndexScope(asTockDocsPublicRuntimeConfig(config.public), assistantScope)
 
       if (!indexScope) {
         logAssistant('index_fallback', {

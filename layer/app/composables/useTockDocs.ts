@@ -7,6 +7,7 @@ import {
   getKnowledgeBaseEntrySlug,
   getKnowledgeBases,
   resolveDocsRoute,
+  asTockDocsPublicRuntimeConfig,
   resolveKnowledgeBaseLocale,
   switchKnowledgeBaseInPath,
   switchLocaleInPath,
@@ -14,7 +15,7 @@ import {
 
 export const useTockDocs = () => {
   const route = useRoute()
-  const config = useRuntimeConfig().public as Parameters<typeof getDocsMode>[0]
+  const config = asTockDocsPublicRuntimeConfig(useRuntimeConfig().public)
 
   const mode = computed(() => getDocsMode(config))
   const knowledgeBases = computed(() => getKnowledgeBases(config))

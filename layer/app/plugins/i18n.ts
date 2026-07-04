@@ -1,6 +1,6 @@
 import type { RouteLocationNormalized } from 'vue-router'
 import { consola } from 'consola'
-import { getDefaultLocale, getDocsMode, getFilteredLocaleCodes, resolveDocsRoute } from '../../utils/docs'
+import { asTockDocsPublicRuntimeConfig, getDefaultLocale, getDocsMode, getFilteredLocaleCodes, resolveDocsRoute } from '../../utils/docs'
 import { hasLocaleMessages, resolveLocaleMessages } from '../../utils/locale-messages'
 
 const log = consola.withTag('TockDocs')
@@ -9,7 +9,7 @@ export default defineNuxtPlugin(() => {
   const nuxtApp = useNuxtApp()
   const appConfig = useAppConfig()
   const localeCatalog = appConfig.tockdocs.localeMessages || {}
-  const publicConfig = nuxtApp.$config.public as Parameters<typeof getDocsMode>[0]
+  const publicConfig = asTockDocsPublicRuntimeConfig(nuxtApp.$config.public)
   const i18nConfig = publicConfig.i18n
 
   if (!i18nConfig) {
@@ -37,7 +37,8 @@ export default defineNuxtPlugin(() => {
     const nextLocale = resolved.locale || defaultLocale
 
     if (nuxtApp.$i18n?.locale.value !== nextLocale) {
-      nuxtApp.$i18n.locale.value = nextLocale
+      const localeRef = nuxtApp.$i18n.locale as { value: string }
+      localeRef.value = nextLocale
     }
   }
 
