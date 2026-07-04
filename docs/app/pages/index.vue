@@ -261,13 +261,12 @@ const isAssistantOpen = ref(false)
           <article
             v-for="program in programs"
             :key="program.title"
-            class="group overflow-hidden rounded-2xl bg-white/82 shadow-[0_18px_50px_rgba(82,61,107,0.14)] ring-1 ring-[#ece1ef] transition hover:-translate-y-1 hover:shadow-[0_24px_70px_rgba(82,61,107,0.2)]"
+            class="overflow-hidden rounded-2xl bg-white/82 shadow-[0_18px_50px_rgba(82,61,107,0.14)] ring-1 ring-[#ece1ef] transition hover:-translate-y-1 hover:shadow-[0_24px_70px_rgba(82,61,107,0.2)]"
           >
             <img
               :src="program.image"
               :alt="`${program.title} at XinYi Class`"
-              class="aspect-[16/10] w-full object-cover transition duration-500 group-hover:scale-[1.03]"
-              :class="program.title === 'Wellness Programs' ? 'object-[center_35%]' : 'object-center'"
+              class="aspect-[16/10] w-full object-cover"
               loading="lazy"
               decoding="async"
             >
