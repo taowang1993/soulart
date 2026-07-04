@@ -21,9 +21,69 @@ const expectedAssets = [
   'silver-club.jpg',
 ]
 
+const referenceCopy = [
+  'XinYi Wellness',
+  'Wellness',
+  'Move. Breathe. Create.',
+  'A calm path through yoga, meditation, sound healing, seasonal retreats, and community care.',
+  'Explore Classes',
+  'Book a Trial',
+  'Practice With Us',
+  'Yoga Journey',
+  'Choose the practice that meets your body today.',
+  'Yin Yoga',
+  'A slow, grounding practice to open the body and calm the nervous system.',
+  'Deep Stretch',
+  'Stillness',
+  'Rest',
+  'Flow Yoga',
+  'Breath-led movement that builds strength, balance, and steady energy.',
+  'Movement',
+  'Balance',
+  'Vitality',
+  'Chair Yoga',
+  'Accessible movement for mobility, posture, and everyday comfort.',
+  'Gentle',
+  'Adaptive',
+  'Supportive',
+  'Inside Flow',
+  'Music, rhythm, and mindful movement become one expressive practice.',
+  'Expression',
+  'Restore the Nervous System',
+  'Meditation & Sound Healing',
+  'Sink into soft sound, guided breath, and steady attention. These sessions offer a quiet space to release stress and reconnect with yourself.',
+  'Sound Bath Sessions',
+  'Guided Meditation',
+  'Mindful Breathing',
+  'Gather & Renew',
+  'Workshops & Retreats',
+  'Outdoor experiences to help you slow down, reconnect with nature, and nourish your body and soul.',
+  'Outdoor Practice',
+  'Move gently, breathe deeply, and reconnect with nature.',
+  'Mindful Art',
+  'Use color, journaling, and simple making as restorative tools.',
+  'Community Time',
+  'Share tea, conversation, and quiet moments with like-minded friends.',
+  'Community Care',
+  'Silver Club 50+',
+  'A gentle community for wisdom, movement, creativity, and friendship. Everyone is welcome, and every practice can be adapted.',
+  'Creative Wellness',
+  'Tea & Conversation',
+  'Seasonal Outings',
+  'New Students Welcome',
+  'Begin Your Wellness Journey',
+  'Choose the practice that feels right, or contact us and we will help you find a gentle first step.',
+  'Schedule a Trial',
+  'Explore Art Programs',
+]
+
 function readWellnessPage() {
   assert.ok(existsSync(wellnessPagePath), 'docs app must provide /wellness at docs/app/pages/wellness.vue')
   return readFileSync(wellnessPagePath, 'utf8')
+}
+
+function escapeRegExp(text: string) {
+  return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
 
 function readJpegSize(asset: string) {
@@ -64,6 +124,14 @@ test('wellness page owns its marketing chrome and preserves assistant', () => {
   assert.match(source, /Begin Your Wellness Journey/)
   assert.match(source, /<HomeAssistantChat\s+v-model:open="isAssistantOpen"\s+\/>/)
   assert.doesNotMatch(source, /<KnowledgeBaseDirectory/)
+})
+
+test('wellness page keeps every visible reference text block', () => {
+  const source = readWellnessPage()
+
+  for (const copy of referenceCopy) {
+    assert.match(source, new RegExp(escapeRegExp(copy), 'i'), `missing reference text: ${copy}`)
+  }
 })
 
 test('home and art pages link to the wellness route', () => {
