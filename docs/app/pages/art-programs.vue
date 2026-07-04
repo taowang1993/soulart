@@ -280,7 +280,7 @@ const isAssistantOpen = ref(false)
             <img
               :src="program.image"
               :alt="`${program.title} artwork`"
-              class="aspect-square w-full rounded-[1.4rem] object-cover"
+              class="aspect-square w-full rounded-[1.4rem] bg-[#f8f3f7] object-contain"
               loading="lazy"
               decoding="async"
             >
@@ -337,7 +337,7 @@ const isAssistantOpen = ref(false)
             <img
               :src="program.image"
               :alt="`${program.title} student artwork`"
-              class="mx-auto aspect-[4/3] w-[88%] rounded-[1.4rem] object-cover"
+              class="mx-auto aspect-[4/3] w-[88%] rounded-[1.4rem] bg-[#f8f3f7] object-contain"
               loading="lazy"
               decoding="async"
             >
