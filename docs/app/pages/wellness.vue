@@ -6,9 +6,9 @@ definePageMeta({
 
 useSeoMeta({
   title: 'Wellness | XinYi Class',
-  description: 'Explore XinYi Class wellness programs with yoga, meditation, sound healing, retreats, and Silver Club community gatherings.',
+  description: 'Nurturing body, mind and spirit through yoga, meditation, mindful living, day retreats, and Silver Club 45+ community gatherings.',
   ogTitle: 'Wellness | XinYi Class',
-  ogDescription: 'Move. Breathe. Create. Wellness programs for calm, connection, and community.',
+  ogDescription: 'Move. Breathe. Create. Nurturing body, mind and spirit through yoga, meditation and mindful living.',
 })
 
 const navItems = [
@@ -21,50 +21,113 @@ const navItems = [
   { label: 'Contact', to: '#contact', icon: 'i-lucide-mail' },
 ]
 
+const programCards = [
+  {
+    title: 'Yoga Journey',
+    text: 'Gentle, Yin, Flow for every body and every stage.',
+    icon: 'i-lucide-flower-2',
+  },
+  {
+    title: 'Meditation',
+    text: 'Calm the mind, return to the present moment.',
+    icon: 'i-lucide-sparkles',
+  },
+  {
+    title: 'Workshops & Retreats',
+    text: 'Deepen your practice and reconnect with yourself.',
+    icon: 'i-lucide-trees',
+  },
+  {
+    title: 'Silver Club',
+    text: 'A warm community for 45+ women to grow together.',
+    icon: 'i-lucide-users-round',
+  },
+]
+
 const yogaCards = [
   {
     title: 'Yin Yoga',
     image: '/wellness/yin-yoga.jpg',
-    description: 'A slow, grounding practice to open the body and calm the nervous system.',
-    points: ['Deep Stretch', 'Stillness', 'Rest'],
+    lead: 'Slow down and soften deeply.',
+    text: 'A gentle, floor-based practice with long-held poses that target fascia, joints, and deep connective tissues.',
+    note: 'Great for relaxation, flexibility, and emotional release.',
   },
   {
     title: 'Flow Yoga',
     image: '/wellness/flow-yoga.jpg',
-    description: 'Breath-led movement that builds strength, balance, and steady energy.',
-    points: ['Movement', 'Balance', 'Vitality'],
+    lead: 'Move with breath. Build strength and ease.',
+    text: 'A dynamic, breath-led practice that links poses into smooth, flowing sequences.',
+    note: 'Ideal for increasing energy, balance, mobility, and body awareness.',
   },
   {
     title: 'Chair Yoga',
     image: '/wellness/chair-yoga.jpg',
-    description: 'Accessible movement for mobility, posture, and everyday comfort.',
-    points: ['Gentle', 'Adaptive', 'Supportive'],
+    lead: 'Gentle movement with support.',
+    text: 'A safe, accessible yoga practice using a chair for balance, stability, and comfort.',
+    note: 'Perfect for seniors, beginners, people with limited mobility, or anyone seeking a softer practice.',
   },
   {
     title: 'Inside Flow',
     image: '/wellness/inside-flow.jpg',
-    description: 'Music, rhythm, and mindful movement become one expressive practice.',
-    points: ['Music', 'Rhythm', 'Expression'],
+    lead: 'Where music, movement and emotion meet.',
+    text: 'A graceful flow practice that moves with modern music, building a seamless sequence breath by breath.',
+    note: 'A beautiful class for expression, coordination, and emotional connection.',
+  },
+]
+
+const soundCards = [
+  {
+    title: 'Meditation',
+    text: 'Deep guided relaxation to restore body and mind while staying awake.',
+    icon: 'i-lucide-sparkles',
+  },
+  {
+    title: 'Sound Healing',
+    text: 'Healing vibrations that balance your energy and calm the nervous system.',
+    icon: 'i-lucide-music-2',
+  },
+  {
+    title: 'Mindfulness Practice',
+    text: 'Simple practices to help you cultivate awareness, presence and peace.',
+    icon: 'i-lucide-leaf',
   },
 ]
 
 const soundBenefits = [
-  'Sound Bath Sessions',
-  'Guided Meditation',
-  'Mindful Breathing',
+  { title: '90 Minutes', text: 'Time to unwind, reset and restore.' },
+  { title: 'All Levels Welcome', text: 'Beginners and experienced practitioners alike.' },
+  { title: 'Safe & Supportive Space', text: 'A gentle environment to be yourself.' },
+  { title: 'What to Bring', text: 'Comfortable clothing, yoga mat, blanket and an open heart.' },
 ]
 
-const retreatCards = [
-  { title: 'Outdoor Practice', text: 'Move gently, breathe deeply, and reconnect with nature.' },
-  { title: 'Mindful Art', text: 'Use color, journaling, and simple making as restorative tools.' },
-  { title: 'Community Time', text: 'Share tea, conversation, and quiet moments with like-minded friends.' },
+const retreatSchedule = [
+  { label: 'Date', lines: ['Wednesday', 'August 26, 2026'] },
+  { label: 'Time', lines: ['9:00am – 5:00pm'] },
+  { label: 'Location', lines: ['Richmond Green Park', '(By Richmond Green Secondary School)', 'Richmond Hill, ON'] },
+  { label: 'Group Size', lines: ['Small Group', 'All Levels Welcome'] },
+  {
+    label: 'Includes',
+    lines: ['Yoga & Meditation', 'Restorative Yoga', 'Outdoor Group Activities', 'Healthy Lunch & Snacks', 'Herbal Tea & Warm Drinks'],
+  },
+  { label: 'Investment', lines: ['$150', 'All-inclusive'] },
 ]
 
-const silverItems = [
-  { title: 'Gentle Yoga', icon: 'i-lucide-leaf' },
-  { title: 'Creative Wellness', icon: 'i-lucide-palette' },
-  { title: 'Tea & Conversation', icon: 'i-lucide-cup-soda' },
-  { title: 'Seasonal Outings', icon: 'i-lucide-sun' },
+const silverOfferings = [
+  {
+    title: 'Gentle Yoga',
+    text: 'Move with ease. Improve flexibility, balance and well-being.',
+    icon: 'i-lucide-leaf',
+  },
+  {
+    title: 'Art & Craft',
+    text: 'Express freely. Explore creativity and enjoy the joy of making.',
+    icon: 'i-lucide-palette',
+  },
+  {
+    title: 'Reading Circle',
+    text: 'Join our book circle. Share ideas, inspiration, and meaningful conversations.',
+    icon: 'i-lucide-book-open',
+  },
 ]
 
 const contactItems = [
@@ -156,7 +219,7 @@ const isAssistantOpen = ref(false)
             Move. Breathe. Create.
           </p>
           <p class="mt-6 text-xl leading-9 text-[#6b6071]">
-            A calm path through yoga, meditation, sound healing, seasonal retreats, and community care.
+            Nurturing body, mind and spirit through yoga, meditation and mindful living.
           </p>
           <div class="mt-9 flex flex-col justify-center gap-4 sm:flex-row lg:justify-start">
             <NuxtLink
@@ -184,6 +247,27 @@ const isAssistantOpen = ref(false)
           >
         </div>
       </div>
+
+      <div class="mx-auto mt-14 grid max-w-6xl gap-5 md:grid-cols-2 lg:grid-cols-4">
+        <article
+          v-for="program in programCards"
+          :key="program.title"
+          class="rounded-[2rem] bg-white/82 p-6 text-center shadow-[0_18px_50px_rgba(85,93,68,0.12)] ring-1 ring-white/80 backdrop-blur"
+        >
+          <div class="mx-auto flex size-14 items-center justify-center rounded-full bg-[#edf6ea] text-[#6b946b]">
+            <UIcon
+              :name="program.icon"
+              class="size-7"
+            />
+          </div>
+          <h2 class="mt-4 font-serif text-2xl font-semibold text-[#4e5f47]">
+            {{ program.title }}
+          </h2>
+          <p class="mt-2 text-sm leading-6 text-[#6b6071]">
+            {{ program.text }}
+          </p>
+        </article>
+      </div>
     </section>
 
     <section
@@ -200,7 +284,13 @@ const isAssistantOpen = ref(false)
           </h2>
           <div class="wellness-divider mx-auto mt-5" />
           <p class="mt-6 text-lg leading-8 text-[#6b6071]">
-            Choose the practice that meets your body today.
+            Find the practice that nourishes your body, calms your mind and awakens your inner light.
+          </p>
+          <p class="mt-3 text-lg leading-8 text-[#6b6071]">
+            We offer a variety of yoga practices designed for all levels and all stages of life.
+          </p>
+          <p class="mt-3 font-serif text-2xl italic text-[#7f9467]">
+            Come as you are. Grow at your own pace.
           </p>
         </div>
 
@@ -221,18 +311,15 @@ const isAssistantOpen = ref(false)
               <h3 class="font-serif text-2xl font-semibold text-[#596d4f]">
                 {{ card.title }}
               </h3>
-              <p class="mt-3 text-sm leading-6 text-[#6b6071]">
-                {{ card.description }}
+              <p class="mt-3 font-semibold text-[#7a684b]">
+                {{ card.lead }}
               </p>
-              <ul class="mt-5 flex flex-wrap gap-2 text-xs font-semibold text-[#6a7e5e]">
-                <li
-                  v-for="point in card.points"
-                  :key="point"
-                  class="rounded-full bg-[#edf4e8] px-3 py-1"
-                >
-                  {{ point }}
-                </li>
-              </ul>
+              <p class="mt-3 text-sm leading-6 text-[#6b6071]">
+                {{ card.text }}
+              </p>
+              <p class="mt-3 text-sm leading-6 text-[#6b6071]">
+                {{ card.note }}
+              </p>
             </div>
           </article>
         </div>
@@ -256,24 +343,58 @@ const isAssistantOpen = ref(false)
         </div>
 
         <div>
-          <p class="text-sm font-bold uppercase tracking-[0.3em] text-[#8a7aae]">
-            Restore the Nervous System
-          </p>
-          <h2 class="mt-3 font-serif text-4xl font-semibold leading-tight text-[#4f4a64] sm:text-5xl">
+          <h2 class="font-serif text-4xl font-semibold leading-tight text-[#4f4a64] sm:text-5xl">
             Meditation & Sound Healing
           </h2>
-          <p class="mt-6 text-lg leading-8 text-[#655f70]">
-            Sink into soft sound, guided breath, and steady attention. These sessions offer a quiet space to release stress and reconnect with yourself.
+          <p class="mt-5 font-serif text-2xl italic text-[#7f9467]">
+            You don’t need to silence the mind. You just need to listen with kindness.
           </p>
-          <div class="mt-8 grid gap-4 sm:grid-cols-3">
-            <div
-              v-for="benefit in soundBenefits"
-              :key="benefit"
-              class="rounded-2xl bg-white/75 p-4 text-center font-semibold text-[#5d6f56] shadow-sm ring-1 ring-white/80"
-            >
-              {{ benefit }}
-            </div>
-          </div>
+          <p class="mt-6 text-lg leading-8 text-[#655f70]">
+            Meditation helps us slow down, breathe deeply, and reconnect with the present moment.
+          </p>
+          <p class="mt-4 text-lg leading-8 text-[#655f70]">
+            Sound healing uses vibration from singing bowls, gentle instruments, and soothing tones to relax the body and calm the nervous system.
+          </p>
+          <p class="mt-4 text-lg leading-8 text-[#655f70]">
+            Together, meditation and sound invite you into deep rest, inner clarity, and emotional balance.
+          </p>
+          <p class="mt-6 font-serif text-2xl italic text-[#8a7aae]">
+            Every breath is a return. Every moment is enough.
+          </p>
+        </div>
+      </div>
+
+      <div class="relative mx-auto mt-12 grid max-w-6xl gap-5 md:grid-cols-3">
+        <article
+          v-for="card in soundCards"
+          :key="card.title"
+          class="rounded-[2rem] bg-white/78 p-6 text-center shadow-[0_18px_50px_rgba(85,93,68,0.12)] ring-1 ring-white/80"
+        >
+          <UIcon
+            :name="card.icon"
+            class="mx-auto size-8 text-[#7aa984]"
+          />
+          <h3 class="mt-4 font-serif text-2xl font-semibold text-[#4f4a64]">
+            {{ card.title }}
+          </h3>
+          <p class="mt-3 leading-7 text-[#6b6071]">
+            {{ card.text }}
+          </p>
+        </article>
+      </div>
+
+      <div class="relative mx-auto mt-8 grid max-w-6xl gap-4 md:grid-cols-4">
+        <div
+          v-for="benefit in soundBenefits"
+          :key="benefit.title"
+          class="rounded-2xl bg-white/75 p-5 text-center shadow-sm ring-1 ring-white/80"
+        >
+          <h3 class="font-serif text-xl font-semibold text-[#5d6f56]">
+            {{ benefit.title }}
+          </h3>
+          <p class="mt-2 text-sm leading-6 text-[#6b6071]">
+            {{ benefit.text }}
+          </p>
         </div>
       </div>
     </section>
@@ -283,15 +404,15 @@ const isAssistantOpen = ref(false)
         <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
           <div>
             <p class="text-sm font-bold uppercase tracking-[0.3em] text-[#8aa06f]">
-              Gather & Renew
+              Retreat & Events
             </p>
             <h2 class="mt-3 font-serif text-4xl font-semibold text-[#4f4a64] sm:text-5xl">
-              Workshops & Retreats
+              Day Retreat
             </h2>
             <div class="wellness-divider mt-5" />
           </div>
           <p class="text-lg leading-8 text-[#6b6071]">
-            Outdoor experiences to help you slow down, reconnect with nature, and nourish your body and soul.
+            Outdoor experiences to help you slow down, connect with nature, and nourish your body and soul.
           </p>
         </div>
 
@@ -303,20 +424,49 @@ const isAssistantOpen = ref(false)
             loading="lazy"
             decoding="async"
           >
-          <div class="grid gap-px bg-[#e4dacb] md:grid-cols-3">
-            <article
-              v-for="card in retreatCards"
-              :key="card.title"
-              class="bg-[#fffaf2] p-7"
-            >
-              <h3 class="font-serif text-2xl font-semibold text-[#7a684b]">
-                {{ card.title }}
+          <div class="grid gap-8 bg-[#fffaf2] p-7 lg:grid-cols-[1fr_0.9fr] lg:p-10">
+            <div>
+              <h3 class="font-serif text-3xl font-semibold text-[#7a684b]">
+                Recharge in Nature. Come Home to Yourself.
               </h3>
-              <p class="mt-4 leading-7 text-[#6b6071]">
-                {{ card.text }}
+              <p class="mt-5 leading-8 text-[#6b6071]">
+                Join us for a full day of rest, movement and connection in the beautiful Richmond Green Park.
               </p>
-            </article>
+              <p class="mt-4 leading-8 text-[#6b6071]">
+                Surrounded by trees, fresh air and open space, we’ll practice yoga, breathe deeply, enjoy nourishing food, and take time to simply be.
+              </p>
+              <p class="mt-4 leading-8 text-[#6b6071]">
+                This retreat is an invitation to slow down, release tension, reconnect with yourself, and enjoy outdoor group activities while meeting more like-minded friends.
+              </p>
+              <p class="mt-5 font-serif text-2xl italic text-[#7f9467]">
+                All levels welcome. Come as you are.
+              </p>
+            </div>
+
+            <div class="rounded-[1.75rem] bg-[#f4eadb] p-5 shadow-inner">
+              <dl class="space-y-4">
+                <div
+                  v-for="item in retreatSchedule"
+                  :key="item.label"
+                  class="grid gap-2 border-b border-[#dfd2bd] pb-4 last:border-b-0 last:pb-0 sm:grid-cols-[7rem_1fr]"
+                >
+                  <dt class="font-bold uppercase tracking-[0.18em] text-[#8aa06f]">
+                    {{ item.label }}
+                  </dt>
+                  <dd class="space-y-1 font-semibold text-[#5f584f]">
+                    <span
+                      v-for="line in item.lines"
+                      :key="line"
+                      class="block"
+                    >{{ line }}</span>
+                  </dd>
+                </div>
+              </dl>
+            </div>
           </div>
+          <p class="bg-[#7aa984] px-7 py-5 text-center font-serif text-2xl italic text-white">
+            Breathe in nature. Move with ease. Connect with yourself and others.
+          </p>
         </div>
       </div>
     </section>
@@ -328,24 +478,33 @@ const isAssistantOpen = ref(false)
             Community Care
           </p>
           <h2 class="mt-3 font-serif text-4xl font-semibold text-[#4f4a64] sm:text-5xl">
-            Silver Club 50+
+            Silver Club
           </h2>
-          <p class="mt-6 text-lg leading-8 text-[#6b6071]">
-            A gentle community for wisdom, movement, creativity, and friendship. Everyone is welcome, and every practice can be adapted.
+          <p class="mt-3 font-serif text-2xl italic text-[#7f9467]">
+            Art, Yoga, Meditation & Connection
           </p>
-          <div class="mt-8 grid gap-4 sm:grid-cols-2">
-            <div
-              v-for="item in silverItems"
-              :key="item.title"
-              class="flex items-center gap-3 rounded-2xl bg-white/75 p-4 font-semibold text-[#5d6f56] shadow-sm ring-1 ring-white/80"
-            >
-              <UIcon
-                :name="item.icon"
-                class="size-6 text-[#7aa984]"
-              />
-              {{ item.title }}
-            </div>
+          <p class="mt-2 inline-flex rounded-full bg-white/75 px-4 py-2 text-sm font-bold uppercase tracking-[0.18em] text-[#7aa984] ring-1 ring-white/80">
+            For 45+ Women
+          </p>
+          <p class="mt-6 text-lg leading-8 text-[#6b6071]">
+            A nurturing space for women 45 and above to relax, express, move, and grow.
+          </p>
+          <p class="mt-4 text-lg leading-8 text-[#6b6071]">
+            Together, we explore creativity, cultivate inner peace, and support one another on our beautiful journey of life.
+          </p>
+          <div class="mt-6 rounded-[1.75rem] bg-white/78 p-5 leading-8 text-[#5f584f] shadow-sm ring-1 ring-white/80">
+            <p class="font-bold text-[#5d6f56]">
+              Every Wednesday Evening
+            </p>
+            <p>6:00 – 8:30 pm</p>
+            <p class="mt-3 font-bold text-[#5d6f56]">
+              Xinyi Art School
+            </p>
+            <p>105 Gordon Baker Rd, Unit 704 (HW404 & Finch), North York, ON</p>
           </div>
+          <p class="mt-6 font-serif text-2xl italic text-[#8a7aae]">
+            Come as you are. Leave feeling lighter, brighter, and more connected.
+          </p>
         </div>
 
         <div class="silver-photo-frame">
@@ -358,6 +517,28 @@ const isAssistantOpen = ref(false)
           >
         </div>
       </div>
+
+      <div class="mx-auto mt-10 grid max-w-6xl gap-5 md:grid-cols-3">
+        <article
+          v-for="offering in silverOfferings"
+          :key="offering.title"
+          class="rounded-[2rem] bg-white/78 p-6 shadow-sm ring-1 ring-white/80"
+        >
+          <UIcon
+            :name="offering.icon"
+            class="size-8 text-[#7aa984]"
+          />
+          <h3 class="mt-4 font-serif text-2xl font-semibold text-[#4f4a64]">
+            {{ offering.title }}
+          </h3>
+          <p class="mt-3 leading-7 text-[#6b6071]">
+            {{ offering.text }}
+          </p>
+        </article>
+      </div>
+      <p class="mx-auto mt-8 max-w-3xl text-center font-serif text-2xl italic text-[#7f9467]">
+        Support. Friendship. Growth. We’re better together.
+      </p>
     </section>
 
     <section
@@ -366,27 +547,24 @@ const isAssistantOpen = ref(false)
     >
       <div class="mx-auto max-w-4xl rounded-[2rem] bg-[#4f6750] px-8 py-12 text-center text-white shadow-[0_24px_80px_rgba(72,90,68,0.24)] sm:px-12">
         <p class="text-sm font-bold uppercase tracking-[0.3em] text-[#dcebd7]">
-          New Students Welcome
+          Ready to Begin?
         </p>
         <h2 class="mt-4 font-serif text-4xl font-semibold sm:text-5xl">
-          Begin Your Wellness Journey
+          Take the first step toward creativity, well-being and connection.
         </h2>
-        <p class="mx-auto mt-5 max-w-2xl text-lg leading-8 text-[#edf7ea]">
-          Choose the practice that feels right, or contact us and we will help you find a gentle first step.
-        </p>
         <div class="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
           <NuxtLink
             to="#contact"
             class="inline-flex items-center justify-center rounded-full bg-white px-8 py-3 font-bold text-[#4f6750] shadow-lg transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
           >
-            Schedule a Trial
+            Book a Trial Class
           </NuxtLink>
-          <NuxtLink
-            to="/art-programs"
+          <a
+            href="tel:4165676538"
             class="inline-flex items-center justify-center rounded-full border border-white/50 px-8 py-3 font-bold text-white transition hover:-translate-y-0.5 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
           >
-            Explore Art Programs
-          </NuxtLink>
+            Call or Text 416-567-6538
+          </a>
         </div>
       </div>
     </section>
@@ -414,7 +592,7 @@ const isAssistantOpen = ref(false)
                 XinYi Class
               </h2>
               <p class="mt-1 text-sm leading-6 text-[#6b6071]">
-                Art, wellness, and community for every season of life
+                Inspiring creativity, connection and well-being since 2016.
               </p>
             </div>
           </div>
