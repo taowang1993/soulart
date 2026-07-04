@@ -24,8 +24,10 @@ const expectedAssets = [
   'craft-1.png',
   'craft-2.jpg',
   'craft-3.jpg',
+  'creative-camp-summer.png',
+  'creative-camp-workshops.jpg',
+  'creative-camp-events.jpg',
   'gallery-wall.png',
-  'summer-camp-farm-visit.jpg',
   'summer-camp-showcase.jpg',
   'summer-camp-fruit-platter.jpg',
 ]
@@ -68,7 +70,9 @@ test('art programs page owns its marketing chrome and links from home', () => {
   assert.match(source, /Children's Art Journey/)
   assert.match(source, /Teen Art Pathway/)
   assert.match(source, /Adult Art Journey/)
-  assert.match(source, /Special Workshops & Camps/)
+  assert.match(source, /The Joys of Making/)
+  assert.doesNotMatch(source, /Special Workshops & Camps/)
+  assert.match(source, /Creative Camps & Events/)
   assert.match(source, /Gallery of Growth/)
   assert.match(source, /Ready to Begin\?/)
   assert.match(source, /<HomeAssistantChat\s+v-model:open="isAssistantOpen"\s+\/>/)
@@ -86,12 +90,16 @@ test('art programs page keeps reference card image treatments', () => {
   assert.match(source, /\.teen-photo-frame::before/)
   assert.match(source, /clip-path: polygon/)
   assert.doesNotMatch(source, /transform: scale/)
-  assert.match(source, /rounded-\[2rem\] bg-white\/80 p-4/)
-  assert.match(source, /aspect-\[4\/3\] w-full rounded-\[1\.4rem\] object-cover/)
+  assert.match(source, /class="making-photo-frame"/)
+  assert.match(source, /class="camp-photo-frame"/)
+  assert.match(source, /object-contain/)
+  assert.match(source, /object-cover/)
 })
 
 test('padded art program PNGs are trimmed before display', () => {
   assert.deepEqual(readPngSize('age-4-6.png'), { width: 979, height: 1074 })
   assert.deepEqual(readPngSize('age-10-12.png'), { width: 1080, height: 810 })
   assert.deepEqual(readPngSize('age-13-15.png'), { width: 810, height: 1080 })
+  assert.deepEqual(readPngSize('craft-1.png'), { width: 1080, height: 654 })
+  assert.deepEqual(readPngSize('creative-camp-summer.png'), { width: 1080, height: 721 })
 })

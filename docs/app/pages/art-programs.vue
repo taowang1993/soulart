@@ -84,24 +84,42 @@ const adultPrograms = [
   },
 ]
 
-const workshopPrograms = [
+const makingPrograms = [
   {
-    title: 'Summer Camp',
-    image: '/art-program/summer-camp-farm-visit.jpg',
-    note: 'Explore • Create • Play',
+    title: 'Crochet & Fiber Arts',
+    image: '/art-program/craft-1.png',
+    note: 'Soft textures, patient hands, playful details.',
+  },
+  {
+    title: 'Clay & Sculpture',
+    image: '/art-program/craft-2.jpg',
+    note: 'Tiny worlds shaped with color, care, and imagination.',
+  },
+  {
+    title: 'Paper & Mixed Media',
+    image: '/art-program/craft-3.jpg',
+    note: 'Layered materials become bright keepsake creations.',
+  },
+]
+
+const campPrograms = [
+  {
+    title: 'Summer Camps',
+    image: '/art-program/creative-camp-summer.png',
+    note: 'Bright weeks of art, play, and friendship.',
     action: 'View Camps',
   },
   {
-    title: 'Seasonal Workshops',
-    image: '/art-program/craft-1.png',
-    note: 'Holiday crafts and creative gifts',
-    action: 'Coming Soon',
+    title: 'Holiday Workshops',
+    image: '/art-program/creative-camp-workshops.jpg',
+    note: 'Seasonal projects and handmade gifts.',
+    action: 'Plan a Visit',
   },
   {
-    title: 'Creative Gatherings',
-    image: '/art-program/craft-3.jpg',
-    note: 'Community art and group projects',
-    action: 'Coming Soon',
+    title: 'Community Events',
+    image: '/art-program/creative-camp-events.jpg',
+    note: 'Shared making moments for families and friends.',
+    action: 'Join Us',
   },
 ]
 
@@ -392,11 +410,49 @@ const isAssistantOpen = ref(false)
       </div>
     </section>
 
-    <section class="bg-[#faf7ef] px-4 py-16 sm:px-6 lg:px-8">
+    <section class="bg-[#fbf0e2] px-4 py-16 sm:px-6 lg:px-8">
       <div class="mx-auto max-w-6xl">
         <div class="text-center">
           <h2 class="font-serif text-4xl font-semibold text-[#5a4380] sm:text-5xl">
-            Special Workshops & Camps
+            The Joys of Making
+          </h2>
+          <p class="mx-auto mt-4 max-w-2xl text-lg text-[#6a5e78]">
+            Hands-on craft projects let students explore texture, form, color, and playful construction.
+          </p>
+          <div class="section-divider mx-auto mt-5" />
+        </div>
+
+        <div class="mt-12 grid gap-8 md:grid-cols-3">
+          <article
+            v-for="program in makingPrograms"
+            :key="program.title"
+            class="making-card rounded-[2rem] bg-[#fffaf1]/80 p-5 text-center shadow-[0_16px_40px_rgba(109,77,52,0.13)] ring-1 ring-[#d9b78f]"
+          >
+            <div class="making-photo-frame">
+              <img
+                :src="program.image"
+                :alt="program.title"
+                class="h-full w-full bg-white object-contain"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
+            <h3 class="mt-5 font-serif text-2xl font-semibold text-[#6f4b31]">
+              {{ program.title }}
+            </h3>
+            <p class="mt-2 leading-7 text-[#70615c]">
+              {{ program.note }}
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-[#fff8f1] px-4 py-16 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-6xl">
+        <div class="text-center">
+          <h2 class="font-serif text-4xl font-semibold text-[#5a4380] sm:text-5xl">
+            Creative Camps & Events
           </h2>
           <p class="mx-auto mt-4 max-w-2xl text-lg text-[#6a5e78]">
             Seasonal creative experiences bring students together for art, play, and celebration.
@@ -406,17 +462,19 @@ const isAssistantOpen = ref(false)
 
         <div class="mt-10 grid gap-7 md:grid-cols-3">
           <article
-            v-for="program in workshopPrograms"
+            v-for="program in campPrograms"
             :key="program.title"
-            class="rounded-[2rem] bg-white/80 p-4 text-center shadow-sm ring-1 ring-[#d7d0c4]"
+            class="rounded-[2rem] bg-white/85 p-4 text-center shadow-sm ring-1 ring-[#d7d0c4]"
           >
-            <img
-              :src="program.image"
-              :alt="program.title"
-              class="aspect-[4/3] w-full rounded-[1.4rem] object-cover"
-              loading="lazy"
-              decoding="async"
-            >
+            <div class="camp-photo-frame">
+              <img
+                :src="program.image"
+                :alt="program.title"
+                class="h-full w-full object-cover"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
             <h3 class="mt-4 font-serif text-2xl font-semibold text-[#69508a]">
               {{ program.title }}
             </h3>
@@ -677,5 +735,44 @@ const isAssistantOpen = ref(false)
 
 .teen-photo-frame img {
   clip-path: polygon(0 7%, 6% 0, 12% 7%, 18% 0, 24% 7%, 30% 0, 36% 7%, 42% 0, 48% 7%, 54% 0, 60% 7%, 66% 0, 72% 7%, 78% 0, 84% 7%, 90% 0, 96% 7%, 100% 7%, 100% 94%, 94% 100%, 88% 94%, 82% 100%, 76% 94%, 70% 100%, 64% 94%, 58% 100%, 52% 94%, 46% 100%, 40% 94%, 34% 100%, 28% 94%, 22% 100%, 16% 94%, 10% 100%, 4% 94%, 0 94%);
+}
+
+.making-card:nth-child(2) .making-photo-frame {
+  transform: rotate(1deg);
+}
+
+.making-card:nth-child(3) .making-photo-frame {
+  transform: rotate(-0.6deg);
+}
+
+.making-photo-frame,
+.camp-photo-frame {
+  position: relative;
+  overflow: hidden;
+}
+
+.making-photo-frame {
+  aspect-ratio: 4 / 3;
+  padding: 0.6rem;
+  background: linear-gradient(135deg, #b77b49, #8f5a33);
+  border-radius: 1.45rem;
+  box-shadow: 0 0.9rem 1.8rem rgba(100, 67, 39, 0.2);
+  transform: rotate(-1deg);
+}
+
+.making-photo-frame img {
+  border-radius: 0.95rem;
+}
+
+.camp-photo-frame {
+  aspect-ratio: 4 / 3;
+  padding: 0.45rem;
+  background: white;
+  border-radius: 1.6rem;
+  box-shadow: inset 0 0 0 1px rgba(123, 111, 137, 0.16);
+}
+
+.camp-photo-frame img {
+  border-radius: 1.2rem;
 }
 </style>
