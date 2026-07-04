@@ -22,6 +22,14 @@ const expectedAssets = [
   'silver-club.jpg',
 ]
 
+const expectedImageHashes: Record<string, string> = {
+  'hero-wellness.jpg': '59a37bb991ac050557434adc5ed3ad1a3651c78f758e28559cb121d6a59ab38d',
+  'yin-yoga.jpg': 'c24a61dc085485a22714fee546eecc528b091b3c1ed5abdc98d0c255a6a84e53',
+  'flow-yoga.jpg': 'cd2110c9453cebc17a0f99603598023386680c532c877aca82926cc47f4ef857',
+  'chair-yoga.jpg': '549aac6b06aa6985136f7c6eaccb82b89bc98ee6a0d174a559ca966663d32bcf',
+  'inside-flow.jpg': 'eda025931aab2071f435b6ffa9ecff2eb579f2907074b63af8c5d7638d2c08e2',
+}
+
 const referenceCopy = [
   'XinYi Wellness',
   'Wellness',
@@ -134,6 +142,10 @@ function escapeRegExp(text: string) {
   return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
 
+function readAssetHash(asset: string) {
+  return createHash('sha256').update(readFileSync(resolve(wellnessAssetPath, asset))).digest('hex')
+}
+
 function readJpegSize(asset: string) {
   const source = readFileSync(resolve(wellnessAssetPath, asset))
   const text = source.toString('latin1')
@@ -214,7 +226,10 @@ test('wellness page uses the reference section headings', () => {
 })
 
 test('wellness card images are exact crops from the reference design', () => {
-  assert.equal(createHash('sha256').update(readFileSync(resolve(wellnessAssetPath, 'hero-wellness.jpg'))).digest('hex'), '59a37bb991ac050557434adc5ed3ad1a3651c78f758e28559cb121d6a59ab38d')
+  for (const [asset, hash] of Object.entries(expectedImageHashes)) {
+    assert.equal(readAssetHash(asset), hash, `${asset} must keep the reference crop`)
+  }
+
   assert.deepEqual(readJpegSize('hero-wellness.jpg'), { width: 1300, height: 1040 })
   assert.deepEqual(readJpegSize('yin-yoga.jpg'), { width: 585, height: 400 })
   assert.deepEqual(readJpegSize('flow-yoga.jpg'), { width: 585, height: 400 })
