@@ -677,19 +677,5 @@ const isAssistantOpen = ref(false)
 
 .teen-photo-frame img {
   clip-path: polygon(0 7%, 6% 0, 12% 7%, 18% 0, 24% 7%, 30% 0, 36% 7%, 42% 0, 48% 7%, 54% 0, 60% 7%, 66% 0, 72% 7%, 78% 0, 84% 7%, 90% 0, 96% 7%, 100% 7%, 100% 94%, 94% 100%, 88% 94%, 82% 100%, 76% 94%, 70% 100%, 64% 94%, 58% 100%, 52% 94%, 46% 100%, 40% 94%, 34% 100%, 28% 94%, 22% 100%, 16% 94%, 10% 100%, 4% 94%, 0 94%);
-  transform: scale(1.06);
-}
-
-#children article:first-child .child-photo-frame img {
-  object-fit: contain;
-}
-
-.teen-grid article:first-child .teen-photo-frame {
-  aspect-ratio: 1;
-}
-
-.teen-grid article:first-child .teen-photo-frame img {
-  object-fit: cover;
-  transform: none;
 }
 </style>
