@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import { createHash } from 'node:crypto'
 import { existsSync, readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { test } from 'node:test'
@@ -195,6 +196,7 @@ test('wellness page keeps reference image treatments', () => {
   const source = readWellnessPage()
 
   assert.match(source, /wellness-hero-banner/)
+  assert.match(source, /md:w-\[64%\]/)
   assert.doesNotMatch(source, /wellness-hero-card/)
   assert.match(source, /class="wellness-card-photo aspect-\[585\/400\] w-full object-cover"/)
   assert.match(source, /class="sound-photo-frame"/)
@@ -212,7 +214,8 @@ test('wellness page uses the reference section headings', () => {
 })
 
 test('wellness card images are exact crops from the reference design', () => {
-  assert.deepEqual(readJpegSize('hero-wellness.jpg'), { width: 2404, height: 1000 })
+  assert.equal(createHash('sha256').update(readFileSync(resolve(wellnessAssetPath, 'hero-wellness.jpg'))).digest('hex'), '59a37bb991ac050557434adc5ed3ad1a3651c78f758e28559cb121d6a59ab38d')
+  assert.deepEqual(readJpegSize('hero-wellness.jpg'), { width: 1300, height: 1040 })
   assert.deepEqual(readJpegSize('yin-yoga.jpg'), { width: 585, height: 400 })
   assert.deepEqual(readJpegSize('flow-yoga.jpg'), { width: 585, height: 400 })
   assert.deepEqual(readJpegSize('chair-yoga.jpg'), { width: 585, height: 400 })

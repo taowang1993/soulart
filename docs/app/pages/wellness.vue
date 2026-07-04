@@ -206,8 +206,8 @@ const isAssistantOpen = ref(false)
       <div class="wellness-hero-banner -mx-4 mt-6 sm:-mx-6 lg:-mx-8">
         <img
           src="/wellness/hero-wellness.jpg"
-          alt="Woman practicing yoga in a peaceful studio"
-          class="absolute inset-0 h-full w-full object-cover object-[62%_50%]"
+          alt="Woman meditating in a peaceful studio"
+          class="absolute inset-0 h-full w-full object-cover object-center md:left-auto md:w-[64%]"
           loading="eager"
           decoding="async"
         >
