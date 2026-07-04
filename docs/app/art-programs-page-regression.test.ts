@@ -70,3 +70,13 @@ test('art programs page owns its marketing chrome and links from home', () => {
   assert.match(home, /\{ label: 'Art Programs', to: '\/art-programs'/)
   assert.match(home, /title: 'Art Programs',[\s\S]*to: '\/art-programs'/)
 })
+
+test('art programs page keeps reference card image treatments', () => {
+  const source = readArtPage()
+
+  assert.match(source, /rounded-3xl bg-white\/85 p-4/)
+  assert.match(source, /aspect-square w-full rounded-\[1\.4rem\] object-cover/)
+  assert.match(source, /mx-auto aspect-\[4\/3\] w-\[88%\] rounded-\[1\.4rem\] object-cover/)
+  assert.match(source, /rounded-\[2rem\] bg-white\/80 p-4/)
+  assert.match(source, /aspect-\[4\/3\] w-full rounded-\[1\.4rem\] object-cover/)
+})

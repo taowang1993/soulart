@@ -275,16 +275,16 @@ const isAssistantOpen = ref(false)
           <article
             v-for="program in childPrograms"
             :key="program.title"
-            class="overflow-hidden rounded-3xl bg-white/85 shadow-[0_18px_50px_rgba(82,61,107,0.14)] ring-1 ring-[#eaddec]"
+            class="rounded-3xl bg-white/85 p-4 shadow-[0_18px_50px_rgba(82,61,107,0.14)] ring-1 ring-[#eaddec]"
           >
             <img
               :src="program.image"
               :alt="`${program.title} artwork`"
-              class="aspect-square w-full object-cover"
+              class="aspect-square w-full rounded-[1.4rem] object-cover"
               loading="lazy"
               decoding="async"
             >
-            <div class="p-6 text-center">
+            <div class="px-2 pb-2 pt-5 text-center">
               <p class="text-sm font-bold uppercase tracking-[0.24em] text-[#d1848d]">
                 {{ program.subtitle }}
               </p>
@@ -337,7 +337,7 @@ const isAssistantOpen = ref(false)
             <img
               :src="program.image"
               :alt="`${program.title} student artwork`"
-              class="aspect-[4/3] w-full rounded-[1.4rem] object-cover"
+              class="mx-auto aspect-[4/3] w-[88%] rounded-[1.4rem] object-cover"
               loading="lazy"
               decoding="async"
             >
@@ -406,12 +406,12 @@ const isAssistantOpen = ref(false)
           <article
             v-for="program in workshopPrograms"
             :key="program.title"
-            class="rounded-none bg-white/80 p-4 text-center shadow-sm ring-1 ring-[#d7d0c4]"
+            class="rounded-[2rem] bg-white/80 p-4 text-center shadow-sm ring-1 ring-[#d7d0c4]"
           >
             <img
               :src="program.image"
               :alt="program.title"
-              class="aspect-[4/3] w-full object-cover"
+              class="aspect-[4/3] w-full rounded-[1.4rem] object-cover"
               loading="lazy"
               decoding="async"
             >
