@@ -1,0 +1,7 @@
+{
+  "database": "dolt",
+  "backend": "dolt",
+  "dolt_mode": "embedded",
+  "dolt_database": "soulart",
+  "project_id": "94764c3a-a2d0-4d6c-9c7c-4faac12f824a"
+}

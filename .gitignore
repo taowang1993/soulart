@@ -45,3 +45,9 @@ template/pnpm-lock.yaml
 .starters/i18n/pnpm-lock.yaml
 .starters/i18n/pnpm-workspace.yaml
 .vercel
+
+# Beads / Dolt files (added by bd init)
+.dolt/
+*.db
+.beads-credential-key
+.beads/proxieddb/
