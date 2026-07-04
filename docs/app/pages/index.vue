@@ -249,7 +249,7 @@ const isAssistantOpen = ref(false)
       id="programs"
       class="px-4 py-14 sm:px-6 lg:px-8 lg:py-18"
     >
-      <div class="mx-auto max-w-6xl">
+      <div class="mx-auto max-w-5xl">
         <div class="text-center">
           <h2 class="font-serif text-4xl font-semibold text-[#5a4380] sm:text-5xl">
             Explore Our Programs
@@ -261,12 +261,13 @@ const isAssistantOpen = ref(false)
           <article
             v-for="program in programs"
             :key="program.title"
-            class="overflow-hidden rounded-2xl bg-white/82 shadow-[0_18px_50px_rgba(82,61,107,0.14)] ring-1 ring-[#ece1ef] transition hover:-translate-y-1 hover:shadow-[0_24px_70px_rgba(82,61,107,0.2)]"
+            class="group overflow-hidden rounded-2xl bg-white/82 shadow-[0_18px_50px_rgba(82,61,107,0.14)] ring-1 ring-[#ece1ef] transition hover:-translate-y-1 hover:shadow-[0_24px_70px_rgba(82,61,107,0.2)]"
           >
             <img
               :src="program.image"
               :alt="`${program.title} at XinYi Class`"
-              class="aspect-[16/10] w-full object-cover"
+              class="aspect-[16/10] w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+              :class="program.title === 'Wellness Programs' ? 'object-[center_35%]' : 'object-center'"
               loading="lazy"
               decoding="async"
             >

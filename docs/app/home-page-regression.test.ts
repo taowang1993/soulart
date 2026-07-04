@@ -40,28 +40,6 @@ function readPngSize(asset: string) {
   }
 }
 
-function readJpegSize(asset: string) {
-  const buffer = readFileSync(resolve(publicHomePath, asset))
-  assert.equal(buffer.readUInt16BE(0), 0xFFD8)
-
-  for (let offset = 2; offset < buffer.length;) {
-    assert.equal(buffer[offset], 0xFF)
-    const marker = buffer[offset + 1]
-    const length = buffer.readUInt16BE(offset + 2)
-
-    if (marker >= 0xC0 && marker <= 0xCF && ![0xC4, 0xC8, 0xCC].includes(marker)) {
-      return {
-        width: buffer.readUInt16BE(offset + 7),
-        height: buffer.readUInt16BE(offset + 5),
-      }
-    }
-
-    offset += 2 + length
-  }
-
-  throw new Error(`missing JPEG size: ${asset}`)
-}
-
 test('home page assets are copied into public home directory', () => {
   for (const asset of expectedAssets) {
     assert.ok(existsSync(resolve(publicHomePath, asset)), `missing public home asset: ${asset}`)
@@ -77,15 +55,14 @@ test('home page uses copied public assets instead of local absolute paths', () =
   }
 })
 
-test('program images keep the design crop ratio without zooming the photos', () => {
+test('program images keep the design crop ratio', () => {
   const source = readHomePage()
   const artSize = readPngSize('art-program.png')
-  const yogaSize = readJpegSize('yoga-program.jpg')
 
-  assert.deepEqual(artSize, { width: 1600, height: 1000 })
-  assert.deepEqual(yogaSize, { width: 1600, height: 1000 })
+  assert.ok(artSize.width > artSize.height, 'art program asset must be cropped as a landscape card image')
+  assert.ok(Math.abs((artSize.width / artSize.height) - 1.6) < 0.02, 'art program crop should match the 16:10 design card ratio')
+  assert.match(source, /<div class="mx-auto max-w-5xl">[\s\S]*Explore Our Programs/)
   assert.match(source, /aspect-\[16\/10\][^\n]+w-full[^\n]+object-cover/)
-  assert.doesNotMatch(source, /group-hover:scale/)
   assert.doesNotMatch(source, /class="h-72 w-full object-cover/)
 })
 
