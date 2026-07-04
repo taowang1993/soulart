@@ -277,13 +277,14 @@ const isAssistantOpen = ref(false)
             :key="program.title"
             class="rounded-3xl bg-white/85 p-4 shadow-[0_18px_50px_rgba(82,61,107,0.14)] ring-1 ring-[#eaddec]"
           >
-            <img
-              :src="program.image"
-              :alt="`${program.title} artwork`"
-              class="aspect-square w-full rounded-[1.4rem] bg-[#f8f3f7] object-contain"
-              loading="lazy"
-              decoding="async"
-            >
+            <div class="child-photo-frame">
+              <img
+                :src="program.image"
+                :alt="`${program.title} artwork`"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
             <div class="px-2 pb-2 pt-5 text-center">
               <p class="text-sm font-bold uppercase tracking-[0.24em] text-[#d1848d]">
                 {{ program.subtitle }}
@@ -328,19 +329,20 @@ const isAssistantOpen = ref(false)
           <div class="section-divider mx-auto mt-5" />
         </div>
 
-        <div class="mt-10 grid gap-7 lg:grid-cols-3">
+        <div class="teen-grid mt-10 grid gap-7 lg:grid-cols-3">
           <article
             v-for="program in teenPrograms"
             :key="program.title"
             class="rounded-[2rem] bg-white p-4 shadow-[0_18px_50px_rgba(82,61,107,0.13)] ring-1 ring-[#e5d9ef]"
           >
-            <img
-              :src="program.image"
-              :alt="`${program.title} student artwork`"
-              class="mx-auto aspect-[4/3] w-[88%] rounded-[1.4rem] bg-[#f8f3f7] object-contain"
-              loading="lazy"
-              decoding="async"
-            >
+            <div class="teen-photo-frame">
+              <img
+                :src="program.image"
+                :alt="`${program.title} student artwork`"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
             <div class="px-3 py-5 text-center">
               <h3 class="font-serif text-3xl font-semibold text-[#72558d]">
                 {{ program.title }}
@@ -620,5 +622,66 @@ const isAssistantOpen = ref(false)
   content: "";
   background: radial-gradient(circle at 50% 50%, #c8a9d8 0 28%, transparent 29%), radial-gradient(circle at 20% 30%, #e59aa5 0 18%, transparent 19%), radial-gradient(circle at 80% 30%, #e59aa5 0 18%, transparent 19%);
   transform: translate(-50%, -50%);
+}
+
+.child-photo-frame,
+.teen-photo-frame {
+  position: relative;
+  overflow: hidden;
+}
+
+.child-photo-frame {
+  aspect-ratio: 1;
+  padding: 0.55rem;
+  background: #fffdfb;
+  border-radius: 2rem 2rem 1.5rem 1.5rem;
+  box-shadow: inset 0 0 0 1px rgba(123, 111, 137, 0.24), 0 0.6rem 1.5rem rgba(83, 68, 99, 0.12);
+}
+
+.child-photo-frame::after {
+  position: absolute;
+  inset: 0.35rem;
+  pointer-events: none;
+  content: "";
+  border: 2px dashed rgba(108, 99, 119, 0.48);
+  border-radius: 1.7rem 1.7rem 1.25rem 1.25rem;
+}
+
+.child-photo-frame img,
+.teen-photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.child-photo-frame img {
+  border-radius: 1.35rem;
+}
+
+.teen-photo-frame {
+  aspect-ratio: 4 / 3;
+  padding: 0.9rem 0.75rem 0.7rem;
+  background: #fffaf7;
+  border-radius: 1.1rem;
+  box-shadow: 0 0.75rem 1.5rem rgba(83, 68, 99, 0.12);
+}
+
+.teen-photo-frame::before {
+  position: absolute;
+  inset: 0.2rem 0.65rem auto;
+  height: 0.55rem;
+  content: "";
+  background-image: radial-gradient(circle, #b9acbf 0 0.08rem, transparent 0.09rem);
+  background-size: 0.55rem 0.55rem;
+}
+
+.teen-photo-frame img {
+  clip-path: polygon(0 8%, 5% 5%, 5% 0, 12% 5%, 19% 0, 26% 5%, 33% 0, 40% 5%, 47% 0, 54% 5%, 61% 0, 68% 5%, 75% 0, 82% 5%, 89% 0, 95% 5%, 100% 7%, 96% 50%, 100% 93%, 92% 96%, 85% 100%, 78% 96%, 71% 100%, 64% 96%, 57% 100%, 50% 96%, 43% 100%, 36% 96%, 29% 100%, 22% 96%, 15% 100%, 8% 96%, 0 93%);
+  transform: scale(1.06);
+}
+
+.teen-grid article:first-child .teen-photo-frame img {
+  transform: scale(1.22);
+  transform-origin: left center;
 }
 </style>
