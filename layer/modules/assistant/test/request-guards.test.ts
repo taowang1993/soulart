@@ -94,6 +94,22 @@ test('resolveAssistantRequestScope accepts validated header scope when referer i
   })
 })
 
+test('resolveAssistantRequestScope accepts site header scope for all KBs', () => {
+  const result = resolveAssistantRequestScope({
+    config: kbConfig,
+    requestOrigin: 'https://example.com',
+    headerScope: 'site',
+  })
+
+  assert.deepEqual(result, {
+    ok: true,
+    scope: {
+      mode: 'kb',
+      scopeLabel: 'all knowledge bases',
+    },
+  })
+})
+
 test('resolveAssistantRequestScope validates KB header scope before retrieval', () => {
   const defaultLocale = resolveAssistantRequestScope({
     config: kbConfig,

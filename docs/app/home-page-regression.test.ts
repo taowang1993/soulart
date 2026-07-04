@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url'
 
 const repoRoot = resolve(fileURLToPath(import.meta.url), '../../..')
 const homePagePath = resolve(repoRoot, 'docs/app/pages/index.vue')
+const homeAssistantPath = resolve(repoRoot, 'docs/app/components/HomeAssistantChat.vue')
 const publicHomePath = resolve(repoRoot, 'docs/public/home')
 
 const expectedAssets = [
@@ -24,6 +25,11 @@ function readHomePage() {
   return readFileSync(homePagePath, 'utf8')
 }
 
+function readHomeAssistant() {
+  assert.ok(existsSync(homeAssistantPath), 'home page must provide a bottom-right assistant component')
+  return readFileSync(homeAssistantPath, 'utf8')
+}
+
 test('home page assets are copied into public home directory', () => {
   for (const asset of expectedAssets) {
     assert.ok(existsSync(resolve(publicHomePath, asset)), `missing public home asset: ${asset}`)
@@ -37,6 +43,27 @@ test('home page uses copied public assets instead of local absolute paths', () =
   for (const asset of expectedAssets) {
     assert.match(source, new RegExp(`/home/${asset.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`))
   }
+})
+
+test('program images keep the design crop ratio', () => {
+  const source = readHomePage()
+
+  assert.match(source, /aspect-\[16\/10\][^\n]+w-full[^\n]+object-cover/)
+  assert.doesNotMatch(source, /class="h-72 w-full object-cover/)
+})
+
+test('home page opens a bottom-right site-wide assistant chat', () => {
+  const source = readHomePage()
+  const assistant = readHomeAssistant()
+
+  assert.match(source, /const isAssistantOpen = ref\(false\)/)
+  assert.match(source, /<HomeAssistantChat\s+v-model:open="isAssistantOpen"\s+\/>/)
+  assert.match(source, /type="button"[\s\S]*@click="isAssistantOpen = true"[\s\S]*Talk with AI Assistant/)
+  assert.match(assistant, /new Chat\(/)
+  assert.match(assistant, /DefaultChatTransport/)
+  assert.match(assistant, /config\.public\.assistant\.apiPath/)
+  assert.match(assistant, /'X-TockDocs-Scope': 'site'/)
+  assert.match(assistant, /fixed bottom-4 right-4/)
 })
 
 test('home page owns its marketing chrome without changing docs routes', () => {

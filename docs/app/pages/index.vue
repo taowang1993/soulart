@@ -114,6 +114,8 @@ const socialLinks = [
   { label: 'Facebook', icon: 'i-lucide-facebook' },
   { label: 'YouTube', icon: 'i-lucide-youtube' },
 ]
+
+const isAssistantOpen = ref(false)
 </script>
 
 <template>
@@ -264,7 +266,7 @@ const socialLinks = [
             <img
               :src="program.image"
               :alt="`${program.title} at XinYi Class`"
-              class="h-72 w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+              class="aspect-[16/10] w-full object-cover transition duration-500 group-hover:scale-[1.03]"
               :class="program.title === 'Wellness Programs' ? 'object-[center_35%]' : 'object-center'"
               loading="lazy"
               decoding="async"
@@ -492,16 +494,17 @@ const socialLinks = [
               </p>
             </div>
           </div>
-          <NuxtLink
-            to="/docs/manual/en/ai/assistant"
+          <button
+            type="button"
             class="mt-8 inline-flex items-center gap-2 rounded-full bg-[#a783c4] px-6 py-3 text-sm font-bold text-white shadow-lg shadow-[#a783c4]/25 transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
+            @click="isAssistantOpen = true"
           >
             <UIcon
               name="i-lucide-bot"
               class="size-4"
             />
             Talk with AI Assistant
-          </NuxtLink>
+          </button>
           <p class="mt-4 max-w-xs text-sm leading-6 text-[#7a6b8b]">
             Ask about classes, schedules, age groups, and upcoming events.
           </p>
@@ -579,6 +582,8 @@ const socialLinks = [
         <p>Art <span class="mx-3 text-[#df838d]">♥</span> Wellness <span class="mx-3 text-[#df838d]">♥</span> Community</p>
       </div>
     </footer>
+
+    <HomeAssistantChat v-model:open="isAssistantOpen" />
   </main>
 </template>
 

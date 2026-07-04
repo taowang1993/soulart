@@ -131,6 +131,7 @@ function getAssistantScope(event: H3Event): AssistantScope {
     referer: getRequestHeader(event, 'referer'),
     headerKb: getRequestHeader(event, 'X-TockDocs-KB'),
     headerLocale: getRequestHeader(event, 'X-TockDocs-Locale'),
+    headerScope: getRequestHeader(event, 'X-TockDocs-Scope'),
   })
 
   if (!result.ok) {
@@ -170,8 +171,8 @@ function getAssistantFsBackend(config: ReturnType<typeof useRuntimeConfig>) {
 }
 
 function getGitFsRoot(assistantScope: AssistantScope) {
-  if (assistantScope.mode === 'kb') {
-    if (!assistantScope.kb || !assistantScope.locale) {
+  if (assistantScope.mode === 'kb' && assistantScope.kb) {
+    if (!assistantScope.locale) {
       throw createError({
         statusCode: 400,
         statusMessage: 'ASSISTANT_FS_BACKEND=gitfs requires a scoped knowledge base and locale.',
@@ -366,7 +367,9 @@ export default defineEventHandler(async (event) => {
     const siteUrl = getRequestURL(event).origin
     const routePrefix = assistantScope.kb
       ? `/docs/${assistantScope.kb}${assistantScope.locale ? `/${assistantScope.locale}` : ''}`
-      : ''
+      : assistantScope.mode === 'kb'
+        ? '/docs'
+        : ''
 
     repoUrlMapper = createRepoPathToUrlMapper({
       siteUrl,

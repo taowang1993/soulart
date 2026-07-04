@@ -277,17 +277,33 @@ function createScope(mode: 'legacy' | 'kb', kb: string | undefined, locale: stri
   }
 }
 
+function createSiteScope(mode: 'legacy' | 'kb'): AssistantScope {
+  return {
+    mode,
+    scopeLabel: mode === 'kb' ? 'all knowledge bases' : 'all locales',
+  }
+}
+
 function resolveHeaderScope({
   config,
   headerKb,
   headerLocale,
+  headerScope,
 }: {
   config: TockDocsPublicRuntimeConfig
   headerKb?: string
   headerLocale?: string
+  headerScope?: string
 }): AssistantGuardResult<{ scope: AssistantScope }> | undefined {
   const mode = getDocsMode(config)
   const locale = headerLocale?.trim() || undefined
+
+  if (headerScope?.trim().toLowerCase() === 'site') {
+    return {
+      ok: true,
+      scope: createSiteScope(mode),
+    }
+  }
 
   if (mode === 'kb') {
     if (!headerKb && !headerLocale) return undefined
@@ -353,12 +369,14 @@ export function resolveAssistantRequestScope({
   referer,
   headerKb,
   headerLocale,
+  headerScope,
 }: {
   config: TockDocsPublicRuntimeConfig
   requestOrigin: string
   referer?: string
   headerKb?: string
   headerLocale?: string
+  headerScope?: string
 }): AssistantGuardResult<{ scope: AssistantScope }> {
   const mode = getDocsMode(config)
   const refererScope = resolveRefererScope({ config, referer, requestOrigin })
@@ -370,9 +388,9 @@ export function resolveAssistantRequestScope({
     }
   }
 
-  const headerScope = resolveHeaderScope({ config, headerKb, headerLocale })
-  if (headerScope) {
-    return headerScope
+  const resolvedHeaderScope = resolveHeaderScope({ config, headerKb, headerLocale, headerScope })
+  if (resolvedHeaderScope) {
+    return resolvedHeaderScope
   }
 
   if (mode === 'kb') {
