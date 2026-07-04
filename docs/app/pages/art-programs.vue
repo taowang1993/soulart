@@ -676,12 +676,20 @@ const isAssistantOpen = ref(false)
 }
 
 .teen-photo-frame img {
-  clip-path: polygon(0 8%, 5% 5%, 5% 0, 12% 5%, 19% 0, 26% 5%, 33% 0, 40% 5%, 47% 0, 54% 5%, 61% 0, 68% 5%, 75% 0, 82% 5%, 89% 0, 95% 5%, 100% 7%, 96% 50%, 100% 93%, 92% 96%, 85% 100%, 78% 96%, 71% 100%, 64% 96%, 57% 100%, 50% 96%, 43% 100%, 36% 96%, 29% 100%, 22% 96%, 15% 100%, 8% 96%, 0 93%);
+  clip-path: polygon(0 7%, 6% 0, 12% 7%, 18% 0, 24% 7%, 30% 0, 36% 7%, 42% 0, 48% 7%, 54% 0, 60% 7%, 66% 0, 72% 7%, 78% 0, 84% 7%, 90% 0, 96% 7%, 100% 7%, 100% 94%, 94% 100%, 88% 94%, 82% 100%, 76% 94%, 70% 100%, 64% 94%, 58% 100%, 52% 94%, 46% 100%, 40% 94%, 34% 100%, 28% 94%, 22% 100%, 16% 94%, 10% 100%, 4% 94%, 0 94%);
   transform: scale(1.06);
 }
 
+#children article:first-child .child-photo-frame img {
+  object-fit: contain;
+}
+
+.teen-grid article:first-child .teen-photo-frame {
+  aspect-ratio: 1;
+}
+
 .teen-grid article:first-child .teen-photo-frame img {
-  transform: scale(1.22);
-  transform-origin: left center;
+  object-fit: cover;
+  transform: none;
 }
 </style>
