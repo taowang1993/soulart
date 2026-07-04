@@ -30,6 +30,16 @@ function readHomeAssistant() {
   return readFileSync(homeAssistantPath, 'utf8')
 }
 
+function readPngSize(asset: string) {
+  const buffer = readFileSync(resolve(publicHomePath, asset))
+  assert.equal(buffer.subarray(1, 4).toString('ascii'), 'PNG')
+
+  return {
+    width: buffer.readUInt32BE(16),
+    height: buffer.readUInt32BE(20),
+  }
+}
+
 test('home page assets are copied into public home directory', () => {
   for (const asset of expectedAssets) {
     assert.ok(existsSync(resolve(publicHomePath, asset)), `missing public home asset: ${asset}`)
@@ -47,7 +57,10 @@ test('home page uses copied public assets instead of local absolute paths', () =
 
 test('program images keep the design crop ratio', () => {
   const source = readHomePage()
+  const artSize = readPngSize('art-program.png')
 
+  assert.ok(artSize.width > artSize.height, 'art program asset must be cropped as a landscape card image')
+  assert.ok(Math.abs((artSize.width / artSize.height) - 1.6) < 0.02, 'art program crop should match the 16:10 design card ratio')
   assert.match(source, /aspect-\[16\/10\][^\n]+w-full[^\n]+object-cover/)
   assert.doesNotMatch(source, /class="h-72 w-full object-cover/)
 })
