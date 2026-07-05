@@ -324,7 +324,7 @@ const isAssistantOpen = ref(false)
                 </li>
               </ul>
               <NuxtLink
-                to="#gallery"
+                to="/art-programs/student-gallery"
                 class="mt-6 inline-flex rounded-full bg-[#e7b3b8] px-7 py-2.5 font-bold text-[#5a435f] shadow-md transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
               >
                 View Gallery
