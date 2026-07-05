@@ -18,7 +18,7 @@ const navItems = [
   { label: 'Schedules', to: '/schedules', icon: 'i-lucide-calendar-days' },
   { label: 'Resources', to: '/docs/manual/en/getting-started/installation', icon: 'i-lucide-book-open' },
   { label: 'About', to: '/about', icon: 'i-lucide-heart' },
-  { label: 'Contact', to: '#contact', icon: 'i-lucide-mail' },
+  { label: 'Contact', to: '/contact', icon: 'i-lucide-mail' },
 ]
 
 const scheduleGroups = [
@@ -157,7 +157,7 @@ const footerLinks = [
   { label: 'Art Programs', to: '/art-programs' },
   { label: 'Wellness', to: '/wellness' },
   { label: 'Resources', to: '/docs/manual/en/getting-started/installation' },
-  { label: 'Contact', to: '#contact' },
+  { label: 'Contact', to: '/contact' },
 ]
 
 const socialLinks = [

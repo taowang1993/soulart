@@ -18,7 +18,7 @@ const navItems = [
   { label: 'Schedules', to: '/schedules', icon: 'i-lucide-calendar-days' },
   { label: 'Resources', to: '/docs/manual/en/getting-started/installation', icon: 'i-lucide-book-open' },
   { label: 'About', to: '/about', icon: 'i-lucide-heart' },
-  { label: 'Contact', to: '#contact', icon: 'i-lucide-mail' },
+  { label: 'Contact', to: '/contact', icon: 'i-lucide-mail' },
 ]
 
 const programCards = [
@@ -140,7 +140,7 @@ const footerLinks = [
   { label: 'Art Programs', to: '/art-programs' },
   { label: 'Wellness', to: '/wellness' },
   { label: 'Resources', to: '/docs/manual/en/getting-started/installation' },
-  { label: 'Contact', to: '#contact' },
+  { label: 'Contact', to: '/contact' },
 ]
 
 const socialLinks = [
@@ -236,7 +236,7 @@ const isAssistantOpen = ref(false)
               Explore Classes
             </NuxtLink>
             <NuxtLink
-              to="#contact"
+              to="/contact"
               class="inline-flex items-center justify-center rounded-full border border-[#b9c9b6] bg-white/70 px-8 py-3 font-bold text-[#527858] shadow-sm transition hover:-translate-y-0.5 hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7aa984]"
             >
               Book a Trial
@@ -559,7 +559,7 @@ const isAssistantOpen = ref(false)
         </h2>
         <div class="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
           <NuxtLink
-            to="#contact"
+            to="/contact"
             class="inline-flex items-center justify-center rounded-full bg-white px-8 py-3 font-bold text-[#4f6750] shadow-lg transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
           >
             Book a Trial Class

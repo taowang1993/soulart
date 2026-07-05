@@ -18,7 +18,7 @@ const navItems = [
   { label: 'Schedules', to: '/schedules', icon: 'i-lucide-calendar-days' },
   { label: 'Resources', to: '/docs/manual/en/getting-started/installation', icon: 'i-lucide-book-open' },
   { label: 'About', to: '/about', icon: 'i-lucide-heart' },
-  { label: 'Contact', to: '#contact', icon: 'i-lucide-mail' },
+  { label: 'Contact', to: '/contact', icon: 'i-lucide-mail' },
 ]
 
 const heroValues = [
@@ -108,7 +108,7 @@ const footerLinks = [
   { label: 'Art Programs', to: '/art-programs' },
   { label: 'Wellness', to: '/wellness' },
   { label: 'Resources', to: '/docs/manual/en/getting-started/installation' },
-  { label: 'Contact', to: '#contact' },
+  { label: 'Contact', to: '/contact' },
 ]
 
 const socialLinks = [
@@ -371,7 +371,7 @@ const isAssistantOpen = ref(false)
             <div class="section-divider mx-auto mt-5 lg:mx-0" />
           </div>
           <NuxtLink
-            to="#contact"
+            to="/contact"
             class="mx-auto inline-flex items-center gap-3 rounded-xl bg-[#e49aa1] px-6 py-3 text-base font-bold text-[#3f304e] shadow-lg shadow-[#e49aa1]/20 transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792] lg:mx-0"
           >
             <UIcon
@@ -456,7 +456,7 @@ const isAssistantOpen = ref(false)
           Every year becomes a story.
         </p>
         <NuxtLink
-          to="#contact"
+          to="/contact"
           class="mt-5 inline-flex items-center gap-3 rounded-xl border border-[#cdb9e7] bg-white/70 px-7 py-3 text-sm font-bold text-[#72558d] shadow-sm transition hover:-translate-y-0.5 hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
         >
           <UIcon

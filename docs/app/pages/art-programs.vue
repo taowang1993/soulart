@@ -18,7 +18,7 @@ const navItems = [
   { label: 'Schedules', to: '/schedules', icon: 'i-lucide-calendar-days' },
   { label: 'Resources', to: '/docs/manual/en/getting-started/installation', icon: 'i-lucide-book-open' },
   { label: 'About', to: '/about', icon: 'i-lucide-heart' },
-  { label: 'Contact', to: '#contact', icon: 'i-lucide-mail' },
+  { label: 'Contact', to: '/contact', icon: 'i-lucide-mail' },
 ]
 
 const heroHighlights = [
@@ -144,7 +144,7 @@ const footerLinks = [
   { label: 'Art Programs', to: '/art-programs' },
   { label: 'Wellness', to: '/wellness' },
   { label: 'Resources', to: '/docs/manual/en/getting-started/installation' },
-  { label: 'Contact', to: '#contact' },
+  { label: 'Contact', to: '/contact' },
 ]
 
 const isAssistantOpen = ref(false)
@@ -198,7 +198,7 @@ const isAssistantOpen = ref(false)
         </div>
 
         <NuxtLink
-          to="#contact"
+          to="/contact"
           class="rounded-full bg-[#df8f9a] px-4 py-2 text-sm font-bold text-white shadow-lg shadow-[#df8f9a]/20 transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
         >
           Book a Trial
@@ -248,7 +248,7 @@ const isAssistantOpen = ref(false)
               Explore Classes
             </NuxtLink>
             <NuxtLink
-              to="#contact"
+              to="/contact"
               class="rounded-full bg-white/80 px-9 py-3 text-lg font-bold text-[#5c486f] shadow-sm ring-1 ring-[#e9ddec] transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
             >
               Book a Trial
@@ -482,7 +482,7 @@ const isAssistantOpen = ref(false)
               {{ program.note }}
             </p>
             <NuxtLink
-              to="#contact"
+              to="/contact"
               class="mt-4 inline-flex rounded-full bg-[#e6b2b6] px-7 py-2.5 font-bold text-[#5a435f] shadow-md transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
             >
               {{ program.action }}
