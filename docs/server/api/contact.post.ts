@@ -2,8 +2,7 @@ import { createError, readValidatedBody } from 'h3'
 import { Resend } from 'resend'
 
 const CONTACT_TO_EMAIL = process.env.CONTACT_TO_EMAIL || 'xinyiartschool@gmail.com'
-// ponytail: local dev uses Resend's test sender; production must set a verified RESEND_FROM_EMAIL.
-const CONTACT_FROM_EMAIL = process.env.RESEND_FROM_EMAIL || (import.meta.dev ? 'Xinyi Class <onboarding@resend.dev>' : '')
+const CONTACT_FROM_EMAIL = process.env.RESEND_FROM_EMAIL || ''
 const interestOptions = new Set([
   'Art Classes',
   'Wellness Programs',
