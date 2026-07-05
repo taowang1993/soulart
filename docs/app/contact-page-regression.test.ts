@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url'
 
 const repoRoot = resolve(fileURLToPath(import.meta.url), '../../..')
 const contactPagePath = resolve(repoRoot, 'docs/app/pages/contact.vue')
+const contactApiPath = resolve(repoRoot, 'docs/server/api/contact.post.ts')
 const pagePaths = [
   resolve(repoRoot, 'docs/app/pages/index.vue'),
   resolve(repoRoot, 'docs/app/pages/art-programs.vue'),
@@ -124,13 +125,30 @@ test('contact page keeps the visible reference copy', () => {
 test('contact page keeps the reference form fields', () => {
   const source = readContactPage()
 
-  assert.match(source, /<form[\s\S]*@submit\.prevent/)
-  assert.match(source, /name="name"/)
-  assert.match(source, /type="email"/)
-  assert.match(source, /name="phone"/)
-  assert.match(source, /name="interest"/)
-  assert.match(source, /<textarea[\s\S]*name="message"/)
-  assert.match(source, /type="checkbox"/)
+  assert.match(source, /<form[\s\S]*@submit\.prevent="submitContactForm"/)
+  assert.match(source, /v-model="contactForm\.name"[\s\S]*name="name"/)
+  assert.match(source, /v-model="contactForm\.email"[\s\S]*type="email"/)
+  assert.match(source, /v-model="contactForm\.phone"[\s\S]*name="phone"/)
+  assert.match(source, /v-model="contactForm\.interest"[\s\S]*name="interest"/)
+  assert.match(source, /<textarea[\s\S]*v-model="contactForm\.message"[\s\S]*name="message"/)
+  assert.match(source, /v-model="contactForm\.updates"[\s\S]*type="checkbox"/)
+})
+
+test('contact form posts to a Resend-backed server route', () => {
+  const pageSource = readContactPage()
+
+  assert.ok(existsSync(contactApiPath), 'missing contact API route')
+  assert.match(pageSource, /\$fetch\('\/api\/contact'/)
+
+  const apiSource = readFileSync(contactApiPath, 'utf8')
+
+  assert.match(apiSource, /import \{ Resend \} from 'resend'/)
+  assert.match(apiSource, /new Resend\(apiKey\)/)
+  assert.match(apiSource, /process\.env\.RESEND_API_KEY/)
+  assert.match(apiSource, /to:\s*\[CONTACT_TO_EMAIL\]/)
+  assert.match(apiSource, /xinyiartschool@gmail\.com/)
+  assert.match(apiSource, /replyTo:\s*body\.email/)
+  assert.doesNotMatch(apiSource, /re_\w+/)
 })
 
 test('marketing pages link to the contact route', () => {

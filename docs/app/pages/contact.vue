@@ -45,6 +45,43 @@ const studioFeatures = [
 ]
 
 const isAssistantOpen = ref(false)
+const contactForm = reactive({
+  name: '',
+  email: '',
+  phone: '',
+  interest: '',
+  message: '',
+  updates: false,
+})
+const submitState = ref<'idle' | 'sending' | 'sent' | 'error'>('idle')
+const submitMessage = ref('')
+
+async function submitContactForm() {
+  submitState.value = 'sending'
+  submitMessage.value = ''
+
+  try {
+    await $fetch('/api/contact', {
+      method: 'POST',
+      body: contactForm,
+    })
+
+    Object.assign(contactForm, {
+      name: '',
+      email: '',
+      phone: '',
+      interest: '',
+      message: '',
+      updates: false,
+    })
+    submitState.value = 'sent'
+    submitMessage.value = 'Thanks — your message has been sent.'
+  }
+  catch {
+    submitState.value = 'error'
+    submitMessage.value = 'Sorry, your message could not be sent. Please email xinyiartschool@gmail.com instead.'
+  }
+}
 </script>
 
 <template>
@@ -211,12 +248,13 @@ const isAssistantOpen = ref(false)
           </h2>
           <form
             class="mt-5 space-y-4"
-            @submit.prevent
+            @submit.prevent="submitContactForm"
           >
             <div class="grid gap-5 sm:grid-cols-2">
               <label class="contact-field">
                 <span>Your Name *</span>
                 <input
+                  v-model="contactForm.name"
                   name="name"
                   type="text"
                   autocomplete="name"
@@ -226,6 +264,7 @@ const isAssistantOpen = ref(false)
               <label class="contact-field">
                 <span>Email Address *</span>
                 <input
+                  v-model="contactForm.email"
                   name="email"
                   type="email"
                   autocomplete="email"
@@ -238,6 +277,7 @@ const isAssistantOpen = ref(false)
               <label class="contact-field">
                 <span>Phone Number (optional)</span>
                 <input
+                  v-model="contactForm.phone"
                   name="phone"
                   type="tel"
                   autocomplete="tel"
@@ -246,6 +286,7 @@ const isAssistantOpen = ref(false)
               <label class="contact-field">
                 <span>I’m interested in</span>
                 <select
+                  v-model="contactForm.interest"
                   name="interest"
                   required
                 >
@@ -266,6 +307,7 @@ const isAssistantOpen = ref(false)
             <label class="contact-field">
               <span>Message *</span>
               <textarea
+                v-model="contactForm.message"
                 name="message"
                 rows="4"
                 required
@@ -274,6 +316,7 @@ const isAssistantOpen = ref(false)
 
             <label class="flex items-start gap-3 rounded-2xl bg-[#fbf8ff] p-3 text-sm leading-6 text-[#4a4a85] ring-1 ring-[#eee4f4]">
               <input
+                v-model="contactForm.updates"
                 type="checkbox"
                 name="updates"
                 class="mt-1 size-4 rounded border-[#cdb9e7] text-[#9f82bd] focus:ring-[#9f82bd]"
@@ -281,11 +324,21 @@ const isAssistantOpen = ref(false)
               <span>Keep me updated about workshops, retreats, new classes and seasonal events.</span>
             </label>
 
+            <p
+              v-if="submitMessage"
+              class="rounded-2xl px-4 py-3 text-sm font-semibold"
+              :class="submitState === 'sent' ? 'bg-[#edf8ef] text-[#376a42]' : 'bg-[#fff0f0] text-[#9b3d4a]'"
+              role="status"
+            >
+              {{ submitMessage }}
+            </p>
+
             <button
               type="submit"
-              class="inline-flex w-full items-center justify-center gap-3 rounded-2xl bg-[#8f76c0] px-8 py-3 text-base font-bold text-white shadow-lg shadow-[#8f76c0]/25 transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#8f76c0]"
+              class="inline-flex w-full items-center justify-center gap-3 rounded-2xl bg-[#8f76c0] px-8 py-3 text-base font-bold text-white shadow-lg shadow-[#8f76c0]/25 transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#8f76c0]"
+              :disabled="submitState === 'sending'"
             >
-              Send Message
+              {{ submitState === 'sending' ? 'Sending…' : 'Send Message' }}
               <span aria-hidden="true">→</span>
             </button>
           </form>
