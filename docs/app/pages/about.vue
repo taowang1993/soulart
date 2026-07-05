@@ -15,7 +15,7 @@ const navItems = [
   { label: 'Home', to: '/', icon: 'i-lucide-home' },
   { label: 'Art Programs', to: '/art-programs', icon: 'i-lucide-palette' },
   { label: 'Wellness', to: '/wellness', icon: 'i-lucide-leaf' },
-  { label: 'Schedules', to: '#contact', icon: 'i-lucide-calendar-days' },
+  { label: 'Schedules', to: '/schedules', icon: 'i-lucide-calendar-days' },
   { label: 'Resources', to: '/docs/manual/en/getting-started/installation', icon: 'i-lucide-book-open' },
   { label: 'About', to: '/about', icon: 'i-lucide-heart' },
   { label: 'Contact', to: '#contact', icon: 'i-lucide-mail' },
