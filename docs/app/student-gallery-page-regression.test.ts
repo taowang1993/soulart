@@ -91,6 +91,17 @@ test('student gallery page uses copied public gallery assets only', () => {
   }
 })
 
+test('student gallery carousel controls are real Vue controls', () => {
+  const source = readPage()
+
+  assert.match(source, /const activeGalleryIndexes = reactive/)
+  assert.match(source, /@click="setActiveWork\(section\.id, index\)"/)
+  assert.match(source, /@click="stepWork\(section\.id, section\.works\.length, -1\)"/)
+  assert.match(source, /@click="stepWork\(section\.id, section\.works\.length, 1\)"/)
+  assert.match(source, /:style="\{ transform: `translateX\(-\$\{activeWorkIndex\(section\.id\) \* 100\}%\)` \}"/)
+  assert.doesNotMatch(source, /aria-label="Previous Chinese artwork"/)
+})
+
 test('art programs page links and renders the nested student gallery route', () => {
   const source = readFileSync(artProgramsPagePath, 'utf8')
 

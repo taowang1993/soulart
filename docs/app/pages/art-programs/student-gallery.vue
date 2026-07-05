@@ -34,6 +34,24 @@ const sectionLinks = [
   { label: 'Chinese Art', to: '#chinese-art' },
 ]
 
+type GalleryWork = {
+  title: string
+  meta: string
+  image: string
+  contain?: boolean
+}
+
+type GallerySection = {
+  id: string
+  tone: string
+  kicker: string
+  title: string
+  description: string
+  tabs: string[]
+  quote: string
+  works: GalleryWork[]
+}
+
 const heroWorks = [
   { title: 'Four Seasons', image: '/student-gallery/children-4-6-four-seasons.jpg' },
   { title: 'Lion Dance', image: '/student-gallery/children-7-9-lion-dance.jpg' },
@@ -42,7 +60,7 @@ const heroWorks = [
   { title: 'Paper Flower', image: '/student-gallery/craft-paper-flower.jpg' },
 ]
 
-const gallerySections = [
+const gallerySections: GallerySection[] = [
   {
     id: 'children',
     tone: 'children',
@@ -91,7 +109,7 @@ const gallerySections = [
     kicker: 'Handmade Joy',
     title: 'Craft Creations',
     description: 'Handmade with love, creativity and care.',
-    tabs: ['All Crafts', 'Paper Crafts', 'Clay & Pottery', 'Textile & Yarn', 'Mixed Media'],
+    tabs: ['Textile & Yarn', 'Paper Crafts', 'Clay & Pottery'],
     quote: 'Crafts help students slow down, solve problems, and enjoy making something with their own hands.',
     works: [
       { title: 'Crochet Friends', meta: 'Textile & Yarn', image: '/student-gallery/craft-crochet.jpg', contain: true },
@@ -126,6 +144,21 @@ const footerLinks = [
 ]
 
 const isAssistantOpen = ref(false)
+const activeGalleryIndexes = reactive(
+  Object.fromEntries(gallerySections.map(section => [section.id, 0])) as Record<string, number>,
+)
+
+function activeWorkIndex(sectionId: string) {
+  return activeGalleryIndexes[sectionId] ?? 0
+}
+
+function setActiveWork(sectionId: string, index: number) {
+  activeGalleryIndexes[sectionId] = index
+}
+
+function stepWork(sectionId: string, total: number, direction: -1 | 1) {
+  activeGalleryIndexes[sectionId] = (activeWorkIndex(sectionId) + direction + total) % total
+}
 </script>
 
 <template>
@@ -281,10 +314,13 @@ const isAssistantOpen = ref(false)
           </p>
           <div class="mt-6 flex flex-wrap justify-center gap-3">
             <button
-              v-for="tab in section.tabs"
+              v-for="(tab, index) in section.tabs"
               :key="tab"
               type="button"
-              class="gallery-pill rounded-full px-5 py-2 text-sm font-bold shadow-sm"
+              class="gallery-pill rounded-full px-5 py-2 text-sm font-bold shadow-sm transition"
+              :class="activeWorkIndex(section.id) === index ? 'bg-white text-[#e65f6e] ring-2 ring-[#e65f6e]/30' : ''"
+              :aria-pressed="activeWorkIndex(section.id) === index"
+              @click="setActiveWork(section.id, index)"
             >
               {{ tab }}
             </button>
@@ -296,13 +332,17 @@ const isAssistantOpen = ref(false)
             type="button"
             class="stage-arrow left-4"
             aria-label="Previous artwork"
+            @click="stepWork(section.id, section.works.length, -1)"
           >
             <UIcon
               name="i-lucide-chevron-left"
               class="size-7"
             />
           </button>
-          <div class="gallery-track">
+          <div
+            class="gallery-track"
+            :style="{ transform: `translateX(-${activeWorkIndex(section.id) * 100}%)` }"
+          >
             <article
               v-for="work in section.works"
               :key="work.title"
@@ -323,6 +363,7 @@ const isAssistantOpen = ref(false)
             type="button"
             class="stage-arrow right-4"
             aria-label="Next artwork"
+            @click="stepWork(section.id, section.works.length, 1)"
           >
             <UIcon
               name="i-lucide-chevron-right"
@@ -332,9 +373,15 @@ const isAssistantOpen = ref(false)
         </div>
 
         <div class="mt-7 flex justify-center gap-3">
-          <span class="size-3 rounded-full bg-[#e65f6e]" />
-          <span class="size-3 rounded-full border-2 border-current/35" />
-          <span class="size-3 rounded-full border-2 border-current/35" />
+          <button
+            v-for="(work, index) in section.works"
+            :key="`${section.id}-${work.title}-dot`"
+            type="button"
+            class="size-3 rounded-full border-2 transition"
+            :class="activeWorkIndex(section.id) === index ? 'border-[#e65f6e] bg-[#e65f6e]' : 'border-current/35'"
+            :aria-label="`Show ${work.title}`"
+            @click="setActiveWork(section.id, index)"
+          />
         </div>
 
         <p class="mx-auto mt-8 max-w-3xl text-center font-serif text-2xl italic leading-10 text-[#6d5b84]">
@@ -359,16 +406,6 @@ const isAssistantOpen = ref(false)
         </p>
 
         <div class="scroll-stage mx-auto mt-10 max-w-5xl">
-          <button
-            type="button"
-            class="stage-arrow left-4"
-            aria-label="Previous Chinese artwork"
-          >
-            <UIcon
-              name="i-lucide-chevron-left"
-              class="size-7"
-            />
-          </button>
           <img
             :src="chineseWork.image"
             :alt="`${chineseWork.title} Chinese artwork`"
@@ -376,21 +413,6 @@ const isAssistantOpen = ref(false)
             loading="lazy"
             decoding="async"
           >
-          <button
-            type="button"
-            class="stage-arrow right-4"
-            aria-label="Next Chinese artwork"
-          >
-            <UIcon
-              name="i-lucide-chevron-right"
-              class="size-7"
-            />
-          </button>
-          <div class="mt-6 flex justify-center gap-3">
-            <span class="size-3 rounded-full bg-[#e65f6e]" />
-            <span class="size-3 rounded-full border-2 border-[#8f8270]" />
-            <span class="size-3 rounded-full border-2 border-[#8f8270]" />
-          </div>
           <h3 class="mt-5 font-serif text-3xl text-[#3a352c]">
             {{ chineseWork.title }}
           </h3>
@@ -692,6 +714,7 @@ const isAssistantOpen = ref(false)
 .gallery-stage,
 .scroll-stage {
   position: relative;
+  overflow: hidden;
   padding: clamp(1rem, 3vw, 2.2rem);
   background:
     linear-gradient(90deg, rgba(255, 255, 255, 0.35), transparent 8%, transparent 92%, rgba(255, 255, 255, 0.35)),
@@ -702,12 +725,12 @@ const isAssistantOpen = ref(false)
 }
 
 .gallery-track {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(1rem, 2vw, 1.5rem);
+  display: flex;
+  transition: transform 320ms ease;
 }
 
 .stage-card {
+  flex: 0 0 100%;
   padding: 0.8rem;
   text-align: center;
   background: rgba(255, 255, 255, 0.92);
@@ -770,10 +793,6 @@ const isAssistantOpen = ref(false)
   .hero-gallery-frame {
     min-height: 0;
     transform: none;
-  }
-
-  .gallery-track {
-    grid-template-columns: 1fr;
   }
 
   .stage-arrow {
