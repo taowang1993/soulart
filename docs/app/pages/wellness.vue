@@ -17,7 +17,7 @@ const navItems = [
   { label: 'Wellness', to: '/wellness', icon: 'i-lucide-leaf' },
   { label: 'Schedules', to: '#schedule', icon: 'i-lucide-calendar-days' },
   { label: 'Resources', to: '/docs/manual/en/getting-started/installation', icon: 'i-lucide-book-open' },
-  { label: 'About', to: '/#studio', icon: 'i-lucide-heart' },
+  { label: 'About', to: '/about', icon: 'i-lucide-heart' },
   { label: 'Contact', to: '#contact', icon: 'i-lucide-mail' },
 ]
 
@@ -136,7 +136,7 @@ const contactItems = [
 
 const footerLinks = [
   { label: 'Home', to: '/' },
-  { label: 'About', to: '/#studio' },
+  { label: 'About', to: '/about' },
   { label: 'Art Programs', to: '/art-programs' },
   { label: 'Wellness', to: '/wellness' },
   { label: 'Resources', to: '/docs/manual/en/getting-started/installation' },
