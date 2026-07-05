@@ -6,27 +6,32 @@ import { fileURLToPath } from 'node:url'
 
 const repoRoot = resolve(fileURLToPath(import.meta.url), '../../..')
 const pagePath = resolve(repoRoot, 'docs/app/pages/art-programs/student-gallery.vue')
+const marketingPagePaths = [
+  resolve(repoRoot, 'docs/app/pages/index.vue'),
+  resolve(repoRoot, 'docs/app/pages/art-programs.vue'),
+  resolve(repoRoot, 'docs/app/pages/art-programs/student-gallery.vue'),
+  resolve(repoRoot, 'docs/app/pages/wellness.vue'),
+  resolve(repoRoot, 'docs/app/pages/about.vue'),
+  resolve(repoRoot, 'docs/app/pages/schedules.vue'),
+  resolve(repoRoot, 'docs/app/pages/contact.vue'),
+]
 const artProgramsPagePath = resolve(repoRoot, 'docs/app/pages/art-programs.vue')
 const galleryAssetPath = resolve(repoRoot, 'docs/public/student-gallery')
 
 const expectedGalleryAssets = [
   'children-4-6-four-seasons.jpg',
-  'children-7-9-dragon-boat.jpg',
+  'children-7-9-lion-dance.jpg',
   'children-10-12-dream.jpg',
   'teen-13-15-ancient-girl.jpg',
-  'teen-13-15-violin.jpg',
-  'teen-15-18-sunset.jpg',
+  'teen-15-18-girl.jpg',
   'portfolio-helen.jpg',
-  'adult-class.jpg',
-  'adult-ecio.jpg',
-  'adult-grace.jpg',
-  'adult-study.jpg',
+  'adult-town.jpg',
+  'adult-eva.jpg',
+  'adult-watercolor-sophia.jpg',
   'craft-crochet.jpg',
   'craft-paper-flower.jpg',
-  'craft-clay-minecraft.jpg',
-  'craft-mixed-media.jpg',
-  'chinese-ink-1.jpg',
-  'chinese-ink-8.jpg',
+  'craft-clay-lotus.jpg',
+  'chinese-landscape.jpg',
 ] as const
 
 const referenceCopy = [
@@ -38,6 +43,7 @@ const referenceCopy = [
   'Age 10–12',
   'Teen\'s Art Works',
   'Ancient Girl',
+  'Student Gallery',
   'Adult Art Works',
   'Craft Creations',
   'Chinese Painting & Calligraphy',
@@ -58,7 +64,7 @@ test('student gallery assets are copied from the gallery source into public path
 })
 
 test('student gallery page keeps the reference sections and copy', () => {
-  const source = readPage()
+  const source = readPage().replace(/\\'/g, String.fromCharCode(39))
 
   for (const copy of referenceCopy) {
     assert.match(source, new RegExp(copy.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')))
@@ -91,4 +97,14 @@ test('art programs page links and renders the nested student gallery route', () 
   assert.match(source, /\/art-programs\/student-gallery/)
   assert.match(source, /const isNestedRoute = computed/)
   assert.match(source, /<NuxtPage v-if="isNestedRoute" \/>/)
+})
+
+test('marketing nav exposes Student Gallery under Art Programs', () => {
+  for (const path of marketingPagePaths) {
+    const source = readFileSync(path, 'utf8')
+
+    assert.match(source, /label: 'Art Programs'/, `${path} must keep Art Programs in the nav`)
+    assert.match(source, /children: \[\{ label: 'Student Gallery', to: '\/art-programs\/student-gallery' \}\]/, `${path} must add the Student Gallery dropdown item`)
+    assert.match(source, /i-lucide-chevron-down/, `${path} must show a dropdown affordance`)
+  }
 })

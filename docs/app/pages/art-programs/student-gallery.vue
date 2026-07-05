@@ -13,7 +13,12 @@ useSeoMeta({
 
 const navItems = [
   { label: 'Home', to: '/', icon: 'i-lucide-home' },
-  { label: 'Art Programs', to: '/art-programs', icon: 'i-lucide-palette' },
+  {
+    label: 'Art Programs',
+    to: '/art-programs',
+    icon: 'i-lucide-palette',
+    children: [{ label: 'Student Gallery', to: '/art-programs/student-gallery' }],
+  },
   { label: 'Wellness', to: '/wellness', icon: 'i-lucide-leaf' },
   { label: 'Schedules', to: '/schedules', icon: 'i-lucide-calendar-days' },
   { label: 'Resources', to: '/docs/manual/en/getting-started/installation', icon: 'i-lucide-book-open' },
@@ -29,53 +34,78 @@ const sectionLinks = [
   { label: 'Chinese Art', to: '#chinese-art' },
 ]
 
-const childrenTabs = ['Age 4–6', 'Age 7–9', 'Age 10–12']
-const teenTabs = ['Age 13–15', 'Age 15–18', 'Portfolios']
-const adultTabs = ['All Works', 'Paintings', 'Watercolor']
-const craftTabs = ['All Crafts', 'Paper Crafts', 'Clay & Pottery', 'Textile & Yarn', 'Mixed Media']
-
 const heroWorks = [
   { title: 'Four Seasons', image: '/student-gallery/children-4-6-four-seasons.jpg' },
-  { title: 'Dragon Boat', image: '/student-gallery/children-7-9-dragon-boat.jpg' },
+  { title: 'Lion Dance', image: '/student-gallery/children-7-9-lion-dance.jpg' },
   { title: 'Dream Garden', image: '/student-gallery/children-10-12-dream.jpg' },
   { title: 'Ancient Girl', image: '/student-gallery/teen-13-15-ancient-girl.jpg' },
-  { title: 'Sunset Painting', image: '/student-gallery/teen-15-18-sunset.jpg' },
-  { title: 'Open Studio', image: '/student-gallery/adult-class.jpg' },
-  { title: 'Crochet Friends', image: '/student-gallery/craft-crochet.jpg' },
-  { title: 'Ink Brushwork', image: '/student-gallery/chinese-ink-1.jpg' },
+  { title: 'Paper Flower', image: '/student-gallery/craft-paper-flower.jpg' },
 ]
 
-const childrenWorks = [
-  { title: 'Four Seasons', meta: 'Age 5', image: '/student-gallery/children-4-6-four-seasons.jpg', color: '#f3cbd7' },
-  { title: 'Dragon Boat', meta: 'Age 9', image: '/student-gallery/children-7-9-dragon-boat.jpg', color: '#f7d7a8' },
-  { title: 'Dream Garden', meta: 'Age 12', image: '/student-gallery/children-10-12-dream.jpg', color: '#cfe7c4' },
+const gallerySections = [
+  {
+    id: 'children',
+    tone: 'children',
+    kicker: 'Young Artists',
+    title: 'Children\'s Art Works',
+    description: 'Celebrating creativity, imagination and growth at every age.',
+    tabs: ['Age 4–6', 'Age 7–9', 'Age 10–12'],
+    quote: 'Little hands. Big imagination. Every creation is a beautiful story.',
+    works: [
+      { title: 'Four Seasons', meta: 'Age 5', image: '/student-gallery/children-4-6-four-seasons.jpg', contain: false },
+      { title: 'Lion Dance', meta: 'Age 9', image: '/student-gallery/children-7-9-lion-dance.jpg', contain: false },
+      { title: 'Dream Garden', meta: 'Age 12', image: '/student-gallery/children-10-12-dream.jpg', contain: false },
+    ],
+  },
+  {
+    id: 'teens',
+    tone: 'teens',
+    kicker: 'Growing Voices',
+    title: 'Teen\'s Art Works',
+    description: 'Showcasing growth, expression and creative journeys.',
+    tabs: ['Age 13–15', 'Age 15–18', 'Portfolios'],
+    quote: 'Every artwork tells a story. Thank you for being part of our creative journey.',
+    works: [
+      { title: 'Ancient Girl', meta: 'Age 13 · Watercolor', image: '/student-gallery/teen-13-15-ancient-girl.jpg', contain: false },
+      { title: 'Dreaming Girl', meta: 'Age 16 · Acrylic', image: '/student-gallery/teen-15-18-girl.jpg', contain: false },
+      { title: 'Portfolio Portrait', meta: 'Portfolio', image: '/student-gallery/portfolio-helen.jpg', contain: false },
+    ],
+  },
+  {
+    id: 'adults',
+    tone: 'adults',
+    kicker: 'Creative Practice',
+    title: 'Adult Art Works',
+    description: 'Art created with passion, experience and personal expression.',
+    tabs: ['All Works', 'Paintings', 'Watercolor'],
+    quote: 'Art is not about perfection. It is about expression. Every piece is a reflection of a unique journey.',
+    works: [
+      { title: 'Mountain House', meta: 'Painting', image: '/student-gallery/adult-town.jpg', contain: false },
+      { title: 'Eva', meta: 'Acrylic', image: '/student-gallery/adult-eva.jpg', contain: false },
+      { title: 'Soft Garden', meta: 'Watercolor', image: '/student-gallery/adult-watercolor-sophia.jpg', contain: false },
+    ],
+  },
+  {
+    id: 'crafts',
+    tone: 'crafts',
+    kicker: 'Handmade Joy',
+    title: 'Craft Creations',
+    description: 'Handmade with love, creativity and care.',
+    tabs: ['All Crafts', 'Paper Crafts', 'Clay & Pottery', 'Textile & Yarn', 'Mixed Media'],
+    quote: 'Crafts help students slow down, solve problems, and enjoy making something with their own hands.',
+    works: [
+      { title: 'Crochet Friends', meta: 'Textile & Yarn', image: '/student-gallery/craft-crochet.jpg', contain: true },
+      { title: 'Paper Flower', meta: 'Paper Crafts', image: '/student-gallery/craft-paper-flower.jpg', contain: true },
+      { title: 'Clay Lotus Pond', meta: 'Clay & Pottery', image: '/student-gallery/craft-clay-lotus.jpg', contain: true },
+    ],
+  },
 ]
 
-const teenWorks = [
-  { title: 'Ancient Girl', meta: 'Age 13 · Watercolor', image: '/student-gallery/teen-13-15-ancient-girl.jpg' },
-  { title: 'Violin Study', meta: 'Age 15 · Drawing', image: '/student-gallery/teen-13-15-violin.jpg' },
-  { title: 'Sunset Painting', meta: 'Age 16 · Acrylic', image: '/student-gallery/teen-15-18-sunset.jpg' },
-  { title: 'Portfolio Portrait', meta: 'Portfolio', image: '/student-gallery/portfolio-helen.jpg' },
-]
-
-const adultWorks = [
-  { title: 'Open Studio', meta: 'Oil Painting', image: '/student-gallery/adult-class.jpg' },
-  { title: 'Portrait Study', meta: 'Watercolor', image: '/student-gallery/adult-ecio.jpg' },
-  { title: 'Grace’s Garden', meta: 'Acrylic', image: '/student-gallery/adult-grace.jpg' },
-  { title: 'Quiet Study', meta: 'Mixed Media', image: '/student-gallery/adult-study.jpg' },
-]
-
-const craftWorks = [
-  { title: 'Crochet Friends', meta: 'Textile & Yarn', image: '/student-gallery/craft-crochet.jpg' },
-  { title: 'Paper Flower', meta: 'Paper Crafts', image: '/student-gallery/craft-paper-flower.jpg' },
-  { title: 'Minecraft Clay World', meta: 'Clay & Pottery', image: '/student-gallery/craft-clay-minecraft.jpg' },
-  { title: 'Mixed Media Butterfly', meta: 'Mixed Media', image: '/student-gallery/craft-mixed-media.jpg' },
-]
-
-const chineseWorks = [
-  { title: 'Ink Portrait', meta: 'Chinese Painting', image: '/student-gallery/chinese-ink-1.jpg' },
-  { title: 'Mountain Poem', meta: 'Ink Wash', image: '/student-gallery/chinese-ink-8.jpg' },
-]
+const chineseWork = {
+  title: 'Mountain Landscape',
+  meta: 'Ink on Fan',
+  image: '/student-gallery/chinese-landscape.jpg',
+}
 
 const contactItems = [
   { label: 'North York, Ontario, Canada', icon: 'i-lucide-map-pin' },
@@ -89,6 +119,7 @@ const footerLinks = [
   { label: 'Home', to: '/' },
   { label: 'About', to: '/about' },
   { label: 'Art Programs', to: '/art-programs' },
+  { label: 'Student Gallery', to: '/art-programs/student-gallery' },
   { label: 'Wellness', to: '/wellness' },
   { label: 'Schedules', to: '/schedules' },
   { label: 'Contact', to: '/contact' },
@@ -98,20 +129,11 @@ const isAssistantOpen = ref(false)
 </script>
 
 <template>
-  <main class="student-gallery min-h-screen overflow-hidden bg-[#fff9f1] text-[#40335f]">
-    <section class="relative isolate overflow-hidden bg-[linear-gradient(135deg,#fff9f1_0%,#fbedf5_50%,#f1eefb_100%)] px-4 pb-16 pt-5 sm:px-6 lg:px-8">
-      <div
-        class="absolute inset-0 -z-10"
-        aria-hidden="true"
-      >
-        <div class="wash left-[-8rem] top-[-8rem] bg-[#f4bdd1]/55" />
-        <div class="wash right-[-8rem] top-24 bg-[#d6cef4]/60" />
-        <div class="wash bottom-[-10rem] left-1/3 bg-[#f7dbad]/45" />
-      </div>
-
+  <main class="student-gallery min-h-screen overflow-hidden bg-[#fff8ed] text-[#40335f]">
+    <section class="hero-shell relative isolate overflow-hidden px-4 pb-16 pt-5 sm:px-6 lg:px-8">
       <nav
         aria-label="Main Navigation"
-        class="mx-auto flex max-w-6xl items-center justify-between px-3 py-3"
+        class="mx-auto flex max-w-6xl items-center justify-between rounded-none bg-white/75 px-3 py-3 shadow-sm ring-1 ring-white/80 backdrop-blur md:rounded-[2rem] md:px-5"
       >
         <NuxtLink
           to="/"
@@ -127,21 +149,44 @@ const isAssistantOpen = ref(false)
           >
         </NuxtLink>
 
-        <div class="hidden items-center gap-5 md:flex">
-          <NuxtLink
+        <div class="hidden items-center gap-1 rounded-full bg-white/50 p-1 md:flex">
+          <div
             v-for="item in navItems"
             :key="item.label"
-            :to="item.to"
-            class="flex items-center gap-1.5 rounded-xl px-3 py-2 text-sm font-semibold text-[#4f4169] transition hover:bg-white/70 hover:text-[#7d5ca5] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#d98792]"
-            :class="item.label === 'Art Programs' ? 'bg-white/80 text-[#6d4d95]' : ''"
+            class="group relative"
           >
-            <UIcon
-              v-if="item.label === 'Art Programs'"
-              :name="item.icon"
-              class="size-4"
-            />
-            {{ item.label }}
-          </NuxtLink>
+            <NuxtLink
+              :to="item.to"
+              class="flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-semibold text-[#41335f] transition hover:bg-[#f3e8ff] hover:text-[#7d5ca5] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#d98792]"
+              :class="item.label === 'Art Programs' ? 'bg-[#f1e4ff] text-[#6d4d95]' : ''"
+            >
+              <UIcon
+                v-if="item.label === 'Art Programs'"
+                :name="item.icon"
+                class="size-4"
+              />
+              {{ item.label }}
+              <UIcon
+                v-if="item.children"
+                name="i-lucide-chevron-down"
+                class="size-4 transition group-hover:rotate-180"
+              />
+            </NuxtLink>
+
+            <div
+              v-if="item.children"
+              class="pointer-events-none absolute left-0 top-full z-30 mt-2 min-w-52 rounded-2xl bg-white/95 p-2 opacity-0 shadow-xl ring-1 ring-[#eaddec] transition group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100"
+            >
+              <NuxtLink
+                v-for="child in item.children"
+                :key="child.label"
+                :to="child.to"
+                class="flex rounded-xl px-4 py-3 text-sm font-bold text-[#6d4d95] hover:bg-[#f7eefb] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#d98792]"
+              >
+                {{ child.label }}
+              </NuxtLink>
+            </div>
+          </div>
         </div>
 
         <div class="flex items-center gap-2 rounded-full bg-white/70 px-3 py-2 text-xs font-semibold text-[#5b457d]">
@@ -161,12 +206,12 @@ const isAssistantOpen = ref(false)
         </div>
       </nav>
 
-      <div class="mx-auto grid max-w-6xl items-center gap-10 py-14 lg:grid-cols-[0.85fr_1.15fr] lg:py-20">
+      <div class="mx-auto grid max-w-6xl items-center gap-12 py-16 lg:grid-cols-[0.82fr_1.18fr] lg:py-24">
         <div class="text-center lg:text-left">
-          <p class="text-sm font-bold uppercase tracking-[0.36em] text-[#b47b9a]">
+          <p class="text-sm font-bold uppercase tracking-[0.36em] text-[#bd8496]">
             XinYi Class
           </p>
-          <h1 class="mt-5 font-serif text-5xl font-semibold leading-tight text-[#415f3a] sm:text-6xl lg:text-7xl">
+          <h1 class="script-title mt-5 text-6xl font-semibold leading-none text-[#566e3d] sm:text-7xl lg:text-8xl">
             Students' Gallery
           </h1>
           <p class="mx-auto mt-6 max-w-xl text-xl leading-8 text-[#6a5f78] lg:mx-0">
@@ -176,7 +221,7 @@ const isAssistantOpen = ref(false)
             <NuxtLink
               to="#children"
               aria-label="Jump to children's artwork"
-              class="inline-flex items-center justify-center rounded-full bg-[#e7a0ab] px-6 py-4 text-white shadow-lg shadow-[#d9848f]/25 transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
+              class="inline-flex items-center justify-center rounded-full bg-[#e6a0ac] px-6 py-4 text-white shadow-lg shadow-[#d9848f]/25 transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
             >
               <UIcon
                 name="i-lucide-arrow-down"
@@ -185,34 +230,26 @@ const isAssistantOpen = ref(false)
             </NuxtLink>
             <NuxtLink
               to="/contact?interest=Trial%20Class#message"
-              class="inline-flex items-center justify-center rounded-full bg-white/80 px-8 py-4 font-bold text-[#6d4d95] shadow-sm ring-1 ring-[#eaddec] transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
+              class="inline-flex items-center justify-center rounded-full bg-white/85 px-8 py-4 font-bold text-[#6d4d95] shadow-sm ring-1 ring-[#eaddec] transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
             >
               Book a Trial Class
             </NuxtLink>
           </div>
         </div>
 
-        <div class="relative">
-          <div class="absolute -left-5 top-10 hidden rotate-[-10deg] rounded-full bg-white/80 px-4 py-2 font-serif text-xl text-[#d88993] shadow-md md:block">
-            ✦ Art Wall ✦
-          </div>
-          <div class="gallery-hero-card">
-            <div class="hero-art-grid h-full rounded-[1.75rem] bg-white/80 p-3">
-              <img
-                v-for="work in heroWorks"
-                :key="work.title"
-                :src="work.image"
-                :alt="`${work.title} student gallery artwork`"
-                class="h-full w-full rounded-2xl object-cover shadow-sm"
-                loading="eager"
-                decoding="async"
-              >
-            </div>
-          </div>
+        <div class="hero-gallery-frame">
+          <img
+            v-for="work in heroWorks"
+            :key="work.title"
+            :src="work.image"
+            :alt="`${work.title} student gallery artwork`"
+            loading="eager"
+            decoding="async"
+          >
         </div>
       </div>
 
-      <div class="mx-auto flex max-w-4xl flex-wrap justify-center gap-3 rounded-full bg-white/65 p-2 shadow-sm ring-1 ring-white/80 backdrop-blur">
+      <div class="mx-auto flex max-w-4xl flex-wrap justify-center gap-3 rounded-full bg-white/70 p-2 shadow-sm ring-1 ring-white/80 backdrop-blur">
         <NuxtLink
           v-for="link in sectionLinks"
           :key="link.label"
@@ -225,299 +262,160 @@ const isAssistantOpen = ref(false)
     </section>
 
     <section
-      id="children"
-      class="relative px-4 py-16 sm:px-6 lg:px-8"
+      v-for="section in gallerySections"
+      :id="section.id"
+      :key="section.id"
+      class="gallery-band px-4 py-20 sm:px-6 lg:px-8"
+      :class="`gallery-band--${section.tone}`"
     >
       <div class="mx-auto max-w-6xl">
         <div class="text-center">
-          <p class="text-3xl text-[#d98d98]">
-            ✦ 🎨 ✦
+          <p class="text-sm font-bold uppercase tracking-[0.28em] text-current/60">
+            {{ section.kicker }}
           </p>
-          <h2 class="mt-3 font-serif text-4xl font-semibold text-[#415f3a] sm:text-5xl">
-            Children's Art Works
+          <h2 class="script-title mt-2 text-5xl font-semibold leading-tight sm:text-6xl">
+            {{ section.title }}
           </h2>
           <p class="mx-auto mt-4 max-w-2xl text-lg leading-8 text-[#6a5f78]">
-            Celebrating creativity, imagination and growth at every age.
+            {{ section.description }}
           </p>
           <div class="mt-6 flex flex-wrap justify-center gap-3">
             <button
-              v-for="tab in childrenTabs"
+              v-for="tab in section.tabs"
               :key="tab"
               type="button"
-              class="rounded-full bg-[#f3d9df] px-5 py-2 text-sm font-bold text-[#694e68] shadow-sm ring-1 ring-[#e9bcc9]"
+              class="gallery-pill rounded-full px-5 py-2 text-sm font-bold shadow-sm"
             >
               {{ tab }}
             </button>
           </div>
         </div>
 
-        <div class="mt-10 grid gap-6 lg:grid-cols-[1fr_1fr_1fr_0.72fr]">
-          <article
-            v-for="work in childrenWorks"
-            :key="work.title"
-            class="paper-card"
+        <div class="gallery-stage mt-12">
+          <button
+            type="button"
+            class="stage-arrow left-4"
+            aria-label="Previous artwork"
           >
-            <div
-              class="rounded-[1.6rem] p-3"
-              :style="{ backgroundColor: work.color }"
+            <UIcon
+              name="i-lucide-chevron-left"
+              class="size-7"
+            />
+          </button>
+          <div class="gallery-track">
+            <article
+              v-for="work in section.works"
+              :key="work.title"
+              class="stage-card"
             >
               <img
                 :src="work.image"
                 :alt="`${work.title} student artwork`"
-                class="aspect-square w-full rounded-[1.15rem] bg-white object-cover shadow-sm"
+                :class="work.contain ? 'object-contain bg-white' : 'object-cover object-top'"
                 loading="lazy"
                 decoding="async"
               >
-            </div>
-            <h3 class="mt-5 font-serif text-2xl font-semibold text-[#4b6343]">
-              {{ work.title }}
-            </h3>
-            <p class="mt-1 text-sm font-bold uppercase tracking-[0.2em] text-[#c6808e]">
-              {{ work.meta }}
-            </p>
-          </article>
-
-          <aside class="flex min-h-64 items-center justify-center rounded-[2rem] border border-dashed border-[#d9b6c5] bg-[#fff7fb] p-6 text-center shadow-sm">
-            <div>
-              <UIcon
-                name="i-lucide-hand"
-                class="mx-auto size-10 text-[#d88993]"
-              />
-              <p class="mt-4 font-serif text-2xl text-[#6d4d95]">
-                Swipe or click to explore more artwork
-              </p>
-            </div>
-          </aside>
-        </div>
-      </div>
-    </section>
-
-    <section
-      id="teens"
-      class="bg-[#f3effa] px-4 py-16 sm:px-6 lg:px-8"
-    >
-      <div class="mx-auto max-w-6xl">
-        <div class="text-center">
-          <h2 class="font-serif text-4xl font-semibold text-[#5a4380] sm:text-5xl">
-            Teen's Art Works
-          </h2>
-          <p class="mx-auto mt-4 max-w-2xl text-lg leading-8 text-[#6a5f78]">
-            Showcasing growth, expression and creative journeys.
-          </p>
-          <div class="mt-6 flex flex-wrap justify-center gap-3">
-            <button
-              v-for="tab in teenTabs"
-              :key="tab"
-              type="button"
-              class="rounded-full bg-white px-5 py-2 text-sm font-bold text-[#6d4d95] shadow-sm ring-1 ring-[#ded0ee]"
-            >
-              {{ tab }}
-            </button>
+              <h3>{{ work.title }}</h3>
+              <p>{{ work.meta }}</p>
+            </article>
           </div>
-        </div>
-
-        <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          <article
-            v-for="work in teenWorks"
-            :key="work.title"
-            class="gallery-card bg-white"
+          <button
+            type="button"
+            class="stage-arrow right-4"
+            aria-label="Next artwork"
           >
-            <img
-              :src="work.image"
-              :alt="`${work.title} student artwork`"
-              class="h-72 w-full rounded-[1.35rem] object-cover object-top"
-              loading="lazy"
-              decoding="async"
-            >
-            <h3 class="mt-5 font-serif text-2xl font-semibold text-[#5a4380]">
-              {{ work.title }}
-            </h3>
-            <p class="mt-1 text-sm font-bold uppercase tracking-[0.16em] text-[#a07ab5]">
-              {{ work.meta }}
-            </p>
-          </article>
+            <UIcon
+              name="i-lucide-chevron-right"
+              class="size-7"
+            />
+          </button>
         </div>
 
-        <p class="mx-auto mt-12 max-w-3xl text-center font-serif text-2xl italic leading-10 text-[#6d5b84]">
-          “Every artwork tells a story. Thank you for being part of our creative journey.”
-        </p>
-      </div>
-    </section>
-
-    <section
-      id="adults"
-      class="px-4 py-16 sm:px-6 lg:px-8"
-    >
-      <div class="mx-auto max-w-6xl">
-        <div class="text-center">
-          <h2 class="font-serif text-4xl font-semibold text-[#415f3a] sm:text-5xl">
-            Adult Art Works
-          </h2>
-          <p class="mx-auto mt-4 max-w-2xl text-lg leading-8 text-[#6a5f78]">
-            Art created with passion, experience and personal expression.
-          </p>
-          <div class="mt-6 flex flex-wrap justify-center gap-3">
-            <button
-              v-for="tab in adultTabs"
-              :key="tab"
-              type="button"
-              class="rounded-full bg-[#e4ead9] px-5 py-2 text-sm font-bold text-[#4f6745] shadow-sm ring-1 ring-[#cddbbf]"
-            >
-              {{ tab }}
-            </button>
-          </div>
+        <div class="mt-7 flex justify-center gap-3">
+          <span class="size-3 rounded-full bg-[#e65f6e]" />
+          <span class="size-3 rounded-full border-2 border-current/35" />
+          <span class="size-3 rounded-full border-2 border-current/35" />
         </div>
 
-        <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          <article
-            v-for="work in adultWorks"
-            :key="work.title"
-            class="gallery-card bg-[#fffdf8]"
-          >
-            <img
-              :src="work.image"
-              :alt="`${work.title} adult artwork`"
-              class="h-72 w-full rounded-[1.35rem] object-cover object-top"
-              loading="lazy"
-              decoding="async"
-            >
-            <h3 class="mt-5 font-serif text-2xl font-semibold text-[#4f6745]">
-              {{ work.title }}
-            </h3>
-            <p class="mt-1 text-sm font-bold uppercase tracking-[0.16em] text-[#9b7a50]">
-              {{ work.meta }}
-            </p>
-          </article>
-        </div>
-
-        <p class="mx-auto mt-12 max-w-3xl text-center font-serif text-2xl italic leading-10 text-[#6a5f78]">
-          “Art is not about perfection. it's about expression. Every piece is a reflection of a unique journey.”
-        </p>
-      </div>
-    </section>
-
-    <section
-      id="crafts"
-      class="bg-[#fff1e4] px-4 py-16 sm:px-6 lg:px-8"
-    >
-      <div class="mx-auto max-w-6xl">
-        <div class="text-center">
-          <h2 class="font-serif text-4xl font-semibold text-[#6f4b31] sm:text-5xl">
-            Craft Creations
-          </h2>
-          <p class="mx-auto mt-4 max-w-2xl text-lg leading-8 text-[#6a5f78]">
-            Handmade with love, creativity and care.
-          </p>
-          <div class="mt-6 flex flex-wrap justify-center gap-3">
-            <button
-              v-for="tab in craftTabs"
-              :key="tab"
-              type="button"
-              class="rounded-full bg-white/85 px-5 py-2 text-sm font-bold text-[#76543a] shadow-sm ring-1 ring-[#e0c29c]"
-            >
-              {{ tab }}
-            </button>
-          </div>
-        </div>
-
-        <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          <article
-            v-for="work in craftWorks"
-            :key="work.title"
-            class="gallery-card bg-[#fffaf1]"
-          >
-            <img
-              :src="work.image"
-              :alt="`${work.title} craft artwork`"
-              class="h-64 w-full rounded-[1.35rem] bg-white object-contain"
-              loading="lazy"
-              decoding="async"
-            >
-            <h3 class="mt-5 font-serif text-2xl font-semibold text-[#6f4b31]">
-              {{ work.title }}
-            </h3>
-            <p class="mt-1 text-sm font-bold uppercase tracking-[0.16em] text-[#a06d45]">
-              {{ work.meta }}
-            </p>
-          </article>
-        </div>
-
-        <p class="mx-auto mt-12 max-w-3xl text-center font-serif text-2xl italic leading-10 text-[#76543a]">
-          “Little hands. Big imagination. Every creation is a beautiful story.”
+        <p class="mx-auto mt-8 max-w-3xl text-center font-serif text-2xl italic leading-10 text-[#6d5b84]">
+          “{{ section.quote }}”
         </p>
       </div>
     </section>
 
     <section
       id="chinese-art"
-      class="bg-[#f8f1e6] px-4 py-16 sm:px-6 lg:px-8"
+      class="ink-section px-4 py-20 text-[#3a352c] sm:px-6 lg:px-8"
     >
-      <div class="mx-auto max-w-6xl">
-        <div class="text-center">
-          <p class="mx-auto flex size-12 items-center justify-center rounded-sm bg-[#b6342c] font-serif text-lg font-bold text-white shadow-md">
-            心
-          </p>
-          <h2 class="mt-5 font-serif text-4xl font-semibold text-[#2f352c] sm:text-5xl">
-            Chinese Painting & Calligraphy
-          </h2>
-          <p class="mt-4 text-lg font-semibold tracking-[0.18em] text-[#7d6c5b]">
-            Tradition · Simplicity · Inner Peace
+      <div class="mx-auto max-w-6xl text-center">
+        <p class="mx-auto flex size-12 items-center justify-center rounded-sm bg-[#b6342c] font-serif text-lg font-bold text-white shadow-md">
+          心
+        </p>
+        <h2 class="script-title mt-5 text-5xl font-semibold leading-tight sm:text-6xl">
+          Chinese Painting & Calligraphy
+        </h2>
+        <p class="mt-4 text-lg font-semibold tracking-[0.18em] text-[#7d6c5b]">
+          Tradition · Simplicity · Inner Peace
+        </p>
+
+        <div class="scroll-stage mx-auto mt-10 max-w-5xl">
+          <button
+            type="button"
+            class="stage-arrow left-4"
+            aria-label="Previous Chinese artwork"
+          >
+            <UIcon
+              name="i-lucide-chevron-left"
+              class="size-7"
+            />
+          </button>
+          <img
+            :src="chineseWork.image"
+            :alt="`${chineseWork.title} Chinese artwork`"
+            class="mx-auto max-h-[32rem] w-full max-w-3xl object-contain"
+            loading="lazy"
+            decoding="async"
+          >
+          <button
+            type="button"
+            class="stage-arrow right-4"
+            aria-label="Next Chinese artwork"
+          >
+            <UIcon
+              name="i-lucide-chevron-right"
+              class="size-7"
+            />
+          </button>
+          <div class="mt-6 flex justify-center gap-3">
+            <span class="size-3 rounded-full bg-[#e65f6e]" />
+            <span class="size-3 rounded-full border-2 border-[#8f8270]" />
+            <span class="size-3 rounded-full border-2 border-[#8f8270]" />
+          </div>
+          <h3 class="mt-5 font-serif text-3xl text-[#3a352c]">
+            {{ chineseWork.title }}
+          </h3>
+          <p class="mt-1 text-sm font-bold uppercase tracking-[0.18em] text-[#9b4237]">
+            {{ chineseWork.meta }}
           </p>
         </div>
 
-        <div class="mt-10 grid gap-8 lg:grid-cols-[1.25fr_0.75fr] lg:items-stretch">
-          <div class="rounded-[2rem] bg-[#d8c3a4] p-4 shadow-[0_22px_70px_rgba(62,51,39,0.16)] ring-1 ring-[#b89c75]">
-            <div class="grid gap-4 md:grid-cols-2">
-              <article
-                v-for="work in chineseWorks"
-                :key="work.title"
-                class="rounded-[1.5rem] bg-[#fffaf0] p-3 shadow-inner"
-              >
-                <img
-                  :src="work.image"
-                  :alt="`${work.title} Chinese artwork`"
-                  class="h-96 w-full rounded-[1.1rem] bg-white object-contain"
-                  loading="lazy"
-                  decoding="async"
-                >
-                <h3 class="mt-4 text-center font-serif text-2xl font-semibold text-[#2f352c]">
-                  {{ work.title }}
-                </h3>
-                <p class="mt-1 text-center text-sm font-bold uppercase tracking-[0.18em] text-[#9b4237]">
-                  {{ work.meta }}
-                </p>
-              </article>
-            </div>
-          </div>
-
-          <aside class="rounded-[2rem] bg-white/80 p-8 shadow-sm ring-1 ring-[#decdb2]">
-            <h3 class="font-serif text-3xl font-semibold text-[#2f352c]">
-              About Chinese Art
-            </h3>
-            <p class="mt-5 text-lg leading-8 text-[#665846]">
-              Chinese painting and calligraphy are more than art forms—they are a way of life.
-            </p>
-            <p class="mt-5 text-lg leading-8 text-[#665846]">
-              Through the brush, we cultivate mindfulness, appreciate nature, and express the beauty within.
-            </p>
-            <div class="mt-8 rounded-[1.5rem] bg-[#f7eee0] p-5 text-center font-serif text-2xl italic text-[#7b483e]">
-              Mountain Landscape · Ink on Fan
-            </div>
-          </aside>
+        <div class="mx-auto mt-10 max-w-3xl rounded-[2rem] bg-white/75 p-8 text-left shadow-sm ring-1 ring-[#decdb2]">
+          <h3 class="font-serif text-3xl font-semibold text-[#2f352c]">
+            About Chinese Art
+          </h3>
+          <p class="mt-5 text-lg leading-8 text-[#665846]">
+            Chinese painting and calligraphy are more than art forms—they are a way of life.
+          </p>
+          <p class="mt-5 text-lg leading-8 text-[#665846]">
+            Through the brush, we cultivate mindfulness, appreciate nature, and express the beauty within.
+          </p>
         </div>
       </div>
     </section>
 
     <section class="relative isolate overflow-hidden bg-[#fff9fb] px-4 py-16 text-center sm:px-6 lg:px-8">
-      <div
-        class="absolute inset-0 -z-10 opacity-70"
-        aria-hidden="true"
-      >
-        <div class="wash left-[-8rem] top-[-8rem] bg-[#f4bdd1]/55" />
-        <div class="wash right-[-8rem] bottom-[-8rem] bg-[#d6cef4]/60" />
-      </div>
       <div class="mx-auto max-w-4xl">
-        <h2 class="font-serif text-5xl font-semibold text-[#415f3a]">
+        <h2 class="script-title text-5xl font-semibold text-[#415f3a]">
           Ready to Begin?
         </h2>
         <p class="mt-4 text-xl italic text-[#a56d41]">
@@ -633,72 +531,253 @@ const isAssistantOpen = ref(false)
   font-family: Georgia, "Times New Roman", serif;
 }
 
-.wash {
-  position: absolute;
-  width: 24rem;
-  height: 24rem;
-  border-radius: 9999px;
-  filter: blur(32px);
+.script-title {
+  font-family: "Bradley Hand", "Segoe Print", "Comic Sans MS", cursive;
+  letter-spacing: -0.04em;
 }
 
-.gallery-hero-card {
+.hero-shell {
+  background:
+    radial-gradient(circle at 7% 18%, rgba(243, 187, 205, 0.58), transparent 22rem),
+    radial-gradient(circle at 90% 16%, rgba(235, 209, 159, 0.6), transparent 24rem),
+    radial-gradient(circle at 65% 84%, rgba(204, 199, 232, 0.72), transparent 26rem),
+    linear-gradient(135deg, #fff8ed 0%, #fdf1ef 46%, #f1edf8 100%);
+}
+
+.hero-gallery-frame {
   position: relative;
-  aspect-ratio: 16 / 10;
-  padding: 0.7rem;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.78);
-  border-radius: 2.3rem;
-  box-shadow: 0 1.5rem 4.5rem rgba(89, 70, 110, 0.17);
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: clamp(0.75rem, 1.4vw, 1.1rem);
+  min-height: 32rem;
+  padding: clamp(1rem, 2vw, 1.5rem);
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 3rem;
+  box-shadow: 0 2rem 5rem rgba(111, 79, 121, 0.18);
+  transform: rotate(1deg);
 }
 
-.gallery-hero-card::before,
-.gallery-hero-card::after {
+.hero-gallery-frame::before,
+.hero-gallery-frame::after {
   position: absolute;
-  z-index: 1;
-  width: 5.5rem;
+  z-index: 2;
+  width: 6rem;
   height: 1.7rem;
   content: "";
-  background: rgba(249, 220, 166, 0.8);
+  background: rgba(245, 216, 157, 0.85);
   border-radius: 9999px;
-  transform: rotate(-10deg);
+  transform: rotate(-9deg);
 }
 
-.gallery-hero-card::before {
+.hero-gallery-frame::before {
   top: 1.4rem;
-  left: 2.3rem;
+  left: 2.5rem;
 }
 
-.gallery-hero-card::after {
-  right: 2.3rem;
-  bottom: 1.5rem;
+.hero-gallery-frame::after {
+  right: 2.5rem;
+  bottom: 1.4rem;
 }
 
-.hero-art-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  grid-auto-rows: minmax(6rem, 1fr);
-  gap: 0.75rem;
+.hero-gallery-frame img {
+  width: 100%;
+  height: 100%;
+  min-height: 11rem;
+  object-fit: cover;
+  object-position: top;
+  background: white;
+  border: 0.55rem solid white;
+  border-radius: 1.5rem;
+  box-shadow: 0 1rem 2rem rgba(82, 61, 107, 0.14);
 }
 
-.hero-art-grid img:first-child {
-  grid-column: span 2;
+.hero-gallery-frame img:first-child {
+  grid-column: span 3;
   grid-row: span 2;
 }
 
-.paper-card,
-.gallery-card {
-  padding: 1rem;
+.hero-gallery-frame img:nth-child(2),
+.hero-gallery-frame img:nth-child(3) {
+  grid-column: span 3;
+}
+
+.hero-gallery-frame img:nth-child(4),
+.hero-gallery-frame img:nth-child(5) {
+  grid-column: span 3;
+}
+
+.gallery-band {
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery-band::before,
+.gallery-band::after {
+  position: absolute;
+  width: 21rem;
+  height: 21rem;
+  pointer-events: none;
+  content: "";
+  border-radius: 9999px;
+  filter: blur(36px);
+  opacity: 0.55;
+}
+
+.gallery-band::before {
+  top: -8rem;
+  left: -8rem;
+}
+
+.gallery-band::after {
+  right: -8rem;
+  bottom: -8rem;
+}
+
+.gallery-band--children {
+  color: #596f42;
+  background: linear-gradient(180deg, #fff8ed 0%, #fdf1e6 100%);
+}
+
+.gallery-band--children::before {
+  background: #f0bac7;
+}
+
+.gallery-band--children::after {
+  background: #ead2a2;
+}
+
+.gallery-band--teens {
+  color: #614684;
+  background: linear-gradient(180deg, #f4f0fa 0%, #ebe7f5 100%);
+}
+
+.gallery-band--teens::before,
+.gallery-band--teens::after {
+  background: #d7c8ec;
+}
+
+.gallery-band--adults {
+  color: #536a42;
+  background: linear-gradient(180deg, #fbf5ec 0%, #f0eadc 100%);
+}
+
+.gallery-band--adults::before {
+  background: #cad8b9;
+}
+
+.gallery-band--adults::after {
+  background: #e7cdae;
+}
+
+.gallery-band--crafts {
+  color: #7a5639;
+  background: linear-gradient(180deg, #fff1e2 0%, #f8e5cf 100%);
+}
+
+.gallery-band--crafts::before {
+  background: #f1c392;
+}
+
+.gallery-band--crafts::after {
+  background: #d9c5a1;
+}
+
+.gallery-pill {
+  color: currentcolor;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(110, 89, 124, 0.14);
+}
+
+.gallery-stage,
+.scroll-stage {
+  position: relative;
+  padding: clamp(1rem, 3vw, 2.2rem);
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.35), transparent 8%, transparent 92%, rgba(255, 255, 255, 0.35)),
+    rgba(255, 255, 255, 0.62);
+  border: 1px solid rgba(255, 255, 255, 0.84);
+  border-radius: 2.8rem;
+  box-shadow: 0 1.6rem 4.5rem rgba(82, 61, 107, 0.13);
+}
+
+.gallery-track {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.stage-card {
+  padding: 0.8rem;
   text-align: center;
+  background: rgba(255, 255, 255, 0.92);
   border-radius: 2rem;
-  box-shadow: 0 1rem 3rem rgba(82, 61, 107, 0.12);
+  box-shadow: 0 1rem 2.4rem rgba(82, 61, 107, 0.1);
 }
 
-.paper-card {
+.stage-card img {
+  width: 100%;
+  height: clamp(16rem, 28vw, 24rem);
+  border-radius: 1.45rem;
+}
+
+.stage-card h3 {
+  margin-top: 1.2rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.45rem;
+  font-weight: 600;
+}
+
+.stage-card p {
+  margin-top: 0.3rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.68;
+}
+
+.stage-arrow {
+  position: absolute;
+  top: 45%;
+  z-index: 3;
+  display: grid;
+  width: 3.4rem;
+  height: 3.4rem;
+  place-items: center;
+  color: #6d5b70;
   background: rgba(255, 255, 255, 0.86);
-  border: 1px solid #efdfe8;
+  border-radius: 9999px;
+  box-shadow: 0 0.8rem 1.8rem rgba(89, 70, 110, 0.13);
+  transform: translateY(-50%);
 }
 
-.gallery-card {
-  border: 1px solid rgba(222, 208, 232, 0.9);
+.ink-section {
+  background:
+    linear-gradient(90deg, rgba(143, 104, 55, 0.16), transparent 8%, transparent 92%, rgba(143, 104, 55, 0.16)),
+    linear-gradient(180deg, #f4ead8 0%, #ead9bd 100%);
+}
+
+.scroll-stage {
+  background:
+    linear-gradient(90deg, rgba(108, 74, 37, 0.13), transparent 9%, transparent 91%, rgba(108, 74, 37, 0.13)),
+    radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.82), transparent 34rem),
+    #efe1c6;
+  border-color: #d8c19f;
+}
+
+@media (max-width: 768px) {
+  .hero-gallery-frame {
+    min-height: 0;
+    transform: none;
+  }
+
+  .gallery-track {
+    grid-template-columns: 1fr;
+  }
+
+  .stage-arrow {
+    display: none;
+  }
 }
 </style>

@@ -13,7 +13,12 @@ useSeoMeta({
 
 const navItems = [
   { label: 'Home', to: '/', icon: 'i-lucide-home' },
-  { label: 'Art Programs', to: '/art-programs', icon: 'i-lucide-palette' },
+  {
+    label: 'Art Programs',
+    to: '/art-programs',
+    icon: 'i-lucide-palette',
+    children: [{ label: 'Student Gallery', to: '/art-programs/student-gallery' }],
+  },
   { label: 'Wellness', to: '/wellness', icon: 'i-lucide-leaf' },
   { label: 'Schedules', to: '/schedules', icon: 'i-lucide-calendar-days' },
   { label: 'Resources', to: '/docs/manual/en/getting-started/installation', icon: 'i-lucide-book-open' },
@@ -179,20 +184,42 @@ const isAssistantOpen = ref(false)
         </NuxtLink>
 
         <div class="hidden items-center gap-1 rounded-full bg-white/50 p-1 md:flex">
-          <NuxtLink
+          <div
             v-for="item in navItems"
             :key="item.label"
-            :to="item.to"
-            class="flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-semibold text-[#413a4f] transition hover:bg-[#e8f2e7] hover:text-[#597c58] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7aa984]"
-            :class="item.label === 'Wellness' ? 'bg-[#e5f2e5] text-[#527858]' : ''"
+            class="group relative"
           >
-            <UIcon
-              v-if="item.label === 'Wellness'"
-              :name="item.icon"
-              class="size-4"
-            />
-            {{ item.label }}
-          </NuxtLink>
+            <NuxtLink
+              :to="item.to"
+              class="flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-semibold text-[#413a4f] transition hover:bg-[#e8f2e7] hover:text-[#597c58] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7aa984]"
+              :class="item.label === 'Wellness' ? 'bg-[#e5f2e5] text-[#527858]' : ''"
+            >
+              <UIcon
+                v-if="item.label === 'Wellness'"
+                :name="item.icon"
+                class="size-4"
+              />
+              {{ item.label }}
+              <UIcon
+                v-if="item.children"
+                name="i-lucide-chevron-down"
+                class="size-4 transition group-hover:rotate-180"
+              />
+            </NuxtLink>
+            <div
+              v-if="item.children"
+              class="pointer-events-none absolute left-0 top-full z-30 mt-2 min-w-52 rounded-2xl bg-white/95 p-2 opacity-0 shadow-xl ring-1 ring-[#d8e8d3] transition group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100"
+            >
+              <NuxtLink
+                v-for="child in item.children"
+                :key="child.label"
+                :to="child.to"
+                class="flex rounded-xl px-4 py-3 text-sm font-bold text-[#527858] hover:bg-[#edf6ed] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7aa984]"
+              >
+                {{ child.label }}
+              </NuxtLink>
+            </div>
+          </div>
         </div>
 
         <NuxtLink
