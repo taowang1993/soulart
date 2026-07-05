@@ -38,7 +38,7 @@ const interestOptions = [
   'Portfolio Preparation',
   'Workshops or Retreats',
 ]
-const studioMapUrl = 'https://www.google.com/maps?q=Xinyi%20Class%2C%20Unit%20704%2C%20105%20Gordon%20Baker%20Rd%2C%20North%20York%2C%20ON%20M2H%203P8&output=embed'
+const studioMapUrl = 'https://www.google.com/maps?q=43.80143,-79.34376&z=16&output=embed'
 const route = useRoute()
 
 function interestFromQuery(value: unknown) {
@@ -439,7 +439,7 @@ function selectTrialClass() {
             </div>
           </div>
 
-          <div class="overflow-hidden rounded-[1.75rem] bg-white shadow-[0_22px_70px_rgba(80,62,120,0.13)] ring-1 ring-[#eaddec]">
+          <div class="relative overflow-hidden rounded-[1.75rem] bg-white shadow-[0_22px_70px_rgba(80,62,120,0.13)] ring-1 ring-[#eaddec]">
             <iframe
               :src="studioMapUrl"
               title="Google Map to Xinyi Class"
@@ -448,6 +448,15 @@ function selectTrialClass() {
               allowfullscreen
               referrerpolicy="no-referrer-when-downgrade"
             />
+            <div class="pointer-events-none absolute left-4 top-4 hidden max-w-[18rem] rounded-2xl bg-white/95 p-4 text-[#2f5543] shadow-lg ring-1 ring-[#d8eadf] md:block">
+              <p class="font-bold text-[#1f3f31]">
+                Xinyi Class
+              </p>
+              <p class="mt-2 text-sm leading-6">
+                Unit 704, 105 Gordon Baker Rd<br>
+                North York, ON M2H 3P8
+              </p>
+            </div>
           </div>
         </div>
       </div>

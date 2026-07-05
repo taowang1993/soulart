@@ -170,7 +170,11 @@ test('contact page embeds a real Google map', () => {
 
   assert.match(source, /https:\/\/www\.google\.com\/maps/)
   assert.match(source, /output=embed/)
+  assert.match(source, /43\.80143,-79\.34376/)
+  assert.match(source, /z=16/)
   assert.match(source, /<iframe[\s\S]*Google Map to Xinyi Class/)
+  assert.match(source, /Unit 704, 105 Gordon Baker Rd/)
+  assert.doesNotMatch(source, /q=Xinyi%20Class/)
   assert.doesNotMatch(source, /\/contact\/studio-map\.png/)
 })
 
