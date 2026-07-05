@@ -29,13 +29,21 @@ const contactItems = [
   { label: '@XinyiArt-Yoga-Healing', detail: 'Follow us on YouTube', icon: 'i-lucide-youtube' },
 ]
 
+const trialClassInterest = 'Trial Class'
 const interestOptions = [
+  trialClassInterest,
   'Art Classes',
   'Wellness Programs',
   'Private Sessions',
   'Portfolio Preparation',
   'Workshops or Retreats',
 ]
+const studioMapUrl = 'https://www.google.com/maps?q=Xinyi%20Class%2C%20Unit%20704%2C%20105%20Gordon%20Baker%20Rd%2C%20North%20York%2C%20ON%20M2H%203P8&output=embed'
+const route = useRoute()
+
+function interestFromQuery(value: unknown) {
+  return typeof value === 'string' && interestOptions.includes(value) ? value : ''
+}
 
 const studioFeatures = [
   { label: 'North York, Ontario', icon: 'i-lucide-map-pin' },
@@ -49,7 +57,8 @@ const contactForm = reactive({
   name: '',
   email: '',
   phone: '',
-  interest: '',
+  interest: interestFromQuery(route.query.interest),
+  preferredTime: '',
   message: '',
   updates: false,
 })
@@ -59,6 +68,7 @@ const submitMessage = ref('')
 async function submitContactForm() {
   submitState.value = 'sending'
   submitMessage.value = ''
+  const isTrialClassRequest = contactForm.interest === trialClassInterest
 
   try {
     await $fetch('/api/contact', {
@@ -70,17 +80,27 @@ async function submitContactForm() {
       name: '',
       email: '',
       phone: '',
-      interest: '',
+      interest: interestFromQuery(route.query.interest),
+      preferredTime: '',
       message: '',
       updates: false,
     })
     submitState.value = 'sent'
-    submitMessage.value = 'Thanks — your message has been sent.'
+    submitMessage.value = isTrialClassRequest ? 'Thanks — your trial class request has been sent.' : 'Thanks — your message has been sent.'
   }
   catch {
     submitState.value = 'error'
     submitMessage.value = 'Sorry, your message could not be sent. Please email xinyiartschool@gmail.com instead.'
   }
+}
+
+watch(() => route.query.interest, (interest) => {
+  const selected = interestFromQuery(interest)
+  if (selected) contactForm.interest = selected
+})
+
+function selectTrialClass() {
+  contactForm.interest = trialClassInterest
 }
 </script>
 
@@ -228,8 +248,9 @@ async function submitContactForm() {
           </ul>
 
           <NuxtLink
-            to="#message"
+            to="?interest=Trial%20Class#message"
             class="mt-5 inline-flex w-full items-center justify-center gap-3 rounded-2xl bg-[#e7a0ab] px-7 py-3 text-base font-bold text-white shadow-lg shadow-[#e7a0ab]/25 transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
+            @click="selectTrialClass"
           >
             Book a Trial Class
             <span aria-hidden="true">→</span>
@@ -303,6 +324,16 @@ async function submitContactForm() {
                 </select>
               </label>
             </div>
+
+            <label class="contact-field">
+              <span>Preferred Time (Optional)</span>
+              <input
+                v-model="contactForm.preferredTime"
+                name="preferredTime"
+                type="text"
+                placeholder="e.g. Saturday morning or weekday after 4 PM"
+              >
+            </label>
 
             <label class="contact-field">
               <span>Message *</span>
@@ -409,13 +440,14 @@ async function submitContactForm() {
           </div>
 
           <div class="overflow-hidden rounded-[1.75rem] bg-white shadow-[0_22px_70px_rgba(80,62,120,0.13)] ring-1 ring-[#eaddec]">
-            <img
-              src="/contact/studio-map.png"
-              alt="Map to Xinyi Class at Unit 704, 105 Gordon Baker Road in North York"
-              class="h-full min-h-[17rem] w-full object-cover object-left"
+            <iframe
+              :src="studioMapUrl"
+              title="Google Map to Xinyi Class"
+              class="h-full min-h-[17rem] w-full border-0"
               loading="lazy"
-              decoding="async"
-            >
+              allowfullscreen
+              referrerpolicy="no-referrer-when-downgrade"
+            />
           </div>
         </div>
       </div>

@@ -3,7 +3,9 @@ import { Resend } from 'resend'
 
 const CONTACT_TO_EMAIL = process.env.CONTACT_TO_EMAIL || 'xinyiartschool@gmail.com'
 const CONTACT_FROM_EMAIL = process.env.RESEND_FROM_EMAIL || ''
+const trialClassInterest = 'Trial Class'
 const interestOptions = new Set([
+  trialClassInterest,
   'Art Classes',
   'Wellness Programs',
   'Private Sessions',
@@ -16,6 +18,7 @@ type ContactBody = {
   email: string
   phone: string
   interest: string
+  preferredTime: string
   message: string
   updates: boolean
 }
@@ -57,6 +60,7 @@ function validateContactBody(body: unknown): ContactBody {
   const email = readString(source, 'email', 254).toLowerCase()
   const phone = readString(source, 'phone', 60, false)
   const interest = readString(source, 'interest', 80)
+  const preferredTime = readString(source, 'preferredTime', 160, false)
   const message = readString(source, 'message', 3000)
 
   if (!looksLikeEmail(email)) badRequest('Email address is invalid')
@@ -67,6 +71,7 @@ function validateContactBody(body: unknown): ContactBody {
     email,
     phone,
     interest,
+    preferredTime,
     message,
     updates: source.updates === true,
   }
@@ -91,6 +96,7 @@ function contactEmailHtml(body: ContactBody) {
     ['Email', body.email],
     ['Phone', body.phone || 'Not provided'],
     ['Interest', body.interest],
+    ['Preferred Time', body.preferredTime || 'Not provided'],
     ['Updates', body.updates ? 'Yes' : 'No'],
   ]
   const rows = fields
@@ -106,9 +112,40 @@ function contactEmailText(body: ContactBody) {
     `Email: ${body.email}`,
     `Phone: ${body.phone || 'Not provided'}`,
     `Interest: ${body.interest}`,
+    `Preferred Time: ${body.preferredTime || 'Not provided'}`,
     `Updates: ${body.updates ? 'Yes' : 'No'}`,
     '',
     body.message,
+  ].join('\n')
+}
+
+function contactSubject(body: ContactBody) {
+  return body.interest === trialClassInterest
+    ? 'New Xinyi Class trial class request'
+    : `New Xinyi Class inquiry: ${body.interest}`
+}
+
+function autoReplySubject(body: ContactBody) {
+  return body.interest === trialClassInterest
+    ? 'We received your trial class request'
+    : 'We received your Xinyi Class message'
+}
+
+function autoReplyEmailHtml(body: ContactBody) {
+  return [
+    `<p>Hi ${escapeHtml(body.name)},</p>`,
+    `<p>Thanks for contacting Xinyi Class. ${escapeHtml(autoReplySubject(body))}. We’ll contact you soon.</p>`,
+    '<p>Art • Wellness • Community</p>',
+  ].join('')
+}
+
+function autoReplyEmailText(body: ContactBody) {
+  return [
+    `Hi ${body.name},`,
+    '',
+    `Thanks for contacting Xinyi Class. ${autoReplySubject(body)}. We’ll contact you soon.`,
+    '',
+    'Art • Wellness • Community',
   ].join('\n')
 }
 
@@ -128,7 +165,7 @@ export default defineEventHandler(async (event) => {
   const { data, error } = await resend.emails.send({
     from: CONTACT_FROM_EMAIL,
     to: [CONTACT_TO_EMAIL],
-    subject: `New Xinyi Class inquiry: ${body.interest}`,
+    subject: contactSubject(body),
     html: contactEmailHtml(body),
     text: contactEmailText(body),
     replyTo: body.email,
@@ -139,5 +176,15 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 502, statusMessage: 'Error sending email' })
   }
 
-  return { ok: true, id: data?.id }
+  const { data: replyData, error: replyError } = await resend.emails.send({
+    from: CONTACT_FROM_EMAIL,
+    to: [body.email],
+    subject: autoReplySubject(body),
+    html: autoReplyEmailHtml(body),
+    text: autoReplyEmailText(body),
+  })
+
+  if (replyError) console.error('[contact] Resend auto-reply failed', replyError)
+
+  return { ok: true, id: data?.id, autoReplyId: replyData?.id }
 })

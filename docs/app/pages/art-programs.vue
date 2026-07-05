@@ -543,12 +543,12 @@ const isAssistantOpen = ref(false)
           Take the first step toward creativity, well-being, and connection.
         </p>
         <div class="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
-          <a
-            href="mailto:xinyiartschool@gmail.com"
+          <NuxtLink
+            to="/contact?interest=Trial%20Class#message"
             class="rounded-full bg-[#d9848f] px-10 py-4 text-lg font-bold text-white shadow-lg shadow-[#d9848f]/25 transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
           >
             Book a Trial Class
-          </a>
+          </NuxtLink>
           <a
             href="tel:4165676538"
             class="rounded-full bg-white/80 px-10 py-4 text-lg font-bold text-[#49653f] shadow-sm ring-1 ring-[#eaddec] transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"

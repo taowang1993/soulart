@@ -20,14 +20,12 @@ const expectedAssets = [
   'hero-leaves.png',
   'hero-art.png',
   'ai-assistant.png',
-  'studio-map.png',
 ] as const
 
 const expectedAssetSizes = {
   'hero-leaves.png': { width: 720, height: 760 },
   'hero-art.png': { width: 840, height: 780 },
   'ai-assistant.png': { width: 650, height: 420 },
-  'studio-map.png': { width: 1900, height: 480 },
 }
 
 const referenceCopy = [
@@ -49,7 +47,9 @@ const referenceCopy = [
   'Email Address',
   'Phone Number',
   'I’m interested in',
+  'Trial Class',
   'Please select',
+  'Preferred Time',
   'Message',
   'Keep me updated about workshops, retreats, new classes and seasonal events.',
   'Send Message',
@@ -130,6 +130,7 @@ test('contact page keeps the reference form fields', () => {
   assert.match(source, /v-model="contactForm\.email"[\s\S]*type="email"/)
   assert.match(source, /v-model="contactForm\.phone"[\s\S]*name="phone"/)
   assert.match(source, /v-model="contactForm\.interest"[\s\S]*name="interest"/)
+  assert.match(source, /v-model="contactForm\.preferredTime"[\s\S]*name="preferredTime"/)
   assert.match(source, /<textarea[\s\S]*v-model="contactForm\.message"[\s\S]*name="message"/)
   assert.match(source, /v-model="contactForm\.updates"[\s\S]*type="checkbox"/)
 })
@@ -148,7 +149,29 @@ test('contact form posts to a Resend-backed server route', () => {
   assert.match(apiSource, /to:\s*\[CONTACT_TO_EMAIL\]/)
   assert.match(apiSource, /xinyiartschool@gmail\.com/)
   assert.match(apiSource, /replyTo:\s*body\.email/)
+  assert.match(apiSource, /Preferred Time/)
+  assert.match(apiSource, /to:\s*\[body\.email\]/)
+  assert.match(apiSource, /We received your trial class request/)
   assert.doesNotMatch(apiSource, /re_\w+/)
+})
+
+test('book trial links preselect trial class on contact form', () => {
+  const contactSource = readContactPage()
+
+  assert.match(contactSource, /useRoute\(\)/)
+  assert.match(contactSource, /\?interest=Trial%20Class#message/)
+  for (const pagePath of [resolve(repoRoot, 'docs/app/pages/art-programs.vue'), resolve(repoRoot, 'docs/app/pages/wellness.vue')]) {
+    assert.match(readFileSync(pagePath, 'utf8'), /\/contact\?interest=Trial%20Class#message/)
+  }
+})
+
+test('contact page embeds a real Google map', () => {
+  const source = readContactPage()
+
+  assert.match(source, /https:\/\/www\.google\.com\/maps/)
+  assert.match(source, /output=embed/)
+  assert.match(source, /<iframe[\s\S]*Google Map to Xinyi Class/)
+  assert.doesNotMatch(source, /\/contact\/studio-map\.png/)
 })
 
 test('marketing pages link to the contact route', () => {
