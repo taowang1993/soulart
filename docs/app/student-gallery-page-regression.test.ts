@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import { existsSync, readFileSync } from 'node:fs'
+import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { test } from 'node:test'
 import { fileURLToPath } from 'node:url'
@@ -7,31 +7,26 @@ import { fileURLToPath } from 'node:url'
 const repoRoot = resolve(fileURLToPath(import.meta.url), '../../..')
 const pagePath = resolve(repoRoot, 'docs/app/pages/art-programs/student-gallery.vue')
 const artProgramsPagePath = resolve(repoRoot, 'docs/app/pages/art-programs.vue')
-const artAssetPath = resolve(repoRoot, 'docs/public/art-program')
 const galleryAssetPath = resolve(repoRoot, 'docs/public/student-gallery')
 
-const expectedArtAssets = [
-  'gallery-wall.png',
-  'age-4-6.png',
-  'age-7-9.jpg',
-  'age-10-12.png',
-  'age-13-15.png',
-  'age-15-18.jpg',
-  'age-16-plus.jpg',
-  'adult-1.jpg',
-  'adult-2.jpg',
-  'adult-3.png',
-  'craft-1.png',
-  'craft-2.jpg',
-  'craft-3.jpg',
-  'summer-camp-fruit-platter.jpg',
-] as const
-
 const expectedGalleryAssets = [
-  'fantasy-girl.jpg',
-  'bernice-portrait.jpg',
-  'jane-watercolor.jpg',
-  'julia-artwork.jpg',
+  'children-4-6-four-seasons.jpg',
+  'children-7-9-dragon-boat.jpg',
+  'children-10-12-dream.jpg',
+  'teen-13-15-ancient-girl.jpg',
+  'teen-13-15-violin.jpg',
+  'teen-15-18-sunset.jpg',
+  'portfolio-helen.jpg',
+  'adult-class.jpg',
+  'adult-ecio.jpg',
+  'adult-grace.jpg',
+  'adult-study.jpg',
+  'craft-crochet.jpg',
+  'craft-paper-flower.jpg',
+  'craft-clay-minecraft.jpg',
+  'craft-mixed-media.jpg',
+  'chinese-ink-1.jpg',
+  'chinese-ink-8.jpg',
 ] as const
 
 const referenceCopy = [
@@ -39,10 +34,10 @@ const referenceCopy = [
   'Celebrating creativity, imagination and growth at every age.',
   'Children\'s Art Works',
   'Age 4–6',
-  'Age 7–10',
-  'Age 11–13',
+  'Age 7–9',
+  'Age 10–12',
   'Teen\'s Art Works',
-  'Fantasy Girl',
+  'Ancient Girl',
   'Adult Art Works',
   'Craft Creations',
   'Chinese Painting & Calligraphy',
@@ -56,13 +51,10 @@ function readPage() {
   return readFileSync(pagePath, 'utf8')
 }
 
-test('student gallery assets are available from public paths', () => {
-  for (const asset of expectedArtAssets) {
-    assert.ok(existsSync(resolve(artAssetPath, asset)), `missing public art program asset: ${asset}`)
-  }
-  for (const asset of expectedGalleryAssets) {
-    assert.ok(existsSync(resolve(galleryAssetPath, asset)), `missing public student gallery asset: ${asset}`)
-  }
+test('student gallery assets are copied from the gallery source into public paths', () => {
+  const actualAssets = readdirSync(galleryAssetPath).filter(file => file.endsWith('.jpg')).sort()
+
+  assert.deepEqual(actualAssets, [...expectedGalleryAssets].sort())
 })
 
 test('student gallery page keeps the reference sections and copy', () => {
@@ -83,20 +75,20 @@ test('student gallery page owns marketing chrome and keeps the assistant', () =>
   assert.match(source, /© 2026 Xinyi Class/)
 })
 
-test('student gallery page uses copied public assets only', () => {
+test('student gallery page uses copied public gallery assets only', () => {
   const source = readPage()
 
   assert.doesNotMatch(source, /\/Users\/max\/projects\/resources/)
-  for (const asset of expectedArtAssets) {
-    assert.match(source, new RegExp(`/art-program/${asset.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`))
-  }
+  assert.doesNotMatch(source, /\/art-program\//)
   for (const asset of expectedGalleryAssets) {
     assert.match(source, new RegExp(`/student-gallery/${asset.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`))
   }
 })
 
-test('art programs page links visitors to the student gallery route', () => {
+test('art programs page links and renders the nested student gallery route', () => {
   const source = readFileSync(artProgramsPagePath, 'utf8')
 
   assert.match(source, /\/art-programs\/student-gallery/)
+  assert.match(source, /const isNestedRoute = computed/)
+  assert.match(source, /<NuxtPage v-if="isNestedRoute" \/>/)
 })

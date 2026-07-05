@@ -29,41 +29,52 @@ const sectionLinks = [
   { label: 'Chinese Art', to: '#chinese-art' },
 ]
 
-const childrenTabs = ['Age 4–6', 'Age 7–10', 'Age 11–13']
+const childrenTabs = ['Age 4–6', 'Age 7–9', 'Age 10–12']
 const teenTabs = ['Age 13–15', 'Age 15–18', 'Portfolios']
 const adultTabs = ['All Works', 'Paintings', 'Watercolor']
 const craftTabs = ['All Crafts', 'Paper Crafts', 'Clay & Pottery', 'Textile & Yarn', 'Mixed Media']
 
+const heroWorks = [
+  { title: 'Four Seasons', image: '/student-gallery/children-4-6-four-seasons.jpg' },
+  { title: 'Dragon Boat', image: '/student-gallery/children-7-9-dragon-boat.jpg' },
+  { title: 'Dream Garden', image: '/student-gallery/children-10-12-dream.jpg' },
+  { title: 'Ancient Girl', image: '/student-gallery/teen-13-15-ancient-girl.jpg' },
+  { title: 'Sunset Painting', image: '/student-gallery/teen-15-18-sunset.jpg' },
+  { title: 'Open Studio', image: '/student-gallery/adult-class.jpg' },
+  { title: 'Crochet Friends', image: '/student-gallery/craft-crochet.jpg' },
+  { title: 'Ink Brushwork', image: '/student-gallery/chinese-ink-1.jpg' },
+]
+
 const childrenWorks = [
-  { title: 'My City - Toronto', meta: 'Age 5', image: '/art-program/age-4-6.png', color: '#f3cbd7' },
-  { title: 'Lion Dance', meta: 'Age 6', image: '/art-program/age-7-9.jpg', color: '#f7d7a8' },
-  { title: 'Sunny Day', meta: 'Age 6', image: '/art-program/age-10-12.png', color: '#cfe7c4' },
+  { title: 'Four Seasons', meta: 'Age 5', image: '/student-gallery/children-4-6-four-seasons.jpg', color: '#f3cbd7' },
+  { title: 'Dragon Boat', meta: 'Age 9', image: '/student-gallery/children-7-9-dragon-boat.jpg', color: '#f7d7a8' },
+  { title: 'Dream Garden', meta: 'Age 12', image: '/student-gallery/children-10-12-dream.jpg', color: '#cfe7c4' },
 ]
 
 const teenWorks = [
-  { title: 'Fantasy Girl', meta: 'Age 14 · Digital Art', image: '/student-gallery/fantasy-girl.jpg' },
-  { title: 'Cat Study', meta: 'Age 13 · Watercolor', image: '/art-program/age-13-15.png' },
-  { title: 'Portfolio Practice', meta: 'Age 16 · Acrylic', image: '/art-program/age-16-plus.jpg' },
-  { title: 'Quiet Portrait', meta: 'Age 15 · Drawing', image: '/art-program/age-15-18.jpg' },
+  { title: 'Ancient Girl', meta: 'Age 13 · Watercolor', image: '/student-gallery/teen-13-15-ancient-girl.jpg' },
+  { title: 'Violin Study', meta: 'Age 15 · Drawing', image: '/student-gallery/teen-13-15-violin.jpg' },
+  { title: 'Sunset Painting', meta: 'Age 16 · Acrylic', image: '/student-gallery/teen-15-18-sunset.jpg' },
+  { title: 'Portfolio Portrait', meta: 'Portfolio', image: '/student-gallery/portfolio-helen.jpg' },
 ]
 
 const adultWorks = [
-  { title: 'Mountain Lake', meta: 'Oil Painting', image: '/student-gallery/julia-artwork.jpg' },
-  { title: 'Floral Figure', meta: 'Watercolor', image: '/art-program/adult-1.jpg' },
-  { title: 'Garden Portrait', meta: 'Acrylic', image: '/student-gallery/bernice-portrait.jpg' },
-  { title: 'Soft Bloom', meta: 'Mixed Media', image: '/art-program/adult-2.jpg' },
+  { title: 'Open Studio', meta: 'Oil Painting', image: '/student-gallery/adult-class.jpg' },
+  { title: 'Portrait Study', meta: 'Watercolor', image: '/student-gallery/adult-ecio.jpg' },
+  { title: 'Grace’s Garden', meta: 'Acrylic', image: '/student-gallery/adult-grace.jpg' },
+  { title: 'Quiet Study', meta: 'Mixed Media', image: '/student-gallery/adult-study.jpg' },
 ]
 
 const craftWorks = [
-  { title: 'Tiny Garden', meta: 'Paper Crafts', image: '/art-program/craft-2.jpg' },
-  { title: 'Fruit Platter', meta: 'Mixed Media', image: '/art-program/summer-camp-fruit-platter.jpg' },
-  { title: 'Yarn Friends', meta: 'Textile & Yarn', image: '/art-program/craft-1.png' },
-  { title: 'Little Keeper', meta: 'Clay & Pottery', image: '/art-program/craft-3.jpg' },
+  { title: 'Crochet Friends', meta: 'Textile & Yarn', image: '/student-gallery/craft-crochet.jpg' },
+  { title: 'Paper Flower', meta: 'Paper Crafts', image: '/student-gallery/craft-paper-flower.jpg' },
+  { title: 'Minecraft Clay World', meta: 'Clay & Pottery', image: '/student-gallery/craft-clay-minecraft.jpg' },
+  { title: 'Mixed Media Butterfly', meta: 'Mixed Media', image: '/student-gallery/craft-mixed-media.jpg' },
 ]
 
 const chineseWorks = [
-  { title: 'Mountain Landscape', meta: 'Ink on Fan', image: '/art-program/adult-3.png' },
-  { title: 'Quiet Brushwork', meta: 'Chinese Painting', image: '/student-gallery/jane-watercolor.jpg' },
+  { title: 'Ink Portrait', meta: 'Chinese Painting', image: '/student-gallery/chinese-ink-1.jpg' },
+  { title: 'Mountain Poem', meta: 'Ink Wash', image: '/student-gallery/chinese-ink-8.jpg' },
 ]
 
 const contactItems = [
@@ -186,21 +197,18 @@ const isAssistantOpen = ref(false)
             ✦ Art Wall ✦
           </div>
           <div class="gallery-hero-card">
-            <img
-              src="/art-program/gallery-wall.png"
-              alt="Student artwork wall at XinYi Class"
-              class="h-full w-full rounded-[1.75rem] object-cover"
-              loading="eager"
-              decoding="async"
-            >
+            <div class="hero-art-grid h-full rounded-[1.75rem] bg-white/80 p-3">
+              <img
+                v-for="work in heroWorks"
+                :key="work.title"
+                :src="work.image"
+                :alt="`${work.title} student gallery artwork`"
+                class="h-full w-full rounded-2xl object-cover shadow-sm"
+                loading="eager"
+                decoding="async"
+              >
+            </div>
           </div>
-          <img
-            src="/student-gallery/fantasy-girl.jpg"
-            alt="Fantasy Girl student digital artwork"
-            class="absolute -bottom-8 right-8 hidden h-44 w-32 rotate-6 rounded-2xl object-cover shadow-2xl ring-4 ring-white md:block"
-            loading="lazy"
-            decoding="async"
-          >
         </div>
       </div>
 
@@ -663,6 +671,18 @@ const isAssistantOpen = ref(false)
 .gallery-hero-card::after {
   right: 2.3rem;
   bottom: 1.5rem;
+}
+
+.hero-art-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: minmax(6rem, 1fr);
+  gap: 0.75rem;
+}
+
+.hero-art-grid img:first-child {
+  grid-column: span 2;
+  grid-row: span 2;
 }
 
 .paper-card,

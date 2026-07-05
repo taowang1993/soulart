@@ -147,11 +147,18 @@ const footerLinks = [
   { label: 'Contact', to: '/contact' },
 ]
 
+const route = useRoute()
+const isNestedRoute = computed(() => route.path.replace(/\/$/, '') !== '/art-programs')
 const isAssistantOpen = ref(false)
 </script>
 
 <template>
-  <main class="xinyi-art-program min-h-screen overflow-hidden bg-[#fbf7ff] text-[#40335f]">
+  <NuxtPage v-if="isNestedRoute" />
+
+  <main
+    v-else
+    class="xinyi-art-program min-h-screen overflow-hidden bg-[#fbf7ff] text-[#40335f]"
+  >
     <section class="relative isolate overflow-hidden bg-[linear-gradient(120deg,#fff9fb_0%,#f4efff_52%,#fff3ed_100%)] px-4 pb-16 pt-5 sm:px-6 lg:px-8">
       <div
         class="absolute inset-0 -z-10 opacity-75"
