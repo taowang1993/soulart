@@ -16,7 +16,13 @@ const expectedAssets = [
   'art-supplies.png',
   'plant-jar.png',
   'wellness-illustration.png',
-]
+] as const
+
+const expectedAssetSizes = {
+  'art-supplies.png': { width: 800, height: 610 },
+  'plant-jar.png': { width: 760, height: 780 },
+  'wellness-illustration.png': { width: 1120, height: 360 },
+}
 
 const referenceCopy = [
   'Class Schedule',
@@ -63,9 +69,22 @@ function escapeRegExp(text: string) {
   return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
 
+function readPngSize(asset: (typeof expectedAssets)[number]) {
+  const source = readFileSync(resolve(scheduleAssetPath, asset))
+
+  assert.equal(source.subarray(1, 4).toString('ascii'), 'PNG')
+  return { width: source.readUInt32BE(16), height: source.readUInt32BE(20) }
+}
+
 test('schedule assets are copied into public schedule directory', () => {
   for (const asset of expectedAssets) {
     assert.ok(existsSync(resolve(scheduleAssetPath, asset)), `missing public schedule asset: ${asset}`)
+  }
+})
+
+test('schedule decorative crops include full artwork margins', () => {
+  for (const asset of expectedAssets) {
+    assert.deepEqual(readPngSize(asset), expectedAssetSizes[asset])
   }
 })
 
