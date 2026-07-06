@@ -17,7 +17,10 @@ const navItems = [
     label: 'Art Programs',
     to: '/art-programs',
     icon: 'i-lucide-palette',
-    children: [{ label: 'Student Gallery', to: '/art-programs/student-gallery' }],
+    children: [
+      { label: 'Student Gallery', to: '/art-programs/student-gallery' },
+      { label: 'Summer Camps', to: '/art-programs/summer-camps' },
+    ],
   },
   { label: 'Wellness', to: '/wellness', icon: 'i-lucide-leaf' },
   { label: 'Schedules', to: '/schedules', icon: 'i-lucide-calendar-days' },
@@ -113,18 +116,21 @@ const campPrograms = [
     image: '/art-program/creative-camp-summer.png',
     note: 'Bright weeks of art, play, and friendship.',
     action: 'View Camps',
+    to: '/art-programs/summer-camps',
   },
   {
     title: 'Holiday Workshops',
     image: '/art-program/creative-camp-workshops.jpg',
     note: 'Seasonal projects and handmade gifts.',
     action: 'Plan a Visit',
+    to: '/contact',
   },
   {
     title: 'Community Events',
     image: '/art-program/creative-camp-events.jpg',
     note: 'Shared making moments for families and friends.',
     action: 'Join Us',
+    to: '/contact',
   },
 ]
 
@@ -516,7 +522,7 @@ const isAssistantOpen = ref(false)
               {{ program.note }}
             </p>
             <NuxtLink
-              to="/contact"
+              :to="program.to"
               class="mt-4 inline-flex rounded-full bg-[#e6b2b6] px-7 py-2.5 font-bold text-[#5a435f] shadow-md transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
             >
               {{ program.action }}

@@ -24,7 +24,10 @@ const navItems = [
     label: 'Art Programs',
     to: '/art-programs',
     icon: 'i-lucide-palette',
-    children: [{ label: 'Student Gallery', to: '/art-programs/student-gallery' }],
+    children: [
+      { label: 'Student Gallery', to: '/art-programs/student-gallery' },
+      { label: 'Summer Camps', to: '/art-programs/summer-camps' },
+    ],
   },
   { label: 'Wellness', to: '/wellness', icon: 'i-lucide-leaf' },
   { label: 'Schedules', to: '/schedules', icon: 'i-lucide-calendar-days' },
