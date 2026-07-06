@@ -31,6 +31,7 @@ const expectedGalleryAssets = [
   'craft-crochet.jpg',
   'craft-paper-flower.jpg',
   'craft-clay-lotus.jpg',
+  'craft-mixed-media.jpg',
   'chinese-landscape.jpg',
 ] as const
 
@@ -39,13 +40,14 @@ const referenceCopy = [
   'Celebrating creativity, imagination and growth at every age.',
   'Children\'s Art Works',
   'Age 4–6',
-  'Age 7–9',
-  'Age 10–12',
+  'Age 7–10',
+  'Age 11–13',
   'Teen\'s Art Works',
   'Ancient Girl',
   'Student Gallery',
   'Adult Art Works',
   'Craft Creations',
+  'Mixed Media',
   'Chinese Painting & Calligraphy',
   'Tradition · Simplicity · Inner Peace',
   'About Chinese Art',
@@ -91,14 +93,17 @@ test('student gallery page uses copied public gallery assets only', () => {
   }
 })
 
-test('student gallery carousel controls are real Vue controls', () => {
+test('student gallery carousel controls are real Vue controls without breaking the reference card layout', () => {
   const source = readPage()
 
   assert.match(source, /const activeGalleryIndexes = reactive/)
+  assert.match(source, /visibleWorks\(section\)/)
   assert.match(source, /@click="setActiveWork\(section\.id, index\)"/)
   assert.match(source, /@click="stepWork\(section\.id, section\.works\.length, -1\)"/)
   assert.match(source, /@click="stepWork\(section\.id, section\.works\.length, 1\)"/)
-  assert.match(source, /:style="\{ transform: `translateX\(-\$\{activeWorkIndex\(section\.id\) \* 100\}%\)` \}"/)
+  assert.match(source, /grid-template-columns: repeat\(3, minmax\(0, 1fr\)\)/)
+  assert.doesNotMatch(source, /flex:\s*0 0 100%/)
+  assert.doesNotMatch(source, /Ready to Begin\?/) // reference jumps from Chinese art to footer
   assert.doesNotMatch(source, /aria-label="Previous Chinese artwork"/)
 })
 

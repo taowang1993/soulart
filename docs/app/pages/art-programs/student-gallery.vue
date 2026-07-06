@@ -26,14 +26,6 @@ const navItems = [
   { label: 'Contact', to: '/contact', icon: 'i-lucide-mail' },
 ]
 
-const sectionLinks = [
-  { label: 'Children', to: '#children' },
-  { label: 'Teens', to: '#teens' },
-  { label: 'Adults', to: '#adults' },
-  { label: 'Crafts', to: '#crafts' },
-  { label: 'Chinese Art', to: '#chinese-art' },
-]
-
 type GalleryWork = {
   title: string
   meta: string
@@ -67,10 +59,10 @@ const gallerySections: GallerySection[] = [
     kicker: 'Young Artists',
     title: 'Children\'s Art Works',
     description: 'Celebrating creativity, imagination and growth at every age.',
-    tabs: ['Age 4–6', 'Age 7–9', 'Age 10–12'],
+    tabs: ['Age 4–6', 'Age 7–10', 'Age 11–13'],
     quote: 'Little hands. Big imagination. Every creation is a beautiful story.',
     works: [
-      { title: 'Four Seasons', meta: 'Age 5', image: '/student-gallery/children-4-6-four-seasons.jpg', contain: false },
+      { title: 'My City', meta: 'Age 6', image: '/student-gallery/children-4-6-four-seasons.jpg', contain: false },
       { title: 'Lion Dance', meta: 'Age 9', image: '/student-gallery/children-7-9-lion-dance.jpg', contain: false },
       { title: 'Dream Garden', meta: 'Age 12', image: '/student-gallery/children-10-12-dream.jpg', contain: false },
     ],
@@ -85,7 +77,7 @@ const gallerySections: GallerySection[] = [
     quote: 'Every artwork tells a story. Thank you for being part of our creative journey.',
     works: [
       { title: 'Ancient Girl', meta: 'Age 13 · Watercolor', image: '/student-gallery/teen-13-15-ancient-girl.jpg', contain: false },
-      { title: 'Dreaming Girl', meta: 'Age 16 · Acrylic', image: '/student-gallery/teen-15-18-girl.jpg', contain: false },
+      { title: 'Fantasy Girl', meta: 'Age 14 · Digital Art', image: '/student-gallery/teen-15-18-girl.jpg', contain: false },
       { title: 'Portfolio Portrait', meta: 'Portfolio', image: '/student-gallery/portfolio-helen.jpg', contain: false },
     ],
   },
@@ -98,7 +90,7 @@ const gallerySections: GallerySection[] = [
     tabs: ['All Works', 'Paintings', 'Watercolor'],
     quote: 'Art is not about perfection. It is about expression. Every piece is a reflection of a unique journey.',
     works: [
-      { title: 'Mountain House', meta: 'Painting', image: '/student-gallery/adult-town.jpg', contain: false },
+      { title: 'Mountain Lake', meta: 'Oil Painting', image: '/student-gallery/adult-town.jpg', contain: false },
       { title: 'Eva', meta: 'Acrylic', image: '/student-gallery/adult-eva.jpg', contain: false },
       { title: 'Soft Garden', meta: 'Watercolor', image: '/student-gallery/adult-watercolor-sophia.jpg', contain: false },
     ],
@@ -108,13 +100,14 @@ const gallerySections: GallerySection[] = [
     tone: 'crafts',
     kicker: 'Handmade Joy',
     title: 'Craft Creations',
-    description: 'Handmade with love, creativity and care.',
-    tabs: ['Textile & Yarn', 'Paper Crafts', 'Clay & Pottery'],
-    quote: 'Crafts help students slow down, solve problems, and enjoy making something with their own hands.',
+    description: 'Handmade with love, creativity and care!',
+    tabs: ['Paper Crafts', 'Clay & Pottery', 'Textile & Yarn', 'Mixed Media'],
+    quote: 'Little hands. Big imagination. Every creation is a beautiful story.',
     works: [
-      { title: 'Crochet Friends', meta: 'Textile & Yarn', image: '/student-gallery/craft-crochet.jpg', contain: true },
       { title: 'Paper Flower', meta: 'Paper Crafts', image: '/student-gallery/craft-paper-flower.jpg', contain: true },
       { title: 'Clay Lotus Pond', meta: 'Clay & Pottery', image: '/student-gallery/craft-clay-lotus.jpg', contain: true },
+      { title: 'Crochet Friends', meta: 'Textile & Yarn', image: '/student-gallery/craft-crochet.jpg', contain: true },
+      { title: 'Mixed Media Frame', meta: 'Mixed Media', image: '/student-gallery/craft-mixed-media.jpg', contain: true },
     ],
   },
 ]
@@ -137,9 +130,8 @@ const footerLinks = [
   { label: 'Home', to: '/' },
   { label: 'About', to: '/about' },
   { label: 'Art Programs', to: '/art-programs' },
-  { label: 'Student Gallery', to: '/art-programs/student-gallery' },
   { label: 'Wellness', to: '/wellness' },
-  { label: 'Schedules', to: '/schedules' },
+  { label: 'Resources', to: '/docs/manual/en/getting-started/installation' },
   { label: 'Contact', to: '/contact' },
 ]
 
@@ -159,11 +151,16 @@ function setActiveWork(sectionId: string, index: number) {
 function stepWork(sectionId: string, total: number, direction: -1 | 1) {
   activeGalleryIndexes[sectionId] = (activeWorkIndex(sectionId) + direction + total) % total
 }
+
+function visibleWorks(section: GallerySection) {
+  const active = activeWorkIndex(section.id)
+  return [...section.works.slice(active), ...section.works.slice(0, active)].slice(0, 3)
+}
 </script>
 
 <template>
   <main class="student-gallery min-h-screen overflow-hidden bg-[#fff8ed] text-[#40335f]">
-    <section class="hero-shell relative isolate overflow-hidden px-4 pb-16 pt-5 sm:px-6 lg:px-8">
+    <section class="hero-shell relative isolate overflow-hidden px-4 pb-12 pt-5 sm:px-6 lg:px-8">
       <nav
         aria-label="Main Navigation"
         class="mx-auto flex max-w-6xl items-center justify-between rounded-none bg-white/75 px-3 py-3 shadow-sm ring-1 ring-white/80 backdrop-blur md:rounded-[2rem] md:px-5"
@@ -239,33 +236,24 @@ function stepWork(sectionId: string, total: number, direction: -1 | 1) {
         </div>
       </nav>
 
-      <div class="mx-auto grid max-w-6xl items-center gap-12 py-16 lg:grid-cols-[0.82fr_1.18fr] lg:py-24">
+      <div class="mx-auto grid max-w-6xl items-center gap-12 py-10 lg:grid-cols-[0.9fr_1.1fr] lg:py-12">
         <div class="text-center lg:text-left">
-          <p class="text-sm font-bold uppercase tracking-[0.36em] text-[#bd8496]">
-            XinYi Class
-          </p>
-          <h1 class="script-title mt-5 text-6xl font-semibold leading-none text-[#566e3d] sm:text-7xl lg:text-8xl">
+          <h1 class="script-title text-6xl font-semibold leading-none text-[#566e3d] sm:text-7xl lg:whitespace-nowrap lg:text-7xl">
             Students' Gallery
           </h1>
           <p class="mx-auto mt-6 max-w-xl text-xl leading-8 text-[#6a5f78] lg:mx-0">
             Celebrating creativity, imagination and growth at every age.
           </p>
-          <div class="mt-8 flex flex-col justify-center gap-4 sm:flex-row lg:justify-start">
+          <div class="mt-8 flex justify-center lg:justify-start">
             <NuxtLink
               to="#children"
               aria-label="Jump to children's artwork"
-              class="inline-flex items-center justify-center rounded-full bg-[#e6a0ac] px-6 py-4 text-white shadow-lg shadow-[#d9848f]/25 transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
+              class="inline-flex size-14 items-center justify-center rounded-full bg-[#e6a0ac] text-white shadow-lg shadow-[#d9848f]/25 transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
             >
               <UIcon
                 name="i-lucide-arrow-down"
                 class="size-6"
               />
-            </NuxtLink>
-            <NuxtLink
-              to="/contact?interest=Trial%20Class#message"
-              class="inline-flex items-center justify-center rounded-full bg-white/85 px-8 py-4 font-bold text-[#6d4d95] shadow-sm ring-1 ring-[#eaddec] transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
-            >
-              Book a Trial Class
             </NuxtLink>
           </div>
         </div>
@@ -281,32 +269,18 @@ function stepWork(sectionId: string, total: number, direction: -1 | 1) {
           >
         </div>
       </div>
-
-      <div class="mx-auto flex max-w-4xl flex-wrap justify-center gap-3 rounded-full bg-white/70 p-2 shadow-sm ring-1 ring-white/80 backdrop-blur">
-        <NuxtLink
-          v-for="link in sectionLinks"
-          :key="link.label"
-          :to="link.to"
-          class="rounded-full px-4 py-2 text-sm font-bold text-[#6b577c] transition hover:bg-[#f2e5ff] hover:text-[#5b3d91] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#d98792]"
-        >
-          {{ link.label }}
-        </NuxtLink>
-      </div>
     </section>
 
     <section
       v-for="section in gallerySections"
       :id="section.id"
       :key="section.id"
-      class="gallery-band px-4 py-20 sm:px-6 lg:px-8"
+      class="gallery-band px-4 py-16 sm:px-6 lg:px-8"
       :class="`gallery-band--${section.tone}`"
     >
       <div class="mx-auto max-w-6xl">
         <div class="text-center">
-          <p class="text-sm font-bold uppercase tracking-[0.28em] text-current/60">
-            {{ section.kicker }}
-          </p>
-          <h2 class="script-title mt-2 text-5xl font-semibold leading-tight sm:text-6xl">
+          <h2 class="script-title text-5xl font-semibold leading-tight sm:text-6xl">
             {{ section.title }}
           </h2>
           <p class="mx-auto mt-4 max-w-2xl text-lg leading-8 text-[#6a5f78]">
@@ -327,7 +301,13 @@ function stepWork(sectionId: string, total: number, direction: -1 | 1) {
           </div>
         </div>
 
-        <div class="gallery-stage mt-12">
+        <div class="gallery-stage mt-10">
+          <p
+            v-if="section.id === 'children'"
+            class="gallery-help hidden lg:block"
+          >
+            Swipe or click<br>to explore<br>more artwork
+          </p>
           <button
             type="button"
             class="stage-arrow left-4"
@@ -339,12 +319,9 @@ function stepWork(sectionId: string, total: number, direction: -1 | 1) {
               class="size-7"
             />
           </button>
-          <div
-            class="gallery-track"
-            :style="{ transform: `translateX(-${activeWorkIndex(section.id) * 100}%)` }"
-          >
+          <div class="gallery-track">
             <article
-              v-for="work in section.works"
+              v-for="work in visibleWorks(section)"
               :key="work.title"
               class="stage-card"
             >
@@ -352,7 +329,7 @@ function stepWork(sectionId: string, total: number, direction: -1 | 1) {
                 :src="work.image"
                 :alt="`${work.title} student artwork`"
                 :class="work.contain ? 'object-contain bg-white' : 'object-cover object-top'"
-                loading="lazy"
+                loading="eager"
                 decoding="async"
               >
               <h3>{{ work.title }}</h3>
@@ -392,7 +369,7 @@ function stepWork(sectionId: string, total: number, direction: -1 | 1) {
 
     <section
       id="chinese-art"
-      class="ink-section px-4 py-20 text-[#3a352c] sm:px-6 lg:px-8"
+      class="ink-section px-4 py-16 text-[#3a352c] sm:px-6 lg:px-8"
     >
       <div class="mx-auto max-w-6xl text-center">
         <p class="mx-auto flex size-12 items-center justify-center rounded-sm bg-[#b6342c] font-serif text-lg font-bold text-white shadow-md">
@@ -405,12 +382,12 @@ function stepWork(sectionId: string, total: number, direction: -1 | 1) {
           Tradition · Simplicity · Inner Peace
         </p>
 
-        <div class="scroll-stage mx-auto mt-10 max-w-5xl">
+        <div class="scroll-stage mx-auto mt-10 max-w-3xl">
           <img
             :src="chineseWork.image"
             :alt="`${chineseWork.title} Chinese artwork`"
             class="mx-auto max-h-[32rem] w-full max-w-3xl object-contain"
-            loading="lazy"
+            loading="eager"
             decoding="async"
           >
           <h3 class="mt-5 font-serif text-3xl text-[#3a352c]">
@@ -435,34 +412,8 @@ function stepWork(sectionId: string, total: number, direction: -1 | 1) {
       </div>
     </section>
 
-    <section class="relative isolate overflow-hidden bg-[#fff9fb] px-4 py-16 text-center sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-4xl">
-        <h2 class="script-title text-5xl font-semibold text-[#415f3a]">
-          Ready to Begin?
-        </h2>
-        <p class="mt-4 text-xl italic text-[#a56d41]">
-          Take the first step toward creativity, well-being, and connection.
-        </p>
-        <div class="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
-          <NuxtLink
-            to="/contact?interest=Trial%20Class#message"
-            class="rounded-full bg-[#d9848f] px-10 py-4 text-lg font-bold text-white shadow-lg shadow-[#d9848f]/25 transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
-          >
-            Book a Trial Class
-          </NuxtLink>
-          <button
-            type="button"
-            class="rounded-full bg-white/80 px-10 py-4 text-lg font-bold text-[#49653f] shadow-sm ring-1 ring-[#eaddec] transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
-            @click="isAssistantOpen = true"
-          >
-            Talk with AI Assistant
-          </button>
-        </div>
-      </div>
-    </section>
-
     <footer class="relative bg-[linear-gradient(180deg,#f7f1fb_0%,#efe6f4_100%)] px-4 py-12 sm:px-6 lg:px-8">
-      <div class="mx-auto grid max-w-6xl gap-10 border-b border-[#d8c7e0] pb-10 md:grid-cols-[1.2fr_1fr_1.4fr]">
+      <div class="mx-auto grid max-w-6xl gap-10 border-b border-[#d8c7e0] pb-8 md:grid-cols-[1.2fr_1fr_1.4fr]">
         <div class="text-center md:text-left">
           <img
             src="/home/logo.png"
@@ -528,7 +479,7 @@ function stepWork(sectionId: string, total: number, direction: -1 | 1) {
             src="/home/qr-code.jpg"
             alt="XinYi Class WeChat QR code"
             class="mt-5 h-24 w-24 rounded-md bg-white p-1 shadow-sm ring-1 ring-[#d6c5e2]"
-            loading="lazy"
+            loading="eager"
             decoding="async"
           >
         </div>
@@ -570,14 +521,14 @@ function stepWork(sectionId: string, total: number, direction: -1 | 1) {
   position: relative;
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: clamp(0.75rem, 1.4vw, 1.1rem);
-  min-height: 32rem;
-  padding: clamp(1rem, 2vw, 1.5rem);
+  grid-auto-rows: clamp(6.8rem, 9.2vw, 8.3rem);
+  gap: clamp(0.65rem, 1.2vw, 0.95rem);
+  min-height: 0;
+  padding: clamp(0.9rem, 1.7vw, 1.25rem);
   background: rgba(255, 255, 255, 0.72);
   border: 1px solid rgba(255, 255, 255, 0.9);
-  border-radius: 3rem;
-  box-shadow: 0 2rem 5rem rgba(111, 79, 121, 0.18);
-  transform: rotate(1deg);
+  border-radius: 2.4rem;
+  box-shadow: 0 1.5rem 4rem rgba(111, 79, 121, 0.15);
 }
 
 .hero-gallery-frame::before,
@@ -605,13 +556,13 @@ function stepWork(sectionId: string, total: number, direction: -1 | 1) {
 .hero-gallery-frame img {
   width: 100%;
   height: 100%;
-  min-height: 11rem;
+  min-height: 0;
   object-fit: cover;
   object-position: top;
   background: white;
-  border: 0.55rem solid white;
-  border-radius: 1.5rem;
-  box-shadow: 0 1rem 2rem rgba(82, 61, 107, 0.14);
+  border: 0.45rem solid white;
+  border-radius: 1.25rem;
+  box-shadow: 0 0.8rem 1.7rem rgba(82, 61, 107, 0.12);
 }
 
 .hero-gallery-frame img:first-child {
@@ -637,8 +588,8 @@ function stepWork(sectionId: string, total: number, direction: -1 | 1) {
 .gallery-band::before,
 .gallery-band::after {
   position: absolute;
-  width: 21rem;
-  height: 21rem;
+  width: 18rem;
+  height: 18rem;
   pointer-events: none;
   content: "";
   border-radius: 9999px;
@@ -714,40 +665,43 @@ function stepWork(sectionId: string, total: number, direction: -1 | 1) {
 .gallery-stage,
 .scroll-stage {
   position: relative;
-  overflow: hidden;
-  padding: clamp(1rem, 3vw, 2.2rem);
+  padding: clamp(1rem, 2.4vw, 1.8rem);
   background:
     linear-gradient(90deg, rgba(255, 255, 255, 0.35), transparent 8%, transparent 92%, rgba(255, 255, 255, 0.35)),
     rgba(255, 255, 255, 0.62);
   border: 1px solid rgba(255, 255, 255, 0.84);
-  border-radius: 2.8rem;
-  box-shadow: 0 1.6rem 4.5rem rgba(82, 61, 107, 0.13);
+  border-radius: 2.25rem;
+  box-shadow: 0 1.2rem 3.3rem rgba(82, 61, 107, 0.12);
+}
+
+.scroll-stage {
+  overflow: hidden;
 }
 
 .gallery-track {
-  display: flex;
-  transition: transform 320ms ease;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.9rem, 1.8vw, 1.35rem);
 }
 
 .stage-card {
-  flex: 0 0 100%;
-  padding: 0.8rem;
+  padding: 0.75rem;
   text-align: center;
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 2rem;
-  box-shadow: 0 1rem 2.4rem rgba(82, 61, 107, 0.1);
+  background: rgba(255, 255, 255, 0.94);
+  border-radius: 1.8rem;
+  box-shadow: 0 0.8rem 1.9rem rgba(82, 61, 107, 0.09);
 }
 
 .stage-card img {
   width: 100%;
-  height: clamp(16rem, 28vw, 24rem);
-  border-radius: 1.45rem;
+  height: clamp(13rem, 20vw, 18rem);
+  border-radius: 1.25rem;
 }
 
 .stage-card h3 {
-  margin-top: 1.2rem;
+  margin-top: 0.95rem;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.45rem;
+  font-size: 1.25rem;
   font-weight: 600;
 }
 
@@ -762,16 +716,38 @@ function stepWork(sectionId: string, total: number, direction: -1 | 1) {
 
 .stage-arrow {
   position: absolute;
-  top: 45%;
+  top: 50%;
   z-index: 3;
   display: grid;
-  width: 3.4rem;
-  height: 3.4rem;
+  width: 3rem;
+  height: 3rem;
   place-items: center;
   color: #6d5b70;
   background: rgba(255, 255, 255, 0.86);
   border-radius: 9999px;
   box-shadow: 0 0.8rem 1.8rem rgba(89, 70, 110, 0.13);
+  transform: translateY(-50%);
+}
+
+.stage-arrow.left-4 {
+  left: -0.9rem;
+}
+
+.stage-arrow.right-4 {
+  right: -0.9rem;
+}
+
+.gallery-help {
+  position: absolute;
+  top: 50%;
+  right: -1rem;
+  z-index: 2;
+  width: 7rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.9rem;
+  font-style: italic;
+  line-height: 1.25;
+  color: rgba(93, 73, 107, 0.68);
   transform: translateY(-50%);
 }
 
@@ -782,17 +758,43 @@ function stepWork(sectionId: string, total: number, direction: -1 | 1) {
 }
 
 .scroll-stage {
+  padding-inline: clamp(2rem, 6vw, 5rem);
   background:
     linear-gradient(90deg, rgba(108, 74, 37, 0.13), transparent 9%, transparent 91%, rgba(108, 74, 37, 0.13)),
     radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.82), transparent 34rem),
     #efe1c6;
   border-color: #d8c19f;
+  border-radius: 1.4rem;
+}
+
+.scroll-stage::before,
+.scroll-stage::after {
+  position: absolute;
+  top: 0.9rem;
+  bottom: 0.9rem;
+  width: 2rem;
+  content: "";
+  background: linear-gradient(90deg, #c49a63, #efd5a3 45%, #b9854c);
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px rgba(96, 59, 24, 0.16);
+}
+
+.scroll-stage::before {
+  left: 1rem;
+}
+
+.scroll-stage::after {
+  right: 1rem;
 }
 
 @media (max-width: 768px) {
   .hero-gallery-frame {
     min-height: 0;
     transform: none;
+  }
+
+  .gallery-track {
+    grid-template-columns: 1fr;
   }
 
   .stage-arrow {
