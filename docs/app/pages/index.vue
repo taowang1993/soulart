@@ -36,9 +36,9 @@ const heroValues = [
 ]
 
 const announcements = [
-  'Summer Outdoor Art Camp Registration Open',
-  'Upcoming Workshops',
-  'Meet XinYi AI Assistant',
+  { text: 'Summer Outdoor Art Camp Registration', action: 'Open Here', to: '/art-programs/summer-camps' },
+  { text: 'Upcoming Workshops' },
+  { text: 'Meet XinYi AI Assistant' },
 ]
 
 const programs = [
@@ -263,9 +263,16 @@ const isAssistantOpen = ref(false)
                 <ul class="mt-1 space-y-1">
                   <li
                     v-for="(item, index) in announcements"
-                    :key="item"
+                    :key="item.text"
                   >
-                    <span class="font-semibold">Card {{ index + 1 }}:</span> {{ item }}
+                    <span class="font-semibold">Card {{ index + 1 }}:</span> {{ item.text }}
+                    <NuxtLink
+                      v-if="item.to"
+                      :to="item.to"
+                      class="font-bold text-[#7d5ca5] underline decoration-[#d8c8e5] underline-offset-4 hover:text-[#5a4380] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
+                    >
+                      {{ item.action }}
+                    </NuxtLink>
                   </li>
                 </ul>
               </div>
@@ -483,17 +490,6 @@ const isAssistantOpen = ref(false)
           Every drawing begins with trust.<br>
           Every year becomes a story.
         </p>
-        <NuxtLink
-          to="/contact"
-          class="mt-5 inline-flex items-center gap-3 rounded-xl border border-[#cdb9e7] bg-white/70 px-7 py-3 text-sm font-bold text-[#72558d] shadow-sm transition hover:-translate-y-0.5 hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
-        >
-          <UIcon
-            name="i-lucide-book-open"
-            class="size-4"
-          />
-          Read More Stories
-          <span aria-hidden="true">›</span>
-        </NuxtLink>
       </div>
     </section>
 

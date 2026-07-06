@@ -91,6 +91,8 @@ test('home page owns its marketing chrome without changing docs routes', () => {
   assert.match(source, /class="hero-title[^"]*"[\s\S]*Art[\s\S]*Wellness[\s\S]*Community/)
   assert.match(source, /\.hero-title\s*\{[\s\S]*white-space:\s*nowrap/)
   assert.match(source, /Explore Our Programs/)
+  assert.match(source, /\{ text: 'Summer Outdoor Art Camp Registration', action: 'Open Here', to: '\/art-programs\/summer-camps' \}/)
+  assert.doesNotMatch(source, /Read More Stories/)
   assert.match(source, /<div class="text-center">[\s\S]*Welcome to\s*<[^>]+>\s*Our Studio[\s\S]*A warm, inspiring space designed for creativity, mindfulness, and meaningful connection\./)
   assert.match(source, /Why Families Choose\s*<[^>]+>\s*XinYi/)
   assert.match(source, /Handwritten Memories/)
