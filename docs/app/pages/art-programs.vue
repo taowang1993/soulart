@@ -35,18 +35,21 @@ const childPrograms = [
     subtitle: 'Discover',
     image: '/art-program/age-4-6.png',
     points: ['Color & Shape', 'Playful Lines', 'Storytelling', 'Confidence Building'],
+    galleryTo: { path: '/art-programs/student-gallery', hash: '#children', query: { section: 'children', category: 'Age 4–6', slide: '0' } },
   },
   {
     title: 'Ages 7–9',
     subtitle: 'Explore',
     image: '/art-program/age-7-9.jpg',
     points: ['Drawing Foundations', 'Watercolor & Acrylic', 'Observation Skills', 'Creative Projects'],
+    galleryTo: { path: '/art-programs/student-gallery', hash: '#children', query: { section: 'children', category: 'Age 7–9', slide: '0' } },
   },
   {
     title: 'Ages 10–12',
     subtitle: 'Grow',
     image: '/art-program/age-10-12.png',
     points: ['Composition', 'Personal Style', 'Mixed Media', 'Art Appreciation'],
+    galleryTo: { path: '/art-programs/student-gallery', hash: '#children', query: { section: 'children', category: 'Age 10–12', slide: '0' } },
   },
 ]
 
@@ -304,7 +307,7 @@ const isAssistantOpen = ref(false)
                 </li>
               </ul>
               <NuxtLink
-                to="/art-programs/student-gallery"
+                :to="program.galleryTo"
                 class="mt-6 inline-flex rounded-full bg-[#e7b3b8] px-7 py-2.5 font-bold text-[#5a435f] shadow-md transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
               >
                 View Gallery

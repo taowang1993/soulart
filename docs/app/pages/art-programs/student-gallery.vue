@@ -237,6 +237,7 @@ const footerLinks = [
 ]
 
 const isAssistantOpen = ref(false)
+const route = useRoute()
 const activeChineseIndex = shallowRef(0)
 const activeChineseWork = computed<GalleryWork>(() => chineseWorks[activeChineseIndex.value] ?? chineseWorks[0]!)
 const activeCategoryIndexes = reactive(
@@ -266,6 +267,32 @@ function activeWorks(section: GallerySection) {
   return activeCategory(section).works
 }
 
+function firstQueryValue(value: unknown) {
+  const first = Array.isArray(value) ? value[0] : value
+  return typeof first === 'string' ? first : ''
+}
+
+function normalizeSlideIndex(index: number, total: number) {
+  return total ? ((index % total) + total) % total : 0
+}
+
+function applyGalleryRoute() {
+  const sectionId = firstQueryValue(route.query.section) || route.hash.replace(/^#/, '')
+  const section = gallerySections.find(section => section.id === sectionId)
+  if (!section) return
+
+  const category = firstQueryValue(route.query.category)
+  const categoryIndex = section.categories.findIndex(item => item.label === category)
+  if (categoryIndex >= 0) {
+    activeCategoryIndexes[section.id] = categoryIndex
+  }
+
+  const slideIndex = Number.parseInt(firstQueryValue(route.query.slide), 10)
+  if (Number.isFinite(slideIndex)) {
+    activeGalleryIndexes[section.id] = normalizeSlideIndex(slideIndex, activeWorks(section).length)
+  }
+}
+
 function setActiveCategory(sectionId: string, index: number) {
   activeCategoryIndexes[sectionId] = index
   activeGalleryIndexes[sectionId] = 0
@@ -278,7 +305,7 @@ function setActiveWork(sectionId: string, index: number) {
 function stepWork(sectionId: string, total: number, direction: -1 | 1) {
   if (!total) return
 
-  activeGalleryIndexes[sectionId] = (activeWorkIndex(sectionId) + direction + total) % total
+  activeGalleryIndexes[sectionId] = normalizeSlideIndex(activeWorkIndex(sectionId) + direction, total)
 }
 
 function visibleWorks(section: GallerySection) {
@@ -296,6 +323,9 @@ function setActiveChineseWork(index: number) {
 function stepChineseWork(direction: -1 | 1) {
   activeChineseIndex.value = (activeChineseIndex.value + direction + chineseWorks.length) % chineseWorks.length
 }
+
+applyGalleryRoute()
+watch(() => route.fullPath, applyGalleryRoute)
 </script>
 
 <template>

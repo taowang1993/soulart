@@ -173,6 +173,19 @@ test('student gallery carousel controls are real Vue controls without breaking t
   assert.doesNotMatch(source, /Ready to Begin\?/) // reference jumps from Chinese art to footer
 })
 
+test('student gallery opens the requested section, category, and slide from art program links', () => {
+  const source = readPage()
+
+  assert.match(source, /const route = useRoute\(\)/)
+  assert.match(source, /function applyGalleryRoute\(\)/)
+  assert.match(source, /route\.query\.section/)
+  assert.match(source, /route\.query\.category/)
+  assert.match(source, /route\.query\.slide/)
+  assert.match(source, /activeCategoryIndexes\[section\.id\] = categoryIndex/)
+  assert.match(source, /activeGalleryIndexes\[section\.id\] = normalizeSlideIndex\(slideIndex, activeWorks\(section\)\.length\)/)
+  assert.match(source, /watch\(\(\) => route\.fullPath, applyGalleryRoute\)/)
+})
+
 test('Chinese Painting & Calligraphy section is a real carousel with copied Chinese gallery assets', () => {
   const source = readPage()
   const chineseAssets = expectedGalleryAssets.filter(asset => asset.startsWith('chinese-'))
