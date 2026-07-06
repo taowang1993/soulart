@@ -456,7 +456,10 @@ const isAssistantOpen = ref(false)
       </div>
     </section>
 
-    <section class="bg-[#fff8f1] px-4 py-16 sm:px-6 lg:px-8">
+    <section
+      id="events"
+      class="bg-[#fff8f1] px-4 py-16 sm:px-6 lg:px-8"
+    >
       <div class="mx-auto max-w-6xl">
         <div class="text-center">
           <h2 class="font-serif text-4xl font-semibold text-[#5a4380] sm:text-5xl">

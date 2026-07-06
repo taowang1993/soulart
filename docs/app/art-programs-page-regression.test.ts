@@ -92,7 +92,7 @@ test('art programs page owns its marketing chrome and links from home', () => {
   assert.match(source, /Adult Art Journey/)
   assert.match(source, /The Joys of Making/)
   assert.doesNotMatch(source, /Special Workshops & Camps/)
-  assert.match(source, /Creative Camps & Events/)
+  assert.match(source, /id="events"[\s\S]*Creative Camps & Events/)
   assert.match(source, /title: 'Holiday Workshops'[\s\S]*status: 'Coming Soon'/)
   assert.match(source, /title: 'Community Events'[\s\S]*status: 'Coming Soon'/)
   assert.match(source, /v-for="program in campPrograms"[\s\S]*class="flex flex-col/)

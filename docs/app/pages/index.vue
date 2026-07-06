@@ -5,9 +5,9 @@ definePageMeta({
 })
 
 useSeoMeta({
-  title: 'XinYi Class | Art, Wellness, Community',
-  description: 'XinYi Class offers art programs, wellness classes, and a warm creative studio for children, teens, adults, and families.',
-  ogTitle: 'XinYi Class | Art, Wellness, Community',
+  title: 'XinYi Class | Art, Yoga Wellness, Community',
+  description: 'XinYi Class offers art programs, yoga wellness classes, and a warm creative studio for children, teens, adults, and families.',
+  ogTitle: 'XinYi Class | Art, Yoga Wellness, Community',
   ogDescription: 'A place to create, connect, and thrive.',
 })
 
@@ -22,7 +22,7 @@ const navItems = [
       { label: 'Summer Camps', to: '/art-programs/summer-camps' },
     ],
   },
-  { label: 'Wellness', to: '/wellness', icon: 'i-lucide-leaf' },
+  { label: 'Yoga Wellness', to: '/wellness', icon: 'i-lucide-leaf' },
   { label: 'Schedules', to: '/schedules', icon: 'i-lucide-calendar-days' },
   { label: 'Resources', to: '/resources', icon: 'i-lucide-book-open' },
   { label: 'About', to: '/about', icon: 'i-lucide-heart' },
@@ -36,9 +36,9 @@ const heroValues = [
 ]
 
 const announcements = [
-  { text: 'Summer Outdoor Art Camp Registration', action: 'Open Here', to: '/art-programs/summer-camps' },
-  { text: 'Upcoming Workshops' },
-  { text: 'Meet XinYi AI Assistant' },
+  { text: 'Summer Outdoor Yoga Retreat Registration', action: 'Open Here', to: '/wellness#retreat', image: '/wellness/outdoor-yoga.jpg', assistant: false },
+  { text: 'Upcoming Workshops', action: 'Open Here', to: '/art-programs#events', image: '/art-program/creative-camp-workshops.jpg', assistant: false },
+  { text: 'Meet XinYi AI Assistant', action: 'Open Here', to: '', image: '/home/logo.png', assistant: true },
 ]
 
 const programs = [
@@ -229,7 +229,7 @@ const isAssistantOpen = ref(false)
 
         <div class="pb-2 text-center lg:pb-6">
           <h1 class="hero-title font-serif font-semibold tracking-tight text-[#4d4166]">
-            Art <span class="mx-2 text-[#735d91]">•</span> Wellness <span class="mx-2 text-[#735d91]">•</span> Community
+            Art <span class="mx-2 text-[#735d91]">•</span> Yoga Wellness <span class="mx-2 text-[#735d91]">•</span> Community
           </h1>
           <p class="mt-5 font-serif text-2xl italic text-[#8b6aa3] sm:text-3xl">
             A Place to Create, Connect and Thrive
@@ -250,32 +250,58 @@ const isAssistantOpen = ref(false)
           </div>
 
           <div class="mt-10 rounded-3xl bg-white/75 p-4 text-left shadow-[0_18px_50px_rgba(128,91,145,0.16)] ring-1 ring-white/80 backdrop-blur sm:p-5">
-            <div class="flex flex-col gap-4 sm:flex-row sm:items-center">
+            <div class="flex items-center gap-3">
               <img
                 src="/home/logo.png"
                 alt="XinYi Class Logo"
-                class="h-20 w-20 rounded-2xl bg-[#fff8f8] object-contain p-2 ring-1 ring-[#eaddec]"
+                class="h-14 w-14 rounded-2xl bg-[#fff8f8] object-contain p-2 ring-1 ring-[#eaddec]"
               >
-              <div class="min-w-0 text-sm leading-6 text-[#40335f]">
-                <p class="font-semibold">
-                  What&apos;s New at XinYi Class
+              <div>
+                <p class="text-xs font-bold uppercase tracking-[0.18em] text-[#9b79b4]">
+                  What&apos;s New
                 </p>
-                <ul class="mt-1 space-y-1">
-                  <li
-                    v-for="(item, index) in announcements"
-                    :key="item.text"
-                  >
-                    <span class="font-semibold">Card {{ index + 1 }}:</span> {{ item.text }}
-                    <NuxtLink
-                      v-if="item.to"
-                      :to="item.to"
-                      class="font-bold text-[#7d5ca5] underline decoration-[#d8c8e5] underline-offset-4 hover:text-[#5a4380] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
-                    >
-                      {{ item.action }}
-                    </NuxtLink>
-                  </li>
-                </ul>
+                <p class="font-serif text-2xl font-semibold text-[#5a4380]">
+                  Shortcut Cards
+                </p>
               </div>
+            </div>
+            <div class="mt-4 grid auto-cols-[minmax(13rem,1fr)] grid-flow-col gap-3 overflow-x-auto pb-1 snap-x snap-mandatory sm:grid-flow-row sm:grid-cols-3 sm:overflow-visible sm:pb-0">
+              <article
+                v-for="(item, index) in announcements"
+                :key="item.text"
+                class="snap-start rounded-2xl bg-white/85 p-3 shadow-sm ring-1 ring-[#eaddec]"
+              >
+                <img
+                  :src="item.image"
+                  :alt="`${item.text} shortcut`"
+                  class="h-20 w-full rounded-xl object-cover"
+                  loading="lazy"
+                  decoding="async"
+                >
+                <p class="mt-3 text-xs font-bold uppercase tracking-[0.18em] text-[#9b79b4]">
+                  Card {{ index + 1 }}
+                </p>
+                <h3 class="mt-1 min-h-10 text-sm font-bold leading-5 text-[#40335f]">
+                  {{ item.text }}
+                </h3>
+                <NuxtLink
+                  v-if="item.to"
+                  :to="item.to"
+                  :aria-label="`${item.action}: ${item.text}`"
+                  class="mt-3 inline-flex rounded-full bg-[#f1e4ff] px-4 py-2 text-sm font-bold text-[#6d4d95] transition hover:bg-[#e7d5f7] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
+                >
+                  {{ item.action }}
+                </NuxtLink>
+                <button
+                  v-else
+                  type="button"
+                  :aria-label="`${item.action}: ${item.text}`"
+                  class="mt-3 inline-flex rounded-full bg-[#f1e4ff] px-4 py-2 text-sm font-bold text-[#6d4d95] transition hover:bg-[#e7d5f7] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
+                  @click="item.assistant && (isAssistantOpen = true)"
+                >
+                  {{ item.action }}
+                </button>
+              </article>
             </div>
           </div>
         </div>
@@ -611,7 +637,7 @@ const isAssistantOpen = ref(false)
 }
 
 .hero-title {
-  font-size: clamp(1.45rem, 4.1vw, 3.2rem);
+  font-size: clamp(1.35rem, 3.7vw, 2.9rem);
   line-height: 1.05;
   white-space: nowrap;
 }
