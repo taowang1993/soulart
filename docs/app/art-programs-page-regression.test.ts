@@ -10,7 +10,7 @@ const homePagePath = resolve(repoRoot, 'docs/app/pages/index.vue')
 const artAssetPath = resolve(repoRoot, 'docs/public/art-program')
 
 const expectedAssets = [
-  'cover-girl-painting.png',
+  'hero-reference.png',
   'the-painting.jpg',
   'age-4-6.png',
   'age-7-9.jpg',
@@ -66,7 +66,12 @@ test('art programs page owns its marketing chrome and links from home', () => {
   const home = readHomePage()
 
   assert.match(source, /definePageMeta\(\{[\s\S]*header:\s*false[\s\S]*footer:\s*false[\s\S]*\}\)/)
-  assert.match(source, /Art Programs[\s\S]*Creativity grows through practice/)
+  assert.match(source, /ART PROGRAMS[\s\S]*creativity grows through practice/)
+  assert.match(source, /src="\/art-program\/hero-reference\.png"[\s\S]*alt="ART PROGRAMS — creativity grows through practice"[\s\S]*class="w-full"/)
+  assert.match(source, /item\.label === 'Home' \? 'bg-\[#f1e4ff\] text-\[#6d4d95\]' : ''/)
+  assert.match(source, />\s*EN\s*<\/NuxtLink>[\s\S]*>\s*中文\s*<\/NuxtLink>/)
+  assert.doesNotMatch(source, /Explore Classes/)
+  assert.doesNotMatch(source, /v-for="item in heroHighlights"/)
   assert.match(source, /Children's Art Journey/)
   assert.match(source, /Teen Art Pathway/)
   assert.match(source, /Adult Art Journey/)

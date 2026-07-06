@@ -22,17 +22,11 @@ const navItems = [
       { label: 'Summer Camps', to: '/art-programs/summer-camps' },
     ],
   },
-  { label: 'Wellness', to: '/wellness', icon: 'i-lucide-leaf' },
+  { label: 'Wellness', to: '/wellness', icon: 'i-lucide-leaf', chevron: true },
   { label: 'Schedules', to: '/schedules', icon: 'i-lucide-calendar-days' },
-  { label: 'Resources', to: '/resources', icon: 'i-lucide-book-open' },
+  { label: 'Resources', to: '/resources', icon: 'i-lucide-book-open', chevron: true },
   { label: 'About', to: '/about', icon: 'i-lucide-heart' },
   { label: 'Contact', to: '/contact', icon: 'i-lucide-mail' },
-]
-
-const heroHighlights = [
-  { label: 'Drawing', icon: 'i-lucide-pencil' },
-  { label: 'Painting', icon: 'i-lucide-paintbrush' },
-  { label: 'Mixed Media', icon: 'i-lucide-sparkles' },
 ]
 
 const childPrograms = [
@@ -170,19 +164,10 @@ const isAssistantOpen = ref(false)
     v-else
     class="xinyi-art-program min-h-screen overflow-hidden bg-[#fbf7ff] text-[#40335f]"
   >
-    <section class="relative isolate overflow-hidden bg-[linear-gradient(120deg,#fff9fb_0%,#f4efff_52%,#fff3ed_100%)] px-4 pb-16 pt-5 sm:px-6 lg:px-8">
-      <div
-        class="absolute inset-0 -z-10 opacity-75"
-        aria-hidden="true"
-      >
-        <div class="watercolor watercolor-rose left-[-7rem] top-[-8rem]" />
-        <div class="watercolor watercolor-gold right-[-8rem] top-[8rem]" />
-        <div class="watercolor watercolor-lavender bottom-[-9rem] left-1/3" />
-      </div>
-
+    <section class="relative isolate overflow-hidden bg-[linear-gradient(120deg,#fbf7ff_0%,#fff9f4_52%,#fbf1ff_100%)] px-4 pb-0 pt-6 sm:px-6">
       <nav
         aria-label="Main Navigation"
-        class="mx-auto flex max-w-6xl items-center justify-between bg-white/75 px-3 py-3 shadow-sm ring-1 ring-white/70 backdrop-blur md:rounded-[2rem] md:px-5"
+        class="mx-auto flex max-w-[1360px] items-center justify-between bg-white/90 px-5 py-3 shadow-sm ring-1 ring-white/80 backdrop-blur md:px-8"
       >
         <NuxtLink
           to="/"
@@ -192,13 +177,13 @@ const isAssistantOpen = ref(false)
           <img
             src="/home/logo.png"
             alt="XinYi Class"
-            class="h-14 w-auto object-contain sm:h-16"
+            class="h-24 w-auto object-contain"
             loading="eager"
             decoding="async"
           >
         </NuxtLink>
 
-        <div class="hidden items-center gap-1 rounded-full bg-white/50 p-1 md:flex">
+        <div class="hidden items-center gap-4 md:flex lg:gap-6">
           <div
             v-for="item in navItems"
             :key="item.label"
@@ -206,17 +191,17 @@ const isAssistantOpen = ref(false)
           >
             <NuxtLink
               :to="item.to"
-              class="flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-semibold text-[#41335f] transition hover:bg-[#f3e8ff] hover:text-[#7d5ca5] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#d98792]"
-              :class="item.label === 'Art Programs' ? 'bg-[#f1e4ff] text-[#6d4d95]' : ''"
+              class="flex items-center gap-2 whitespace-nowrap rounded-xl px-4 py-2 text-base font-semibold text-[#34275c] transition hover:bg-[#f3e8ff] hover:text-[#7d5ca5] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#d98792]"
+              :class="item.label === 'Home' ? 'bg-[#f1e4ff] text-[#6d4d95]' : ''"
             >
               <UIcon
-                v-if="item.label === 'Art Programs'"
+                v-if="item.label === 'Home'"
                 :name="item.icon"
-                class="size-4"
+                class="size-5"
               />
               {{ item.label }}
               <UIcon
-                v-if="item.children"
+                v-if="item.children || item.chevron"
                 name="i-lucide-chevron-down"
                 class="size-4 transition group-hover:rotate-180"
               />
@@ -237,90 +222,45 @@ const isAssistantOpen = ref(false)
           </div>
         </div>
 
-        <NuxtLink
-          to="/contact?interest=Trial%20Class#message"
-          class="rounded-full bg-[#df8f9a] px-4 py-2 text-sm font-bold text-white shadow-lg shadow-[#df8f9a]/20 transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
-        >
-          Book a Trial
-        </NuxtLink>
+        <div class="flex items-center gap-2 whitespace-nowrap rounded-xl bg-[#f1e4ff] px-4 py-2 text-base font-semibold text-[#34275c]">
+          <NuxtLink
+            to="/docs/manual/en/getting-started/installation"
+            class="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
+          >
+            EN
+          </NuxtLink>
+          <span class="text-[#6d4d95]">|</span>
+          <NuxtLink
+            to="/docs/manual/zh/getting-started/installation"
+            class="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
+          >
+            中文
+          </NuxtLink>
+        </div>
       </nav>
 
-      <div class="mx-auto grid max-w-6xl items-center gap-10 pt-14 lg:grid-cols-[0.95fr_1.05fr] lg:pt-20">
-        <div class="relative order-2 lg:order-1">
-          <div class="absolute -left-6 -top-6 hidden h-40 w-40 rounded-full bg-[#f2cbd5]/60 blur-3xl lg:block" />
-          <div class="relative rounded-[2rem] bg-white/70 p-4 shadow-[0_24px_70px_rgba(93,69,122,0.18)] ring-1 ring-white/80 backdrop-blur">
-            <img
-              src="/art-program/cover-girl-painting.png"
-              alt="Student painting at XinYi Class"
-              class="h-[34rem] w-full rounded-[1.5rem] object-cover object-[center_28%]"
-              loading="eager"
-              decoding="async"
-            >
-            <img
-              src="/art-program/the-painting.jpg"
-              alt="Student artwork"
-              class="absolute -right-5 bottom-8 hidden h-40 w-32 rounded-2xl object-cover shadow-xl ring-4 ring-white sm:block"
-              loading="lazy"
-              decoding="async"
-            >
-          </div>
-        </div>
-
-        <div class="order-1 text-center lg:order-2 lg:text-left">
-          <p class="text-lg font-semibold uppercase tracking-[0.32em] text-[#c78673]">
-            XinYi Class
-          </p>
-          <h1 class="art-hero-title mt-4 font-serif font-semibold text-[#4d6a43]">
-            Art Programs
-          </h1>
-          <p class="mt-4 font-serif text-3xl italic text-[#9e6f46] sm:text-4xl">
-            Creativity grows through practice.
-          </p>
-          <p class="mx-auto mt-6 max-w-xl text-lg leading-8 text-[#5d526b] lg:mx-0">
-            At XinYi Class, art education is a journey of imagination, technique, confidence, and emotional growth for every age and stage.
-          </p>
-
-          <div class="mt-8 flex flex-col justify-center gap-4 sm:flex-row lg:justify-start">
-            <NuxtLink
-              to="#children"
-              class="rounded-full bg-[#d9848f] px-9 py-3 text-lg font-bold text-white shadow-lg shadow-[#d9848f]/25 transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
-            >
-              Explore Classes
-            </NuxtLink>
-            <NuxtLink
-              to="/contact?interest=Trial%20Class#message"
-              class="rounded-full bg-white/80 px-9 py-3 text-lg font-bold text-[#5c486f] shadow-sm ring-1 ring-[#e9ddec] transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
-            >
-              Book a Trial
-            </NuxtLink>
-          </div>
-
-          <div class="mt-10 grid gap-3 sm:grid-cols-3">
-            <div
-              v-for="item in heroHighlights"
-              :key="item.label"
-              class="rounded-2xl bg-white/72 px-4 py-4 text-center shadow-sm ring-1 ring-white/80"
-            >
-              <UIcon
-                :name="item.icon"
-                class="mx-auto size-7 text-[#c77c86]"
-              />
-              <p class="mt-2 text-sm font-bold text-[#5b486c]">
-                {{ item.label }}
-              </p>
-            </div>
-          </div>
+      <div class="relative -mx-4 mt-5 overflow-hidden shadow-[0_24px_70px_rgba(39,31,57,0.2)] sm:-mx-6">
+        <img
+          src="/art-program/hero-reference.png"
+          alt="ART PROGRAMS — creativity grows through practice"
+          class="w-full"
+          loading="eager"
+          decoding="async"
+        >
+        <div class="sr-only">
+          <h1>ART PROGRAMS</h1>
+          <p>creativity grows through practice</p>
         </div>
       </div>
     </section>
 
     <section
       id="children"
-      class="px-4 py-16 sm:px-6 lg:px-8"
+      class="px-4 pb-16 pt-28 sm:px-6 lg:px-8"
     >
       <div class="mx-auto max-w-6xl">
         <div class="text-center">
-          <h2 class="font-serif text-4xl font-semibold text-[#5a4380] sm:text-5xl">
+          <h2 class="font-serif text-4xl font-semibold italic text-[#6e5b84] [text-shadow:0.08rem_0.1rem_0_rgba(95,142,139,0.72)] sm:text-5xl">
             Children's Art Journey
           </h2>
           <p class="mx-auto mt-4 max-w-2xl text-lg text-[#6a5e78]">
@@ -678,11 +618,6 @@ const isAssistantOpen = ref(false)
 
 .xinyi-art-program :where(.font-serif) {
   font-family: Georgia, "Times New Roman", serif;
-}
-
-.art-hero-title {
-  font-size: clamp(3.8rem, 10vw, 8.5rem);
-  line-height: 0.9;
 }
 
 .watercolor {
