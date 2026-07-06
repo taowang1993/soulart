@@ -32,6 +32,12 @@ const expectedResourceAssets = [
   'book-deep-work.jpg',
   'book-untethered-soul.jpg',
   'book-yoga-sutras.jpg',
+  'playlist-art-healing.jpg',
+  'playlist-gentle-yoga.jpg',
+  'playlist-meditation.jpg',
+  'playlist-art-tutorial.jpg',
+  'playlist-conversations.jpg',
+  'playlist-shorts.jpg',
 ] as const
 
 const staleGeneratedAssets = [
@@ -71,6 +77,13 @@ test('resources page uses the requested YouTube intro video', () => {
   assert.match(source, /Watch Intro Video/)
 })
 
+test('resources hero gives the video more room and reduces the heading size', () => {
+  const source = readPage()
+
+  assert.match(source, /lg:grid-cols-\[0\.75fr_1\.25fr\]/)
+  assert.match(source, /<h1 class="mt-6 font-serif text-4xl[^"]*sm:text-5xl[^"]*lg:text-6xl"/)
+})
+
 test('resources page follows the reference content sections', () => {
   const source = readPage()
   const requiredCopy = [
@@ -107,6 +120,25 @@ test('resources page follows the reference content sections', () => {
 
   for (const copy of requiredCopy) {
     assert.match(source, new RegExp(copy.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')), `${copy} should appear on the page`)
+  }
+})
+
+test('resources page uses Pexels photos in the YouTube playlist cards', () => {
+  const source = readPage()
+  const playlistImages = [
+    'playlist-art-healing.jpg',
+    'playlist-gentle-yoga.jpg',
+    'playlist-meditation.jpg',
+    'playlist-art-tutorial.jpg',
+    'playlist-conversations.jpg',
+    'playlist-shorts.jpg',
+  ]
+
+  assert.match(source, /v-for="playlist in playlists"[\s\S]*<img[\s\S]*:src="playlist\.image"/)
+  assert.match(source, /\{\{ playlist\.source \}\}/)
+
+  for (const image of playlistImages) {
+    assert.match(source, new RegExp(`/resources/${image}`))
   }
 })
 

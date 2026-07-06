@@ -74,31 +74,49 @@ const playlists = [
   {
     title: 'Weekly Art Healing',
     icon: 'i-lucide-palette',
+    image: '/resources/playlist-art-healing.jpg',
+    alt: 'Pexels photo of an art class painting together',
+    source: 'Pexels',
     copy: 'Draw, craft and heal with weekly art therapy practices.',
   },
   {
     title: 'Gentle Yoga',
     icon: 'i-lucide-leaf',
+    image: '/resources/playlist-gentle-yoga.jpg',
+    alt: 'Pexels photo of a gentle yoga practice',
+    source: 'Pexels',
     copy: 'Short and accessible yoga practices for body, mind and energy.',
   },
   {
     title: 'Meditation & Yoga Nidra',
     icon: 'i-lucide-moon',
+    image: '/resources/playlist-meditation.jpg',
+    alt: 'Pexels photo of seated meditation practice',
+    source: 'Pexels',
     copy: 'Guided meditations and deep relaxation for rest, calm and inner peace.',
   },
   {
     title: 'Art Tutorials',
     icon: 'i-lucide-brush',
+    image: '/resources/playlist-art-tutorial.jpg',
+    alt: 'Pexels photo of watercolor supplies and brushes',
+    source: 'Pexels',
     copy: 'Step-by-step art lessons in watercolor, oil painting, Chinese painting and more.',
   },
   {
     title: 'Creative Conversations',
     icon: 'i-lucide-messages-square',
+    image: '/resources/playlist-conversations.jpg',
+    alt: 'Pexels photo of a small group in conversation',
+    source: 'Pexels',
     copy: 'Inspiring talks on art, education, parenting, AI and meaningful living.',
   },
   {
     title: 'YouTube Shorts',
     icon: 'i-lucide-play',
+    image: '/resources/playlist-shorts.jpg',
+    alt: 'Pexels photo of a phone recording a short video',
+    source: 'Pexels',
     copy: 'Quick little mini inspiration and creative moments in one minute.',
   },
 ]
@@ -287,12 +305,12 @@ const isAssistantOpen = ref(false)
         </div>
       </nav>
 
-      <div class="mx-auto grid max-w-6xl items-center gap-10 pt-16 lg:grid-cols-[0.9fr_1.1fr]">
+      <div class="mx-auto grid max-w-7xl items-center gap-10 pt-16 lg:grid-cols-[0.75fr_1.25fr]">
         <div>
           <p class="text-xs font-black uppercase tracking-[0.34em] text-[#bd7a55]">
             Welcome to XinYi Art Studio
           </p>
-          <h1 class="mt-6 font-serif text-5xl font-semibold leading-[1.03] text-[#41513a] sm:text-6xl lg:text-7xl">
+          <h1 class="mt-6 font-serif text-4xl font-semibold leading-[1.08] text-[#41513a] sm:text-5xl lg:text-6xl">
             A Place for Creativity, Connection & Growth
           </h1>
           <p class="mt-6 max-w-lg text-lg leading-8 text-[#68735e]">
@@ -517,29 +535,43 @@ const isAssistantOpen = ref(false)
           <article
             v-for="playlist in playlists"
             :key="playlist.title"
-            class="rounded-[1.75rem] bg-white/82 p-7 shadow-[0_16px_45px_rgba(80,73,54,0.1)] ring-1 ring-[#eadfc9]"
+            class="overflow-hidden rounded-[1.75rem] bg-white/82 shadow-[0_16px_45px_rgba(80,73,54,0.1)] ring-1 ring-[#eadfc9]"
           >
-            <div class="flex size-14 items-center justify-center rounded-full bg-[#f5ead8] text-[#bd7a55]">
-              <UIcon
-                :name="playlist.icon"
-                class="size-7"
-              />
-            </div>
-            <h3 class="mt-6 font-serif text-3xl font-semibold text-[#41513a]">
-              {{ playlist.title }}
-            </h3>
-            <p class="mt-3 min-h-16 text-sm leading-7 text-[#6c735f]">
-              {{ playlist.copy }}
-            </p>
-            <a
-              :href="youtubeUrl"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="mt-5 inline-flex items-center gap-2 text-sm font-black text-[#bd7a55] hover:text-[#8a603f] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#bd7a55]"
+            <img
+              :src="playlist.image"
+              :alt="playlist.alt"
+              class="aspect-[4/3] w-full object-cover"
+              loading="lazy"
+              decoding="async"
             >
-              Explore Playlist
-              <span aria-hidden="true">→</span>
-            </a>
+            <div class="p-7 pt-5">
+              <div class="flex items-center justify-between gap-4">
+                <div class="flex size-14 items-center justify-center rounded-full bg-[#f5ead8] text-[#bd7a55]">
+                  <UIcon
+                    :name="playlist.icon"
+                    class="size-7"
+                  />
+                </div>
+                <p class="text-[0.7rem] font-black uppercase tracking-[0.18em] text-[#9aa78c]">
+                  Photo: {{ playlist.source }}
+                </p>
+              </div>
+              <h3 class="mt-6 font-serif text-3xl font-semibold text-[#41513a]">
+                {{ playlist.title }}
+              </h3>
+              <p class="mt-3 min-h-16 text-sm leading-7 text-[#6c735f]">
+                {{ playlist.copy }}
+              </p>
+              <a
+                :href="youtubeUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-5 inline-flex items-center gap-2 text-sm font-black text-[#bd7a55] hover:text-[#8a603f] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#bd7a55]"
+              >
+                Explore Playlist
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
           </article>
         </div>
 
