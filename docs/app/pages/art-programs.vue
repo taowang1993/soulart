@@ -128,15 +128,13 @@ const campPrograms = [
     title: 'Holiday Workshops',
     image: '/art-program/creative-camp-workshops.jpg',
     note: 'Seasonal projects and handmade gifts.',
-    action: 'Plan a Visit',
-    to: '/contact',
+    status: 'Coming Soon',
   },
   {
     title: 'Community Events',
     image: '/art-program/creative-camp-events.jpg',
     note: 'Shared making moments for families and friends.',
-    action: 'Join Us',
-    to: '/contact',
+    status: 'Coming Soon',
   },
 ]
 
@@ -492,11 +490,18 @@ const isAssistantOpen = ref(false)
               {{ program.note }}
             </p>
             <NuxtLink
+              v-if="program.to"
               :to="program.to"
               class="mt-4 inline-flex rounded-full bg-[#e6b2b6] px-7 py-2.5 font-bold text-[#5a435f] shadow-md transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
             >
               {{ program.action }}
             </NuxtLink>
+            <span
+              v-else
+              class="mt-4 inline-flex rounded-full bg-[#f3e6de] px-7 py-2.5 font-bold text-[#8a6758] shadow-sm ring-1 ring-[#dec8bb]"
+            >
+              {{ program.status }}
+            </span>
           </article>
         </div>
       </div>
@@ -531,6 +536,12 @@ const isAssistantOpen = ref(false)
             decoding="async"
           >
         </div>
+        <NuxtLink
+          to="/art-programs/student-gallery"
+          class="mt-8 inline-flex rounded-full bg-[#d9848f] px-9 py-3 text-lg font-bold text-white shadow-lg shadow-[#d9848f]/25 transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
+        >
+          Enter Gallery
+        </NuxtLink>
       </div>
     </section>
 
