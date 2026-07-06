@@ -102,7 +102,9 @@ test('resources page follows the reference content sections', () => {
     'Explore Our YouTube Playlists',
     'Weekly Art Healing',
     'Gentle Yoga',
-    'Meditation & Yoga Nidra',
+    'Meditation',
+    'Creative Conversation',
+    'Shorts',
     'Explore 300+ Free Videos on Our YouTube Channel',
     'Reading List',
     'The Power of Now',
@@ -131,6 +133,24 @@ test('resources page removes placeholder article and social CTAs', () => {
   assert.doesNotMatch(source, /Xiaohongshu/)
   assert.doesNotMatch(source, /WeChat Official Account/)
   assert.doesNotMatch(source, /href="#contact"/)
+})
+
+test('resources page links each YouTube playlist card to the requested playlist', () => {
+  const source = readPage()
+  const playlistUrls = [
+    'https://www.youtube.com/playlist?list=PLVajkfC82YOjB7hzvQPNj0GBCzp-KiFs0',
+    'https://www.youtube.com/playlist?list=PLVajkfC82YOi7bKMTrBbtvuSN-Fk9XrYu',
+    'https://www.youtube.com/playlist?list=PLVajkfC82YOglFs3HSq7sLA34cFRF73I1',
+    'https://www.youtube.com/playlist?list=PLVajkfC82YOjF0lCmBrMVABo6eMa5tyXC',
+    'https://www.youtube.com/playlist?list=PLVajkfC82YOiSS1OIqrs1OrRUMCGSWzs_',
+    'https://www.youtube.com/playlist?list=PLVajkfC82YOj_5uu9AyDuZDtFWtyPdAS1',
+  ]
+
+  assert.match(source, /:href="playlist\.href"/)
+
+  for (const url of playlistUrls) {
+    assert.match(source, new RegExp(url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')))
+  }
 })
 
 test('resources page uses Pexels photos in the YouTube playlist cards', () => {

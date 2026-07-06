@@ -76,6 +76,7 @@ const parentVoices = [
 const playlists = [
   {
     title: 'Weekly Art Healing',
+    href: 'https://www.youtube.com/playlist?list=PLVajkfC82YOjB7hzvQPNj0GBCzp-KiFs0',
     icon: 'i-lucide-palette',
     image: '/resources/playlist-art-healing.jpg',
     alt: 'Pexels photo of an art class painting together',
@@ -84,6 +85,7 @@ const playlists = [
   },
   {
     title: 'Gentle Yoga',
+    href: 'https://www.youtube.com/playlist?list=PLVajkfC82YOi7bKMTrBbtvuSN-Fk9XrYu',
     icon: 'i-lucide-leaf',
     image: '/resources/playlist-gentle-yoga.jpg',
     alt: 'Pexels photo of a gentle yoga practice',
@@ -91,7 +93,8 @@ const playlists = [
     copy: 'Short and accessible yoga practices for body, mind and energy.',
   },
   {
-    title: 'Meditation & Yoga Nidra',
+    title: 'Meditation',
+    href: 'https://www.youtube.com/playlist?list=PLVajkfC82YOglFs3HSq7sLA34cFRF73I1',
     icon: 'i-lucide-moon',
     image: '/resources/playlist-meditation.jpg',
     alt: 'Pexels photo of seated meditation practice',
@@ -100,6 +103,7 @@ const playlists = [
   },
   {
     title: 'Art Tutorials',
+    href: 'https://www.youtube.com/playlist?list=PLVajkfC82YOjF0lCmBrMVABo6eMa5tyXC',
     icon: 'i-lucide-brush',
     image: '/resources/playlist-art-tutorial.jpg',
     alt: 'Pexels photo of watercolor supplies and brushes',
@@ -107,7 +111,8 @@ const playlists = [
     copy: 'Step-by-step art lessons in watercolor, oil painting, Chinese painting and more.',
   },
   {
-    title: 'Creative Conversations',
+    title: 'Creative Conversation',
+    href: 'https://www.youtube.com/playlist?list=PLVajkfC82YOiSS1OIqrs1OrRUMCGSWzs_',
     icon: 'i-lucide-messages-square',
     image: '/resources/playlist-conversations.jpg',
     alt: 'Pexels photo of a small group in conversation',
@@ -115,7 +120,8 @@ const playlists = [
     copy: 'Inspiring talks on art, education, parenting, AI and meaningful living.',
   },
   {
-    title: 'YouTube Shorts',
+    title: 'Shorts',
+    href: 'https://www.youtube.com/playlist?list=PLVajkfC82YOj_5uu9AyDuZDtFWtyPdAS1',
     icon: 'i-lucide-play',
     image: '/resources/playlist-shorts.jpg',
     alt: 'Pexels photo of a phone recording a short video',
@@ -564,7 +570,7 @@ const isAssistantOpen = ref(false)
                 {{ playlist.copy }}
               </p>
               <a
-                :href="youtubeUrl"
+                :href="playlist.href"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="mt-5 inline-flex items-center gap-2 text-sm font-black text-[#bd7a55] hover:text-[#8a603f] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#bd7a55]"
