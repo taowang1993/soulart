@@ -14,6 +14,12 @@ const pagePaths = [
   resolve(repoRoot, 'docs/app/pages/about.vue'),
   resolve(repoRoot, 'docs/app/pages/schedules.vue'),
 ]
+const socialFooterPagePaths = [
+  resolve(repoRoot, 'docs/app/pages/index.vue'),
+  resolve(repoRoot, 'docs/app/pages/wellness.vue'),
+  resolve(repoRoot, 'docs/app/pages/about.vue'),
+  resolve(repoRoot, 'docs/app/pages/schedules.vue'),
+]
 const contactAssetPath = resolve(repoRoot, 'docs/public/contact')
 
 const expectedAssets = [
@@ -133,6 +139,7 @@ test('contact page keeps the reference form fields', () => {
   assert.match(source, /v-model="contactForm\.preferredTime"[\s\S]*name="preferredTime"/)
   assert.match(source, /<textarea[\s\S]*v-model="contactForm\.message"[\s\S]*name="message"/)
   assert.match(source, /v-model="contactForm\.updates"[\s\S]*type="checkbox"/)
+  assert.match(source, /v-model="contactForm\.website"[\s\S]*name="website"[\s\S]*autocomplete="off"/)
 })
 
 test('contact form posts to a Resend-backed server route', () => {
@@ -149,10 +156,21 @@ test('contact form posts to a Resend-backed server route', () => {
   assert.match(apiSource, /to:\s*\[CONTACT_TO_EMAIL\]/)
   assert.match(apiSource, /xinyiartschool@gmail\.com/)
   assert.match(apiSource, /replyTo:\s*body\.email/)
+  assert.match(apiSource, /'Summer Camp'/)
   assert.match(apiSource, /Preferred Time/)
   assert.match(apiSource, /to:\s*\[body\.email\]/)
   assert.match(apiSource, /We received your trial class request/)
   assert.doesNotMatch(apiSource, /re_\w+/)
+})
+
+test('contact form has basic spam controls', () => {
+  const pageSource = readContactPage()
+  const apiSource = readFileSync(contactApiPath, 'utf8')
+
+  assert.match(pageSource, /contactForm\.website/)
+  assert.match(apiSource, /readString\(source, 'website'/)
+  assert.match(apiSource, /getRequestIP\(event/)
+  assert.match(apiSource, /statusCode:\s*429/)
 })
 
 test('book trial links preselect trial class on contact form', () => {
@@ -183,5 +201,16 @@ test('marketing pages link to the contact route', () => {
     const source = readFileSync(pagePath, 'utf8')
 
     assert.match(source, /\{ label: 'Contact', to: '\/contact'/, `${pagePath} must link Contact nav to /contact`)
+  }
+})
+
+test('marketing footers only keep the real YouTube social link', () => {
+  for (const pagePath of socialFooterPagePaths) {
+    const source = readFileSync(pagePath, 'utf8')
+
+    assert.doesNotMatch(source, /Instagram|i-lucide-instagram/, `${pagePath} should not keep Instagram placeholders`)
+    assert.doesNotMatch(source, /Facebook|i-lucide-facebook/, `${pagePath} should not keep Facebook placeholders`)
+    assert.match(source, /href:\s*'https:\/\/www\.youtube\.com\/@XinyiArt-Yoga-Healing'/, `${pagePath} should link to the real YouTube channel`)
+    assert.match(source, /:href="social\.href"/, `${pagePath} should use the configured social URL`)
   }
 })

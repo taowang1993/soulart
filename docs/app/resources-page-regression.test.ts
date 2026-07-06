@@ -123,6 +123,16 @@ test('resources page follows the reference content sections', () => {
   }
 })
 
+test('resources page removes placeholder article and social CTAs', () => {
+  const source = readPage()
+
+  assert.doesNotMatch(source, /Read Article/)
+  assert.doesNotMatch(source, /View More Reading Recommendations/)
+  assert.doesNotMatch(source, /Xiaohongshu/)
+  assert.doesNotMatch(source, /WeChat Official Account/)
+  assert.doesNotMatch(source, /href="#contact"/)
+})
+
 test('resources page uses Pexels photos in the YouTube playlist cards', () => {
   const source = readPage()
   const playlistImages = [

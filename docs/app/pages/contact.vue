@@ -69,6 +69,7 @@ const contactForm = reactive({
   interest: interestFromQuery(route.query.interest),
   preferredTime: '',
   message: '',
+  website: '',
   updates: false,
 })
 const submitState = ref<'idle' | 'sending' | 'sent' | 'error'>('idle')
@@ -92,6 +93,7 @@ async function submitContactForm() {
       interest: interestFromQuery(route.query.interest),
       preferredTime: '',
       message: '',
+      website: '',
       updates: false,
     })
     submitState.value = 'sent'
@@ -375,6 +377,16 @@ function selectTrialClass() {
                 required
               />
             </label>
+
+            <input
+              v-model="contactForm.website"
+              type="text"
+              name="website"
+              tabindex="-1"
+              autocomplete="off"
+              class="hidden"
+              aria-hidden="true"
+            >
 
             <label class="flex items-start gap-3 rounded-2xl bg-[#fbf8ff] p-3 text-sm leading-6 text-[#4a4a85] ring-1 ring-[#eee4f4]">
               <input

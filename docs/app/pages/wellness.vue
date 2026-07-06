@@ -152,9 +152,7 @@ const footerLinks = [
 ]
 
 const socialLinks = [
-  { label: 'Instagram', icon: 'i-lucide-instagram' },
-  { label: 'Facebook', icon: 'i-lucide-facebook' },
-  { label: 'YouTube', icon: 'i-lucide-youtube' },
+  { label: 'YouTube', icon: 'i-lucide-youtube', href: 'https://www.youtube.com/@XinyiArt-Yoga-Healing' },
 ]
 
 const isAssistantOpen = ref(false)
@@ -266,7 +264,7 @@ const isAssistantOpen = ref(false)
               Explore Classes
             </NuxtLink>
             <NuxtLink
-              to="/contact"
+              to="/contact?interest=Trial%20Class#message"
               class="inline-flex items-center justify-center rounded-full border border-[#b9c9b6] bg-white/70 px-8 py-3 font-bold text-[#527858] shadow-sm transition hover:-translate-y-0.5 hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7aa984]"
             >
               Book a Trial
@@ -687,7 +685,9 @@ const isAssistantOpen = ref(false)
             <a
               v-for="social in socialLinks"
               :key="social.label"
-              href="#contact"
+              :href="social.href"
+              target="_blank"
+              rel="noopener noreferrer"
               :aria-label="social.label"
               class="flex size-9 items-center justify-center rounded-full bg-white/70 text-[#7aa984] ring-1 ring-[#d5cdc0] transition hover:-translate-y-0.5 hover:text-[#527858] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7aa984]"
             >

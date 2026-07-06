@@ -238,7 +238,7 @@ const isAssistantOpen = ref(false)
         </div>
 
         <NuxtLink
-          to="/contact"
+          to="/contact?interest=Trial%20Class#message"
           class="rounded-full bg-[#df8f9a] px-4 py-2 text-sm font-bold text-white shadow-lg shadow-[#df8f9a]/20 transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
         >
           Book a Trial
@@ -288,7 +288,7 @@ const isAssistantOpen = ref(false)
               Explore Classes
             </NuxtLink>
             <NuxtLink
-              to="/contact"
+              to="/contact?interest=Trial%20Class#message"
               class="rounded-full bg-white/80 px-9 py-3 text-lg font-bold text-[#5c486f] shadow-sm ring-1 ring-[#e9ddec] transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
             >
               Book a Trial

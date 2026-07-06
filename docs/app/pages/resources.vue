@@ -193,8 +193,6 @@ const articles = [
 const journeyLinks = [
   { label: 'YouTube', detail: 'English Videos and Playlists', icon: 'i-lucide-youtube', href: 'https://www.youtube.com/@XinyiArt-Yoga-Healing' },
   { label: 'Video Channel', detail: 'Chinese Video Updates', icon: 'i-lucide-play-square', href: '#youtube' },
-  { label: 'Xiaohongshu', detail: 'Art and Daily Life', icon: 'i-lucide-flower-2', href: '#articles' },
-  { label: 'WeChat Official Account', detail: 'News and Community Notes', icon: 'i-lucide-message-circle', href: '#contact' },
 ]
 
 const footerLinks = [
@@ -638,16 +636,6 @@ const isAssistantOpen = ref(false)
             </p>
           </article>
         </div>
-
-        <div class="mt-10 text-center">
-          <a
-            href="#articles"
-            class="inline-flex items-center gap-3 rounded-full bg-white/75 px-7 py-3 text-sm font-black text-[#607a4b] shadow-sm ring-1 ring-[#dfd0b4] transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#bd7a55]"
-          >
-            View More Reading Recommendations
-            <span aria-hidden="true">→</span>
-          </a>
-        </div>
       </div>
     </section>
 
@@ -694,13 +682,6 @@ const isAssistantOpen = ref(false)
               <p class="mt-3 text-sm leading-7 text-[#6c735f]">
                 {{ article.copy }}
               </p>
-              <a
-                href="#contact"
-                class="mt-5 inline-flex items-center gap-2 text-sm font-black text-[#bd7a55] hover:text-[#8a603f] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#bd7a55]"
-              >
-                Read Article
-                <span aria-hidden="true">→</span>
-              </a>
             </div>
           </article>
         </div>
@@ -716,7 +697,7 @@ const isAssistantOpen = ref(false)
           Stay connected through our different creative spaces.
         </p>
 
-        <div class="mt-10 grid gap-5 md:grid-cols-4">
+        <div class="mx-auto mt-10 grid max-w-3xl gap-5 md:grid-cols-2">
           <a
             v-for="link in journeyLinks"
             :key="link.label"

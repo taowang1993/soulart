@@ -1,12 +1,18 @@
-import { createError, readValidatedBody } from 'h3'
+import { createError, getRequestIP, readValidatedBody } from 'h3'
+import type { H3Event } from 'h3'
 import { Resend } from 'resend'
 
 const CONTACT_TO_EMAIL = process.env.CONTACT_TO_EMAIL || 'xinyiartschool@gmail.com'
 const CONTACT_FROM_EMAIL = process.env.RESEND_FROM_EMAIL || ''
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000
+const RATE_LIMIT_MAX_REQUESTS = 5
+const RATE_LIMIT_MAX_BUCKETS = 500
+const contactRateLimits = new Map<string, { count: number, resetAt: number }>()
 const trialClassInterest = 'Trial Class'
 const interestOptions = new Set([
   trialClassInterest,
   'Art Classes',
+  'Summer Camp',
   'Wellness Programs',
   'Private Sessions',
   'Portfolio Preparation',
@@ -50,6 +56,28 @@ function looksLikeEmail(value: string) {
   return at > 0 && dot > at + 1 && dot < value.length - 1 && !value.includes(' ')
 }
 
+function checkRateLimit(event: H3Event) {
+  const key = getRequestIP(event, { xForwardedFor: true }) || 'unknown'
+  const now = Date.now()
+  const bucket = contactRateLimits.get(key)
+
+  if (contactRateLimits.size >= RATE_LIMIT_MAX_BUCKETS && !bucket) {
+    const oldestKey = contactRateLimits.keys().next().value
+    if (oldestKey) contactRateLimits.delete(oldestKey)
+  }
+
+  if (!bucket || bucket.resetAt <= now) {
+    contactRateLimits.set(key, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS })
+    return
+  }
+
+  if (bucket.count >= RATE_LIMIT_MAX_REQUESTS) {
+    throw createError({ statusCode: 429, statusMessage: 'Too many contact requests. Please try again later.' })
+  }
+
+  bucket.count += 1
+}
+
 function validateContactBody(body: unknown): ContactBody {
   if (!body || typeof body !== 'object' || Array.isArray(body)) {
     badRequest('Invalid request body')
@@ -62,7 +90,9 @@ function validateContactBody(body: unknown): ContactBody {
   const interest = readString(source, 'interest', 80)
   const preferredTime = readString(source, 'preferredTime', 160, false)
   const message = readString(source, 'message', 3000)
+  const website = readString(source, 'website', 120, false)
 
+  if (website) badRequest('Invalid request body')
   if (!looksLikeEmail(email)) badRequest('Email address is invalid')
   if (!interestOptions.has(interest)) badRequest('Interest is invalid')
 
@@ -150,6 +180,7 @@ function autoReplyEmailText(body: ContactBody) {
 }
 
 export default defineEventHandler(async (event) => {
+  checkRateLimit(event)
   const body = await readValidatedBody(event, validateContactBody)
   const apiKey = process.env.RESEND_API_KEY
 

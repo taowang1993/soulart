@@ -120,9 +120,7 @@ const footerLinks = [
 ]
 
 const socialLinks = [
-  { label: 'Instagram', icon: 'i-lucide-instagram' },
-  { label: 'Facebook', icon: 'i-lucide-facebook' },
-  { label: 'YouTube', icon: 'i-lucide-youtube' },
+  { label: 'YouTube', icon: 'i-lucide-youtube', href: 'https://www.youtube.com/@XinyiArt-Yoga-Healing' },
 ]
 
 const isAssistantOpen = ref(false)
@@ -582,7 +580,9 @@ const isAssistantOpen = ref(false)
             <a
               v-for="social in socialLinks"
               :key="social.label"
-              href="#contact"
+              :href="social.href"
+              target="_blank"
+              rel="noopener noreferrer"
               :aria-label="social.label"
               class="flex size-9 items-center justify-center rounded-full bg-white/70 text-[#9f82bd] ring-1 ring-[#d8c8e5] transition hover:-translate-y-0.5 hover:text-[#6d4d95] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
             >
