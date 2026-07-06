@@ -109,61 +109,61 @@ const books = [
     title: 'The Power of Now',
     author: 'Eckhart Tolle',
     note: 'Living in the present moment',
-    coverClass: 'book-now',
+    cover: '/resources/book-power-of-now.jpg',
   },
   {
     number: '2',
     title: 'The Creative Act',
     author: 'Rick Rubin',
     note: 'Creativity as a way of being',
-    coverClass: 'book-creative',
+    cover: '/resources/book-creative-act.jpg',
   },
   {
     number: '3',
     title: 'The Artist’s Way',
     author: 'Julia Cameron',
     note: 'Rediscovering creative confidence',
-    coverClass: 'book-artist',
+    cover: '/resources/book-artists-way.jpg',
   },
   {
     number: '4',
     title: 'Deep Work',
     author: 'Cal Newport',
     note: 'Focus in a distracted world',
-    coverClass: 'book-deep',
+    cover: '/resources/book-deep-work.jpg',
   },
   {
     number: '5',
     title: 'The Untethered Soul',
     author: 'Michael A. Singer',
     note: 'Freedom through awareness',
-    coverClass: 'book-soul',
+    cover: '/resources/book-untethered-soul.jpg',
   },
   {
     number: '6',
     title: 'Yoga Sutras of Patanjali',
     author: 'Patanjali',
     note: 'Wisdom for everyday practice',
-    coverClass: 'book-yoga',
+    cover: '/resources/book-yoga-sutras.jpg',
   },
 ]
 
 const articles = [
   {
     title: 'Creating vs. Consuming',
-    image: '/resources/article-creating.jpg',
+    image: '/resources/julia-artwork.jpg',
     icon: 'i-lucide-leaf',
     copy: 'How creativity changes the way we experience life.',
   },
   {
     title: 'Growing Upward, Rooting Inward',
-    image: '/resources/article-growing.jpg',
+    image: '/resources/doris-artwork.jpg',
     icon: 'i-lucide-sprout',
     copy: 'Reflections on growth, family and inner peace.',
   },
   {
     title: 'Living with AI, Staying Human',
-    image: '/resources/article-ai.jpg',
+    image: '/resources/jane-art.jpg',
     icon: 'i-lucide-bot',
     copy: 'Thoughts on creativity, education and the future.',
   },
@@ -192,6 +192,8 @@ const contactItems = [
   { label: '@XinyiArt-Yoga-Healing', icon: 'i-lucide-youtube' },
 ]
 
+const introVideoUrl = 'https://www.youtube.com/watch?v=1t98Fw2k988'
+const introEmbedUrl = 'https://www.youtube.com/embed/1t98Fw2k988'
 const youtubeUrl = 'https://www.youtube.com/@XinyiArt-Yoga-Healing'
 const isAssistantOpen = ref(false)
 </script>
@@ -297,7 +299,7 @@ const isAssistantOpen = ref(false)
             Get to know our story, our values, and how we create a warm space where art and wellness come together.
           </p>
           <a
-            :href="youtubeUrl"
+            :href="introVideoUrl"
             target="_blank"
             rel="noopener noreferrer"
             class="mt-8 inline-flex items-center gap-3 rounded-full bg-[#d7916e] px-7 py-3 text-sm font-black text-white shadow-lg shadow-[#d7916e]/25 transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#bd7a55]"
@@ -306,33 +308,22 @@ const isAssistantOpen = ref(false)
               name="i-lucide-play"
               class="size-5"
             />
-            Watch Introduction Video
+            Watch Intro Video
           </a>
         </div>
 
         <div class="relative">
           <div class="absolute -inset-5 -z-10 rounded-[2.5rem] bg-white/50 blur-2xl" />
-          <a
-            :href="youtubeUrl"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="group block overflow-hidden rounded-[2rem] bg-[#1f1f1f] p-2 shadow-[0_26px_80px_rgba(80,73,54,0.23)] ring-1 ring-white/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#bd7a55]"
-            aria-label="Watch the XinYi Class introduction video"
-          >
-            <img
-              src="/resources/hero-video.jpg"
-              alt="XinYi Art introduction video preview"
-              class="aspect-video w-full rounded-[1.55rem] object-cover transition duration-500 group-hover:scale-[1.02]"
-              loading="eager"
-              decoding="async"
-            >
-            <span class="absolute left-1/2 top-1/2 flex size-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-[#bd7a55] shadow-2xl transition group-hover:scale-105">
-              <UIcon
-                name="i-lucide-play"
-                class="ml-1 size-9"
-              />
-            </span>
-          </a>
+          <div class="overflow-hidden rounded-[2rem] bg-[#1f1f1f] p-2 shadow-[0_26px_80px_rgba(80,73,54,0.23)] ring-1 ring-white/80">
+            <iframe
+              :src="introEmbedUrl"
+              title="XinYi Class Introduction Video"
+              class="aspect-video w-full rounded-[1.55rem]"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            />
+          </div>
         </div>
       </div>
     </section>
@@ -464,8 +455,8 @@ const isAssistantOpen = ref(false)
 
         <div class="mt-12 grid gap-8 lg:grid-cols-[1.08fr_0.92fr]">
           <img
-            src="/resources/wellness-community.jpg"
-            alt="Outdoor wellness community class at XinYi Class"
+            src="/resources/jane-art.jpg"
+            alt="Jane Liu artwork from the XinYi Class resource archive"
             class="h-full min-h-[420px] rounded-[2rem] object-cover shadow-[0_22px_70px_rgba(72,86,55,0.18)] ring-1 ring-white/80"
             loading="lazy"
             decoding="async"
@@ -597,13 +588,13 @@ const isAssistantOpen = ref(false)
             :key="book.title"
             class="rounded-[1.5rem] bg-white/82 p-4 shadow-[0_14px_38px_rgba(80,73,54,0.12)] ring-1 ring-white/70"
           >
-            <div
-              class="book-cover flex aspect-[3/4] flex-col justify-between rounded-xl p-4 text-white shadow-inner"
-              :class="book.coverClass"
+            <img
+              :src="book.cover"
+              :alt="`${book.title} book cover`"
+              class="aspect-[3/4] w-full rounded-xl object-cover shadow-inner"
+              loading="lazy"
+              decoding="async"
             >
-              <span class="text-xs font-black uppercase tracking-[0.18em] opacity-80">{{ book.author }}</span>
-              <strong class="font-serif text-2xl leading-tight">{{ book.title }}</strong>
-            </div>
             <p class="mt-5 text-xs font-black uppercase tracking-[0.18em] text-[#bd7a55]">
               {{ book.number }}. {{ book.title }}
             </p>
@@ -838,33 +829,5 @@ const isAssistantOpen = ref(false)
 
 .polaroid {
   border-radius: 1.2rem;
-}
-
-.book-cover {
-  min-height: 12rem;
-}
-
-.book-now {
-  background: linear-gradient(160deg, #f2cf70 0%, #d48954 100%);
-}
-
-.book-creative {
-  background: linear-gradient(160deg, #c7d9bc 0%, #617e57 100%);
-}
-
-.book-artist {
-  background: linear-gradient(160deg, #b6d2d5 0%, #507c8a 100%);
-}
-
-.book-deep {
-  background: linear-gradient(160deg, #425a68 0%, #151e28 100%);
-}
-
-.book-soul {
-  background: linear-gradient(160deg, #e5c8a7 0%, #a06b3f 100%);
-}
-
-.book-yoga {
-  background: linear-gradient(160deg, #e4ddc8 0%, #8d7d5d 100%);
 }
 </style>

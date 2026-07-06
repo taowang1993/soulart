@@ -19,7 +19,6 @@ const marketingPages = [
 ] as const
 
 const expectedResourceAssets = [
-  'hero-video.jpg',
   'julia-2019.jpg',
   'julia-2025.jpg',
   'julia.jpg',
@@ -27,6 +26,16 @@ const expectedResourceAssets = [
   'julia-artwork.jpg',
   'doris-artwork.jpg',
   'jane-art.jpg',
+  'book-power-of-now.jpg',
+  'book-creative-act.jpg',
+  'book-artists-way.jpg',
+  'book-deep-work.jpg',
+  'book-untethered-soul.jpg',
+  'book-yoga-sutras.jpg',
+] as const
+
+const staleGeneratedAssets = [
+  'hero-video.jpg',
   'wellness-community.jpg',
   'article-creating.jpg',
   'article-growing.jpg',
@@ -53,12 +62,21 @@ test('resources page owns marketing chrome and preserves the assistant', () => {
   assert.doesNotMatch(source, /\/Users\/max\/projects\/resources/)
 })
 
+test('resources page uses the requested YouTube intro video', () => {
+  const source = readPage()
+
+  assert.match(source, /const introVideoUrl = 'https:\/\/www\.youtube\.com\/watch\?v=1t98Fw2k988'/)
+  assert.match(source, /const introEmbedUrl = 'https:\/\/www\.youtube\.com\/embed\/1t98Fw2k988'/)
+  assert.match(source, /<iframe[\s\S]*:src="introEmbedUrl"/)
+  assert.match(source, /Watch Intro Video/)
+})
+
 test('resources page follows the reference content sections', () => {
   const source = readPage()
   const requiredCopy = [
     'Welcome to XinYi Art Studio',
     'A Place for Creativity, Connection & Growth',
-    'Watch Introduction Video',
+    'Watch Intro Video',
     'Stories of Growth',
     'Julia & Bernice',
     'Growing Together',
@@ -94,12 +112,22 @@ test('resources page follows the reference content sections', () => {
 
 test('resources page uses copied public assets only', () => {
   const source = readPage()
+  const allowed = new Set(expectedResourceAssets.map(asset => `/resources/${asset}`))
+  const referencedAssets = [...source.matchAll(/['"](\/resources\/[^'"]+)['"]/g)].map(match => match[1]!)
 
   for (const asset of expectedResourceAssets) {
     assert.match(source, new RegExp(`/resources/${asset.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`))
   }
 
-  assert.doesNotMatch(source, /src="https?:/)
+  for (const asset of staleGeneratedAssets) {
+    assert.doesNotMatch(source, new RegExp(`/resources/${asset.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`), `${asset} should not be used`)
+  }
+
+  for (const asset of referencedAssets) {
+    assert.ok(allowed.has(asset), `${asset} should come from the source Resource folder or searched book covers`)
+  }
+
+  assert.doesNotMatch(source, /<img[\s\S]*src="https?:/)
   assert.doesNotMatch(source, /\/Users\/max\/projects\/resources/)
 })
 
