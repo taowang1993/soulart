@@ -231,7 +231,7 @@ const footerLinks = [
   { label: 'Home', to: '/' },
   { label: 'About', to: '/about' },
   { label: 'Art Programs', to: '/art-programs' },
-  { label: 'Wellness', to: '/wellness' },
+  { label: 'Yoga Wellness', to: '/wellness' },
   { label: 'Resources', to: '/resources' },
   { label: 'Contact', to: '/contact' },
 ]
@@ -636,7 +636,7 @@ watch(() => route.fullPath, applyGalleryRoute)
             decoding="async"
           >
           <p class="mt-4 max-w-xs text-sm leading-6 text-[#6c6078] md:max-w-sm">
-            Inspiring creativity, connection and well-being since 2016.
+            XinYi Art School · Children&apos;s Art Classes in Toronto · XinYi Yoga · Gentle Yoga &amp; Meditation in Toronto
           </p>
           <button
             type="button"
@@ -700,7 +700,7 @@ watch(() => route.fullPath, applyGalleryRoute)
 
       <div class="relative mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 pt-7 text-sm text-[#7a6b8b] md:flex-row">
         <p>© 2026 Xinyi Class</p>
-        <p>Art <span class="mx-3 text-[#df838d]">♥</span> Wellness <span class="mx-3 text-[#df838d]">♥</span> Community</p>
+        <p>Art <span class="mx-3 text-[#df838d]">♥</span> Yoga Wellness <span class="mx-3 text-[#df838d]">♥</span> Community</p>
       </div>
     </footer>
 

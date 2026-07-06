@@ -70,7 +70,7 @@ const referenceCopy = [
   'Wheelchair accessible',
   'Thank you for visiting!',
   'I look forward to creating, growing and learning with you.',
-  'Art • Wellness • Community',
+  'Art • Yoga Wellness • Community',
   '© 2026 Xinyi Class',
 ]
 

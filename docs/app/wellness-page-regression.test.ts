@@ -198,10 +198,10 @@ test('home and art pages link to the wellness route', () => {
   const home = readFileSync(homePagePath, 'utf8')
   const art = readFileSync(artPagePath, 'utf8')
 
-  assert.match(home, /\{ label: 'Wellness', to: '\/wellness'/)
+  assert.match(home, /\{ label: 'Yoga Wellness', to: '\/wellness'/)
   assert.match(home, /title: 'Wellness Programs',[\s\S]*to: '\/wellness'/)
   assert.match(art, /\{ label: 'Wellness', to: '\/wellness'/)
-  assert.match(art, /\{ label: 'Wellness', to: '\/wellness' \}/)
+  assert.match(art, /\{ label: 'Yoga Wellness', to: '\/wellness' \}/)
 })
 
 test('wellness page keeps reference image treatments', () => {

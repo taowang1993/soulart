@@ -205,7 +205,7 @@ const footerLinks = [
   { label: 'Home', to: '/' },
   { label: 'About', to: '/about' },
   { label: 'Art Programs', to: '/art-programs' },
-  { label: 'Wellness', to: '/wellness' },
+  { label: 'Yoga Wellness', to: '/wellness' },
   { label: 'Resources', to: '/resources' },
   { label: 'Contact', to: '/contact' },
 ]
@@ -744,7 +744,7 @@ const isAssistantOpen = ref(false)
                 XinYi Class
               </h2>
               <p class="mt-1 text-sm leading-6 text-[#d5dfcb]">
-                Inspiring creativity, connection, and well-being since 2016
+                XinYi Art School · Children&apos;s Art Classes in Toronto · XinYi Yoga · Gentle Yoga &amp; Meditation in Toronto
               </p>
             </div>
           </div>

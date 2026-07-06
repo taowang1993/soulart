@@ -289,7 +289,7 @@ function selectTrialClass() {
             <span aria-hidden="true">→</span>
           </NuxtLink>
           <p class="mt-4 text-center font-serif text-lg italic text-[#9f82bd]">
-            Art • Wellness • Community
+            Art • Yoga Wellness • Community
           </p>
         </article>
 
@@ -518,7 +518,7 @@ function selectTrialClass() {
           I look forward to creating, growing and learning with you.
         </p>
         <p class="mt-8 font-serif text-2xl italic text-[#9f82bd]">
-          Art • Wellness • Community
+          Art • Yoga Wellness • Community
         </p>
         <p class="mt-10 text-sm text-[#776a8e]">
           © 2026 Xinyi Class
