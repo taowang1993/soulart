@@ -549,17 +549,20 @@ watch(() => route.fullPath, applyGalleryRoute)
       class="ink-section px-4 py-16 text-[#3a352c] sm:px-6 lg:px-8"
     >
       <div class="mx-auto max-w-6xl text-center">
-        <p class="mx-auto flex size-12 items-center justify-center rounded-sm bg-[#b6342c] font-serif text-lg font-bold text-white shadow-md">
-          心
-        </p>
-        <h2 class="script-title mt-5 text-5xl font-semibold leading-tight sm:text-6xl">
-          Chinese Painting & Calligraphy
-        </h2>
-        <p class="mt-4 text-lg font-semibold tracking-[0.18em] text-[#7d6c5b]">
+        <div class="chinese-heading">
+          <h2 class="script-title text-5xl font-semibold leading-tight text-[#27251f] sm:text-6xl">
+            Chinese Painting & Calligraphy
+          </h2>
+          <span
+            class="chinese-seal"
+            aria-hidden="true"
+          >心</span>
+        </div>
+        <p class="mt-4 text-lg font-semibold tracking-[0.18em] text-[#8f7d50]">
           Tradition · Simplicity · Inner Peace
         </p>
 
-        <div class="scroll-stage chinese-carousel mx-auto mt-10 max-w-3xl">
+        <div class="scroll-stage chinese-carousel mx-auto mt-10 w-full">
           <button
             type="button"
             class="stage-arrow left-4"
@@ -574,7 +577,7 @@ watch(() => route.fullPath, applyGalleryRoute)
           <img
             :src="activeChineseWork.image"
             :alt="`${activeChineseWork.title} Chinese artwork`"
-            class="mx-auto max-h-[32rem] w-full max-w-3xl object-contain"
+            class="chinese-artwork"
             loading="eager"
             decoding="async"
           >
@@ -589,34 +592,33 @@ watch(() => route.fullPath, applyGalleryRoute)
               class="size-7"
             />
           </button>
-          <h3 class="mt-5 font-serif text-3xl text-[#3a352c]">
+          <div class="chinese-dots">
+            <button
+              v-for="(work, index) in chineseWorks"
+              :key="`${work.title}-chinese-dot`"
+              type="button"
+              class="chinese-dot"
+              :class="activeChineseIndex === index ? 'chinese-dot--active' : ''"
+              :aria-label="`Show ${work.title}`"
+              @click="setActiveChineseWork(index)"
+            />
+          </div>
+          <h3 class="chinese-title">
             {{ activeChineseWork.title }}
           </h3>
-          <p class="mt-1 text-sm font-bold uppercase tracking-[0.18em] text-[#9b4237]">
+          <p class="chinese-meta">
             {{ activeChineseWork.meta }}
           </p>
         </div>
 
-        <div class="mt-6 flex justify-center gap-3">
-          <button
-            v-for="(work, index) in chineseWorks"
-            :key="`${work.title}-chinese-dot`"
-            type="button"
-            class="size-3 rounded-full border-2 transition"
-            :class="activeChineseIndex === index ? 'border-[#9b4237] bg-[#9b4237]' : 'border-[#9b4237]/35'"
-            :aria-label="`Show ${work.title}`"
-            @click="setActiveChineseWork(index)"
-          />
-        </div>
-
-        <div class="mx-auto mt-10 max-w-3xl rounded-[2rem] bg-white/75 p-8 text-left shadow-sm ring-1 ring-[#decdb2]">
-          <h3 class="font-serif text-3xl font-semibold text-[#2f352c]">
+        <div class="chinese-about">
+          <h3 class="chinese-about-title">
             About Chinese Art
           </h3>
-          <p class="mt-5 text-lg leading-8 text-[#665846]">
+          <p>
             Chinese painting and calligraphy are more than art forms—they are a way of life.
           </p>
-          <p class="mt-5 text-lg leading-8 text-[#665846]">
+          <p>
             Through the brush, we cultivate mindfulness, appreciate nature, and express the beauty within.
           </p>
         </div>
@@ -963,39 +965,229 @@ watch(() => route.fullPath, applyGalleryRoute)
 }
 
 .ink-section {
+  position: relative;
+  overflow: hidden;
   background:
-    linear-gradient(90deg, rgba(143, 104, 55, 0.16), transparent 8%, transparent 92%, rgba(143, 104, 55, 0.16)),
-    linear-gradient(180deg, #f4ead8 0%, #ead9bd 100%);
+    radial-gradient(ellipse at 9% 10%, rgba(85, 104, 77, 0.18), transparent 17rem),
+    radial-gradient(ellipse at 88% 12%, rgba(83, 96, 84, 0.14), transparent 24rem),
+    radial-gradient(ellipse at 86% 86%, rgba(113, 123, 103, 0.14), transparent 24rem),
+    linear-gradient(180deg, #f7f0e4 0%, #efe3ce 42%, #f8f3ea 100%);
+}
+
+.ink-section::before,
+.ink-section::after {
+  position: absolute;
+  pointer-events: none;
+  content: "";
+}
+
+.ink-section::before {
+  top: 1rem;
+  left: -2rem;
+  width: 17rem;
+  height: 12rem;
+  background:
+    linear-gradient(112deg, transparent 36%, rgba(46, 66, 52, 0.36) 37% 40%, transparent 41%),
+    linear-gradient(72deg, transparent 48%, rgba(46, 66, 52, 0.26) 49% 52%, transparent 53%);
+  opacity: 0.58;
+  transform: rotate(-8deg);
+}
+
+.ink-section::after {
+  right: -5rem;
+  bottom: 5rem;
+  width: 31rem;
+  height: 15rem;
+  background: radial-gradient(ellipse at 50% 100%, rgba(86, 99, 91, 0.2), transparent 70%);
+  opacity: 0.45;
+}
+
+.chinese-heading {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.chinese-seal {
+  display: grid;
+  width: 1.35rem;
+  height: 1.35rem;
+  margin-top: 0.3rem;
+  place-items: center;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #b93731;
+  border: 2px solid currentcolor;
 }
 
 .scroll-stage {
-  padding-inline: clamp(2rem, 6vw, 5rem);
-  background:
-    linear-gradient(90deg, rgba(108, 74, 37, 0.13), transparent 9%, transparent 91%, rgba(108, 74, 37, 0.13)),
-    radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.82), transparent 34rem),
-    #efe1c6;
+  background: #efe1c6;
   border-color: #d8c19f;
-  border-radius: 1.4rem;
 }
 
-.scroll-stage::before,
-.scroll-stage::after {
+.chinese-carousel {
+  z-index: 1;
+  max-width: 72rem;
+  padding: clamp(3.8rem, 5vw, 5.2rem) clamp(3rem, 6vw, 5.6rem) clamp(3rem, 4.5vw, 4.4rem);
+  overflow: visible;
+  background:
+    linear-gradient(to bottom, transparent 0 2.1rem, rgba(129, 133, 111, 0.66) 2.1rem 2.85rem, transparent 2.85rem calc(100% - 2.65rem), rgba(117, 123, 103, 0.66) calc(100% - 2.65rem) calc(100% - 1.9rem), transparent calc(100% - 1.9rem)),
+    radial-gradient(circle at 50% 23%, rgba(255, 255, 255, 0.64), transparent 31rem),
+    linear-gradient(90deg, rgba(132, 93, 49, 0.12), transparent 7%, transparent 93%, rgba(132, 93, 49, 0.12)),
+    #f1e6d4;
+  border: 0;
+  border-radius: 0.55rem;
+  box-shadow: 0 1.5rem 3.2rem rgba(72, 56, 42, 0.13), inset 0 0 0 1px rgba(126, 100, 67, 0.12);
+}
+
+.chinese-carousel::before,
+.chinese-carousel::after {
   position: absolute;
-  top: 0.9rem;
-  bottom: 0.9rem;
-  width: 2rem;
+  top: 2.35rem;
+  bottom: 2.05rem;
+  z-index: 1;
+  width: clamp(1.8rem, 2.4vw, 2.45rem);
   content: "";
-  background: linear-gradient(90deg, #c49a63, #efd5a3 45%, #b9854c);
+  background:
+    linear-gradient(90deg, #d5c7a9, #f7ead1 48%, #b59a72),
+    linear-gradient(#4d341c, #26170c);
   border-radius: 999px;
-  box-shadow: inset 0 0 0 1px rgba(96, 59, 24, 0.16);
+  box-shadow:
+    inset 0 0 0 1px rgba(77, 54, 30, 0.2),
+    0 -1.25rem 0 -0.58rem #2b1a0d,
+    0 1.25rem 0 -0.58rem #2b1a0d,
+    0 0.6rem 1rem rgba(55, 35, 18, 0.22);
 }
 
-.scroll-stage::before {
-  left: 1rem;
+.chinese-carousel::before {
+  left: -0.35rem;
 }
 
-.scroll-stage::after {
-  right: 1rem;
+.chinese-carousel::after {
+  right: -0.35rem;
+}
+
+.chinese-artwork {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: min(100%, 58rem);
+  height: clamp(20rem, 38vw, 32rem);
+  margin: 0 auto;
+  object-fit: contain;
+  filter: drop-shadow(0 1rem 1.1rem rgba(62, 52, 39, 0.12));
+}
+
+.chinese-carousel .stage-arrow {
+  top: 44%;
+  z-index: 4;
+  color: #343632;
+  background: rgba(255, 252, 246, 0.86);
+}
+
+.chinese-carousel .stage-arrow.left-4 {
+  left: clamp(1rem, 2.5vw, 2.1rem);
+}
+
+.chinese-carousel .stage-arrow.right-4 {
+  right: clamp(1rem, 2.5vw, 2.1rem);
+}
+
+.chinese-dots {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 0.45rem;
+}
+
+.chinese-dot {
+  width: 0.85rem;
+  height: 0.85rem;
+  border: 2px solid rgba(99, 104, 96, 0.56);
+  border-radius: 999px;
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+
+.chinese-dot--active {
+  background: #e44b5d;
+  border-color: #e44b5d;
+}
+
+.chinese-title {
+  position: relative;
+  z-index: 2;
+  margin-top: 1.2rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 3vw, 2.9rem);
+  color: #27251f;
+}
+
+.chinese-meta {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.35rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+  color: #9b8150;
+}
+
+.chinese-meta::after {
+  width: 3.8rem;
+  height: 1px;
+  content: "";
+  background: linear-gradient(90deg, transparent, #a8915d 45% 55%, transparent);
+}
+
+.chinese-about {
+  position: relative;
+  z-index: 1;
+  max-width: 47rem;
+  margin: clamp(4rem, 6vw, 5.2rem) auto 0;
+  text-align: center;
+}
+
+.chinese-about-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 3vw, 2.7rem);
+  color: #596e56;
+}
+
+.chinese-about-title::before,
+.chinese-about-title::after {
+  font-size: 1.35rem;
+  color: #566856;
+  opacity: 0.8;
+}
+
+.chinese-about-title::before {
+  content: "♣";
+}
+
+.chinese-about-title::after {
+  content: "✦";
+}
+
+.chinese-about p {
+  margin-top: 1.1rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.15rem, 2vw, 1.55rem);
+  line-height: 1.75;
+  color: #5f5a4f;
 }
 
 @media (max-width: 768px) {
@@ -1006,6 +1198,20 @@ watch(() => route.fullPath, applyGalleryRoute)
 
   .gallery-track {
     grid-template-columns: 1fr;
+  }
+
+  .chinese-carousel {
+    padding-inline: 1.5rem;
+    overflow: hidden;
+  }
+
+  .chinese-carousel::before,
+  .chinese-carousel::after {
+    display: none;
+  }
+
+  .chinese-artwork {
+    height: clamp(17rem, 82vw, 25rem);
   }
 
   .stage-arrow {
