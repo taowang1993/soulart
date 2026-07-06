@@ -55,7 +55,16 @@ const expectedGalleryAssets = [
   'craft-paper-flower.jpg',
   'craft-paper-flowers.jpg',
   'craft-paper-garden.jpg',
+  'chinese-bird-moon.jpg',
+  'chinese-calligraphy-scroll.jpg',
+  'chinese-crane.jpg',
   'chinese-landscape.jpg',
+  'chinese-lotus-calligraphy.jpg',
+  'chinese-lotus.jpg',
+  'chinese-meditation.jpg',
+  'chinese-orchid.jpg',
+  'chinese-serenity.jpg',
+  'chinese-tea-window.jpg',
 ] as const
 
 const referenceCopy = [
@@ -162,7 +171,27 @@ test('student gallery carousel controls are real Vue controls without breaking t
   assert.match(source, /grid-template-columns: repeat\(3, minmax\(0, 1fr\)\)/)
   assert.doesNotMatch(source, /flex:\s*0 0 100%/)
   assert.doesNotMatch(source, /Ready to Begin\?/) // reference jumps from Chinese art to footer
-  assert.doesNotMatch(source, /aria-label="Previous Chinese artwork"/)
+})
+
+test('Chinese Painting & Calligraphy section is a real carousel with copied Chinese gallery assets', () => {
+  const source = readPage()
+  const chineseAssets = expectedGalleryAssets.filter(asset => asset.startsWith('chinese-'))
+
+  assert.ok(chineseAssets.length >= 6, 'Chinese carousel needs multiple artworks')
+  for (const asset of chineseAssets) {
+    assert.match(source, new RegExp(`/student-gallery/${asset.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`))
+  }
+
+  assert.match(source, /const chineseWorks: GalleryWork\[\]/)
+  assert.match(source, /const activeChineseIndex = shallowRef\(0\)/)
+  assert.match(source, /const activeChineseWork = computed<GalleryWork>/)
+  assert.match(source, /:src="activeChineseWork\.image"/)
+  assert.match(source, /aria-label="Previous Chinese artwork"/)
+  assert.match(source, /aria-label="Next Chinese artwork"/)
+  assert.match(source, /@click="stepChineseWork\(-1\)"/)
+  assert.match(source, /@click="stepChineseWork\(1\)"/)
+  assert.match(source, /@click="setActiveChineseWork\(index\)"/)
+  assert.doesNotMatch(source, /const chineseWork = \{/)
 })
 
 test('art programs page links and renders the nested student gallery route', () => {

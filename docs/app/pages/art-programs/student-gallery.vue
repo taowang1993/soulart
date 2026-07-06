@@ -203,11 +203,18 @@ const gallerySections: GallerySection[] = [
   },
 ]
 
-const chineseWork = {
-  title: 'Mountain Landscape',
-  meta: 'Ink on Fan',
-  image: '/student-gallery/chinese-landscape.jpg',
-}
+const chineseWorks: GalleryWork[] = [
+  { title: 'Mountain Landscape', meta: 'Ink on Fan', image: '/student-gallery/chinese-landscape.jpg', contain: true },
+  { title: 'Bird Under Moon', meta: 'Chinese Painting', image: '/student-gallery/chinese-bird-moon.jpg', contain: true },
+  { title: 'Tea by the Window', meta: 'Chinese Painting', image: '/student-gallery/chinese-tea-window.jpg', contain: true },
+  { title: 'Lotus Blossom', meta: 'Chinese Painting', image: '/student-gallery/chinese-lotus.jpg', contain: true },
+  { title: 'Serenity Pavilion', meta: 'Chinese Calligraphy', image: '/student-gallery/chinese-serenity.jpg', contain: true },
+  { title: 'Meditation', meta: 'Ink Practice', image: '/student-gallery/chinese-meditation.jpg', contain: true },
+  { title: 'Crane', meta: 'Chinese Painting', image: '/student-gallery/chinese-crane.jpg', contain: true },
+  { title: 'Lotus Calligraphy', meta: 'Chinese Calligraphy', image: '/student-gallery/chinese-lotus-calligraphy.jpg', contain: true },
+  { title: 'Orchid', meta: 'Chinese Painting', image: '/student-gallery/chinese-orchid.jpg', contain: true },
+  { title: 'Calligraphy Scroll', meta: 'Brush Calligraphy', image: '/student-gallery/chinese-calligraphy-scroll.jpg', contain: true },
+]
 
 const contactItems = [
   { label: 'North York, Ontario, Canada', icon: 'i-lucide-map-pin' },
@@ -227,6 +234,8 @@ const footerLinks = [
 ]
 
 const isAssistantOpen = ref(false)
+const activeChineseIndex = shallowRef(0)
+const activeChineseWork = computed<GalleryWork>(() => chineseWorks[activeChineseIndex.value] ?? chineseWorks[0]!)
 const activeCategoryIndexes = reactive(
   Object.fromEntries(gallerySections.map(section => [section.id, 0])) as Record<string, number>,
 )
@@ -275,6 +284,14 @@ function visibleWorks(section: GallerySection) {
 
   const active = activeWorkIndex(section.id) % works.length
   return [...works.slice(active), ...works.slice(0, active)].slice(0, 3)
+}
+
+function setActiveChineseWork(index: number) {
+  activeChineseIndex.value = index
+}
+
+function stepChineseWork(direction: -1 | 1) {
+  activeChineseIndex.value = (activeChineseIndex.value + direction + chineseWorks.length) % chineseWorks.length
 }
 </script>
 
@@ -502,20 +519,54 @@ function visibleWorks(section: GallerySection) {
           Tradition · Simplicity · Inner Peace
         </p>
 
-        <div class="scroll-stage mx-auto mt-10 max-w-3xl">
+        <div class="scroll-stage chinese-carousel mx-auto mt-10 max-w-3xl">
+          <button
+            type="button"
+            class="stage-arrow left-4"
+            aria-label="Previous Chinese artwork"
+            @click="stepChineseWork(-1)"
+          >
+            <UIcon
+              name="i-lucide-chevron-left"
+              class="size-7"
+            />
+          </button>
           <img
-            :src="chineseWork.image"
-            :alt="`${chineseWork.title} Chinese artwork`"
+            :src="activeChineseWork.image"
+            :alt="`${activeChineseWork.title} Chinese artwork`"
             class="mx-auto max-h-[32rem] w-full max-w-3xl object-contain"
             loading="eager"
             decoding="async"
           >
+          <button
+            type="button"
+            class="stage-arrow right-4"
+            aria-label="Next Chinese artwork"
+            @click="stepChineseWork(1)"
+          >
+            <UIcon
+              name="i-lucide-chevron-right"
+              class="size-7"
+            />
+          </button>
           <h3 class="mt-5 font-serif text-3xl text-[#3a352c]">
-            {{ chineseWork.title }}
+            {{ activeChineseWork.title }}
           </h3>
           <p class="mt-1 text-sm font-bold uppercase tracking-[0.18em] text-[#9b4237]">
-            {{ chineseWork.meta }}
+            {{ activeChineseWork.meta }}
           </p>
+        </div>
+
+        <div class="mt-6 flex justify-center gap-3">
+          <button
+            v-for="(work, index) in chineseWorks"
+            :key="`${work.title}-chinese-dot`"
+            type="button"
+            class="size-3 rounded-full border-2 transition"
+            :class="activeChineseIndex === index ? 'border-[#9b4237] bg-[#9b4237]' : 'border-[#9b4237]/35'"
+            :aria-label="`Show ${work.title}`"
+            @click="setActiveChineseWork(index)"
+          />
         </div>
 
         <div class="mx-auto mt-10 max-w-3xl rounded-[2rem] bg-white/75 p-8 text-left shadow-sm ring-1 ring-[#decdb2]">
