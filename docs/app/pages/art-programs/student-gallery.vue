@@ -278,6 +278,14 @@ function normalizeSlideIndex(index: number, total: number) {
 
 function applyGalleryRoute() {
   const sectionId = firstQueryValue(route.query.section) || route.hash.replace(/^#/, '')
+  const slideIndex = Number.parseInt(firstQueryValue(route.query.slide), 10)
+  if (sectionId === 'chinese-art') {
+    if (Number.isFinite(slideIndex)) {
+      activeChineseIndex.value = normalizeSlideIndex(slideIndex, chineseWorks.length)
+    }
+    return
+  }
+
   const section = gallerySections.find(section => section.id === sectionId)
   if (!section) return
 
@@ -287,7 +295,6 @@ function applyGalleryRoute() {
     activeCategoryIndexes[section.id] = categoryIndex
   }
 
-  const slideIndex = Number.parseInt(firstQueryValue(route.query.slide), 10)
   if (Number.isFinite(slideIndex)) {
     activeGalleryIndexes[section.id] = normalizeSlideIndex(slideIndex, activeWorks(section).length)
   }

@@ -183,6 +183,8 @@ test('student gallery opens the requested section, category, and slide from art 
   assert.match(source, /route\.query\.slide/)
   assert.match(source, /activeCategoryIndexes\[section\.id\] = categoryIndex/)
   assert.match(source, /activeGalleryIndexes\[section\.id\] = normalizeSlideIndex\(slideIndex, activeWorks\(section\)\.length\)/)
+  assert.match(source, /sectionId === 'chinese-art'/)
+  assert.match(source, /activeChineseIndex\.value = normalizeSlideIndex\(slideIndex, chineseWorks\.length\)/)
   assert.match(source, /watch\(\(\) => route\.fullPath, applyGalleryRoute\)/)
 })
 

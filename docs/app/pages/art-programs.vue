@@ -58,16 +58,19 @@ const teenPrograms = [
     title: 'Ages 13–15',
     image: '/art-program/age-13-15.png',
     description: 'Build stronger technique, creative confidence, and visual storytelling skills.',
+    galleryTo: { path: '/art-programs/student-gallery', hash: '#teens', query: { section: 'teens', category: 'Age 13–15', slide: '0' } },
   },
   {
     title: 'Ages 15–18',
     image: '/art-program/age-15-18.jpg',
     description: 'Develop independent projects while refining drawing, painting, and critique habits.',
+    galleryTo: { path: '/art-programs/student-gallery', hash: '#teens', query: { section: 'teens', category: 'Age 15–18', slide: '0' } },
   },
   {
     title: '16+ Portfolio',
     image: '/art-program/age-16-plus.jpg',
     description: 'Prepare portfolio pieces with focused mentorship and art school guidance.',
+    galleryTo: { path: '/art-programs/student-gallery', hash: '#teens', query: { section: 'teens', category: 'Portfolios', slide: '0' } },
   },
 ]
 
@@ -76,16 +79,19 @@ const adultPrograms = [
     title: 'Creative Well-Being',
     image: '/art-program/adult-1.jpg',
     description: 'Relax, reconnect, and enjoy mindful creativity in a warm studio setting.',
+    galleryTo: { path: '/art-programs/student-gallery', hash: '#adults', query: { section: 'adults', category: 'All Works', slide: '0' } },
   },
   {
     title: 'Painting Practice',
     image: '/art-program/adult-2.jpg',
     description: 'Explore expressive color, brushwork, and personal themes at your own pace.',
+    galleryTo: { path: '/art-programs/student-gallery', hash: '#adults', query: { section: 'adults', category: 'Paintings', slide: '0' } },
   },
   {
     title: 'Ink & Calligraphy',
     image: '/art-program/adult-3.png',
     description: 'Practice graceful lines, cultural tradition, and calm concentration.',
+    galleryTo: { path: '/art-programs/student-gallery', hash: '#chinese-art', query: { section: 'chinese-art', slide: '0' } },
   },
 ]
 
@@ -94,16 +100,19 @@ const makingPrograms = [
     title: 'Crochet & Fiber Arts',
     image: '/art-program/craft-1.png',
     note: 'Soft textures, patient hands, playful details.',
+    galleryTo: { path: '/art-programs/student-gallery', hash: '#crafts', query: { section: 'crafts', category: 'Textile & Yarn', slide: '0' } },
   },
   {
     title: 'Clay & Sculpture',
     image: '/art-program/craft-2.jpg',
     note: 'Tiny worlds shaped with color, care, and imagination.',
+    galleryTo: { path: '/art-programs/student-gallery', hash: '#crafts', query: { section: 'crafts', category: 'Clay & Pottery', slide: '0' } },
   },
   {
     title: 'Paper & Mixed Media',
     image: '/art-program/craft-3.jpg',
     note: 'Layered materials become bright keepsake creations.',
+    galleryTo: { path: '/art-programs/student-gallery', hash: '#crafts', query: { section: 'crafts', category: 'Mixed Media', slide: '0' } },
   },
 ]
 
@@ -351,6 +360,12 @@ const isAssistantOpen = ref(false)
               <p class="mt-3 leading-7 text-[#5d5268]">
                 {{ program.description }}
               </p>
+              <NuxtLink
+                :to="program.galleryTo"
+                class="mt-5 inline-flex rounded-full bg-[#d8c4eb] px-7 py-2.5 font-bold text-[#5a435f] shadow-md transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
+              >
+                View Gallery
+              </NuxtLink>
             </div>
           </article>
         </div>
@@ -388,6 +403,12 @@ const isAssistantOpen = ref(false)
             <p class="mt-3 leading-7 text-[#625768]">
               {{ program.description }}
             </p>
+            <NuxtLink
+              :to="program.galleryTo"
+              class="mt-5 inline-flex rounded-full bg-[#d7c7a9] px-7 py-2.5 font-bold text-[#4f4f3e] shadow-md transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
+            >
+              View Gallery
+            </NuxtLink>
           </article>
         </div>
       </div>
@@ -426,6 +447,12 @@ const isAssistantOpen = ref(false)
             <p class="mt-2 leading-7 text-[#70615c]">
               {{ program.note }}
             </p>
+            <NuxtLink
+              :to="program.galleryTo"
+              class="mt-5 inline-flex rounded-full bg-[#e4b77e] px-7 py-2.5 font-bold text-[#5a3f27] shadow-md transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
+            >
+              View Gallery
+            </NuxtLink>
           </article>
         </div>
       </div>
