@@ -385,7 +385,7 @@ const isAssistantOpen = ref(false)
           </h2>
           <div class="section-divider mx-auto mt-5" />
           <p class="mx-auto mt-6 max-w-sm text-base leading-7 text-[#4f455b]">
-            A warm, inspiring space designed for creativity, mindfulness, and meaningful connection.
+            XinYi Art School &amp; XinYi Yoga — a creative community in North Toronto, where art, mindfulness, and lifelong learning come together.
           </p>
           <div class="mt-9 grid grid-cols-2 gap-5 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
             <div
@@ -414,7 +414,7 @@ const isAssistantOpen = ref(false)
       </div>
 
       <p class="mx-auto mt-12 max-w-4xl border-y border-[#e9ddec] py-6 text-center font-serif text-xl italic text-[#a283b8]">
-        More than a classroom — a place to create, connect, and belong.
+        Children&apos;s Art Classes • Adult Art Lessons • Summer Camps • Portfolio Preparation • Gentle Yoga • Meditation • Mindfulness
       </p>
     </section>
 
