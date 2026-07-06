@@ -33,15 +33,19 @@ type GalleryWork = {
   contain?: boolean
 }
 
+type GalleryCategory = {
+  label: string
+  works: GalleryWork[]
+}
+
 type GallerySection = {
   id: string
   tone: string
   kicker: string
   title: string
   description: string
-  tabs: string[]
   quote: string
-  works: GalleryWork[]
+  categories: GalleryCategory[]
 }
 
 const heroWorks = [
@@ -59,12 +63,32 @@ const gallerySections: GallerySection[] = [
     kicker: 'Young Artists',
     title: 'Children\'s Art Works',
     description: 'Celebrating creativity, imagination and growth at every age.',
-    tabs: ['Age 4–6', 'Age 7–10', 'Age 11–13'],
     quote: 'Little hands. Big imagination. Every creation is a beautiful story.',
-    works: [
-      { title: 'My City', meta: 'Age 6', image: '/student-gallery/children-4-6-four-seasons.jpg', contain: false },
-      { title: 'Lion Dance', meta: 'Age 9', image: '/student-gallery/children-7-9-lion-dance.jpg', contain: false },
-      { title: 'Dream Garden', meta: 'Age 12', image: '/student-gallery/children-10-12-dream.jpg', contain: false },
+    categories: [
+      {
+        label: 'Age 4–6',
+        works: [
+          { title: 'Four Seasons', meta: 'Age 5', image: '/student-gallery/children-4-6-four-seasons.jpg' },
+          { title: 'Study Cat', meta: 'Age 6', image: '/student-gallery/children-4-6-study-cat.jpg' },
+          { title: 'Winter Fun', meta: 'Age 5', image: '/student-gallery/children-4-6-winter-fun.jpg' },
+        ],
+      },
+      {
+        label: 'Age 7–9',
+        works: [
+          { title: 'Lion Dance', meta: 'Age 9', image: '/student-gallery/children-7-9-lion-dance.jpg' },
+          { title: 'Spring', meta: 'Age 9', image: '/student-gallery/children-7-9-spring.jpg' },
+          { title: 'The Milkmaid', meta: 'Age 8', image: '/student-gallery/children-7-9-milk-maid.jpg' },
+        ],
+      },
+      {
+        label: 'Age 10–12',
+        works: [
+          { title: 'Dream Garden', meta: 'Age 12', image: '/student-gallery/children-10-12-dream.jpg' },
+          { title: 'Rapunzel', meta: 'Age 10', image: '/student-gallery/children-10-12-rapunzel.jpg' },
+          { title: 'Unicorn', meta: 'Age 12', image: '/student-gallery/children-10-12-unicorn.jpg' },
+        ],
+      },
     ],
   },
   {
@@ -73,12 +97,32 @@ const gallerySections: GallerySection[] = [
     kicker: 'Growing Voices',
     title: 'Teen\'s Art Works',
     description: 'Showcasing growth, expression and creative journeys.',
-    tabs: ['Age 13–15', 'Age 15–18', 'Portfolios'],
     quote: 'Every artwork tells a story. Thank you for being part of our creative journey.',
-    works: [
-      { title: 'Ancient Girl', meta: 'Age 13 · Watercolor', image: '/student-gallery/teen-13-15-ancient-girl.jpg', contain: false },
-      { title: 'Fantasy Girl', meta: 'Age 14 · Digital Art', image: '/student-gallery/teen-15-18-girl.jpg', contain: false },
-      { title: 'Portfolio Portrait', meta: 'Portfolio', image: '/student-gallery/portfolio-helen.jpg', contain: false },
+    categories: [
+      {
+        label: 'Age 13–15',
+        works: [
+          { title: 'Ancient Girl', meta: 'Age 13 · Watercolor', image: '/student-gallery/teen-13-15-ancient-girl.jpg' },
+          { title: 'Christmas', meta: 'Age 14', image: '/student-gallery/teen-13-15-christmas.jpg' },
+          { title: 'Violin', meta: 'Age 15', image: '/student-gallery/teen-13-15-violin.jpg' },
+        ],
+      },
+      {
+        label: 'Age 15–18',
+        works: [
+          { title: 'Fantasy Girl', meta: 'Age 16', image: '/student-gallery/teen-15-18-girl.jpg' },
+          { title: 'Sunset', meta: 'Age 16', image: '/student-gallery/teen-15-18-sunset.jpg' },
+          { title: 'Autumn', meta: 'Age 17', image: '/student-gallery/teen-15-18-autumn.jpg' },
+        ],
+      },
+      {
+        label: 'Portfolios',
+        works: [
+          { title: 'Helen Portfolio', meta: 'Portfolio', image: '/student-gallery/portfolio-helen.jpg' },
+          { title: 'Sunny Portfolio', meta: 'Portfolio', image: '/student-gallery/portfolio-sunny.jpg' },
+          { title: 'Serena Portfolio', meta: 'Portfolio', image: '/student-gallery/portfolio-serena.jpg' },
+        ],
+      },
     ],
   },
   {
@@ -87,12 +131,32 @@ const gallerySections: GallerySection[] = [
     kicker: 'Creative Practice',
     title: 'Adult Art Works',
     description: 'Art created with passion, experience and personal expression.',
-    tabs: ['All Works', 'Paintings', 'Watercolor'],
     quote: 'Art is not about perfection. It is about expression. Every piece is a reflection of a unique journey.',
-    works: [
-      { title: 'Mountain Lake', meta: 'Oil Painting', image: '/student-gallery/adult-town.jpg', contain: false },
-      { title: 'Eva', meta: 'Acrylic', image: '/student-gallery/adult-eva.jpg', contain: false },
-      { title: 'Soft Garden', meta: 'Watercolor', image: '/student-gallery/adult-watercolor-sophia.jpg', contain: false },
+    categories: [
+      {
+        label: 'All Works',
+        works: [
+          { title: 'Mountain Lake', meta: 'Oil Painting', image: '/student-gallery/adult-town.jpg' },
+          { title: 'Eva', meta: 'Acrylic', image: '/student-gallery/adult-eva.jpg' },
+          { title: 'Soft Garden', meta: 'Watercolor', image: '/student-gallery/adult-watercolor-sophia.jpg' },
+        ],
+      },
+      {
+        label: 'Paintings',
+        works: [
+          { title: 'Mountain Lake', meta: 'Oil Painting', image: '/student-gallery/adult-town.jpg' },
+          { title: 'Eva', meta: 'Acrylic', image: '/student-gallery/adult-eva.jpg' },
+          { title: 'Family Study', meta: 'Acrylic', image: '/student-gallery/adult-painting-family.jpg' },
+        ],
+      },
+      {
+        label: 'Watercolor',
+        works: [
+          { title: 'Soft Garden', meta: 'Watercolor', image: '/student-gallery/adult-watercolor-sophia.jpg' },
+          { title: 'Zi Yin', meta: 'Watercolor', image: '/student-gallery/adult-watercolor-zinyin.jpg' },
+          { title: 'Amanda', meta: 'Watercolor', image: '/student-gallery/adult-watercolor-amanda.jpg' },
+        ],
+      },
     ],
   },
   {
@@ -101,13 +165,40 @@ const gallerySections: GallerySection[] = [
     kicker: 'Handmade Joy',
     title: 'Craft Creations',
     description: 'Handmade with love, creativity and care!',
-    tabs: ['Paper Crafts', 'Clay & Pottery', 'Textile & Yarn', 'Mixed Media'],
     quote: 'Little hands. Big imagination. Every creation is a beautiful story.',
-    works: [
-      { title: 'Paper Flower', meta: 'Paper Crafts', image: '/student-gallery/craft-paper-flower.jpg', contain: true },
-      { title: 'Clay Lotus Pond', meta: 'Clay & Pottery', image: '/student-gallery/craft-clay-lotus.jpg', contain: true },
-      { title: 'Crochet Friends', meta: 'Textile & Yarn', image: '/student-gallery/craft-crochet.jpg', contain: true },
-      { title: 'Mixed Media Frame', meta: 'Mixed Media', image: '/student-gallery/craft-mixed-media.jpg', contain: true },
+    categories: [
+      {
+        label: 'Paper Crafts',
+        works: [
+          { title: 'Paper Flower', meta: 'Paper Crafts', image: '/student-gallery/craft-paper-flower.jpg', contain: true },
+          { title: 'Paper Garden', meta: 'Paper Crafts', image: '/student-gallery/craft-paper-garden.jpg', contain: true },
+          { title: 'Paper Flowers', meta: 'Paper Crafts', image: '/student-gallery/craft-paper-flowers.jpg', contain: true },
+        ],
+      },
+      {
+        label: 'Clay & Pottery',
+        works: [
+          { title: 'Clay Lotus Pond', meta: 'Clay & Pottery', image: '/student-gallery/craft-clay-lotus.jpg', contain: true },
+          { title: 'Minecraft Clay', meta: 'Clay & Pottery', image: '/student-gallery/craft-clay-minecraft.jpg', contain: true },
+          { title: 'Clay Bowl', meta: 'Clay & Pottery', image: '/student-gallery/craft-clay-bowl.jpg', contain: true },
+        ],
+      },
+      {
+        label: 'Textile & Yarn',
+        works: [
+          { title: 'Crochet Friends', meta: 'Textile & Yarn', image: '/student-gallery/craft-crochet.jpg', contain: true },
+          { title: 'Crochet Bunnies', meta: 'Textile & Yarn', image: '/student-gallery/craft-crochet-bunnies.jpg', contain: true },
+          { title: 'Crochet Bear', meta: 'Textile & Yarn', image: '/student-gallery/craft-crochet-bear.jpg', contain: true },
+        ],
+      },
+      {
+        label: 'Mixed Media',
+        works: [
+          { title: 'Mixed Media Frame', meta: 'Mixed Media', image: '/student-gallery/craft-mixed-media.jpg', contain: true },
+          { title: 'Mixed Media Owl', meta: 'Mixed Media', image: '/student-gallery/craft-mixed-media-owl.jpg', contain: true },
+          { title: 'Mixed Media Collage', meta: 'Mixed Media', image: '/student-gallery/craft-mixed-media-collage.jpg', contain: true },
+        ],
+      },
     ],
   },
 ]
@@ -136,12 +227,36 @@ const footerLinks = [
 ]
 
 const isAssistantOpen = ref(false)
+const activeCategoryIndexes = reactive(
+  Object.fromEntries(gallerySections.map(section => [section.id, 0])) as Record<string, number>,
+)
 const activeGalleryIndexes = reactive(
   Object.fromEntries(gallerySections.map(section => [section.id, 0])) as Record<string, number>,
 )
 
+function activeCategoryIndex(sectionId: string) {
+  return activeCategoryIndexes[sectionId] ?? 0
+}
+
 function activeWorkIndex(sectionId: string) {
   return activeGalleryIndexes[sectionId] ?? 0
+}
+
+function activeCategory(section: GallerySection): GalleryCategory {
+  const category = section.categories[activeCategoryIndex(section.id)] ?? section.categories[0]
+  if (!category) {
+    throw new Error(`Gallery section ${section.id} has no categories`)
+  }
+  return category
+}
+
+function activeWorks(section: GallerySection) {
+  return activeCategory(section).works
+}
+
+function setActiveCategory(sectionId: string, index: number) {
+  activeCategoryIndexes[sectionId] = index
+  activeGalleryIndexes[sectionId] = 0
 }
 
 function setActiveWork(sectionId: string, index: number) {
@@ -149,12 +264,17 @@ function setActiveWork(sectionId: string, index: number) {
 }
 
 function stepWork(sectionId: string, total: number, direction: -1 | 1) {
+  if (!total) return
+
   activeGalleryIndexes[sectionId] = (activeWorkIndex(sectionId) + direction + total) % total
 }
 
 function visibleWorks(section: GallerySection) {
-  const active = activeWorkIndex(section.id)
-  return [...section.works.slice(active), ...section.works.slice(0, active)].slice(0, 3)
+  const works = activeWorks(section)
+  if (!works.length) return []
+
+  const active = activeWorkIndex(section.id) % works.length
+  return [...works.slice(active), ...works.slice(0, active)].slice(0, 3)
 }
 </script>
 
@@ -288,15 +408,15 @@ function visibleWorks(section: GallerySection) {
           </p>
           <div class="mt-6 flex flex-wrap justify-center gap-3">
             <button
-              v-for="(tab, index) in section.tabs"
-              :key="tab"
+              v-for="(category, index) in section.categories"
+              :key="category.label"
               type="button"
               class="gallery-pill rounded-full px-5 py-2 text-sm font-bold shadow-sm transition"
-              :class="activeWorkIndex(section.id) === index ? 'bg-white text-[#e65f6e] ring-2 ring-[#e65f6e]/30' : ''"
-              :aria-pressed="activeWorkIndex(section.id) === index"
-              @click="setActiveWork(section.id, index)"
+              :class="activeCategoryIndex(section.id) === index ? 'bg-white text-[#e65f6e] ring-2 ring-[#e65f6e]/30' : ''"
+              :aria-pressed="activeCategoryIndex(section.id) === index"
+              @click="setActiveCategory(section.id, index)"
             >
-              {{ tab }}
+              {{ category.label }}
             </button>
           </div>
         </div>
@@ -312,7 +432,7 @@ function visibleWorks(section: GallerySection) {
             type="button"
             class="stage-arrow left-4"
             aria-label="Previous artwork"
-            @click="stepWork(section.id, section.works.length, -1)"
+            @click="stepWork(section.id, activeWorks(section).length, -1)"
           >
             <UIcon
               name="i-lucide-chevron-left"
@@ -340,7 +460,7 @@ function visibleWorks(section: GallerySection) {
             type="button"
             class="stage-arrow right-4"
             aria-label="Next artwork"
-            @click="stepWork(section.id, section.works.length, 1)"
+            @click="stepWork(section.id, activeWorks(section).length, 1)"
           >
             <UIcon
               name="i-lucide-chevron-right"
@@ -351,8 +471,8 @@ function visibleWorks(section: GallerySection) {
 
         <div class="mt-7 flex justify-center gap-3">
           <button
-            v-for="(work, index) in section.works"
-            :key="`${section.id}-${work.title}-dot`"
+            v-for="(work, index) in activeWorks(section)"
+            :key="`${section.id}-${activeCategory(section).label}-${work.title}-dot`"
             type="button"
             class="size-3 rounded-full border-2 transition"
             :class="activeWorkIndex(section.id) === index ? 'border-[#e65f6e] bg-[#e65f6e]' : 'border-current/35'"
