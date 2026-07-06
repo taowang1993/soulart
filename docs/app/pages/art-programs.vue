@@ -164,10 +164,10 @@ const isAssistantOpen = ref(false)
     v-else
     class="xinyi-art-program min-h-screen overflow-hidden bg-[#fbf7ff] text-[#40335f]"
   >
-    <section class="relative isolate overflow-hidden bg-[linear-gradient(120deg,#fbf7ff_0%,#fff9f4_52%,#fbf1ff_100%)] px-4 pb-0 pt-6 sm:px-6">
+    <section class="relative isolate overflow-visible bg-[linear-gradient(120deg,#fbf7ff_0%,#fff9f4_52%,#fbf1ff_100%)] px-4 pb-0 pt-6 sm:px-6">
       <nav
         aria-label="Main Navigation"
-        class="mx-auto flex max-w-[1360px] items-center justify-between bg-white/90 px-5 py-3 shadow-sm ring-1 ring-white/80 backdrop-blur md:px-8"
+        class="relative z-50 mx-auto flex max-w-[1360px] items-center justify-between overflow-visible bg-white/90 px-5 py-3 shadow-sm ring-1 ring-white/80 backdrop-blur md:px-8"
       >
         <NuxtLink
           to="/"
@@ -208,7 +208,7 @@ const isAssistantOpen = ref(false)
             </NuxtLink>
             <div
               v-if="item.children"
-              class="pointer-events-none absolute left-0 top-full z-30 min-w-52 rounded-2xl bg-white/95 p-2 opacity-0 shadow-xl ring-1 ring-[#eaddec] transition group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100"
+              class="pointer-events-none absolute left-0 top-full z-[70] min-w-52 rounded-2xl bg-white/95 p-2 opacity-0 shadow-xl ring-1 ring-[#eaddec] transition group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100"
             >
               <NuxtLink
                 v-for="child in item.children"
