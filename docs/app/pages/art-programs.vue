@@ -243,7 +243,7 @@ const isAssistantOpen = ref(false)
         <img
           src="/art-program/hero-reference.png"
           alt="ART PROGRAMS — creativity grows through practice"
-          class="w-full"
+          class="h-[27rem] w-full object-cover object-[35%_center]"
           loading="eager"
           decoding="async"
         >

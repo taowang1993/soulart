@@ -67,7 +67,7 @@ test('art programs page owns its marketing chrome and links from home', () => {
 
   assert.match(source, /definePageMeta\(\{[\s\S]*header:\s*false[\s\S]*footer:\s*false[\s\S]*\}\)/)
   assert.match(source, /ART PROGRAMS[\s\S]*creativity grows through practice/)
-  assert.match(source, /src="\/art-program\/hero-reference\.png"[\s\S]*alt="ART PROGRAMS — creativity grows through practice"[\s\S]*class="w-full"/)
+  assert.match(source, /src="\/art-program\/hero-reference\.png"[\s\S]*alt="ART PROGRAMS — creativity grows through practice"[\s\S]*class="h-\[27rem\] w-full object-cover object-\[35%_center\]"/)
   assert.match(source, /item\.label === 'Home' \? 'bg-\[#f1e4ff\] text-\[#6d4d95\]' : ''/)
   assert.match(source, />\s*EN\s*<\/NuxtLink>[\s\S]*>\s*中文\s*<\/NuxtLink>/)
   assert.doesNotMatch(source, /Explore Classes/)
