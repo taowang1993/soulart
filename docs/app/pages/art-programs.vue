@@ -472,7 +472,7 @@ const isAssistantOpen = ref(false)
           <article
             v-for="program in campPrograms"
             :key="program.title"
-            class="rounded-[2rem] bg-white/85 p-4 text-center shadow-sm ring-1 ring-[#d7d0c4]"
+            class="flex flex-col rounded-[2rem] bg-white/85 p-4 text-center shadow-sm ring-1 ring-[#d7d0c4]"
           >
             <div class="camp-photo-frame">
               <img
@@ -492,13 +492,13 @@ const isAssistantOpen = ref(false)
             <NuxtLink
               v-if="program.to"
               :to="program.to"
-              class="mt-4 inline-flex rounded-full bg-[#e6b2b6] px-7 py-2.5 font-bold text-[#5a435f] shadow-md transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
+              class="mt-auto inline-flex self-center rounded-full bg-[#e6b2b6] px-7 py-2.5 font-bold text-[#5a435f] shadow-md transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
             >
               {{ program.action }}
             </NuxtLink>
             <span
               v-else
-              class="mt-4 inline-flex rounded-full bg-[#f3e6de] px-7 py-2.5 font-bold text-[#8a6758] shadow-sm ring-1 ring-[#dec8bb]"
+              class="mt-auto inline-flex self-center rounded-full bg-[#f3e6de] px-7 py-2.5 font-bold text-[#8a6758] shadow-sm ring-1 ring-[#dec8bb]"
             >
               {{ program.status }}
             </span>
