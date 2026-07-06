@@ -1,0 +1,113 @@
+import assert from 'node:assert/strict'
+import { existsSync, readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
+import { test } from 'node:test'
+
+const repoRoot = resolve(import.meta.dirname, '../..')
+const resourcesPagePath = resolve(repoRoot, 'docs/app/pages/resources.vue')
+const publicResourcesDir = resolve(repoRoot, 'docs/public/resources')
+
+const marketingPages = [
+  'docs/app/pages/index.vue',
+  'docs/app/pages/art-programs.vue',
+  'docs/app/pages/art-programs/student-gallery.vue',
+  'docs/app/pages/wellness.vue',
+  'docs/app/pages/about.vue',
+  'docs/app/pages/schedules.vue',
+  'docs/app/pages/contact.vue',
+  'docs/app/pages/resources.vue',
+] as const
+
+const expectedResourceAssets = [
+  'hero-video.jpg',
+  'julia-2019.jpg',
+  'julia-2025.jpg',
+  'julia.jpg',
+  'bernice.jpg',
+  'julia-artwork.jpg',
+  'doris-artwork.jpg',
+  'jane-art.jpg',
+  'wellness-community.jpg',
+  'article-creating.jpg',
+  'article-growing.jpg',
+  'article-ai.jpg',
+] as const
+
+function readPage() {
+  assert.ok(existsSync(resourcesPagePath), 'resources.vue page should exist')
+  return readFileSync(resourcesPagePath, 'utf8')
+}
+
+test('resources assets are copied into the public resources directory', () => {
+  for (const asset of expectedResourceAssets) {
+    assert.ok(existsSync(resolve(publicResourcesDir, asset)), `${asset} should be copied to docs/public/resources`)
+  }
+})
+
+test('resources page owns marketing chrome and preserves the assistant', () => {
+  const source = readPage()
+
+  assert.match(source, /definePageMeta\(\{[\s\S]*header:\s*false[\s\S]*footer:\s*false[\s\S]*\}\)/)
+  assert.match(source, /useSeoMeta\(\{[\s\S]*title:\s*['"]Resources \| XinYi Class['"]/)
+  assert.match(source, /<HomeAssistantChat\s+v-model:open="isAssistantOpen"\s+\/>/)
+  assert.doesNotMatch(source, /\/Users\/max\/projects\/resources/)
+})
+
+test('resources page follows the reference content sections', () => {
+  const source = readPage()
+  const requiredCopy = [
+    'Welcome to XinYi Art Studio',
+    'A Place for Creativity, Connection & Growth',
+    'Watch Introduction Video',
+    'Stories of Growth',
+    'Julia & Bernice',
+    'Growing Together',
+    'Doris',
+    'Learning Never Stops',
+    'Parents’ Voices',
+    'Growing in Body, Mind and Heart',
+    'Words from Our Community',
+    'Art by Jane',
+    'Explore Our YouTube Playlists',
+    'Weekly Art Healing',
+    'Gentle Yoga',
+    'Meditation & Yoga Nidra',
+    'Explore 300+ Free Videos on Our YouTube Channel',
+    'Reading List',
+    'The Power of Now',
+    'The Creative Act',
+    'The Artist’s Way',
+    'Deep Work',
+    'The Untethered Soul',
+    'Yoga Sutras of Patanjali',
+    'Articles & Reflections',
+    'Creating vs. Consuming',
+    'Growing Upward, Rooting Inward',
+    'Living with AI, Staying Human',
+    'Continue the Journey',
+  ]
+
+  for (const copy of requiredCopy) {
+    assert.match(source, new RegExp(copy.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')), `${copy} should appear on the page`)
+  }
+})
+
+test('resources page uses copied public assets only', () => {
+  const source = readPage()
+
+  for (const asset of expectedResourceAssets) {
+    assert.match(source, new RegExp(`/resources/${asset.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`))
+  }
+
+  assert.doesNotMatch(source, /src="https?:/)
+  assert.doesNotMatch(source, /\/Users\/max\/projects\/resources/)
+})
+
+test('marketing navigation links Resources to the resources route', () => {
+  for (const path of marketingPages) {
+    const source = readFileSync(resolve(repoRoot, path), 'utf8')
+
+    assert.match(source, /\{ label: 'Resources', to: '\/resources', icon: 'i-lucide-book-open'/, `${path} should link Resources nav to /resources`)
+    assert.doesNotMatch(source, /\{ label: 'Resources', to: '\/docs\/manual\/en\/getting-started\/installation'/, `${path} should not send Resources to docs installation`)
+  }
+})

@@ -21,7 +21,7 @@ const navItems = [
   },
   { label: 'Wellness', to: '/wellness', icon: 'i-lucide-leaf' },
   { label: 'Schedules', to: '/schedules', icon: 'i-lucide-calendar-days' },
-  { label: 'Resources', to: '/docs/manual/en/getting-started/installation', icon: 'i-lucide-book-open' },
+  { label: 'Resources', to: '/resources', icon: 'i-lucide-book-open' },
   { label: 'About', to: '/about', icon: 'i-lucide-heart' },
   { label: 'Contact', to: '/contact', icon: 'i-lucide-mail' },
 ]
@@ -112,7 +112,7 @@ const footerLinks = [
   { label: 'About', to: '/about' },
   { label: 'Art Programs', to: '/art-programs' },
   { label: 'Wellness', to: '/wellness' },
-  { label: 'Resources', to: '/docs/manual/en/getting-started/installation' },
+  { label: 'Resources', to: '/resources' },
   { label: 'Contact', to: '/contact' },
 ]
 
