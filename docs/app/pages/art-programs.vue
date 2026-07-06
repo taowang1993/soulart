@@ -217,7 +217,7 @@ const isAssistantOpen = ref(false)
             </NuxtLink>
             <div
               v-if="item.children"
-              class="pointer-events-none absolute left-0 top-full z-30 mt-2 min-w-52 rounded-2xl bg-white/95 p-2 opacity-0 shadow-xl ring-1 ring-[#eaddec] transition group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100"
+              class="pointer-events-none absolute left-0 top-full z-30 min-w-52 rounded-2xl bg-white/95 p-2 opacity-0 shadow-xl ring-1 ring-[#eaddec] transition group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100"
             >
               <NuxtLink
                 v-for="child in item.children"

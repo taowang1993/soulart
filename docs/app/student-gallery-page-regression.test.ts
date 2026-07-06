@@ -122,5 +122,6 @@ test('marketing nav exposes Student Gallery under Art Programs', () => {
     assert.match(source, /label: 'Art Programs'/, `${path} must keep Art Programs in the nav`)
     assert.match(source, /children: \[\{ label: 'Student Gallery', to: '\/art-programs\/student-gallery' \}\]/, `${path} must add the Student Gallery dropdown item`)
     assert.match(source, /i-lucide-chevron-down/, `${path} must show a dropdown affordance`)
+    assert.doesNotMatch(source, /top-full z-30 mt-2 min-w-52/, `${path} dropdown must not leave an unhoverable margin gap`)
   }
 })
