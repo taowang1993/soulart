@@ -20,6 +20,29 @@ const expectedAssets = [
   'yoga-program.jpg',
 ]
 
+const expectedElementAssets = [
+  'hero-connect.webp',
+  'hero-create.webp',
+  'hero-thrive.webp',
+  'leaf-row.webp',
+  'leaf-single.webp',
+  'program-art.webp',
+  'program-yoga.webp',
+  'reason-community.webp',
+  'reason-confidence.webp',
+  'reason-creativity.webp',
+  'reason-focus.webp',
+  'reason-joy.webp',
+  'reason-wellbeing.webp',
+  'shortcut-assistant.webp',
+  'shortcut-summer.webp',
+  'shortcut-yoga.webp',
+  'studio-calm.webp',
+  'studio-creative.webp',
+  'studio-groups.webp',
+  'studio-light.webp',
+]
+
 function readHomePage() {
   assert.ok(existsSync(homePagePath), 'docs app must provide a custom / page at docs/app/pages/index.vue')
   return readFileSync(homePagePath, 'utf8')
@@ -44,6 +67,10 @@ test('home page assets are copied into public home directory', () => {
   for (const asset of expectedAssets) {
     assert.ok(existsSync(resolve(publicHomePath, asset)), `missing public home asset: ${asset}`)
   }
+
+  for (const asset of expectedElementAssets) {
+    assert.ok(existsSync(resolve(publicHomePath, 'elements', asset)), `missing supplied home element: ${asset}`)
+  }
 })
 
 test('home page uses copied public assets instead of local absolute paths', () => {
@@ -52,6 +79,9 @@ test('home page uses copied public assets instead of local absolute paths', () =
   assert.doesNotMatch(source, /\/Users\/max\/projects\/resources/)
   for (const asset of expectedAssets) {
     assert.match(source, new RegExp(`/home/${asset.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`))
+  }
+  for (const asset of expectedElementAssets) {
+    assert.match(source, new RegExp(`/home/elements/${asset.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`))
   }
 })
 
@@ -70,7 +100,7 @@ test('home page opens a floating bottom-right site-wide assistant chat', () => {
   const source = readHomePage()
   const assistant = readHomeAssistant()
 
-  assert.match(source, /const isAssistantOpen = ref\(false\)/)
+  assert.match(source, /const isAssistantOpen = shallowRef\(false\)/)
   assert.match(source, /<HomeAssistantChat\s+v-model:open="isAssistantOpen"\s+\/>/)
   assert.doesNotMatch(source, /Talk with AI Assistant/)
   assert.match(assistant, /new Chat\(/)
@@ -92,9 +122,9 @@ test('home page owns its marketing chrome without changing docs routes', () => {
   assert.match(source, /class="hero-title[^"]*"[\s\S]*Art[\s\S]*Yoga Wellness[\s\S]*Community/)
   assert.match(source, /\.hero-title\s*\{[\s\S]*white-space:\s*nowrap/)
   assert.match(source, /Explore Our Programs/)
-  assert.match(source, /\{ text: 'Summer Outdoor Yoga Retreat Registration', action: 'Open Here', to: '\/wellness#retreat', image: '\/wellness\/outdoor-yoga\.jpg', assistant: false \}/)
-  assert.match(source, /\{ text: 'Upcoming Workshops', action: 'Open Here', to: '\/art-programs#events', image: '\/art-program\/creative-camp-workshops\.jpg', assistant: false \}/)
-  assert.match(source, /\{ text: 'Meet XinYi AI Assistant', action: 'Open Here', to: '', image: '\/home\/logo\.png', assistant: true \}/)
+  assert.match(source, /\{ text: 'Summer Outdoor Yoga Retreat Registration', action: 'Open Here', to: '\/wellness#retreat', image: '\/home\/elements\/shortcut-yoga\.webp', assistant: false \}/)
+  assert.match(source, /\{ text: 'Upcoming Workshops', action: 'Open Here', to: '\/art-programs#events', image: '\/home\/elements\/shortcut-summer\.webp', assistant: false \}/)
+  assert.match(source, /\{ text: 'Meet XinYi AI Assistant', action: 'Open Here', to: '', image: '\/home\/elements\/shortcut-assistant\.webp', assistant: true \}/)
   assert.match(source, /:src="item\.image"/)
   assert.match(source, /@click="item\.assistant && \(isAssistantOpen = true\)"/)
   assert.doesNotMatch(source, /Read More Stories/)

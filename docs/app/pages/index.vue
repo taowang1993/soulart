@@ -30,22 +30,22 @@ const navItems = [
 ]
 
 const heroValues = [
-  { label: 'Create', icon: 'i-lucide-palette' },
-  { label: 'Connect', icon: 'i-lucide-sprout' },
-  { label: 'Thrive', icon: 'i-lucide-heart' },
+  { label: 'Create', image: '/home/elements/hero-create.webp' },
+  { label: 'Connect', image: '/home/elements/hero-connect.webp' },
+  { label: 'Thrive', image: '/home/elements/hero-thrive.webp' },
 ]
 
 const announcements = [
-  { text: 'Summer Outdoor Yoga Retreat Registration', action: 'Open Here', to: '/wellness#retreat', image: '/wellness/outdoor-yoga.jpg', assistant: false },
-  { text: 'Upcoming Workshops', action: 'Open Here', to: '/art-programs#events', image: '/art-program/creative-camp-workshops.jpg', assistant: false },
-  { text: 'Meet XinYi AI Assistant', action: 'Open Here', to: '', image: '/home/logo.png', assistant: true },
+  { text: 'Summer Outdoor Yoga Retreat Registration', action: 'Open Here', to: '/wellness#retreat', image: '/home/elements/shortcut-yoga.webp', assistant: false },
+  { text: 'Upcoming Workshops', action: 'Open Here', to: '/art-programs#events', image: '/home/elements/shortcut-summer.webp', assistant: false },
+  { text: 'Meet XinYi AI Assistant', action: 'Open Here', to: '', image: '/home/elements/shortcut-assistant.webp', assistant: true },
 ]
 
 const programs = [
   {
     title: 'Art Programs',
     image: '/home/art-program.png',
-    icon: 'i-lucide-palette',
+    icon: '/home/elements/program-art.webp',
     tint: 'rose',
     description: 'For children, teens, and adults',
     tagline: 'Create • Explore • Grow',
@@ -54,7 +54,7 @@ const programs = [
   {
     title: 'Wellness Programs',
     image: '/home/yoga-program.jpg',
-    icon: 'i-lucide-flower-2',
+    icon: '/home/elements/program-yoga.webp',
     tint: 'violet',
     description: 'Yoga, community, and well-being',
     tagline: 'Breathe • Connect • Flourish',
@@ -63,41 +63,41 @@ const programs = [
 ]
 
 const studioTraits = [
-  { label: 'Natural Light', icon: 'i-lucide-sun' },
-  { label: 'Small Groups', icon: 'i-lucide-users' },
-  { label: 'Creative Studio', icon: 'i-lucide-palette' },
-  { label: 'Calm & Inspiring', icon: 'i-lucide-leaf' },
+  { label: 'Natural Light', image: '/home/elements/studio-light.webp' },
+  { label: 'Small Groups', image: '/home/elements/studio-groups.webp' },
+  { label: 'Creative Studio', image: '/home/elements/studio-creative.webp' },
+  { label: 'Calm & Inspiring', image: '/home/elements/studio-calm.webp' },
 ]
 
 const reasons = [
   {
     title: 'Creativity',
-    icon: 'i-lucide-palette',
+    image: '/home/elements/reason-creativity.webp',
     description: 'Art encourages imagination, problem solving, and original thinking.',
   },
   {
     title: 'Confidence',
-    icon: 'i-lucide-smile',
+    image: '/home/elements/reason-confidence.webp',
     description: 'Children gain confidence by expressing their ideas and sharing their work.',
   },
   {
     title: 'Emotional Well-Being',
-    icon: 'i-lucide-heart',
+    image: '/home/elements/reason-wellbeing.webp',
     description: 'Art provides a safe space for self-expression, reflection, and emotional growth.',
   },
   {
     title: 'Observation & Focus',
-    icon: 'i-lucide-eye',
+    image: '/home/elements/reason-focus.webp',
     description: 'Drawing and painting strengthen observation skills and concentration.',
   },
   {
     title: 'Community',
-    icon: 'i-lucide-users-round',
+    image: '/home/elements/reason-community.webp',
     description: 'Students learn, create, and grow together in a supportive environment.',
   },
   {
     title: 'Joy of Learning',
-    icon: 'i-lucide-star',
+    image: '/home/elements/reason-joy.webp',
     description: 'Learning should be meaningful, engaging, and enjoyable.',
   },
 ]
@@ -123,7 +123,7 @@ const socialLinks = [
   { label: 'YouTube', icon: 'i-lucide-youtube', href: 'https://www.youtube.com/@XinyiArt-Yoga-Healing' },
 ]
 
-const isAssistantOpen = ref(false)
+const isAssistantOpen = shallowRef(false)
 </script>
 
 <template>
@@ -159,7 +159,7 @@ const isAssistantOpen = ref(false)
           >
         </NuxtLink>
 
-        <div class="hidden items-center gap-1 rounded-full bg-white/50 p-1 md:flex">
+        <div class="hidden items-center gap-1 rounded-full bg-white/50 p-1 lg:flex">
           <div
             v-for="item in navItems"
             :key="item.label"
@@ -198,6 +198,37 @@ const isAssistantOpen = ref(false)
           </div>
         </div>
 
+        <details class="relative ml-auto lg:hidden">
+          <summary class="flex size-10 cursor-pointer list-none items-center justify-center rounded-full bg-[#f3e8ff] text-[#5b457d] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#d98792]">
+            <UIcon
+              name="i-lucide-menu"
+              class="size-5"
+            />
+            <span class="sr-only">Open Navigation</span>
+          </summary>
+          <div class="absolute right-0 top-12 z-40 w-60 rounded-2xl bg-white p-3 shadow-xl ring-1 ring-[#eaddec]">
+            <template
+              v-for="item in navItems"
+              :key="item.label"
+            >
+              <NuxtLink
+                :to="item.to"
+                class="block rounded-xl px-4 py-2.5 text-sm font-semibold text-[#5b457d] hover:bg-[#f7eefb]"
+              >
+                {{ item.label }}
+              </NuxtLink>
+              <NuxtLink
+                v-for="child in item.children || []"
+                :key="child.label"
+                :to="child.to"
+                class="block rounded-xl px-7 py-2 text-sm text-[#79658d] hover:bg-[#f7eefb]"
+              >
+                {{ child.label }}
+              </NuxtLink>
+            </template>
+          </div>
+        </details>
+
         <div class="flex items-center gap-2 rounded-full bg-[#f3e8ff] px-3 py-2 text-xs font-semibold text-[#5b457d]">
           <NuxtLink
             to="/docs/manual/en/getting-started/installation"
@@ -216,18 +247,18 @@ const isAssistantOpen = ref(false)
       </nav>
 
       <div class="mx-auto grid max-w-6xl items-end gap-8 pt-9 lg:grid-cols-[1fr_1.35fr] lg:pt-12">
-        <div class="relative mx-auto max-w-xs self-end lg:mx-0">
+        <div class="relative mx-auto max-w-sm self-end lg:mx-0">
           <div class="absolute -inset-8 -z-10 rounded-full bg-white/45 blur-3xl" />
           <img
             src="/home/musical-hero.jpg"
             alt="XinYi Class students smiling with their teacher"
-            class="aspect-[3/4] w-full rounded-[2rem] object-cover object-[42%_center] shadow-[0_20px_70px_rgba(130,91,121,0.25)] lg:rounded-b-none"
+            class="hero-photo aspect-[3/4] w-full object-cover object-[42%_center]"
             loading="eager"
             decoding="async"
           >
         </div>
 
-        <div class="pb-2 text-center lg:pb-6">
+        <div class="min-w-0 pb-2 text-center lg:pb-6">
           <h1 class="hero-title font-serif font-semibold tracking-tight text-[#4d4166]">
             Art <span class="mx-2 text-[#735d91]">•</span> Yoga Wellness <span class="mx-2 text-[#735d91]">•</span> Community
           </h1>
@@ -235,53 +266,39 @@ const isAssistantOpen = ref(false)
             A Place to Create, Connect and Thrive
           </p>
 
-          <div class="mt-7 flex flex-wrap justify-center gap-4 text-sm font-medium text-[#5c4b6d]">
+          <div class="mt-7 flex flex-wrap justify-center gap-6 text-sm font-medium text-[#5c4b6d]">
             <div
               v-for="value in heroValues"
               :key="value.label"
-              class="flex items-center gap-2 rounded-full bg-white/55 px-4 py-2 shadow-sm ring-1 ring-white/70"
+              class="flex items-center gap-2"
             >
-              <UIcon
-                :name="value.icon"
-                class="size-6 text-[#d88792]"
-              />
+              <img
+                :src="value.image"
+                alt=""
+                class="size-9 object-contain"
+              >
               {{ value.label }}
             </div>
           </div>
 
-          <div class="mt-10 rounded-3xl bg-white/75 p-4 text-left shadow-[0_18px_50px_rgba(128,91,145,0.16)] ring-1 ring-white/80 backdrop-blur sm:p-5">
-            <div class="flex items-center gap-3">
-              <img
-                src="/home/logo.png"
-                alt="XinYi Class Logo"
-                class="h-14 w-14 rounded-2xl bg-[#fff8f8] object-contain p-2 ring-1 ring-[#eaddec]"
-              >
-              <div>
-                <p class="text-xs font-bold uppercase tracking-[0.18em] text-[#9b79b4]">
-                  What&apos;s New
-                </p>
-                <p class="font-serif text-2xl font-semibold text-[#5a4380]">
-                  Shortcut Cards
-                </p>
-              </div>
-            </div>
+          <div class="mt-10 rounded-3xl bg-white/55 p-4 text-left shadow-[0_18px_50px_rgba(128,91,145,0.12)] ring-1 ring-white/80 backdrop-blur sm:p-5">
+            <p class="text-center text-xs font-bold uppercase tracking-[0.2em] text-[#9b79b4]">
+              What&apos;s New
+            </p>
             <div class="mt-4 grid auto-cols-[minmax(13rem,1fr)] grid-flow-col gap-3 overflow-x-auto pb-1 snap-x snap-mandatory sm:grid-flow-row sm:grid-cols-3 sm:overflow-visible sm:pb-0">
               <article
-                v-for="(item, index) in announcements"
+                v-for="item in announcements"
                 :key="item.text"
-                class="snap-start rounded-2xl bg-white/85 p-3 shadow-sm ring-1 ring-[#eaddec]"
+                class="flex snap-start flex-col items-center rounded-2xl bg-white/85 p-4 text-center shadow-sm ring-1 ring-[#eaddec]"
               >
                 <img
                   :src="item.image"
                   :alt="`${item.text} shortcut`"
-                  class="h-20 w-full rounded-xl object-cover"
+                  class="h-20 w-24 object-contain"
                   loading="lazy"
                   decoding="async"
                 >
-                <p class="mt-3 text-xs font-bold uppercase tracking-[0.18em] text-[#9b79b4]">
-                  Card {{ index + 1 }}
-                </p>
-                <h3 class="mt-1 min-h-10 text-sm font-bold leading-5 text-[#40335f]">
+                <h3 class="mt-3 min-h-10 text-sm font-bold leading-5 text-[#40335f]">
                   {{ item.text }}
                 </h3>
                 <NuxtLink
@@ -310,7 +327,7 @@ const isAssistantOpen = ref(false)
 
     <section
       id="programs"
-      class="px-4 py-14 sm:px-6 lg:px-8 lg:py-18"
+      class="px-4 py-20 sm:px-6 lg:px-8 lg:py-24"
     >
       <div class="mx-auto max-w-5xl">
         <div class="text-center">
@@ -339,10 +356,13 @@ const isAssistantOpen = ref(false)
                 class="absolute left-1/2 top-0 flex size-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-lg ring-4"
                 :class="program.tint === 'rose' ? 'text-[#dc8d99] ring-[#f5d8dc]' : 'text-[#9d82c2] ring-[#e7dcf4]'"
               >
-                <UIcon
-                  :name="program.icon"
-                  class="size-10"
-                />
+                <img
+                  :src="program.icon"
+                  alt=""
+                  class="size-14 object-contain"
+                  loading="lazy"
+                  decoding="async"
+                >
               </div>
               <h3 class="font-serif text-3xl font-semibold text-[#72558d]">
                 {{ program.title }}
@@ -369,9 +389,17 @@ const isAssistantOpen = ref(false)
 
     <section
       id="studio"
-      class="relative px-4 py-14 sm:px-6 lg:px-8"
+      class="relative px-4 py-20 sm:px-6 lg:px-8 lg:py-24"
     >
-      <div class="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[0.78fr_1.22fr]">
+      <div class="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1.22fr_0.78fr]">
+        <img
+          src="/home/new-classroom.jpg"
+          alt="Bright XinYi Class art studio classroom"
+          class="h-full min-h-[360px] w-full rounded-[1.75rem] object-cover shadow-[0_22px_70px_rgba(82,61,107,0.18)] ring-1 ring-white/80"
+          loading="lazy"
+          decoding="async"
+        >
+
         <div class="text-center">
           <div
             class="mb-4 hidden text-[#c9a8d6] lg:block"
@@ -393,24 +421,17 @@ const isAssistantOpen = ref(false)
               :key="trait.label"
               class="text-center text-xs font-medium text-[#67577b]"
             >
-              <div class="mx-auto mb-2 flex size-11 items-center justify-center rounded-full bg-white/65 text-[#9f82bd] ring-1 ring-[#e4d4ec]">
-                <UIcon
-                  :name="trait.icon"
-                  class="size-6"
-                />
-              </div>
+              <img
+                :src="trait.image"
+                alt=""
+                class="mx-auto mb-2 size-12 object-contain"
+                loading="lazy"
+                decoding="async"
+              >
               {{ trait.label }}
             </div>
           </div>
         </div>
-
-        <img
-          src="/home/new-classroom.jpg"
-          alt="Bright XinYi Class art studio classroom"
-          class="h-full min-h-[360px] w-full rounded-[1.75rem] object-cover shadow-[0_22px_70px_rgba(82,61,107,0.18)] ring-1 ring-white/80"
-          loading="lazy"
-          decoding="async"
-        >
       </div>
 
       <p class="mx-auto mt-12 max-w-4xl border-y border-[#e9ddec] py-6 text-center font-serif text-xl italic text-[#a283b8]">
@@ -420,61 +441,73 @@ const isAssistantOpen = ref(false)
 
     <section
       id="benefits"
-      class="px-4 py-14 sm:px-6 lg:px-8"
+      class="relative overflow-hidden px-4 py-20 sm:px-6 lg:px-8 lg:py-24"
     >
-      <div class="mx-auto max-w-6xl">
-        <div class="flex flex-col gap-5 text-center lg:flex-row lg:items-center lg:justify-between lg:text-left">
-          <div>
-            <h2 class="font-serif text-4xl font-semibold text-[#5a4380] sm:text-5xl">
-              Why Families Choose
-              <span class="text-[#df838d]">XinYi</span>
-            </h2>
-            <div class="section-divider mx-auto mt-5 lg:mx-0" />
-          </div>
-          <NuxtLink
-            to="/contact"
-            class="mx-auto inline-flex items-center gap-3 rounded-xl bg-[#e49aa1] px-6 py-3 text-base font-bold text-[#3f304e] shadow-lg shadow-[#e49aa1]/20 transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792] lg:mx-0"
-          >
-            <UIcon
-              name="i-lucide-mail"
-              class="size-5"
-            />
-            Join Our Community
-          </NuxtLink>
-        </div>
+      <img
+        src="/home/elements/leaf-single.webp"
+        alt=""
+        class="absolute -left-12 top-16 w-44 -rotate-12 opacity-35"
+        aria-hidden="true"
+        loading="lazy"
+        decoding="async"
+      >
+      <img
+        src="/home/elements/leaf-row.webp"
+        alt=""
+        class="absolute -right-12 bottom-16 w-64 opacity-35"
+        aria-hidden="true"
+        loading="lazy"
+        decoding="async"
+      >
 
-        <div class="mt-10 grid gap-px overflow-hidden rounded-3xl bg-[#e7ddeb] ring-1 ring-[#e7ddeb] md:grid-cols-2 lg:grid-cols-3">
+      <div class="relative mx-auto max-w-6xl text-center">
+        <h2 class="font-serif text-4xl font-semibold text-[#5a4380] sm:text-5xl">
+          Why Families Choose
+          <span class="text-[#df838d]">XinYi</span>
+        </h2>
+        <div class="section-divider mx-auto mt-5" />
+
+        <div class="mt-12 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           <article
             v-for="reason in reasons"
             :key="reason.title"
-            class="flex gap-5 bg-[#fbf6ff]/95 p-7"
+            class="mx-auto max-w-xs text-center"
           >
-            <div class="flex size-20 shrink-0 items-center justify-center rounded-full bg-white/85 text-[#a886c6] shadow-inner ring-1 ring-[#eaddec]">
-              <UIcon
-                :name="reason.icon"
-                class="size-10"
-              />
-            </div>
-            <div>
-              <h3 class="font-serif text-xl font-semibold text-[#604781]">
-                {{ reason.title }}
-              </h3>
-              <p class="mt-3 text-sm leading-6 text-[#4f455b]">
-                {{ reason.description }}
-              </p>
-            </div>
+            <img
+              :src="reason.image"
+              alt=""
+              class="mx-auto h-28 w-32 object-contain"
+              loading="lazy"
+              decoding="async"
+            >
+            <h3 class="mt-4 font-serif text-xl font-semibold text-[#604781]">
+              {{ reason.title }}
+            </h3>
+            <p class="mt-3 text-sm leading-6 text-[#4f455b]">
+              {{ reason.description }}
+            </p>
           </article>
         </div>
 
-        <p class="mx-auto mt-10 max-w-4xl border-t border-[#e9ddec] pt-6 text-center font-serif text-xl italic text-[#a283b8]">
+        <p class="mx-auto mt-12 max-w-4xl border-t border-[#e9ddec] pt-6 font-serif text-xl italic text-[#a283b8]">
           Supporting every child and adult to discover their unique creativity and grow with confidence.
         </p>
+        <NuxtLink
+          to="/contact"
+          class="mt-8 inline-flex items-center gap-3 rounded-xl bg-[#e49aa1] px-6 py-3 text-base font-bold text-[#3f304e] shadow-lg shadow-[#e49aa1]/20 transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
+        >
+          <UIcon
+            name="i-lucide-mail"
+            class="size-5"
+          />
+          Join Our Community
+        </NuxtLink>
       </div>
     </section>
 
     <section
       id="memories"
-      class="relative overflow-hidden bg-[linear-gradient(180deg,#fbf6ff_0%,#f3edff_100%)] px-4 py-16 sm:px-6 lg:px-8"
+      class="relative overflow-hidden bg-[linear-gradient(180deg,#fbf6ff_0%,#f3edff_100%)] px-4 py-20 sm:px-6 lg:px-8 lg:py-24"
     >
       <div
         class="absolute inset-x-0 top-0 h-40 bg-[radial-gradient(circle_at_20%_10%,rgba(222,189,231,0.42),transparent_35%),radial-gradient(circle_at_80%_15%,rgba(255,218,215,0.42),transparent_34%)]"
@@ -637,9 +670,15 @@ const isAssistantOpen = ref(false)
 }
 
 .hero-title {
-  font-size: clamp(1.35rem, 3.7vw, 2.9rem);
+  font-size: clamp(1.35rem, 2.8vw, 2.3rem);
   line-height: 1.05;
   white-space: nowrap;
+}
+
+.hero-photo {
+  filter: drop-shadow(0 22px 36px rgba(130, 91, 121, 0.2));
+  -webkit-mask-image: radial-gradient(ellipse 78% 88% at 50% 47%, #000 55%, transparent 95%);
+  mask-image: radial-gradient(ellipse 78% 88% at 50% 47%, #000 55%, transparent 95%);
 }
 
 .watercolor {
@@ -677,5 +716,11 @@ const isAssistantOpen = ref(false)
   content: "";
   background: radial-gradient(circle at 50% 50%, #c8a9d8 0 28%, transparent 29%), radial-gradient(circle at 20% 30%, #e59aa5 0 18%, transparent 19%), radial-gradient(circle at 80% 30%, #e59aa5 0 18%, transparent 19%);
   transform: translate(-50%, -50%);
+}
+
+@media (max-width: 639px) {
+  .hero-title {
+    white-space: normal;
+  }
 }
 </style>
