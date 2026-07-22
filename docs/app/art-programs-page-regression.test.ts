@@ -9,9 +9,26 @@ const artPagePath = resolve(repoRoot, 'docs/app/pages/art-programs.vue')
 const homePagePath = resolve(repoRoot, 'docs/app/pages/index.vue')
 const artAssetPath = resolve(repoRoot, 'docs/public/art-program')
 
+const expectedElementAssets = [
+  'child-1.webp',
+  'child-2.webp',
+  'child-3.webp',
+  'teen-1.webp',
+  'teen-2.webp',
+  'teen-3.webp',
+  'adult-1.webp',
+  'adult-2.webp',
+  'adult-3.webp',
+  'making-1.webp',
+  'making-2.webp',
+  'making-3.webp',
+  'event-1.webp',
+  'event-2.webp',
+  'event-3.webp',
+]
+
 const expectedAssets = [
   'hero-reference.png',
-  'the-painting.jpg',
   'age-4-6.png',
   'age-7-9.jpg',
   'age-10-12.png',
@@ -28,8 +45,6 @@ const expectedAssets = [
   'creative-camp-workshops.jpg',
   'creative-camp-events.jpg',
   'gallery-wall.png',
-  'summer-camp-showcase.jpg',
-  'summer-camp-fruit-platter.jpg',
 ]
 
 function readArtPage() {
@@ -61,15 +76,33 @@ test('art programs page uses copied public assets instead of local absolute path
   }
 })
 
+test('art programs page uses the supplied scrapbook element frames', () => {
+  const source = readArtPage()
+
+  for (const asset of expectedElementAssets) {
+    assert.ok(existsSync(resolve(artAssetPath, 'elements', asset)), `missing supplied art program element: ${asset}`)
+    assert.match(source, new RegExp(`/art-program/elements/${asset.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`))
+  }
+  assert.match(source, /subtitle: 'Explore'/)
+  assert.match(source, /subtitle: 'Learn'/)
+  assert.match(source, /subtitle: 'Express'/)
+  assert.match(source, /See Creations/)
+  assert.doesNotMatch(source, /const galleryImages =/)
+  assert.match(source, /@click="isAssistantOpen = true"/)
+})
+
 test('art programs page owns its marketing chrome and links from home', () => {
   const source = readArtPage()
   const home = readHomePage()
 
   assert.match(source, /definePageMeta\(\{[\s\S]*header:\s*false[\s\S]*footer:\s*false[\s\S]*\}\)/)
   assert.match(source, /ART PROGRAMS[\s\S]*creativity grows through practice/)
-  assert.match(source, /src="\/art-program\/hero-reference\.png"[\s\S]*alt="ART PROGRAMS — creativity grows through practice"[\s\S]*class="h-\[27rem\] w-full object-cover object-\[35%_center\]"/)
+  assert.match(source, /src="\/art-program\/hero-reference\.png"[\s\S]*alt=""[\s\S]*aria-hidden="true"[\s\S]*class="h-\[16rem\] w-full object-cover object-\[35%_center\] sm:h-\[21rem\] lg:h-\[24rem\]"/)
   assert.match(source, /class="relative z-50[^"]*overflow-visible[^"]*"/)
   assert.match(source, /class="pointer-events-none absolute left-0 top-full z-\[70\]/)
+  assert.match(source, /<details class="relative ml-auto lg:hidden">[\s\S]*v-for="child in item\.children"/)
+  assert.equal(source.match(/sm:grid-cols-2 lg:grid-cols-3/g)?.length, 5)
+  assert.equal(source.match(/last:sm:col-span-2/g)?.length, 5)
   assert.match(source, /item\.label === 'Home' \? 'bg-\[#f1e4ff\] text-\[#6d4d95\]' : ''/)
   assert.match(source, />\s*EN\s*<\/NuxtLink>[\s\S]*>\s*中文\s*<\/NuxtLink>/)
   assert.doesNotMatch(source, /Explore Classes/)
@@ -88,14 +121,14 @@ test('art programs page owns its marketing chrome and links from home', () => {
   assert.match(source, /category: 'Clay & Pottery', slide: '0'/)
   assert.match(source, /category: 'Mixed Media', slide: '0'/)
   assert.match(source, /Children's Art Journey/)
-  assert.match(source, /Teen Art Pathway/)
+  assert.match(source, /Teen Art Journey/)
   assert.match(source, /Adult Art Journey/)
   assert.match(source, /The Joys of Making/)
   assert.doesNotMatch(source, /Special Workshops & Camps/)
   assert.match(source, /id="events"[\s\S]*Creative Camps & Events/)
-  assert.match(source, /title: 'Holiday Workshops'[\s\S]*status: 'Coming Soon'/)
+  assert.match(source, /title: 'Workshops'[\s\S]*status: 'Coming Soon'/)
   assert.match(source, /title: 'Community Events'[\s\S]*status: 'Coming Soon'/)
-  assert.match(source, /v-for="program in campPrograms"[\s\S]*class="flex flex-col/)
+  assert.match(source, /v-for="program in campPrograms"[\s\S]*class="reference-card[^"]* flex[^"]*flex-col/)
   assert.match(source, /v-if="program.to"[\s\S]*class="mt-auto inline-flex self-center/)
   assert.match(source, /v-else[\s\S]*class="mt-auto inline-flex self-center/)
   assert.match(source, /Gallery of Growth/)
@@ -109,15 +142,15 @@ test('art programs page owns its marketing chrome and links from home', () => {
 test('art programs page keeps reference card image treatments', () => {
   const source = readArtPage()
 
-  assert.match(source, /rounded-3xl bg-white\/85 p-4/)
-  assert.match(source, /class="child-photo-frame"/)
-  assert.match(source, /class="teen-photo-frame"/)
-  assert.match(source, /\.child-photo-frame::after/)
-  assert.match(source, /\.teen-photo-frame::before/)
-  assert.match(source, /clip-path: polygon/)
-  assert.doesNotMatch(source, /transform: scale/)
-  assert.match(source, /class="making-photo-frame"/)
-  assert.match(source, /class="camp-photo-frame"/)
+  assert.match(source, /class="reference-card relative isolate/)
+  assert.match(source, /:src="program\.frame"/)
+  assert.match(source, /class="adult-card reference-card/)
+  assert.match(source, /class="making-stage relative/)
+  assert.match(source, /\.reference-card \{[\s\S]*filter: drop-shadow/)
+  assert.match(source, /\.adult-card:nth-child\(3\) \.adult-photo/)
+  assert.doesNotMatch(source, /child-photo-frame/)
+  assert.doesNotMatch(source, /teen-photo-frame/)
+  assert.doesNotMatch(source, /camp-photo-frame/)
   assert.match(source, /object-contain/)
   assert.match(source, /object-cover/)
 })

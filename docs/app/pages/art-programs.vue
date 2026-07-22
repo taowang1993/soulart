@@ -32,22 +32,25 @@ const navItems = [
 const childPrograms = [
   {
     title: 'Ages 4–6',
-    subtitle: 'Discover',
+    subtitle: 'Explore',
     image: '/art-program/age-4-6.png',
-    points: ['Color & Shape', 'Playful Lines', 'Storytelling', 'Confidence Building'],
+    frame: '/art-program/elements/child-1.webp',
+    points: ['Creative Play', 'Mixed Media', 'Fine Motor Skills', 'Imagination'],
     galleryTo: { path: '/art-programs/student-gallery', hash: '#children', query: { section: 'children', category: 'Age 4–6', slide: '0' } },
   },
   {
     title: 'Ages 7–9',
-    subtitle: 'Explore',
+    subtitle: 'Learn',
     image: '/art-program/age-7-9.jpg',
+    frame: '/art-program/elements/child-2.webp',
     points: ['Drawing Foundations', 'Watercolor & Acrylic', 'Observation Skills', 'Creative Projects'],
     galleryTo: { path: '/art-programs/student-gallery', hash: '#children', query: { section: 'children', category: 'Age 7–9', slide: '0' } },
   },
   {
     title: 'Ages 10–12',
-    subtitle: 'Grow',
+    subtitle: 'Express',
     image: '/art-program/age-10-12.png',
+    frame: '/art-program/elements/child-3.webp',
     points: ['Composition', 'Personal Style', 'Mixed Media', 'Art Appreciation'],
     galleryTo: { path: '/art-programs/student-gallery', hash: '#children', query: { section: 'children', category: 'Age 10–12', slide: '0' } },
   },
@@ -56,62 +59,74 @@ const childPrograms = [
 const teenPrograms = [
   {
     title: 'Ages 13–15',
+    subtitle: 'Create',
     image: '/art-program/age-13-15.png',
-    description: 'Build stronger technique, creative confidence, and visual storytelling skills.',
+    frame: '/art-program/elements/teen-1.webp',
+    points: ['Skill Development', 'Sketching & Painting', 'Visual Storytelling', 'Creative Confidence'],
     galleryTo: { path: '/art-programs/student-gallery', hash: '#teens', query: { section: 'teens', category: 'Age 13–15', slide: '0' } },
   },
   {
     title: 'Ages 15–18',
+    subtitle: 'Develop',
     image: '/art-program/age-15-18.jpg',
-    description: 'Develop independent projects while refining drawing, painting, and critique habits.',
+    frame: '/art-program/elements/teen-2.webp',
+    points: ['Advanced Techniques', 'Independent Projects', 'Art Portfolio', 'Personal Expression'],
     galleryTo: { path: '/art-programs/student-gallery', hash: '#teens', query: { section: 'teens', category: 'Age 15–18', slide: '0' } },
   },
   {
-    title: '16+ Portfolio',
+    title: 'Age 16+',
+    subtitle: 'Find Your Voice',
     image: '/art-program/age-16-plus.jpg',
-    description: 'Prepare portfolio pieces with focused mentorship and art school guidance.',
+    frame: '/art-program/elements/teen-3.webp',
+    points: ['Portfolio Preparation', 'Art School Guidance', 'Curated Projects', 'Application Support'],
     galleryTo: { path: '/art-programs/student-gallery', hash: '#teens', query: { section: 'teens', category: 'Portfolios', slide: '0' } },
   },
 ]
 
 const adultPrograms = [
   {
-    title: 'Creative Well-Being',
+    title: 'Skill & Expression',
     image: '/art-program/adult-1.jpg',
-    description: 'Relax, reconnect, and enjoy mindful creativity in a warm studio setting.',
+    frame: '/art-program/elements/adult-1.webp',
+    description: 'Develop techniques, explore personal style, and create meaningful work.',
     galleryTo: { path: '/art-programs/student-gallery', hash: '#adults', query: { section: 'adults', category: 'All Works', slide: '0' } },
   },
   {
-    title: 'Painting Practice',
+    title: 'Art & Well-Being',
     image: '/art-program/adult-2.jpg',
-    description: 'Explore expressive color, brushwork, and personal themes at your own pace.',
+    frame: '/art-program/elements/adult-2.webp',
+    description: 'Relax, reconnect, and enjoy the healing power of creativity.',
     galleryTo: { path: '/art-programs/student-gallery', hash: '#adults', query: { section: 'adults', category: 'Paintings', slide: '0' } },
   },
   {
-    title: 'Ink & Calligraphy',
+    title: 'Chinese Painting & Calligraphy',
     image: '/art-program/adult-3.png',
-    description: 'Practice graceful lines, cultural tradition, and calm concentration.',
+    frame: '/art-program/elements/adult-3.webp',
+    description: 'Learn timeless techniques rooted in culture, balance, and mindful expression.',
     galleryTo: { path: '/art-programs/student-gallery', hash: '#chinese-art', query: { section: 'chinese-art', slide: '0' } },
   },
 ]
 
 const makingPrograms = [
   {
-    title: 'Crochet & Fiber Arts',
+    title: 'Crochet & Fibre Arts',
     image: '/art-program/craft-1.png',
-    note: 'Soft textures, patient hands, playful details.',
+    frame: '/art-program/elements/making-1.webp',
+    note: 'One stitch at a time.',
     galleryTo: { path: '/art-programs/student-gallery', hash: '#crafts', query: { section: 'crafts', category: 'Textile & Yarn', slide: '0' } },
   },
   {
     title: 'Clay & Sculpture',
     image: '/art-program/craft-2.jpg',
-    note: 'Tiny worlds shaped with color, care, and imagination.',
+    frame: '/art-program/elements/making-2.webp',
+    note: 'Shape ideas with your hands.',
     galleryTo: { path: '/art-programs/student-gallery', hash: '#crafts', query: { section: 'crafts', category: 'Clay & Pottery', slide: '0' } },
   },
   {
     title: 'Paper & Mixed Media',
     image: '/art-program/craft-3.jpg',
-    note: 'Layered materials become bright keepsake creations.',
+    frame: '/art-program/elements/making-3.webp',
+    note: 'Mix, layer, create.',
     galleryTo: { path: '/art-programs/student-gallery', hash: '#crafts', query: { section: 'crafts', category: 'Mixed Media', slide: '0' } },
   },
 ]
@@ -120,29 +135,25 @@ const campPrograms = [
   {
     title: 'Summer Camps',
     image: '/art-program/creative-camp-summer.png',
-    note: 'Bright weeks of art, play, and friendship.',
-    action: 'View Camps',
+    frame: '/art-program/elements/event-1.webp',
+    note: 'Full days of art, nature, and imagination.',
+    action: 'View Summer Camps',
     to: '/art-programs/summer-camps',
   },
   {
-    title: 'Holiday Workshops',
+    title: 'Workshops',
     image: '/art-program/creative-camp-workshops.jpg',
-    note: 'Seasonal projects and handmade gifts.',
+    frame: '/art-program/elements/event-2.webp',
+    note: 'Seasonal workshops for children and families.',
     status: 'Coming Soon',
   },
   {
     title: 'Community Events',
     image: '/art-program/creative-camp-events.jpg',
-    note: 'Shared making moments for families and friends.',
+    frame: '/art-program/elements/event-3.webp',
+    note: 'Creative gatherings that bring people together.',
     status: 'Coming Soon',
   },
-]
-
-const galleryImages = [
-  '/art-program/the-painting.jpg',
-  '/art-program/craft-2.jpg',
-  '/art-program/summer-camp-showcase.jpg',
-  '/art-program/summer-camp-fruit-platter.jpg',
 ]
 
 const contactItems = [
@@ -187,13 +198,13 @@ const isAssistantOpen = ref(false)
           <img
             src="/home/logo.png"
             alt="XinYi Class"
-            class="h-24 w-auto object-contain"
+            class="h-20 w-auto object-contain"
             loading="eager"
             decoding="async"
           >
         </NuxtLink>
 
-        <div class="hidden items-center gap-4 md:flex lg:gap-6">
+        <div class="hidden items-center gap-3 lg:flex xl:gap-5">
           <div
             v-for="item in navItems"
             :key="item.label"
@@ -232,6 +243,39 @@ const isAssistantOpen = ref(false)
           </div>
         </div>
 
+        <details class="relative ml-auto lg:hidden">
+          <summary
+            aria-label="Open Main Navigation"
+            class="flex size-11 cursor-pointer list-none items-center justify-center rounded-full bg-[#f1e4ff] text-[#6d4d95] [&::-webkit-details-marker]:hidden"
+          >
+            <UIcon
+              name="i-lucide-menu"
+              class="size-5"
+            />
+          </summary>
+          <div class="absolute right-0 top-14 z-[80] min-w-56 rounded-2xl bg-white/95 p-2 shadow-xl ring-1 ring-[#eaddec] backdrop-blur">
+            <template
+              v-for="item in navItems"
+              :key="item.label"
+            >
+              <NuxtLink
+                :to="item.to"
+                class="flex rounded-xl px-4 py-3 text-sm font-bold text-[#6d4d95] hover:bg-[#f7eefb] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#d98792]"
+              >
+                {{ item.label }}
+              </NuxtLink>
+              <NuxtLink
+                v-for="child in item.children"
+                :key="child.label"
+                :to="child.to"
+                class="flex rounded-xl py-2 pl-8 pr-4 text-sm font-semibold text-[#8168a0] hover:bg-[#f7eefb] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#d98792]"
+              >
+                {{ child.label }}
+              </NuxtLink>
+            </template>
+          </div>
+        </details>
+
         <div class="flex items-center gap-2 whitespace-nowrap rounded-xl bg-[#f1e4ff] px-4 py-2 text-base font-semibold text-[#34275c]">
           <NuxtLink
             to="/docs/manual/en/getting-started/installation"
@@ -252,8 +296,9 @@ const isAssistantOpen = ref(false)
       <div class="relative -mx-4 mt-5 overflow-hidden shadow-[0_24px_70px_rgba(39,31,57,0.2)] sm:-mx-6">
         <img
           src="/art-program/hero-reference.png"
-          alt="ART PROGRAMS — creativity grows through practice"
-          class="h-[27rem] w-full object-cover object-[35%_center]"
+          alt=""
+          aria-hidden="true"
+          class="h-[16rem] w-full object-cover object-[35%_center] sm:h-[21rem] lg:h-[24rem]"
           loading="eager"
           decoding="async"
         >
@@ -266,144 +311,56 @@ const isAssistantOpen = ref(false)
 
     <section
       id="children"
-      class="px-4 pb-16 pt-28 sm:px-6 lg:px-8"
+      class="px-4 pb-20 pt-24 sm:px-6 lg:px-8"
     >
       <div class="mx-auto max-w-6xl">
         <div class="text-center">
           <h2 class="font-serif text-4xl font-semibold italic text-[#6e5b84] [text-shadow:0.08rem_0.1rem_0_rgba(95,142,139,0.72)] sm:text-5xl">
             Children's Art Journey
           </h2>
-          <p class="mx-auto mt-4 max-w-2xl text-lg text-[#6a5e78]">
-            Age-based classes help young artists build fundamentals through playful, confidence-building practice.
-          </p>
           <div class="section-divider mx-auto mt-5" />
         </div>
 
-        <div class="mt-10 grid gap-7 md:grid-cols-3">
+        <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           <article
             v-for="program in childPrograms"
             :key="program.title"
-            class="rounded-3xl bg-white/85 p-4 shadow-[0_18px_50px_rgba(82,61,107,0.14)] ring-1 ring-[#eaddec]"
-          >
-            <div class="child-photo-frame">
-              <img
-                :src="program.image"
-                :alt="`${program.title} artwork`"
-                loading="lazy"
-                decoding="async"
-              >
-            </div>
-            <div class="px-2 pb-2 pt-5 text-center">
-              <p class="text-sm font-bold uppercase tracking-[0.24em] text-[#d1848d]">
-                {{ program.subtitle }}
-              </p>
-              <h3 class="mt-2 font-serif text-3xl font-semibold text-[#69508a]">
-                {{ program.title }}
-              </h3>
-              <ul class="mt-5 space-y-2 text-left text-sm text-[#5a5065]">
-                <li
-                  v-for="point in program.points"
-                  :key="point"
-                  class="flex items-center gap-2"
-                >
-                  <UIcon
-                    name="i-lucide-heart"
-                    class="size-4 shrink-0 text-[#d1848d]"
-                  />
-                  <span>{{ point }}</span>
-                </li>
-              </ul>
-              <NuxtLink
-                :to="program.galleryTo"
-                class="mt-6 inline-flex rounded-full bg-[#e7b3b8] px-7 py-2.5 font-bold text-[#5a435f] shadow-md transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
-              >
-                View Gallery
-              </NuxtLink>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="bg-[#f2eef8] px-4 py-16 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-6xl">
-        <div class="text-center">
-          <h2 class="font-serif text-4xl font-semibold text-[#5a4380] sm:text-5xl">
-            Teen Art Pathway
-          </h2>
-          <p class="mx-auto mt-4 max-w-2xl text-lg text-[#6a5e78]">
-            Structured projects help teens sharpen technique, find their voice, and prepare stronger portfolios.
-          </p>
-          <div class="section-divider mx-auto mt-5" />
-        </div>
-
-        <div class="teen-grid mt-10 grid gap-7 lg:grid-cols-3">
-          <article
-            v-for="program in teenPrograms"
-            :key="program.title"
-            class="rounded-[2rem] bg-white p-4 shadow-[0_18px_50px_rgba(82,61,107,0.13)] ring-1 ring-[#e5d9ef]"
-          >
-            <div class="teen-photo-frame">
-              <img
-                :src="program.image"
-                :alt="`${program.title} student artwork`"
-                loading="lazy"
-                decoding="async"
-              >
-            </div>
-            <div class="px-3 py-5 text-center">
-              <h3 class="font-serif text-3xl font-semibold text-[#72558d]">
-                {{ program.title }}
-              </h3>
-              <p class="mt-3 leading-7 text-[#5d5268]">
-                {{ program.description }}
-              </p>
-              <NuxtLink
-                :to="program.galleryTo"
-                class="mt-5 inline-flex rounded-full bg-[#d8c4eb] px-7 py-2.5 font-bold text-[#5a435f] shadow-md transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
-              >
-                View Gallery
-              </NuxtLink>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="px-4 py-16 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-6xl">
-        <div class="text-center">
-          <h2 class="font-serif text-4xl font-semibold text-[#5a4380] sm:text-5xl">
-            Adult Art Journey
-          </h2>
-          <p class="mx-auto mt-4 max-w-2xl text-lg text-[#6a5e78]">
-            Gentle, expressive classes for adults who want creative practice, calm focus, and community.
-          </p>
-          <div class="section-divider mx-auto mt-5" />
-        </div>
-
-        <div class="mt-10 grid gap-7 md:grid-cols-3">
-          <article
-            v-for="program in adultPrograms"
-            :key="program.title"
-            class="rounded-[2rem] bg-[#fffdf7] p-5 text-center shadow-[0_14px_42px_rgba(84,69,97,0.12)] ring-1 ring-[#e8dfd0]"
+            class="reference-card relative isolate mx-auto flex min-h-[35rem] w-full max-w-[21rem] flex-col px-10 pb-12 pt-12 text-center last:sm:col-span-2 last:sm:justify-self-center last:lg:col-span-1"
           >
             <img
-              :src="program.image"
-              :alt="program.title"
-              class="aspect-[5/4] w-full rounded-[1.4rem] object-cover"
+              :src="program.frame"
+              alt=""
+              class="pointer-events-none absolute inset-0 -z-10 h-full w-full object-fill"
+              aria-hidden="true"
               loading="lazy"
               decoding="async"
             >
-            <h3 class="mt-6 font-serif text-2xl font-semibold text-[#536d49]">
+            <img
+              :src="program.image"
+              :alt="`${program.title} artwork`"
+              class="aspect-[4/3] w-full rounded-xl object-cover shadow-sm"
+              loading="lazy"
+              decoding="async"
+            >
+            <p class="mt-5 font-serif text-2xl font-semibold italic text-[#d1848d]">
+              {{ program.subtitle }}
+            </p>
+            <h3 class="mt-1 font-serif text-3xl font-semibold text-[#69508a]">
               {{ program.title }}
             </h3>
-            <p class="mt-3 leading-7 text-[#625768]">
-              {{ program.description }}
-            </p>
+            <ul class="mx-auto mt-4 space-y-1.5 text-left text-sm text-[#5a5065]">
+              <li
+                v-for="point in program.points"
+                :key="point"
+                class="flex items-center gap-2"
+              >
+                <span aria-hidden="true">•</span>
+                <span>{{ point }}</span>
+              </li>
+            </ul>
             <NuxtLink
               :to="program.galleryTo"
-              class="mt-5 inline-flex rounded-full bg-[#d7c7a9] px-7 py-2.5 font-bold text-[#4f4f3e] shadow-md transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
+              class="mt-auto inline-flex self-center rounded-full bg-[#e7b3b8] px-7 py-2.5 font-bold text-[#5a435f] shadow-md transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
             >
               View Gallery
             </NuxtLink>
@@ -412,44 +369,153 @@ const isAssistantOpen = ref(false)
       </div>
     </section>
 
-    <section class="bg-[#fbf0e2] px-4 py-16 sm:px-6 lg:px-8">
+    <section class="bg-[#f1edf7] px-4 py-20 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-6xl">
+        <div class="text-center">
+          <h2 class="font-serif text-4xl font-semibold text-[#5a4380] sm:text-5xl">
+            Teen Art Journey
+          </h2>
+          <div class="section-divider mx-auto mt-5" />
+        </div>
+
+        <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <article
+            v-for="program in teenPrograms"
+            :key="program.title"
+            class="reference-card relative isolate mx-auto flex min-h-[32rem] w-full max-w-[22rem] flex-col px-12 pb-12 pt-14 text-center last:sm:col-span-2 last:sm:justify-self-center last:lg:col-span-1"
+          >
+            <img
+              :src="program.frame"
+              alt=""
+              class="pointer-events-none absolute inset-0 -z-10 h-full w-full object-fill"
+              aria-hidden="true"
+              loading="lazy"
+              decoding="async"
+            >
+            <img
+              :src="program.image"
+              :alt="`${program.title} student artwork`"
+              class="aspect-[4/3] w-full rounded-lg object-cover shadow-sm"
+              loading="lazy"
+              decoding="async"
+            >
+            <p class="mt-4 font-serif text-xl font-semibold italic text-[#a1758c]">
+              {{ program.subtitle }}
+            </p>
+            <h3 class="mt-1 font-serif text-3xl font-semibold text-[#72558d]">
+              {{ program.title }}
+            </h3>
+            <ul class="mx-auto mt-3 space-y-1 text-left text-sm text-[#5d5268]">
+              <li
+                v-for="point in program.points"
+                :key="point"
+                class="flex items-center gap-2"
+              >
+                <span aria-hidden="true">•</span>
+                <span>{{ point }}</span>
+              </li>
+            </ul>
+            <NuxtLink
+              :to="program.galleryTo"
+              class="mt-auto inline-flex self-center rounded-full bg-[#d8c4eb] px-7 py-2.5 font-bold text-[#5a435f] shadow-md transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
+            >
+              View Gallery
+            </NuxtLink>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="px-4 py-20 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-6xl">
+        <div class="text-center">
+          <h2 class="font-serif text-4xl font-semibold text-[#5a4380] sm:text-5xl">
+            Adult Art Journey
+          </h2>
+          <div class="section-divider mx-auto mt-5" />
+        </div>
+
+        <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <article
+            v-for="program in adultPrograms"
+            :key="program.title"
+            class="adult-card reference-card relative isolate mx-auto flex min-h-[34rem] w-full max-w-[22rem] flex-col px-12 pb-12 pt-16 text-center last:sm:col-span-2 last:sm:justify-self-center last:lg:col-span-1"
+          >
+            <img
+              :src="program.frame"
+              alt=""
+              class="pointer-events-none absolute inset-0 -z-10 h-full w-full object-fill"
+              aria-hidden="true"
+              loading="lazy"
+              decoding="async"
+            >
+            <img
+              :src="program.image"
+              :alt="program.title"
+              class="adult-photo aspect-[5/4] w-full rounded-md object-cover shadow-sm"
+              loading="lazy"
+              decoding="async"
+            >
+            <h3 class="mt-6 font-serif text-2xl font-semibold text-[#536d49]">
+              {{ program.title }}
+            </h3>
+            <p class="mt-3 text-sm leading-6 text-[#625768]">
+              {{ program.description }}
+            </p>
+            <NuxtLink
+              :to="program.galleryTo"
+              class="mt-auto inline-flex self-center rounded-full bg-[#d7c7a9] px-7 py-2.5 font-bold text-[#4f4f3e] shadow-md transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
+            >
+              View Gallery
+            </NuxtLink>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-[#fbf0e2] px-4 py-20 sm:px-6 lg:px-8">
       <div class="mx-auto max-w-6xl">
         <div class="text-center">
           <h2 class="font-serif text-4xl font-semibold text-[#5a4380] sm:text-5xl">
             The Joys of Making
           </h2>
-          <p class="mx-auto mt-4 max-w-2xl text-lg text-[#6a5e78]">
-            Hands-on craft projects let students explore texture, form, color, and playful construction.
-          </p>
           <div class="section-divider mx-auto mt-5" />
         </div>
 
-        <div class="mt-12 grid gap-8 md:grid-cols-3">
+        <div class="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
           <article
             v-for="program in makingPrograms"
             :key="program.title"
-            class="making-card rounded-[2rem] bg-[#fffaf1]/80 p-5 text-center shadow-[0_16px_40px_rgba(109,77,52,0.13)] ring-1 ring-[#d9b78f]"
+            class="making-card text-center last:sm:col-span-2 last:sm:justify-self-center last:lg:col-span-1"
           >
-            <div class="making-photo-frame">
+            <div class="making-stage relative mx-auto aspect-[740/860] w-full max-w-[21rem]">
+              <img
+                :src="program.frame"
+                alt=""
+                class="pointer-events-none absolute inset-0 h-full w-full object-fill"
+                aria-hidden="true"
+                loading="lazy"
+                decoding="async"
+              >
               <img
                 :src="program.image"
                 :alt="program.title"
-                class="h-full w-full bg-white object-contain"
+                class="absolute left-[14%] top-[15%] z-10 h-[50%] w-[72%] rounded-md bg-white object-cover shadow-sm"
                 loading="lazy"
                 decoding="async"
               >
             </div>
-            <h3 class="mt-5 font-serif text-2xl font-semibold text-[#6f4b31]">
+            <h3 class="font-serif text-2xl font-semibold text-[#6f4b31]">
               {{ program.title }}
             </h3>
-            <p class="mt-2 leading-7 text-[#70615c]">
+            <p class="mt-2 italic text-[#70615c]">
               {{ program.note }}
             </p>
             <NuxtLink
               :to="program.galleryTo"
               class="mt-5 inline-flex rounded-full bg-[#e4b77e] px-7 py-2.5 font-bold text-[#5a3f27] shadow-md transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
             >
-              View Gallery
+              See Creations
             </NuxtLink>
           </article>
         </div>
@@ -458,38 +524,41 @@ const isAssistantOpen = ref(false)
 
     <section
       id="events"
-      class="bg-[#fff8f1] px-4 py-16 sm:px-6 lg:px-8"
+      class="bg-[#fff8f1] px-4 py-20 sm:px-6 lg:px-8"
     >
       <div class="mx-auto max-w-6xl">
         <div class="text-center">
           <h2 class="font-serif text-4xl font-semibold text-[#5a4380] sm:text-5xl">
             Creative Camps & Events
           </h2>
-          <p class="mx-auto mt-4 max-w-2xl text-lg text-[#6a5e78]">
-            Seasonal creative experiences bring students together for art, play, and celebration.
-          </p>
           <div class="section-divider mx-auto mt-5" />
         </div>
 
-        <div class="mt-10 grid gap-7 md:grid-cols-3">
+        <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           <article
             v-for="program in campPrograms"
             :key="program.title"
-            class="flex flex-col rounded-[2rem] bg-white/85 p-4 text-center shadow-sm ring-1 ring-[#d7d0c4]"
+            class="reference-card relative isolate mx-auto flex min-h-[29rem] w-full max-w-[22rem] flex-col px-11 pb-12 pt-14 text-center last:sm:col-span-2 last:sm:justify-self-center last:lg:col-span-1"
           >
-            <div class="camp-photo-frame">
-              <img
-                :src="program.image"
-                :alt="program.title"
-                class="h-full w-full object-cover"
-                loading="lazy"
-                decoding="async"
-              >
-            </div>
-            <h3 class="mt-4 font-serif text-2xl font-semibold text-[#69508a]">
+            <img
+              :src="program.frame"
+              alt=""
+              class="pointer-events-none absolute inset-0 -z-10 h-full w-full object-fill"
+              aria-hidden="true"
+              loading="lazy"
+              decoding="async"
+            >
+            <img
+              :src="program.image"
+              :alt="program.title"
+              class="aspect-[4/3] w-full rounded-md object-cover shadow-sm"
+              loading="lazy"
+              decoding="async"
+            >
+            <h3 class="mt-5 font-serif text-2xl font-semibold text-[#69508a]">
               {{ program.title }}
             </h3>
-            <p class="mt-1 text-lg text-[#706676]">
+            <p class="mt-2 text-sm leading-6 text-[#706676]">
               {{ program.note }}
             </p>
             <NuxtLink
@@ -528,17 +597,6 @@ const isAssistantOpen = ref(false)
           loading="lazy"
           decoding="async"
         >
-        <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <img
-            v-for="image in galleryImages"
-            :key="image"
-            :src="image"
-            alt="XinYi Class art program moment"
-            class="aspect-square w-full rounded-2xl object-cover shadow-sm ring-1 ring-[#eaddec]"
-            loading="lazy"
-            decoding="async"
-          >
-        </div>
         <NuxtLink
           to="/art-programs/student-gallery"
           class="mt-8 inline-flex rounded-full bg-[#d9848f] px-9 py-3 text-lg font-bold text-white shadow-lg shadow-[#d9848f]/25 transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
@@ -596,6 +654,17 @@ const isAssistantOpen = ref(false)
           <p class="mt-4 max-w-xs text-sm leading-6 text-[#6c6078] md:max-w-sm">
             XinYi Art School · Children&apos;s Art Classes in Toronto · XinYi Yoga · Gentle Yoga &amp; Meditation in Toronto
           </p>
+          <button
+            type="button"
+            class="mt-5 inline-flex items-center gap-2 rounded-full bg-white/80 px-5 py-2.5 text-sm font-bold text-[#6d4d95] shadow-sm ring-1 ring-[#d8c7e0] transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
+            @click="isAssistantOpen = true"
+          >
+            <UIcon
+              name="i-lucide-sparkles"
+              class="size-4"
+            />
+            Talk with AI Assistant
+          </button>
         </div>
 
         <div>
@@ -701,97 +770,20 @@ const isAssistantOpen = ref(false)
   transform: translate(-50%, -50%);
 }
 
-.child-photo-frame,
-.teen-photo-frame {
-  position: relative;
-  overflow: hidden;
+.reference-card {
+  filter: drop-shadow(0 1rem 1.5rem rgba(83, 68, 99, 0.12));
 }
 
-.child-photo-frame {
-  aspect-ratio: 1;
-  padding: 0.55rem;
-  background: #fffdfb;
-  border-radius: 2rem 2rem 1.5rem 1.5rem;
-  box-shadow: inset 0 0 0 1px rgba(123, 111, 137, 0.24), 0 0.6rem 1.5rem rgba(83, 68, 99, 0.12);
+.adult-card:nth-child(3) .adult-photo {
+  background: #f4ead5;
+  object-fit: contain;
 }
 
-.child-photo-frame::after {
-  position: absolute;
-  inset: 0.35rem;
-  pointer-events: none;
-  content: "";
-  border: 2px dashed rgba(108, 99, 119, 0.48);
-  border-radius: 1.7rem 1.7rem 1.25rem 1.25rem;
-}
-
-.child-photo-frame img,
-.teen-photo-frame img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.child-photo-frame img {
-  border-radius: 1.35rem;
-}
-
-.teen-photo-frame {
-  aspect-ratio: 4 / 3;
-  padding: 0.9rem 0.75rem 0.7rem;
-  background: #fffaf7;
-  border-radius: 1.1rem;
-  box-shadow: 0 0.75rem 1.5rem rgba(83, 68, 99, 0.12);
-}
-
-.teen-photo-frame::before {
-  position: absolute;
-  inset: 0.2rem 0.65rem auto;
-  height: 0.55rem;
-  content: "";
-  background-image: radial-gradient(circle, #b9acbf 0 0.08rem, transparent 0.09rem);
-  background-size: 0.55rem 0.55rem;
-}
-
-.teen-photo-frame img {
-  clip-path: polygon(0 7%, 6% 0, 12% 7%, 18% 0, 24% 7%, 30% 0, 36% 7%, 42% 0, 48% 7%, 54% 0, 60% 7%, 66% 0, 72% 7%, 78% 0, 84% 7%, 90% 0, 96% 7%, 100% 7%, 100% 94%, 94% 100%, 88% 94%, 82% 100%, 76% 94%, 70% 100%, 64% 94%, 58% 100%, 52% 94%, 46% 100%, 40% 94%, 34% 100%, 28% 94%, 22% 100%, 16% 94%, 10% 100%, 4% 94%, 0 94%);
-}
-
-.making-card:nth-child(2) .making-photo-frame {
+.making-card:nth-child(2) .making-stage {
   transform: rotate(1deg);
 }
 
-.making-card:nth-child(3) .making-photo-frame {
+.making-card:nth-child(3) .making-stage {
   transform: rotate(-0.6deg);
-}
-
-.making-photo-frame,
-.camp-photo-frame {
-  position: relative;
-  overflow: hidden;
-}
-
-.making-photo-frame {
-  aspect-ratio: 4 / 3;
-  padding: 0.6rem;
-  background: linear-gradient(135deg, #b77b49, #8f5a33);
-  border-radius: 1.45rem;
-  box-shadow: 0 0.9rem 1.8rem rgba(100, 67, 39, 0.2);
-  transform: rotate(-1deg);
-}
-
-.making-photo-frame img {
-  border-radius: 0.95rem;
-}
-
-.camp-photo-frame {
-  aspect-ratio: 4 / 3;
-  padding: 0.45rem;
-  background: white;
-  border-radius: 1.6rem;
-  box-shadow: inset 0 0 0 1px rgba(123, 111, 137, 0.16);
-}
-
-.camp-photo-frame img {
-  border-radius: 1.2rem;
 }
 </style>
