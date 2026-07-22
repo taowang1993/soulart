@@ -96,6 +96,15 @@ test('program images keep the design crop ratio', () => {
   assert.doesNotMatch(source, /class="h-72 w-full object-cover/)
 })
 
+test('studio section keeps the reference text-left image-right composition', () => {
+  const source = readHomePage()
+  const studio = source.match(/<section\s+id="studio"[\s\S]*?<\/section>/)?.[0]
+
+  assert.ok(studio, 'missing studio section')
+  assert.match(studio, /lg:grid-cols-\[0\.78fr_1\.22fr\]/)
+  assert.ok(studio.indexOf('Welcome to') < studio.indexOf('src="/home/new-classroom.jpg"'))
+})
+
 test('home page opens a floating bottom-right site-wide assistant chat', () => {
   const source = readHomePage()
   const assistant = readHomeAssistant()

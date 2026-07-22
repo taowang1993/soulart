@@ -391,15 +391,7 @@ const isAssistantOpen = shallowRef(false)
       id="studio"
       class="relative px-4 py-20 sm:px-6 lg:px-8 lg:py-24"
     >
-      <div class="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1.22fr_0.78fr]">
-        <img
-          src="/home/new-classroom.jpg"
-          alt="Bright XinYi Class art studio classroom"
-          class="h-full min-h-[360px] w-full rounded-[1.75rem] object-cover shadow-[0_22px_70px_rgba(82,61,107,0.18)] ring-1 ring-white/80"
-          loading="lazy"
-          decoding="async"
-        >
-
+      <div class="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[0.78fr_1.22fr]">
         <div class="text-center">
           <div
             class="mb-4 hidden text-[#c9a8d6] lg:block"
@@ -432,6 +424,14 @@ const isAssistantOpen = shallowRef(false)
             </div>
           </div>
         </div>
+
+        <img
+          src="/home/new-classroom.jpg"
+          alt="Bright XinYi Class art studio classroom"
+          class="h-full min-h-[360px] w-full rounded-[1.75rem] object-cover shadow-[0_22px_70px_rgba(82,61,107,0.18)] ring-1 ring-white/80"
+          loading="lazy"
+          decoding="async"
+        >
       </div>
 
       <p class="mx-auto mt-12 max-w-4xl border-y border-[#e9ddec] py-6 text-center font-serif text-xl italic text-[#a283b8]">
