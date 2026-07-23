@@ -17,6 +17,13 @@ const marketingPagePaths = [
 ]
 const artProgramsPagePath = resolve(repoRoot, 'docs/app/pages/art-programs.vue')
 const galleryAssetPath = resolve(repoRoot, 'docs/public/student-gallery')
+const galleryElementAssetPath = resolve(galleryAssetPath, 'elements')
+
+const expectedElementAssets = [
+  'chinese-about.webp',
+  'chinese-scroll.webp',
+  'hero.webp',
+] as const
 
 const expectedGalleryAssets = [
   'children-4-6-four-seasons.jpg',
@@ -105,6 +112,21 @@ test('student gallery assets are copied from the gallery source into public path
   assert.deepEqual(actualAssets, [...expectedGalleryAssets].sort())
 })
 
+test('student gallery page uses the supplied gallery elements', () => {
+  const source = readPage()
+
+  for (const asset of expectedElementAssets) {
+    assert.ok(existsSync(resolve(galleryElementAssetPath, asset)), `missing supplied gallery element ${asset}`)
+    assert.match(source, new RegExp(`/student-gallery/elements/${asset.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`))
+  }
+
+  assert.doesNotMatch(source, /const heroWorks =/)
+  assert.match(source, /<img[\s\S]*src="\/student-gallery\/elements\/hero\.webp"[\s\S]*alt="Student artwork collage"/)
+  assert.match(source, /v-for="child in item\.children"/)
+  assert.match(source, /aria-label="Navigation Menu"/)
+  assert.match(source, /label: 'All Crafts'/)
+})
+
 test('student gallery page keeps the reference sections and copy', () => {
   const source = readPage().replace(/\\'/g, String.fromCharCode(39))
 
@@ -169,6 +191,12 @@ test('student gallery carousel controls are real Vue controls without breaking t
   assert.match(source, /@click="stepWork\(section\.id, activeWorks\(section\)\.length, -1\)"/)
   assert.match(source, /@click="stepWork\(section\.id, activeWorks\(section\)\.length, 1\)"/)
   assert.match(source, /grid-template-columns: repeat\(3, minmax\(0, 1fr\)\)/)
+  assert.match(source, /\.stage-card:not\(:first-child\)\s*\{[\s\S]*display:\s*none/)
+  assert.match(source, /class="gallery-dot"/)
+  assert.match(source, /\.gallery-dot\s*\{[\s\S]*width:\s*1\.5rem;[\s\S]*height:\s*1\.5rem/)
+  assert.match(source, /class="gallery-help hidden 2xl:block"/)
+  assert.match(source, /aspect-ratio:\s*1200\s*\/\s*954/)
+  assert.match(source, /background-image:\s*none;[\s\S]*border:\s*0\.7rem solid #d0c09c/)
   assert.doesNotMatch(source, /flex:\s*0 0 100%/)
   assert.doesNotMatch(source, /Ready to Begin\?/) // reference jumps from Chinese art to footer
 })

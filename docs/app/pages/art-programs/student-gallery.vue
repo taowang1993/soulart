@@ -51,14 +51,6 @@ type GallerySection = {
   categories: GalleryCategory[]
 }
 
-const heroWorks = [
-  { title: 'Four Seasons', image: '/student-gallery/children-4-6-four-seasons.jpg' },
-  { title: 'Lion Dance', image: '/student-gallery/children-7-9-lion-dance.jpg' },
-  { title: 'Dream Garden', image: '/student-gallery/children-10-12-dream.jpg' },
-  { title: 'Ancient Girl', image: '/student-gallery/teen-13-15-ancient-girl.jpg' },
-  { title: 'Paper Flower', image: '/student-gallery/craft-paper-flower.jpg' },
-]
-
 const gallerySections: GallerySection[] = [
   {
     id: 'children',
@@ -171,6 +163,14 @@ const gallerySections: GallerySection[] = [
     quote: 'Little hands. Big imagination. Every creation is a beautiful story.',
     categories: [
       {
+        label: 'All Crafts',
+        works: [
+          { title: 'Paper Flower', meta: 'Paper Crafts', image: '/student-gallery/craft-paper-flower.jpg', contain: true },
+          { title: 'Paper Flowers', meta: 'Paper Crafts', image: '/student-gallery/craft-paper-flowers.jpg', contain: true },
+          { title: 'Crochet Friends', meta: 'Textile & Yarn', image: '/student-gallery/craft-crochet.jpg', contain: true },
+        ],
+      },
+      {
         label: 'Paper Crafts',
         works: [
           { title: 'Paper Flower', meta: 'Paper Crafts', image: '/student-gallery/craft-paper-flower.jpg', contain: true },
@@ -267,6 +267,15 @@ function activeWorks(section: GallerySection) {
   return activeCategory(section).works
 }
 
+function activeWork(section: GallerySection): GalleryWork {
+  const works = activeWorks(section)
+  const work = works[normalizeSlideIndex(activeWorkIndex(section.id), works.length)]
+  if (!work) {
+    throw new Error(`Gallery section ${section.id} has no artwork`)
+  }
+  return work
+}
+
 function firstQueryValue(value: unknown) {
   const first = Array.isArray(value) ? value[0] : value
   return typeof first === 'string' ? first : ''
@@ -356,7 +365,7 @@ watch(() => route.fullPath, applyGalleryRoute)
           >
         </NuxtLink>
 
-        <div class="hidden items-center gap-1 rounded-full bg-white/50 p-1 md:flex">
+        <div class="hidden items-center gap-1 rounded-full bg-white/50 p-1 lg:flex">
           <div
             v-for="item in navItems"
             :key="item.label"
@@ -396,24 +405,63 @@ watch(() => route.fullPath, applyGalleryRoute)
           </div>
         </div>
 
-        <div class="flex items-center gap-2 rounded-full bg-white/70 px-3 py-2 text-xs font-semibold text-[#5b457d]">
-          <NuxtLink
-            to="/docs/manual/en/getting-started/installation"
-            class="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
-          >
-            EN
-          </NuxtLink>
-          <span class="text-[#b19bcf]">|</span>
-          <NuxtLink
-            to="/docs/manual/zh/getting-started/installation"
-            class="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
-          >
-            中文
-          </NuxtLink>
+        <div class="ml-auto flex items-center gap-2 lg:ml-0">
+          <details class="group relative lg:hidden">
+            <summary
+              aria-label="Navigation Menu"
+              class="flex size-11 cursor-pointer list-none items-center justify-center rounded-full bg-white/80 text-[#6d4d95] shadow-sm ring-1 ring-[#eaddec] [&::-webkit-details-marker]:hidden"
+            >
+              <UIcon
+                name="i-lucide-menu"
+                class="size-5 group-open:hidden"
+              />
+              <UIcon
+                name="i-lucide-x"
+                class="hidden size-5 group-open:block"
+              />
+            </summary>
+            <div class="absolute right-0 top-14 z-[80] min-w-56 rounded-2xl bg-white/95 p-2 shadow-xl ring-1 ring-[#eaddec] backdrop-blur">
+              <template
+                v-for="item in navItems"
+                :key="item.label"
+              >
+                <NuxtLink
+                  :to="item.to"
+                  class="flex rounded-xl px-4 py-3 text-sm font-bold text-[#6d4d95] hover:bg-[#f7eefb] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#d98792]"
+                >
+                  {{ item.label }}
+                </NuxtLink>
+                <NuxtLink
+                  v-for="child in item.children"
+                  :key="child.label"
+                  :to="child.to"
+                  class="flex rounded-xl py-2 pl-8 pr-4 text-sm font-semibold text-[#8168a0] hover:bg-[#f7eefb] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#d98792]"
+                >
+                  {{ child.label }}
+                </NuxtLink>
+              </template>
+            </div>
+          </details>
+
+          <div class="flex items-center gap-2 rounded-full bg-white/70 px-3 py-2 text-xs font-semibold text-[#5b457d]">
+            <NuxtLink
+              to="/docs/manual/en/getting-started/installation"
+              class="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
+            >
+              EN
+            </NuxtLink>
+            <span class="text-[#b19bcf]">|</span>
+            <NuxtLink
+              to="/docs/manual/zh/getting-started/installation"
+              class="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
+            >
+              中文
+            </NuxtLink>
+          </div>
         </div>
       </nav>
 
-      <div class="mx-auto grid max-w-6xl items-center gap-12 py-10 lg:grid-cols-[0.9fr_1.1fr] lg:py-12">
+      <div class="mx-auto grid max-w-6xl items-center gap-8 py-10 lg:min-h-[42rem] lg:grid-cols-[0.82fr_1.18fr] lg:gap-12 lg:py-12">
         <div class="text-center lg:text-left">
           <h1 class="script-title text-6xl font-semibold leading-none text-[#566e3d] sm:text-7xl lg:whitespace-nowrap lg:text-7xl">
             Students' Gallery
@@ -437,10 +485,8 @@ watch(() => route.fullPath, applyGalleryRoute)
 
         <div class="hero-gallery-frame">
           <img
-            v-for="work in heroWorks"
-            :key="work.title"
-            :src="work.image"
-            :alt="`${work.title} student gallery artwork`"
+            src="/student-gallery/elements/hero.webp"
+            alt="Student artwork collage"
             loading="eager"
             decoding="async"
           >
@@ -452,12 +498,12 @@ watch(() => route.fullPath, applyGalleryRoute)
       v-for="section in gallerySections"
       :id="section.id"
       :key="section.id"
-      class="gallery-band px-4 py-16 sm:px-6 lg:px-8"
+      class="gallery-band px-4 py-20 sm:px-6 lg:px-8"
       :class="`gallery-band--${section.tone}`"
     >
       <div class="mx-auto max-w-6xl">
         <div class="text-center">
-          <h2 class="script-title text-5xl font-semibold leading-tight sm:text-6xl">
+          <h2 class="section-title text-5xl font-semibold leading-tight sm:text-6xl">
             {{ section.title }}
           </h2>
           <p class="mx-auto mt-4 max-w-2xl text-lg leading-8 text-[#6a5f78]">
@@ -481,7 +527,7 @@ watch(() => route.fullPath, applyGalleryRoute)
         <div class="gallery-stage mt-10">
           <p
             v-if="section.id === 'children'"
-            class="gallery-help hidden lg:block"
+            class="gallery-help hidden 2xl:block"
           >
             Swipe or click<br>to explore<br>more artwork
           </p>
@@ -509,8 +555,6 @@ watch(() => route.fullPath, applyGalleryRoute)
                 loading="eager"
                 decoding="async"
               >
-              <h3>{{ work.title }}</h3>
-              <p>{{ work.meta }}</p>
             </article>
           </div>
           <button
@@ -526,13 +570,18 @@ watch(() => route.fullPath, applyGalleryRoute)
           </button>
         </div>
 
-        <div class="mt-7 flex justify-center gap-3">
+        <div class="gallery-caption mt-5 text-center">
+          <h3>{{ activeWork(section).title }}</h3>
+          <p>{{ activeWork(section).meta }}</p>
+        </div>
+
+        <div class="mt-5 flex justify-center gap-3">
           <button
             v-for="(work, index) in activeWorks(section)"
             :key="`${section.id}-${activeCategory(section).label}-${work.title}-dot`"
             type="button"
-            class="size-3 rounded-full border-2 transition"
-            :class="activeWorkIndex(section.id) === index ? 'border-[#e65f6e] bg-[#e65f6e]' : 'border-current/35'"
+            class="gallery-dot"
+            :class="activeWorkIndex(section.id) === index ? 'gallery-dot--active' : ''"
             :aria-label="`Show ${work.title}`"
             @click="setActiveWork(section.id, index)"
           />
@@ -722,6 +771,11 @@ watch(() => route.fullPath, applyGalleryRoute)
   letter-spacing: -0.04em;
 }
 
+.section-title,
+.gallery-caption h3 {
+  font-family: Georgia, "Times New Roman", serif;
+}
+
 .hero-shell {
   background:
     radial-gradient(circle at 7% 18%, rgba(243, 187, 205, 0.58), transparent 22rem),
@@ -730,67 +784,11 @@ watch(() => route.fullPath, applyGalleryRoute)
     linear-gradient(135deg, #fff8ed 0%, #fdf1ef 46%, #f1edf8 100%);
 }
 
-.hero-gallery-frame {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  grid-auto-rows: clamp(6.8rem, 9.2vw, 8.3rem);
-  gap: clamp(0.65rem, 1.2vw, 0.95rem);
-  min-height: 0;
-  padding: clamp(0.9rem, 1.7vw, 1.25rem);
-  background: rgba(255, 255, 255, 0.72);
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  border-radius: 2.4rem;
-  box-shadow: 0 1.5rem 4rem rgba(111, 79, 121, 0.15);
-}
-
-.hero-gallery-frame::before,
-.hero-gallery-frame::after {
-  position: absolute;
-  z-index: 2;
-  width: 6rem;
-  height: 1.7rem;
-  content: "";
-  background: rgba(245, 216, 157, 0.85);
-  border-radius: 9999px;
-  transform: rotate(-9deg);
-}
-
-.hero-gallery-frame::before {
-  top: 1.4rem;
-  left: 2.5rem;
-}
-
-.hero-gallery-frame::after {
-  right: 2.5rem;
-  bottom: 1.4rem;
-}
-
 .hero-gallery-frame img {
+  display: block;
   width: 100%;
-  height: 100%;
-  min-height: 0;
-  object-fit: cover;
-  object-position: top;
-  background: white;
-  border: 0.45rem solid white;
-  border-radius: 1.25rem;
-  box-shadow: 0 0.8rem 1.7rem rgba(82, 61, 107, 0.12);
-}
-
-.hero-gallery-frame img:first-child {
-  grid-column: span 3;
-  grid-row: span 2;
-}
-
-.hero-gallery-frame img:nth-child(2),
-.hero-gallery-frame img:nth-child(3) {
-  grid-column: span 3;
-}
-
-.hero-gallery-frame img:nth-child(4),
-.hero-gallery-frame img:nth-child(5) {
-  grid-column: span 3;
+  height: auto;
+  filter: drop-shadow(0 1.3rem 2.4rem rgba(82, 61, 107, 0.14));
 }
 
 .gallery-band {
@@ -875,20 +873,9 @@ watch(() => route.fullPath, applyGalleryRoute)
   border: 1px solid rgba(110, 89, 124, 0.14);
 }
 
-.gallery-stage,
-.scroll-stage {
+.gallery-stage {
   position: relative;
-  padding: clamp(1rem, 2.4vw, 1.8rem);
-  background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.35), transparent 8%, transparent 92%, rgba(255, 255, 255, 0.35)),
-    rgba(255, 255, 255, 0.62);
-  border: 1px solid rgba(255, 255, 255, 0.84);
-  border-radius: 2.25rem;
-  box-shadow: 0 1.2rem 3.3rem rgba(82, 61, 107, 0.12);
-}
-
-.scroll-stage {
-  overflow: hidden;
+  padding: clamp(0.5rem, 1.6vw, 1.2rem);
 }
 
 .gallery-track {
@@ -898,27 +885,24 @@ watch(() => route.fullPath, applyGalleryRoute)
 }
 
 .stage-card {
-  padding: 0.75rem;
-  text-align: center;
-  background: rgba(255, 255, 255, 0.94);
-  border-radius: 1.8rem;
-  box-shadow: 0 0.8rem 1.9rem rgba(82, 61, 107, 0.09);
+  padding: 0.45rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 0.7rem;
+  box-shadow: 0 0.65rem 1.5rem rgba(82, 61, 107, 0.1);
 }
 
 .stage-card img {
   width: 100%;
   height: clamp(13rem, 20vw, 18rem);
-  border-radius: 1.25rem;
+  border-radius: 0.35rem;
 }
 
-.stage-card h3 {
-  margin-top: 0.95rem;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.25rem;
+.gallery-caption h3 {
+  font-size: 1.35rem;
   font-weight: 600;
 }
 
-.stage-card p {
+.gallery-caption p {
   margin-top: 0.3rem;
   font-size: 0.78rem;
   font-weight: 800;
@@ -953,7 +937,7 @@ watch(() => route.fullPath, applyGalleryRoute)
 .gallery-help {
   position: absolute;
   top: 50%;
-  right: -1rem;
+  left: -8rem;
   z-index: 2;
   width: 7rem;
   font-family: Georgia, "Times New Roman", serif;
@@ -964,42 +948,33 @@ watch(() => route.fullPath, applyGalleryRoute)
   transform: translateY(-50%);
 }
 
+.gallery-dot {
+  position: relative;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.gallery-dot::before {
+  position: absolute;
+  inset: 0.375rem;
+  content: "";
+  border: 2px solid currentcolor;
+  border-radius: 9999px;
+  opacity: 0.4;
+}
+
+.gallery-dot--active::before {
+  background: #e65f6e;
+  border-color: #e65f6e;
+  opacity: 1;
+}
+
 .ink-section {
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(ellipse at 9% 10%, rgba(85, 104, 77, 0.18), transparent 17rem),
-    radial-gradient(ellipse at 88% 12%, rgba(83, 96, 84, 0.14), transparent 24rem),
-    radial-gradient(ellipse at 86% 86%, rgba(113, 123, 103, 0.14), transparent 24rem),
-    linear-gradient(180deg, #f7f0e4 0%, #efe3ce 42%, #f8f3ea 100%);
-}
-
-.ink-section::before,
-.ink-section::after {
-  position: absolute;
-  pointer-events: none;
-  content: "";
-}
-
-.ink-section::before {
-  top: 1rem;
-  left: -2rem;
-  width: 17rem;
-  height: 12rem;
-  background:
-    linear-gradient(112deg, transparent 36%, rgba(46, 66, 52, 0.36) 37% 40%, transparent 41%),
-    linear-gradient(72deg, transparent 48%, rgba(46, 66, 52, 0.26) 49% 52%, transparent 53%);
-  opacity: 0.58;
-  transform: rotate(-8deg);
-}
-
-.ink-section::after {
-  right: -5rem;
-  bottom: 5rem;
-  width: 31rem;
-  height: 15rem;
-  background: radial-gradient(ellipse at 50% 100%, rgba(86, 99, 91, 0.2), transparent 70%);
-  opacity: 0.45;
+    url("/student-gallery/elements/chinese-about.webp") center bottom / 100% auto no-repeat,
+    linear-gradient(180deg, #f7f0e4 0%, #efe3ce 58%, #f8f3ea 100%);
 }
 
 .chinese-heading {
@@ -1025,59 +1000,22 @@ watch(() => route.fullPath, applyGalleryRoute)
   border: 2px solid currentcolor;
 }
 
-.scroll-stage {
-  background: #efe1c6;
-  border-color: #d8c19f;
-}
-
 .chinese-carousel {
+  position: relative;
   z-index: 1;
   max-width: 72rem;
-  padding: clamp(3.8rem, 5vw, 5.2rem) clamp(3rem, 6vw, 5.6rem) clamp(3rem, 4.5vw, 4.4rem);
-  overflow: visible;
-  background:
-    linear-gradient(to bottom, transparent 0 2.1rem, rgba(129, 133, 111, 0.66) 2.1rem 2.85rem, transparent 2.85rem calc(100% - 2.65rem), rgba(117, 123, 103, 0.66) calc(100% - 2.65rem) calc(100% - 1.9rem), transparent calc(100% - 1.9rem)),
-    radial-gradient(circle at 50% 23%, rgba(255, 255, 255, 0.64), transparent 31rem),
-    linear-gradient(90deg, rgba(132, 93, 49, 0.12), transparent 7%, transparent 93%, rgba(132, 93, 49, 0.12)),
-    #f1e6d4;
-  border: 0;
-  border-radius: 0.55rem;
-  box-shadow: 0 1.5rem 3.2rem rgba(72, 56, 42, 0.13), inset 0 0 0 1px rgba(126, 100, 67, 0.12);
-}
-
-.chinese-carousel::before,
-.chinese-carousel::after {
-  position: absolute;
-  top: 2.35rem;
-  bottom: 2.05rem;
-  z-index: 1;
-  width: clamp(1.8rem, 2.4vw, 2.45rem);
-  content: "";
-  background:
-    linear-gradient(90deg, #d5c7a9, #f7ead1 48%, #b59a72),
-    linear-gradient(#4d341c, #26170c);
-  border-radius: 999px;
-  box-shadow:
-    inset 0 0 0 1px rgba(77, 54, 30, 0.2),
-    0 -1.25rem 0 -0.58rem #2b1a0d,
-    0 1.25rem 0 -0.58rem #2b1a0d,
-    0 0.6rem 1rem rgba(55, 35, 18, 0.22);
-}
-
-.chinese-carousel::before {
-  left: -0.35rem;
-}
-
-.chinese-carousel::after {
-  right: -0.35rem;
+  aspect-ratio: 1200 / 954;
+  padding: clamp(4rem, 6vw, 5.5rem) clamp(3rem, 8vw, 7rem) clamp(3rem, 5vw, 4.5rem);
+  overflow: hidden;
+  background: url("/student-gallery/elements/chinese-scroll.webp") center / 100% 100% no-repeat;
 }
 
 .chinese-artwork {
   position: relative;
   z-index: 2;
   display: block;
-  width: min(100%, 58rem);
-  height: clamp(20rem, 38vw, 32rem);
+  width: min(82%, 52rem);
+  height: clamp(17rem, 28vw, 24rem);
   margin: 0 auto;
   object-fit: contain;
   filter: drop-shadow(0 1rem 1.1rem rgba(62, 52, 39, 0.12));
@@ -1108,14 +1046,21 @@ watch(() => route.fullPath, applyGalleryRoute)
 }
 
 .chinese-dot {
-  width: 0.85rem;
-  height: 0.85rem;
+  position: relative;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.chinese-dot::before {
+  position: absolute;
+  inset: 0.35rem;
+  content: "";
   border: 2px solid rgba(99, 104, 96, 0.56);
   border-radius: 999px;
   transition: background-color 150ms ease, border-color 150ms ease;
 }
 
-.chinese-dot--active {
+.chinese-dot--active::before {
   background: #e44b5d;
   border-color: #e44b5d;
 }
@@ -1153,7 +1098,8 @@ watch(() => route.fullPath, applyGalleryRoute)
   position: relative;
   z-index: 1;
   max-width: 47rem;
-  margin: clamp(4rem, 6vw, 5.2rem) auto 0;
+  min-height: 14rem;
+  margin: clamp(3rem, 5vw, 4.5rem) auto 0;
   text-align: center;
 }
 
@@ -1200,18 +1146,25 @@ watch(() => route.fullPath, applyGalleryRoute)
     grid-template-columns: 1fr;
   }
 
-  .chinese-carousel {
-    padding-inline: 1.5rem;
-    overflow: hidden;
-  }
-
-  .chinese-carousel::before,
-  .chinese-carousel::after {
+  .stage-card:not(:first-child) {
     display: none;
   }
 
+  .chinese-carousel {
+    aspect-ratio: auto;
+    min-height: clamp(31rem, 120vw, 43rem);
+    padding: 2rem 1.5rem;
+    background-color: #efe3cc;
+    background-image: none;
+    border: 0.7rem solid #d0c09c;
+    border-inline-width: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 1rem 2rem rgba(72, 56, 42, 0.14);
+  }
+
   .chinese-artwork {
-    height: clamp(17rem, 82vw, 25rem);
+    width: 88%;
+    height: clamp(16rem, 75vw, 24rem);
   }
 
   .stage-arrow {
