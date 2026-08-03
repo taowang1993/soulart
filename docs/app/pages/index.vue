@@ -603,6 +603,8 @@ const isAssistantOpen = shallowRef(false)
           <img
             src="/home/card-from-jasmine.jpg"
             alt="Handwritten Christmas thank-you card from Jasmine"
+            width="4032"
+            height="2843"
             class="rotate-[-3deg] rounded-lg bg-white shadow-[0_20px_50px_rgba(64,51,95,0.18)] ring-1 ring-black/5"
             loading="lazy"
             decoding="async"
@@ -610,6 +612,8 @@ const isAssistantOpen = shallowRef(false)
           <img
             src="/home/card-from-doris.jpg"
             alt="Handwritten thank-you card from Doris"
+            width="3888"
+            height="2953"
             class="rotate-[2deg] rounded-lg bg-white shadow-[0_20px_50px_rgba(64,51,95,0.18)] ring-1 ring-black/5"
             loading="lazy"
             decoding="async"
