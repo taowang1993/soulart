@@ -22,7 +22,7 @@ const navItems = [
       { label: 'Summer Camps', to: '/art-programs/summer-camps' },
     ],
   },
-  { label: 'Yoga Wellness', to: '/wellness', icon: 'i-lucide-leaf' },
+  { label: 'Wellness', to: '/wellness', icon: 'i-lucide-leaf' },
   { label: 'Schedules', to: '/schedules', icon: 'i-lucide-calendar-days' },
   { label: 'Resources', to: '/resources', icon: 'i-lucide-book-open' },
   { label: 'About', to: '/about', icon: 'i-lucide-heart' },
@@ -142,30 +142,20 @@ const isAssistantOpen = shallowRef(false)
           class="absolute -left-36 -top-36 w-[32rem] max-w-none opacity-70"
         >
         <img
-          src="/home/elements/wc-lavender.webp"
-          alt=""
-          class="absolute -right-40 -top-24 w-[36rem] max-w-none opacity-60"
-        >
-        <img
           src="/home/elements/wc-rose.webp"
           alt=""
           class="absolute -bottom-48 left-1/4 w-[30rem] max-w-none opacity-50"
-        >
-        <img
-          src="/home/elements/flowers-bloom.webp"
-          alt=""
-          class="absolute -bottom-2 right-2 w-36 opacity-90 sm:w-44 lg:right-10"
         >
       </div>
 
       <nav
         aria-label="Main Navigation"
-        class="mx-auto flex max-w-6xl items-center justify-between rounded-none bg-white/75 px-3 py-3 shadow-sm ring-1 ring-white/70 backdrop-blur md:rounded-[2rem] md:px-5"
+        class="relative mx-auto flex max-w-5xl items-center justify-between rounded-full bg-white/80 px-3 py-3 shadow-sm ring-1 ring-white/70 backdrop-blur md:px-5 lg:pl-24"
       >
         <NuxtLink
           to="#top"
           aria-label="XinYi Class Home"
-          class="flex items-center gap-2 text-[#4e3c71] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
+          class="flex items-center gap-2 text-[#4e3c71] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792] lg:absolute lg:left-0 lg:top-1/2 lg:-translate-y-1/2 xl:-left-14"
         >
           <img
             src="/home/logo.png"
@@ -176,7 +166,7 @@ const isAssistantOpen = shallowRef(false)
           >
         </NuxtLink>
 
-        <div class="hidden items-center gap-1 rounded-full bg-white/50 p-1 lg:flex">
+        <div class="hidden items-center gap-1 bg-transparent p-0 lg:flex">
           <div
             v-for="item in navItems"
             :key="item.label"
@@ -277,7 +267,7 @@ const isAssistantOpen = shallowRef(false)
 
         <div class="min-w-0 pb-2 text-center lg:pb-6">
           <h1 class="hero-title font-serif font-semibold tracking-tight text-[#4d4166]">
-            Art <span class="mx-2 text-[#735d91]">•</span> Yoga Wellness <span class="mx-2 text-[#735d91]">•</span> Community
+            Art <span class="mx-2 text-[#735d91]">•</span> Wellness <span class="mx-2 text-[#735d91]">•</span> Community
           </h1>
           <p class="mt-5 font-serif text-2xl italic text-[#8b6aa3] sm:text-3xl">
             A Place to Create, Connect and Thrive
@@ -346,17 +336,21 @@ const isAssistantOpen = shallowRef(false)
       id="programs"
       class="px-4 py-20 sm:px-6 lg:px-8 lg:py-24"
     >
-      <div class="mx-auto max-w-5xl">
+      <div class="mx-auto max-w-7xl">
         <div class="text-center">
           <h2 class="font-serif text-4xl font-semibold text-[#5a4380] sm:text-5xl">
             Explore Our Programs
           </h2>
-          <img
-            src="/home/elements/divider-heart-pink.webp"
-            alt=""
+          <div
+            class="section-divider mx-auto mt-5"
             aria-hidden="true"
-            class="mx-auto mt-5 w-72 max-w-[70vw] object-contain"
           >
+            <img
+              src="/home/elements/divider-flower-pink.webp"
+              alt=""
+              class="size-8 object-contain"
+            >
+          </div>
         </div>
 
         <div class="mt-8 grid gap-8 md:grid-cols-2">
@@ -414,19 +408,19 @@ const isAssistantOpen = shallowRef(false)
       class="relative overflow-hidden px-4 py-20 sm:px-6 lg:px-8 lg:py-24"
     >
       <img
-        src="/home/elements/lavender-sprig.webp"
+        src="/home/elements/lavender-branch.webp"
         alt=""
         aria-hidden="true"
         class="absolute -left-10 top-6 w-40 opacity-60 lg:w-52"
       >
       <div class="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[0.78fr_1.22fr]">
         <div class="text-center">
-          <div
-            class="mb-4 hidden text-[#c9a8d6] lg:block"
+          <img
+            src="/home/elements/divider-heart-pink.webp"
+            alt=""
             aria-hidden="true"
+            class="mx-auto mb-5 hidden w-72 max-w-[70vw] object-contain lg:block"
           >
-            ✦ ✧ ✦
-          </div>
           <h2 class="font-serif text-4xl font-semibold leading-tight text-[#5a4380] sm:text-5xl">
             Welcome to
             <span class="block text-[#df838d]">Our Studio</span>
@@ -529,21 +523,23 @@ const isAssistantOpen = shallowRef(false)
           <article
             v-for="reason in reasons"
             :key="reason.title"
-            class="mx-auto max-w-xs text-center"
+            class="reason-item mx-auto flex max-w-xs flex-col items-center text-center sm:max-w-sm sm:flex-row sm:items-start sm:gap-4 sm:text-left lg:max-w-none"
           >
             <img
               :src="reason.image"
               alt=""
-              class="mx-auto h-28 w-32 object-contain"
+              class="mx-auto h-28 w-32 shrink-0 object-contain sm:mx-0"
               loading="lazy"
               decoding="async"
             >
-            <h3 class="mt-4 font-serif text-xl font-semibold text-[#604781]">
-              {{ reason.title }}
-            </h3>
-            <p class="mt-3 text-sm leading-6 text-[#4f455b]">
-              {{ reason.description }}
-            </p>
+            <div>
+              <h3 class="mt-4 font-serif text-xl font-semibold text-[#604781] sm:mt-2">
+                {{ reason.title }}
+              </h3>
+              <p class="mt-3 text-sm leading-6 text-[#4f455b]">
+                {{ reason.description }}
+              </p>
+            </div>
           </article>
         </div>
 
@@ -754,6 +750,42 @@ const isAssistantOpen = shallowRef(false)
   filter: drop-shadow(0 22px 36px rgba(130, 91, 121, 0.2));
   -webkit-mask-image: radial-gradient(ellipse 78% 88% at 50% 47%, #000 55%, transparent 95%);
   mask-image: radial-gradient(ellipse 78% 88% at 50% 47%, #000 55%, transparent 95%);
+}
+
+@media (min-width: 1024px) {
+  .reason-item:not(:nth-child(3n)) {
+    border-right: 1px solid #e9ddec;
+    padding-right: 2.5rem;
+  }
+}
+
+#programs .section-divider {
+  width: min(13rem, 70vw);
+  gap: 0.5rem;
+}
+
+#programs .section-divider > img {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.section-divider {
+  display: flex;
+  width: min(18rem, 70vw);
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.section-divider::before,
+.section-divider::after {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(151, 124, 177, 0.45));
+  content: "";
+}
+
+.section-divider::after {
+  background: linear-gradient(90deg, rgba(151, 124, 177, 0.45), transparent);
 }
 
 @media (max-width: 639px) {

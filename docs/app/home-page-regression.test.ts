@@ -21,14 +21,13 @@ const expectedAssets = [
 ]
 
 const expectedElementAssets = [
+  'divider-flower-pink.webp',
   'divider-heart-pink.webp',
-  'flowers-bloom.webp',
   'heart-coral.webp',
   'hero-connect.webp',
   'hero-create.webp',
   'hero-thrive.webp',
   'lavender-branch.webp',
-  'lavender-sprig.webp',
   'leaf-row.webp',
   'leaf-single.webp',
   'program-art.webp',
@@ -46,7 +45,6 @@ const expectedElementAssets = [
   'studio-creative.webp',
   'studio-groups.webp',
   'studio-light.webp',
-  'wc-lavender.webp',
   'wc-rose.webp',
 ]
 
@@ -98,9 +96,28 @@ test('program images keep the design crop ratio', () => {
 
   assert.ok(artSize.width > artSize.height, 'art program asset must be cropped as a landscape card image')
   assert.ok(Math.abs((artSize.width / artSize.height) - 1.6) < 0.02, 'art program crop should match the 16:10 design card ratio')
-  assert.match(source, /<div class="mx-auto max-w-5xl">[\s\S]*Explore Our Programs/)
+  assert.match(source, /<div class="mx-auto max-w-7xl">[\s\S]*Explore Our Programs/)
   assert.match(source, /aspect-\[16\/10\][^\n]+w-full[^\n]+object-cover/)
   assert.doesNotMatch(source, /class="h-72 w-full object-cover/)
+})
+
+test('Explore Programs uses the flower divider accent', () => {
+  const source = readHomePage()
+  const programs = source.match(/<section\s+id="programs"[\s\S]*?<\/section>/)?.[0]
+
+  assert.ok(programs, 'missing programs section')
+  assert.match(programs, /class="section-divider mx-auto mt-5"/)
+  assert.match(programs, /src="\/home\/elements\/divider-flower-pink\.webp"/)
+  assert.doesNotMatch(programs, /src="\/home\/elements\/divider-heart-pink\.webp"/)
+})
+
+test('family benefits use the reference icon-and-copy row layout', () => {
+  const source = readHomePage()
+  const benefits = source.match(/<section\s+id="benefits"[\s\S]*?<\/section>/)?.[0]
+
+  assert.ok(benefits, 'missing benefits section')
+  assert.match(benefits, /class="reason-item mx-auto flex max-w-xs flex-col items-center text-center sm:max-w-sm sm:flex-row sm:items-start sm:gap-4 sm:text-left lg:max-w-none"/)
+  assert.match(benefits, /class="mt-4 font-serif text-xl font-semibold text-\[#604781\] sm:mt-2"/)
 })
 
 test('studio section keeps the reference text-left image-right composition', () => {
@@ -134,10 +151,13 @@ test('home page owns its marketing chrome without changing docs routes', () => {
   const source = readHomePage()
 
   assert.match(source, /definePageMeta\(\{[\s\S]*header:\s*false[\s\S]*footer:\s*false[\s\S]*\}\)/)
-  assert.match(source, /\{ label: 'Yoga Wellness', to: '\/wellness'/)
+  assert.match(source, /\{ label: 'Wellness', to: '\/wellness'/)
   assert.match(source, /class="hero-title[^"]*"[\s\S]*Art[\s\S]*Yoga Wellness[\s\S]*Community/)
   assert.match(source, /\.hero-title\s*\{[\s\S]*white-space:\s*nowrap/)
   assert.match(source, /Explore Our Programs/)
+  assert.match(source, /<nav[\s\S]*max-w-5xl[^"]*rounded-full/)
+  assert.doesNotMatch(source, /src="\/home\/elements\/flowers-bloom\.webp"/)
+  assert.doesNotMatch(source, /src="\/home\/elements\/wc-lavender\.webp"/)
   assert.match(source, /\{ text: 'Summer Outdoor Yoga Retreat Registration', action: 'Open Here', to: '\/wellness#retreat', image: '\/home\/elements\/shortcut-yoga\.webp', assistant: false \}/)
   assert.match(source, /\{ text: 'Upcoming Workshops', action: 'Open Here', to: '\/art-programs#events', image: '\/home\/elements\/shortcut-summer\.webp', assistant: false \}/)
   assert.match(source, /\{ text: 'Meet XinYi AI Assistant', action: 'Open Here', to: '', image: '\/home\/elements\/shortcut-assistant\.webp', assistant: true \}/)

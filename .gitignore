@@ -15,6 +15,8 @@ logs
 
 # Misc
 .DS_Store
+.!*
+.pi-subagents/
 .fleet
 .idea
 .eslintcache
@@ -35,6 +37,7 @@ template/pnpm-lock.yaml
 .profile
 *.0x
 .playwright-cli
+home-top.png
 
 #VSC
 .history

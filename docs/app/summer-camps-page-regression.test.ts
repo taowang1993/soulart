@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from 'node:fs'
+import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'
 import test from 'node:test'
 import assert from 'node:assert/strict'
@@ -10,12 +10,10 @@ const contactPagePath = join(root, 'docs/app/pages/contact.vue')
 const publicDir = join(root, 'docs/public/summer-camps')
 
 const expectedSummerCampAssets = [
-  'hero.jpg',
-  'morning-studio.jpg',
-  'outdoor-farm.jpg',
-  'craft-studio.jpg',
-  'fruit-platter.jpg',
-  'showcase.jpg',
+  'hero-watercolor.webp',
+  'outdoor-farm.webp',
+  'fruit-platter.webp',
+  'showcase.webp',
   'qr-code.jpg',
 ] as const
 
@@ -39,6 +37,7 @@ test('summer camp assets are copied into the public summer-camps directory', () 
   for (const asset of expectedSummerCampAssets) {
     assert.ok(existsSync(join(publicDir, asset)), `${asset} should exist`)
   }
+  assert.deepEqual(readdirSync(publicDir).sort(), [...expectedSummerCampAssets].sort())
 })
 
 test('summer camps page owns marketing chrome and preserves assistant', () => {
@@ -93,9 +92,21 @@ test('summer camps page uses copied public assets only', () => {
   assert.doesNotMatch(source, localPathPattern)
   assert.doesNotMatch(source, remoteImagePattern)
 
-  for (const match of source.matchAll(/['"](\/summer-camps\/[^'"]+)['"]/g)) {
+  const referencedAssets = [...source.matchAll(/['"](\/summer-camps\/[^'"]+)['"]/g)]
+  assert.ok(referencedAssets.length > 0)
+  for (const match of referencedAssets) {
     assert.ok(allowed.has(match[1]!), `${match[1]} should be part of the copied summer camp assets`)
   }
+})
+
+test('summer camps navigation marks the current section and keeps the booking action', () => {
+  const source = readPage()
+
+  assert.match(source, /label: 'Art Programs',[\s\S]*active: true/)
+  assert.doesNotMatch(source, /:aria-current="item\.active/)
+  assert.match(source, /label: 'Summer Camps', to: '\/art-programs\/summer-camps',[\s\S]*current: true/)
+  assert.match(source, /to="\/contact\?interest=Summer%20Camp#message"[\s\S]*>\s*Book Camp\s*</)
+  assert.doesNotMatch(source, /to="\/docs\/manual\/(?:en|zh)\/getting-started\/installation"/)
 })
 
 test('marketing art program navigation exposes Summer Camps', () => {
