@@ -1,12 +1,12 @@
 # Raw HTML prohibition
 
-**Rule**: Never write raw HTML tags inside TockDocs content Markdown files.
+**Rule**: Never write raw HTML tags inside Xinyi Class content Markdown files.
 
 ## Why
 
 Nuxt Studio's TipTap visual editor cannot render raw HTML elements. When Studio opens a page containing `<img>`, `<table>`, `<br>`, `<div>`, `<sub>`, `<sup>`, or any other raw HTML tag, the left editor pane shows blank — the AST contains nodes TipTap has no extension for.
 
-This was the root cause of [the chemistry KB Studio blank-editor bug](https://github.com/taowang1993/tockdocs/pull/...). The chemistry KB (60 pages) was ported from an external LaTeX-adjacent source and contained 216 `<img>` tags, 5 `<table>` blocks, and 15+ `<br>` tags — all of which broke Studio editing.
+This was the root cause of the chemistry KB Studio blank-editor bug. The chemistry KB (60 pages) was ported from an external LaTeX-adjacent source and contained 216 `<img>` tags, 5 `<table>` blocks, and 15+ `<br>` tags — all of which broke Studio editing.
 
 ## What to use instead
 

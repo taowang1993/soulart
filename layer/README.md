@@ -1,13 +1,11 @@
-[![tockdocs](https://tockdocs.dev/_og/s/c_Landing,title_TockDocs,description_An+AI-powered+Knowledge+Management+System.png)](https://tockdocs.dev)
-
-# TockDocs
+# Xinyi Class
 
 > A minimal and beautiful Nuxt layer for documentation websites
 
 [![npm version](https://img.shields.io/npm/v/tockdocs.svg)](https://www.npmjs.com/package/tockdocs)
 [![npm downloads](https://img.shields.io/npm/dm/tockdocs.svg)](https://www.npmjs.com/package/tockdocs)
 
-This is the official Nuxt layer for [TockDocs](https://tockdocs.dev), providing a complete documentation theming. It works with the [TockDocs CLI](https://github.com/taowang1993/tockdocs/tree/main/cli) for rapid project setup.
+This is the official Nuxt layer for [Xinyi Class](https://tockdocs.vercel.app), providing a complete documentation theming. It works with the [Xinyi Class CLI](https://github.com/taowang1993/soulart/tree/main/cli) for rapid project setup.
 
 ## 🚀 Features
 
@@ -20,7 +18,7 @@ This is the official Nuxt layer for [TockDocs](https://tockdocs.dev), providing 
 - 🎨 **Customizable** - Easy theming and customization
 - ⚡ **Fast** - Optimized for performance
 - 🔧 **TypeScript** - Full TypeScript support
-- 🛠️ **CLI Integration** - Works with TockDocs CLI for quick project setup
+- 🛠️ **CLI Integration** - Works with Xinyi Class CLI for quick project setup
 
 ## 📦 Installation
 
@@ -30,9 +28,9 @@ npm install tockdocs
 
 ## 🏗️ Quick Setup
 
-### Option 1: TockDocs CLI (Recommended)
+### Option 1: Xinyi Class CLI (Recommended)
 
-The easiest way to get started is using the TockDocs CLI, which automatically sets up a project with this layer:
+The easiest way to get started is using the Xinyi Class CLI, which automatically sets up a project with this layer:
 
 ```bash
 # Create a new documentation project
@@ -95,7 +93,7 @@ nuxt build --extends tockdocs
 
 ## 🔗 Related Packages
 
-- [`create-tockdocs`](https://www.npmjs.com/package/create-tockdocs) - CLI tool to scaffold TockDocs projects
+- [`create-tockdocs`](https://www.npmjs.com/package/create-tockdocs) - CLI tool to scaffold Xinyi Class projects
 
 ## 📄 License
 
@@ -107,9 +105,9 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📞 Support
 
-- 📖 [Documentation](https://tockdocs.dev)
-- 🐛 [Issues](https://github.com/taowang1993/tockdocs/issues)
-- 💬 [Discussions](https://github.com/taowang1993/tockdocs/discussions)
+- 📖 [Documentation](https://tockdocs.vercel.app)
+- 🐛 [Issues](https://github.com/taowang1993/soulart/issues)
+- 💬 [Discussions](https://github.com/taowang1993/soulart/discussions)
 
 ---
 

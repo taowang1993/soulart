@@ -1,10 +1,10 @@
 export default defineAppConfig({
   header: {
-    title: 'TockDocs',
+    title: 'Xinyi Class',
     logo: {
       light: '/logo/logo-dark.svg',
       dark: '/logo/logo-light.svg',
-      alt: 'TockDocs Logo',
+      alt: 'Xinyi Class Logo',
       favicon: '/favicon.svg',
     },
   },

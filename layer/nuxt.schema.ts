@@ -271,8 +271,8 @@ export default defineNuxtSchema({
       },
     }),
     tockdocs: group({
-      title: 'TockDocs',
-      description: 'TockDocs configuration.',
+      title: 'Xinyi Class',
+      description: 'Xinyi Class configuration.',
       icon: 'i-lucide-settings',
       fields: {
         locale: field({

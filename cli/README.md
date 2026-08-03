@@ -1,12 +1,10 @@
-[![tockdocs](https://tockdocs.dev/_og/s/c_Landing,title_Write+beautiful+docs+with+Markdown,description_Ship+fast+flexible+and+SEO-optimized+documentation+with+beautiful+design+out+of+the+box.+TockDocs+brings+together+the+best+of+the+Nuxt+ecosystem.+Powered+by+Nuxt+UI.,p_Ii9lbiI.png)](https://tockdocs.dev)
-
 > CLI tool to create beautiful docs with Markdown
 
 [![npm version](https://img.shields.io/npm/v/create-tockdocs.svg?style=flat&colorA=020420&colorB=EEEEEE)](https://npmjs.com/package/create-tockdocs)
 [![npm downloads](https://img.shields.io/npm/dm/create-tockdocs.svg?style=flat&colorA=020420&colorB=EEEEEE)](https://npm.chart.dev/create-tockdocs)
 [![License](https://img.shields.io/npm/l/create-tockdocs.svg?style=flat&colorA=020420&colorB=EEEEEE)](https://npmjs.com/package/create-tockdocs)
 
-The fastest way to create a new [TockDocs](https://tockdocs.dev) documentation project. This CLI tool scaffolds a complete documentation website using the [`tockdocs`](https://www.github.com/taowang1993/tockdocs/tree/main/layer) Nuxt layer.
+The fastest way to create a new [Xinyi Class](https://tockdocs.vercel.app) documentation project. This CLI tool scaffolds a complete documentation website using the [`tockdocs`](https://github.com/taowang1993/soulart/tree/main/layer) Nuxt layer.
 
 ## 🚀 Quick Start
 
@@ -78,7 +76,7 @@ my-docs/
 
 ### Optional files and folders
 
-TockDocs uses a layer system, you can go further and use any feature or file of a classical Nuxt project:
+Xinyi Class uses a layer system, you can go further and use any feature or file of a classical Nuxt project:
 
 ```
 my-docs/
@@ -127,15 +125,15 @@ Your project comes pre-configured with the best of the Nuxt ecosystem:
 - [Nuxt UI](https://ui.nuxt.com) - UI components
 - [Nuxt Image](https://image.nuxt.com/) - Optimized images
 - [Tailwind CSS 4](https://tailwindcss.com/) - Utility-first CSS
-- [TockDocs Layer](https://www.npmjs.com/package/tockdocs) - Documentation theme
+- [Xinyi Class Layer](https://www.npmjs.com/package/tockdocs) - Documentation theme
 
 ## 🔗 Related Packages
 
-- [`tockdocs`](https://github.com/taowang1993/tockdocs/tree/main/layer) - The Nuxt layer that powers your documentation
+- [`tockdocs`](https://github.com/taowang1993/soulart/tree/main/layer) - The Nuxt layer that powers your documentation
 
 ## 📖 Documentation
 
-For detailed documentation on customizing your TockDocs project, visit the [TockDocs Documentation](https://tockdocs.dev)
+For detailed documentation on customizing your Xinyi Class project, visit the [Xinyi Class Documentation](https://tockdocs.vercel.app)
 
 ## 🛠️ Development
 
@@ -147,7 +145,7 @@ To contribute to the CLI tool:
 
 ```bash
 # Clone this repository
-git clone https://github.com/taowang1993/tockdocs
+git clone https://github.com/taowang1993/soulart
 
 # Install dependencies
 pnpm install
@@ -161,4 +159,4 @@ pnpm run dev
 
 ## 📄 License
 
-Published under the [MIT](https://github.com/taowang1993/tockdocs/blob/main/LICENSE) license.
+Published under the [MIT](https://github.com/taowang1993/soulart/blob/main/LICENSE) license.

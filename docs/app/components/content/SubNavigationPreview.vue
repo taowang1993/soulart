@@ -8,7 +8,7 @@ const props = withDefaults(defineProps<{
   locale: 'en',
   path: 'getting-started/introduction',
   mode: 'header',
-  title: 'TockDocs UI preview',
+  title: 'Xinyi Class UI preview',
 })
 
 const scaledWidth = 960

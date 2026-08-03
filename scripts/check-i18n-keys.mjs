@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Scans TockDocs source for i18n key usage and reports missing keys
+ * Scans Xinyi Class source for i18n key usage and reports missing keys
  * across locale files in layer/i18n/locales/.
  *
  * Checks:

@@ -1,8 +1,8 @@
-# TockDocs i18n Starter
+# Xinyi Class i18n Starter
 
-> A beautiful, internationalized starter for creating multi-language documentation with TockDocs
+> A beautiful, internationalized starter for creating multi-language documentation with Xinyi Class
 
-This is the i18n TockDocs starter template that provides everything you need to build beautiful, multi-language documentation sites with Markdown and Vue components.
+This is the i18n Xinyi Class starter template that provides everything you need to build beautiful, multi-language documentation sites with Markdown and Vue components.
 
 ## ✨ Features
 
@@ -93,21 +93,21 @@ This starter comes pre-configured with:
 - [Nuxt UI](https://ui.nuxt.com) - UI components
 - [Nuxt Image](https://image.nuxt.com/) - Optimized images
 - [Tailwind CSS 4](https://tailwindcss.com/) - Utility-first CSS
-- [TockDocs Layer](https://www.npmjs.com/package/tockdocs) - Documentation theme
+- [Xinyi Class Layer](https://www.npmjs.com/package/tockdocs) - Documentation theme
 
 ## 📖 Documentation
 
-For detailed documentation on customizing your TockDocs project, visit the [TockDocs Documentation](https://tockdocs.dev)
+For detailed documentation on customizing your Xinyi Class project, visit the [Xinyi Class Documentation](https://tockdocs.vercel.app)
 
 ### 🤖 AI Assistant Skill
 
-Get started quickly with TockDocs by adding specialized knowledge to your AI assistant (Cursor, Claude, etc.):
+Get started quickly with Xinyi Class by adding specialized knowledge to your AI assistant (Cursor, Claude, etc.):
 
 ```bash
-npx skills add taowang1993/tockdocs
+npx skills add taowang1993/soulart
 ```
 
-This skill helps you create documentation faster by providing your AI assistant with best practices, MDC component usage, ready-to-use templates, writing guidelines, and configuration tips for TockDocs. Perfect for quickly scaffolding new documentation projects.
+This skill helps you create documentation faster by providing your AI assistant with best practices, MDC component usage, ready-to-use templates, writing guidelines, and configuration tips for Xinyi Class. Perfect for quickly scaffolding new documentation projects.
 
 ## 🚀 Deployment
 

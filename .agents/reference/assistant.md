@@ -1,4 +1,4 @@
-# TockDocs assistant internals
+# Xinyi Class assistant internals
 
 ## Overview
 

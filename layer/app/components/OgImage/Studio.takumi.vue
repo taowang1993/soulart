@@ -108,7 +108,7 @@
           <div class="flex items-center justify-between border-b border-black/10 bg-[#fafafa] px-6 py-4">
             <div class="flex items-center gap-3">
               <div class="rounded-full bg-black/5 px-4 py-2 text-[15px] font-semibold text-[#111827]">
-                TockDocs
+                Xinyi Class
               </div>
               <div class="rounded-full border border-black/10 bg-white px-3 py-2 text-[13px] text-[#6b7280]">
                 Search...

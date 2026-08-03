@@ -86,7 +86,7 @@ async function main() {
     },
     {
       name: 'Manual KB (MCP server setup)',
-      query: 'How do I set up the built-in MCP server in TockDocs and what tools does it expose for AI agents to search documentation?',
+      query: 'How do I set up the built-in MCP server in Xinyi Class and what tools does it expose for AI agents to search documentation?',
       kb: 'manual',
       locale: 'en',
     },

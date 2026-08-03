@@ -1,8 +1,8 @@
-# TockDocs Architecture
+# Xinyi Class Architecture
 
 ## Overview
 
-TockDocs is a pnpm workspace built around a reusable **Nuxt layer**.
+Xinyi Class is a pnpm workspace built around a reusable **Nuxt layer**.
 
 - **`layer/`** is the product: the shared theme, routing model, content discovery, source-markdown pipeline, search runtime, MCP tools, and assistant runtime.
 - **`docs/`** is the official site and the main real-world consumer. It extends the layer and adds `@nuxtjs/i18n`, `nuxt-skill-hub`, and `nuxt-studio`.
@@ -17,7 +17,7 @@ The repo supports two runtime shapes:
 ## Software Architecture
 
 ```text
-                              TockDocs Workspace
+                              Xinyi Class Workspace
 ┌──────────────────────────────────────────────────────────────────────────────┐
 │ Root pnpm Workspace                                                          │
 │ package.json · pnpm-workspace.yaml · scripts/ · .github/workflows/ci.yml     │
@@ -87,11 +87,11 @@ Each KB can define:
 - `theme`, `searchPlaceholder`, `assistantName`
 - localized `titles` / `descriptions`
 
-Locale discovery is based on real subdirectories on disk. If `kb.yml` declares locales, TockDocs intersects that list with the locale folders that actually exist.
+Locale discovery is based on real subdirectories on disk. If `kb.yml` declares locales, Xinyi Class intersects that list with the locale folders that actually exist.
 
 ### Legacy Mode
 
-When no `kb.yml` files exist, TockDocs falls back to a single docs tree:
+When no `kb.yml` files exist, Xinyi Class falls back to a single docs tree:
 
 - **with i18n** — per-locale collections under `content/<locale>/...`
 - **without i18n** — one unprefixed docs collection, optionally using `content/docs/**`

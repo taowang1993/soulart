@@ -3,7 +3,7 @@ import { createCLI } from './cli'
 
 const cli = createCLI({
   name: 'create-tockdocs',
-  description: 'Create a new TockDocs documentation project',
+  description: 'Create a new Xinyi Class documentation project',
   setup: {
     defaults: {},
   },

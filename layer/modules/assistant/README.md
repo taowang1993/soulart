@@ -172,7 +172,7 @@ clearMessages()
 | ----------- | -------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | `apiPath`   | `string` | `/__tockdocs__/assistant` | API endpoint path for the chat                                                                                                     |
 | `mcpServer` | `string` | `/mcp`                    | MCP server path or full URL (e.g., `https://docs.example.com/mcp` for external servers)                                            |
-| `assistantFsBackend` | `string` | `mcp` | Retrieval backend: `mcp` keeps the current TockDocs MCP tools, `index` injects a build-time docs index and exposes only `get-page`, `gitfs` exposes the docs through a bash tool backed by GitFS |
+| `assistantFsBackend` | `string` | `mcp` | Retrieval backend: `mcp` keeps the current Xinyi Class MCP tools, `index` injects a build-time docs index and exposes only `get-page`, `gitfs` exposes the docs through a bash tool backed by GitFS |
 | `provider`  | `string` | auto                      | Optional provider override (`vercel`, `openrouter`, `deepseek`, `nvidia`, `huggingface`, `groq`, `github`, `gemini`, `cloudflare`) |
 | `model`     | `string` | provider default          | Optional model override for the configured provider                                                                                |
 
@@ -226,8 +226,8 @@ Composable for syntax highlighting code blocks with Shiki.
 - Nuxt UI 3.x (for `USlideover`, `UButton`, `UTextarea`, `UChatMessages`, etc.)
 - An MCP server running when `assistantFsBackend='mcp'` or `assistantFsBackend='index'` (path configurable via `mcpServer`)
 - `GITHUB_TOKEN` available on the server when `assistantFsBackend='gitfs'`
-- Built-in TockDocs MCP tools (`search-pages`, `list-pages`, and `get-page`) when `assistantFsBackend='mcp'`
-- Built-in TockDocs `get-page` tool plus generated `INDEX.md` assets when `assistantFsBackend='index'`
+- Built-in Xinyi Class MCP tools (`search-pages`, `list-pages`, and `get-page`) when `assistantFsBackend='mcp'`
+- Built-in Xinyi Class `get-page` tool plus generated `INDEX.md` assets when `assistantFsBackend='index'`
 - Server credentials for one supported provider, or Vercel AI Gateway auth
 - Optional `NUXT_PUBLIC_ASSISTANT_ENABLED=true` to expose the UI explicitly in production
 - Optional server-only request guardrail env vars: `ASSISTANT_RATE_LIMIT_MAX_REQUESTS`, `ASSISTANT_RATE_LIMIT_WINDOW_MS`, `ASSISTANT_MAX_BODY_BYTES`, `ASSISTANT_MAX_MESSAGES`, `ASSISTANT_MAX_MESSAGE_TEXT_CHARS`, and `ASSISTANT_MAX_TOTAL_TEXT_CHARS`
@@ -238,7 +238,7 @@ Composable for syntax highlighting code blocks with Shiki.
 
 The assistant supports three retrieval backends:
 
-- **`assistantFsBackend: 'mcp'`** — uses the built-in TockDocs tools:
+- **`assistantFsBackend: 'mcp'`** — uses the built-in Xinyi Class tools:
   - `search-pages` — full-document retrieval across titles, descriptions, headings, paths, and body text
   - `list-pages` — structure browsing by page metadata
   - `get-page` — full markdown retrieval for a specific page

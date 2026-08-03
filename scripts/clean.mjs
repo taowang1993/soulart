@@ -66,11 +66,11 @@ const stalePids = unique([
 ]).filter(pid => pid !== String(process.pid))
 
 if (stalePids.length > 0) {
-  console.log(`[clean] Killing stale TockDocs/Nuxt processes: ${stalePids.join(', ')}`)
+  console.log(`[clean] Killing stale Xinyi Class/Nuxt processes: ${stalePids.join(', ')}`)
   killPids(stalePids)
 }
 else {
-  console.log('[clean] No stale TockDocs/Nuxt processes found')
+  console.log('[clean] No stale Xinyi Class/Nuxt processes found')
 }
 
 for (const target of cleanupTargets) {

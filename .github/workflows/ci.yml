@@ -55,17 +55,14 @@ jobs:
       - name: Typecheck
         run: pnpm run typecheck
 
+      - name: Test regressions
+        run: pnpm run test:regression
+
       - name: Build CLI
         run: pnpm run build
         working-directory: ./cli
 
       - name: Publish CLI and Layer
-        if: github.repository == 'taowang1993/tockdocs'
+        if: github.repository == 'taowang1993/soulart'
         continue-on-error: true
-        run: |
-          if [ "$GITHUB_REPOSITORY" != "taowang1993/tockdocs" ]; then
-            echo "Skipping pkg-pr-new publish outside taowang1993/tockdocs"
-            exit 0
-          fi
-
-          npx pkg-pr-new publish --compact './cli' './layer'
+        run: npx pkg-pr-new publish --compact './cli' './layer'

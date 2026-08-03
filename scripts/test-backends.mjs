@@ -1,6 +1,6 @@
 const BASE_URL = 'http://localhost:4987'
 const ENDPOINT = `${BASE_URL}/__tockdocs__/assistant`
-const QUERY = 'What is TockDocs?'
+const QUERY = 'What is Xinyi Class?'
 const ITERATIONS = 3
 
 const BACKENDS = ['mcp', 'index', 'gitfs']
@@ -156,7 +156,7 @@ function stats(values) {
 
 async function main() {
   console.log('='.repeat(70))
-  console.log('TockDocs Assistant FS Backend Speed Test')
+  console.log('Xinyi Class Assistant FS Backend Speed Test')
   console.log('='.repeat(70))
   console.log(`Query: "${QUERY}"`)
   console.log(`Iterations per backend: ${ITERATIONS}`)

@@ -32,7 +32,7 @@ export function createCLI(opts: CLIOptions) {
       }
 
       const { runCommand } = await import('@nuxt/cli')
-      await runCommand('init', [dir, '-t', `gh:taowang1993/tockdocs/.starters/${template}`])
+      await runCommand('init', [dir, '-t', `gh:taowang1993/soulart/.starters/${template}`])
     },
   })
 

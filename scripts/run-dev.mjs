@@ -47,7 +47,7 @@ if (!env.NUXT_SITE_URL) {
 
 if (!(await isPortFree(port, host))) {
   throw new Error(
-    `Port ${port} is already in use on host "${host}". Stop the process using ${port} and rerun TockDocs; this launcher will not fall back to 3000 or 3001.`,
+    `Port ${port} is already in use on host "${host}". Stop the process using ${port} and rerun Xinyi Class; this launcher will not fall back to 3000 or 3001.`,
   )
 }
 

@@ -2,7 +2,7 @@
 seo:
   title: Write beautiful docs with Markdown
   description: Ship fast, flexible, and SEO-optimized documentation with beautiful
-    design out of the box. TockDocs brings together the best of the Nuxt ecosystem.
+    design out of the box. Xinyi Class brings together the best of the Nuxt ecosystem.
     Powered by Nuxt UI.
 ---
 
@@ -13,7 +13,7 @@ Write beautiful docs with Markdown
 #description
 Ship fast, flexible, and SEO-optimized documentation with beautiful design out of the box.
 
-TockDocs brings the best of the Nuxt ecosystem into one CLI.
+Xinyi Class brings the best of the Nuxt ecosystem into one CLI.
 
 #links
 :::u-button
@@ -35,7 +35,7 @@ Get started
 color: neutral
 icon: simple-icons-github
 size: xl
-to: https://github.com/taowang1993/tockdocs
+to: https://github.com/taowang1993/soulart
 variant: outline
 
 ---
@@ -62,7 +62,7 @@ to: https://nuxt.com
 Built with [Nuxt 4]{.text-primary}
 
 #description
-Optimized by the most famous Vue framework. TockDocs gives you everything you need to build fast, performant, and SEO-friendly websites.
+Optimized by the most famous Vue framework. Xinyi Class gives you everything you need to build fast, performant, and SEO-friendly websites.
 :::
 
 :::u-page-feature
@@ -78,7 +78,7 @@ to: https://ui.nuxt.com/
 Powered by [Nuxt UI]{.text-primary}
 
 #description
-Beautiful out of the box, minimal by design but highly customizable. TockDocs leverages Nuxt UI to give you the best docs writing experience with zero boilerplate, just focus on your content.
+Beautiful out of the box, minimal by design but highly customizable. Xinyi Class leverages Nuxt UI to give you the best docs writing experience with zero boilerplate, just focus on your content.
 :::
 
 :::u-page-feature
@@ -142,6 +142,6 @@ to: https://ui.nuxt.com/components/content-search
 Built-in navigation and [full-text search]{.text-primary}
 
 #description
-Only focus on ordering your content, TockDocs handles the search modal and auto-generates the side navigation for you.
+Only focus on ordering your content, Xinyi Class handles the search modal and auto-generates the side navigation for you.
 :::
 ::

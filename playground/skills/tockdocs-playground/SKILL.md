@@ -1,14 +1,14 @@
 ---
 name: tockdocs-playground
-description: Sample skill for testing the TockDocs agent skills discovery feature. Use to verify that /.well-known/skills/ routes work correctly.
+description: Sample skill for testing the Xinyi Class agent skills discovery feature. Use to verify that /.well-known/skills/ routes work correctly.
 metadata:
   author: tockdocs
   version: '1.0'
 ---
 
-# TockDocs Playground Skill
+# Xinyi Class Playground Skill
 
-This is a sample skill used to test the agent skills discovery feature in the TockDocs playground.
+This is a sample skill used to test the agent skills discovery feature in the Xinyi Class playground.
 
 ## Verify Discovery
 

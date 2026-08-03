@@ -1,10 +1,10 @@
 {
   "name": "create-tockdocs",
-  "description": "CLI for creating TockDocs documentation projects",
+  "description": "CLI for creating Xinyi Class documentation projects",
   "version": "5.10.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/taowang1993/tockdocs.git"
+    "url": "git+https://github.com/taowang1993/soulart.git"
   },
   "private": false,
   "license": "MIT",

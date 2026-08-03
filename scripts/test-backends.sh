@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# TockDocs Assistant FS Backend Speed Test
+# Xinyi Class Assistant FS Backend Speed Test
 # Restarts the dev server with each backend and measures TTFT.
 
 PORT=4987
 BASE_URL="http://localhost:${PORT}"
 ENDPOINT="${BASE_URL}/__tockdocs__/assistant"
-QUERY="What is TockDocs?"
+QUERY="What is Xinyi Class?"
 ITERATIONS=3
 
 RED='\033[0;31m'
@@ -145,7 +145,7 @@ run_test() {
 
 # --- Main ---
 echo "======================================================================"
-echo "  TockDocs Assistant FS Backend Speed Test"
+echo "  Xinyi Class Assistant FS Backend Speed Test"
 echo "======================================================================"
 echo "  Query: \"${QUERY}\""
 echo "  Iterations per backend: ${ITERATIONS}"

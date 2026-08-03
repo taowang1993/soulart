@@ -80,9 +80,9 @@ export function pruneVercelSharpOutput(functionDir) {
 }
 
 function printSummary(result) {
-  console.log(`[TockDocs] Kept Vercel sharp packages: ${vercelNodeSharpPackages.join(', ')}`)
-  console.log(`[TockDocs] Removed ${result.removedDirectories.length} unsupported sharp package directories.`)
-  console.log(`[TockDocs] Removed ${result.removedPackageDependencies.length} unsupported sharp package.json entries.`)
+  console.log(`[Xinyi Class] Kept Vercel sharp packages: ${vercelNodeSharpPackages.join(', ')}`)
+  console.log(`[Xinyi Class] Removed ${result.removedDirectories.length} unsupported sharp package directories.`)
+  console.log(`[Xinyi Class] Removed ${result.removedPackageDependencies.length} unsupported sharp package.json entries.`)
 }
 
 function main() {

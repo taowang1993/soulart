@@ -1,7 +1,7 @@
 ---
 seo:
   title: Rédigez votre documentation en Markdown
-  description: Publiez instantanément une documentation élégante, optimisée pour le SEO, avec design déjà pensé. TockDocs intègre le meilleur de l'écosystème Nuxt.
+  description: Publiez instantanément une documentation élégante, optimisée pour le SEO, avec design déjà pensé. Xinyi Class intègre le meilleur de l'écosystème Nuxt.
 ---
 
 ::u-page-hero
@@ -11,7 +11,7 @@ Créez votre documentation en Markdown
 #description
 Publiez instantanément une documentation élégante, optimisée pour le SEO, avec design déjà pensé.
 
-TockDocs rassemble le meilleur de l'écosystème Nuxt en une seule CLI.
+Xinyi Class rassemble le meilleur de l'écosystème Nuxt en une seule CLI.
 
 #links
 :::u-button
@@ -33,7 +33,7 @@ Commencer
 color: neutral
 icon: simple-icons-github
 size: xl
-to: https://github.com/taowang1993/tockdocs
+to: https://github.com/taowang1993/soulart
 variant: outline
 
 ---
@@ -60,7 +60,7 @@ to: https://nuxt.com
 Construit avec [Nuxt 4]{.text-primary}
 
 #description
-Optimisé par votre meta framework Vue préféré. TockDocs vous donne tout ce dont vous avez besoin pour créer des sites rapides, performants et optimisés pour le SEO.
+Optimisé par votre meta framework Vue préféré. Xinyi Class vous donne tout ce dont vous avez besoin pour créer des sites rapides, performants et optimisés pour le SEO.
 :::
 
 :::u-page-feature
@@ -76,7 +76,7 @@ to: https://ui.nuxt.com/
 Désigné par [Nuxt UI]{.text-primary}
 
 #description
-Sexy, minimaliste et personnalisable. TockDocs intègre Nuxt UI pour vous offrir la meilleure expérience pour écrire une documentation sans boilerplate, concentrez-vous simplement sur votre contenu.
+Sexy, minimaliste et personnalisable. Xinyi Class intègre Nuxt UI pour vous offrir la meilleure expérience pour écrire une documentation sans boilerplate, concentrez-vous simplement sur votre contenu.
 :::
 
 :::u-page-feature
@@ -140,6 +140,6 @@ to: https://ui.nuxt.com/components/content-search
 Navigation intégrée et [recherche textuelle]{.text-primary}
 
 #description
-Concentrez-vous uniquement sur votre contenu, TockDocs génère automatiquement une modale de recherche et la navigation latérale pour vous.
+Concentrez-vous uniquement sur votre contenu, Xinyi Class génère automatiquement une modale de recherche et la navigation latérale pour vous.
 :::
 ::

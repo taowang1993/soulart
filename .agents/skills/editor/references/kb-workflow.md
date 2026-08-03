@@ -2,7 +2,7 @@
 
 ## Content model
 
-TockDocs KBs live under `docs/content/<kb>/`.
+Xinyi Class KBs live under `docs/content/<kb>/`.
 
 - `docs/content/<kb>/kb.yml` defines KB metadata.
 - `docs/content/<kb>/<locale>/...` stores the KB pages for each locale.
@@ -12,9 +12,9 @@ TockDocs KBs live under `docs/content/<kb>/`.
 
 ## What to strip when porting
 
-Source KBs often have per-section index or cover pages (e.g., VitePress `index.md` or Docusaurus `intro.md`) that contain only a heading and an auto-generated table of contents. **Do not port these into TockDocs.**
+Source KBs often have per-section index or cover pages (e.g., VitePress `index.md` or Docusaurus `intro.md`) that contain only a heading and an auto-generated table of contents. **Do not port these into Xinyi Class.**
 
-In TockDocs:
+In Xinyi Class:
 
 - Section identity comes from `.navigation.yml` (`title` + `icon`).
 - The first content page in the folder serves as the section entry point — there is no separate section index page.
@@ -29,7 +29,7 @@ Before porting a section, inspect its index/cover page:
 
 - Keep page meaning and section structure intact.
 - Keep locale-specific content in separate locale folders.
-- Keep slugs stable unless the new TockDocs route needs a different shape.
+- Keep slugs stable unless the new Xinyi Class route needs a different shape.
 - Mirror important page metadata: `title`, `description`, `seo`, `navigation`, `sitemap`, and any content-specific frontmatter.
 - Update links and references whenever a page moves.
 

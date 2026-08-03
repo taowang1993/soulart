@@ -1,13 +1,13 @@
 ---
 name: editor
-description: TockDocs knowledge-base editing and migration workflow. Use when porting a source KB into the docs/content tree, editing markdown/frontmatter/navigation, rewriting links or assets, or validating MDC with source-level lint to avoid malformed pages.
+description: Xinyi Class knowledge-base editing and migration workflow. Use when porting a source KB into the docs/content tree, editing markdown/frontmatter/navigation, rewriting links or assets, or validating MDC with source-level lint to avoid malformed pages.
 ---
 
 # Editor
 
 ## Goal
 
-Create or migrate TockDocs content **without malformed MDC** while preserving source meaning, route correctness, and navigation order.
+Create or migrate Xinyi Class content **without malformed MDC** while preserving source meaning, route correctness, and navigation order.
 
 ## Read first
 
@@ -61,7 +61,7 @@ Before making substantive edits, spot-check these quality signals so you catch p
 ### 2. Port one page at a time
 
 - Preserve headings, code fences, and meaning first.
-- Rewrite internal links, image paths, and cross-references to the TockDocs route structure.
+- Rewrite internal links, image paths, and cross-references to the Xinyi Class route structure.
 - If a page moves between sections, update navigation metadata and any links that still point to the old path.
 - Prefer adapting an existing valid page pattern over inventing fresh MDC syntax.
 

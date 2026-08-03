@@ -1,4 +1,4 @@
-# TockDocs phased review plan
+# Xinyi Class phased review plan
 
 This review plan is **feature-based**, not directory-based. Each phase follows a user-visible capability across the layer, docs app, server utilities, and starter/consumer surfaces that implement it.
 
@@ -76,7 +76,7 @@ For each phase:
 
 Run the phases in order. The first three phases cover the core product loop:
 
-1. **Can TockDocs discover and route the docs correctly?**
+1. **Can Xinyi Class discover and route the docs correctly?**
 2. **Can a user read and navigate those docs correctly?**
 3. **Can the assistant ground itself in those docs correctly?**
 

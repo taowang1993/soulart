@@ -1,6 +1,6 @@
 const BASE_URL = 'http://localhost:4987'
 const ENDPOINT = `${BASE_URL}/__tockdocs__/assistant`
-const QUERY = 'What is TockDocs?'
+const QUERY = 'What is Xinyi Class?'
 
 async function runOne(label) {
   const body = JSON.stringify({

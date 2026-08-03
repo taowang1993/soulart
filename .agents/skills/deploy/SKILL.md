@@ -1,6 +1,6 @@
 ---
 name: deploy
-description: Deploy TockDocs to Vercel using local build + prebuilt artifacts. Use when the user wants to deploy to Vercel faster than the default cloud build, or when troubleshooting Vercel deployments. The project is configured at tao-project/tockdocs with rootDirectory=docs and uses the Nuxt framework preset. The deploy script is bundled at scripts/deploy.sh.
+description: Deploy Xinyi Class to Vercel using local build + prebuilt artifacts. Use when the user wants to deploy to Vercel faster than the default cloud build, or when troubleshooting Vercel deployments. The project is configured at tao-project/tockdocs with rootDirectory=docs and uses the Nuxt framework preset. The deploy script is bundled at scripts/deploy.sh.
 ---
 
 ## Quick deploy
@@ -14,7 +14,7 @@ Before building, the script cleans stale caches to prevent Nuxt Content from ser
 - `node_modules/.cache/nuxt` — module cache
 
 ```bash
-cd ~/projects/knowledge/tockdocs
+cd ~/projects/soulart
 ./.agents/skills/deploy/scripts/deploy.sh
 ```
 

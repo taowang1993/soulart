@@ -1,12 +1,12 @@
 {
   "name": "tockdocs",
-  "description": "Nuxt layer for TockDocs documentation theme",
+  "description": "Nuxt layer for Xinyi Class documentation theme",
   "version": "5.10.0",
   "type": "module",
   "main": "./nuxt.config.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/taowang1993/tockdocs.git"
+    "url": "git+https://github.com/taowang1993/soulart.git"
   },
   "private": false,
   "license": "MIT",

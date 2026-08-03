@@ -8,7 +8,7 @@ import { z } from 'zod'
 import { GitHubProvider, GitRepoFilesystem, PersistentGitFsCache } from '@taowang1993/gitfs'
 
 const DEFAULT_GITFS_OWNER = 'taowang1993'
-const DEFAULT_GITFS_REPO = 'tockdocs'
+const DEFAULT_GITFS_REPO = 'soulart'
 const DEFAULT_GITFS_REF = 'main'
 const DEFAULT_GITFS_ROOT = 'docs/content'
 const DEFAULT_GITFS_CACHE_DIR = '/tmp/gitfs-cache'

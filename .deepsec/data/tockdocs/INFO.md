@@ -2,7 +2,7 @@
 
 ## What this codebase does
 
-TockDocs is a pnpm workspace for an AI-powered Nuxt documentation layer. `layer/` is the reusable product: routing, content collection resolution, markdown source serving, MCP tools, assistant runtime, skills catalog routes, and shared UI. `docs/` is the official KB-mode site with manual, chemistry, and investing knowledge bases. `playground/` exercises legacy mode, and `cli/` publishes `create-tockdocs` from `.starters/` templates.
+Xinyi Class is a pnpm workspace for an AI-powered Nuxt documentation layer. `layer/` is the reusable product: routing, content collection resolution, markdown source serving, MCP tools, assistant runtime, skills catalog routes, and shared UI. `docs/` is the official KB-mode site with manual, chemistry, and investing knowledge bases. `playground/` exercises legacy mode, and `cli/` publishes `create-tockdocs` from `.starters/` templates.
 
 ## Auth shape
 

@@ -343,7 +343,7 @@ export default defineEventHandler(async (event) => {
     }
 
     const gitfsOwner = process.env.GITFS_GITHUB_OWNER || 'taowang1993'
-    const gitfsRepo = process.env.GITFS_GITHUB_REPO || 'tockdocs'
+    const gitfsRepo = process.env.GITFS_GITHUB_REPO || 'soulart'
     const gitfsRef = process.env.GITFS_REF || 'main'
     const gitFsRoot = getGitFsRoot(assistantScope)
 

@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   extends: ['tockdocs'],
   modules: ['@nuxtjs/i18n', 'nuxt-skill-hub', 'nuxt-studio'],
   site: {
-    name: 'TockDocs',
+    name: 'Xinyi Class',
     ...(siteUrl ? { url: siteUrl } : {}),
   },
   mdc: {
@@ -39,15 +39,15 @@ export default defineNuxtConfig({
   },
   llms: {
     ...(siteUrl ? { domain: siteUrl } : {}),
-    title: 'TockDocs',
-    description: 'Write beautiful docs with Markdown.',
+    title: 'Xinyi Class',
+    description: 'Xinyi Class — AI-powered knowledge management.',
     full: {
-      title: 'TockDocs',
-      description: 'Write beautiful docs with Markdown.',
+      title: 'Xinyi Class',
+      description: 'Xinyi Class — AI-powered knowledge management.',
     },
   },
   mcp: {
-    name: 'TockDocs documentation',
+    name: 'Xinyi Class documentation',
     browserRedirect: '/docs/manual/en/ai/mcp',
   },
   skillHub: {
@@ -60,7 +60,7 @@ export default defineNuxtConfig({
     repository: {
       provider: 'github',
       owner: 'taowang1993',
-      repo: 'tockdocs',
+      repo: 'soulart',
       rootDir: 'docs',
     },
   },

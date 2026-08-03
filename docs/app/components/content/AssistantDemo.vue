@@ -19,12 +19,12 @@ const chatUser = {
 const suggestedQuestionsMap: Record<string, string[]> = {
   en: [
     'How do I get started?',
-    'What is TockDocs?',
+    'What is Xinyi Class?',
     'How to customize the theme?',
   ],
   fr: [
     'Comment démarrer ?',
-    'Qu\'est-ce que TockDocs ?',
+    'Qu\'est-ce que Xinyi Class ?',
     'Comment personnaliser le thème ?',
   ],
 }

@@ -1,6 +1,6 @@
 # MDC safety
 
-Goal: keep TockDocs content at **zero malformed MDC in source** by combining safe authoring patterns with mandatory source lint and the rendered-output backstop.
+Goal: keep Xinyi Class content at **zero malformed MDC in source** by combining safe authoring patterns with mandatory source lint and the rendered-output backstop.
 
 ## Mandatory editing loop
 
@@ -103,9 +103,9 @@ Keep generated asset URLs relative when they belong to the same site.
 
 ## Common failure modes
 
-These are the patterns the source linter catches or that commonly break TockDocs pages:
+These are the patterns the source linter catches or that commonly break Xinyi Class pages:
 
-- **Missing `u-` prefix on Nuxt UI components.** `::page-hero` silently fails to render; use `::u-page-hero`. This is the most common TockDocs MDC error. Note: Nuxt Content components (`::code-group`, `::steps`, `::note`, `::tip`, `::warning`, `::caution`) do **not** need the prefix — only Nuxt UI components (`u-page-hero`, `u-button`, `u-badge`, `u-color-mode-image`, etc.) require it.
+- **Missing `u-` prefix on Nuxt UI components.** `::page-hero` silently fails to render; use `::u-page-hero`. This is the most common Xinyi Class MDC error. Note: Nuxt Content components (`::code-group`, `::steps`, `::note`, `::tip`, `::warning`, `::caution`) do **not** need the prefix — only Nuxt UI components (`u-page-hero`, `u-button`, `u-badge`, `u-color-mode-image`, etc.) require it.
 - Unclosed page frontmatter fences (`---`).
 - Markdown-rich `description` frontmatter. Descriptions render under page titles as plain text, so keep them to one concise sentence with no links, bullets, tables, code, bold markup, raw HTML, or copied body excerpts.
 - Invalid component fences or trailing text on the same line as a component opener.

@@ -2,17 +2,17 @@
 
 ## Overview
 
-TockDocs is an AI-powered Knowledge Management System.
+Xinyi Class is an AI-powered Knowledge Management System.
 
-- `layer/` is the main product: the TockDocs theme, layouts, routing, knowledge-base/content resolution, server utilities, AI assistant, MCP tools, and shared runtime assets.
-- `docs/` is the official documentation site (`tockdocs.dev`) and a real consumer of the layer.
+- `layer/` is the main product: the Xinyi Class theme, layouts, routing, knowledge-base/content resolution, server utilities, AI assistant, MCP tools, and shared runtime assets.
+- `docs/` is the official documentation site and a real consumer of the layer.
 - `playground/` is a lightweight local consumer used to validate the layer in isolation.
 - `cli/` publishes `create-tockdocs`, which scaffolds new projects from the starter templates.
 - `.starters/` contains the `default` and `i18n` templates consumed by the CLI.
 
 CI (`.github/workflows/ci.yml`) installs dependencies, prepares Nuxt types, lints, checks i18n and MDC source integrity, typechecks, builds the CLI, and validates package publishability.
 
-The repo’s core architecture is: **build TockDocs once as an AI-powered Nuxt layer, then reuse it across the docs site, playground, and generated starter projects**.
+The repo’s core architecture is: **build Xinyi Class once as an AI-powered Nuxt layer, then reuse it across the docs site, playground, and generated starter projects**.
 
 ## Tech Stack
 
@@ -40,15 +40,15 @@ Use `tree -L2` or `tree -L3` to maintain this section.
 ├── cli/                     # create-tockdocs package
 │   ├── cli.ts               # CLI command definition
 │   └── main.ts              # CLI entrypoint
-├── docs/                    # Official docs app extending the TockDocs layer
+├── docs/                    # Official docs app extending the Xinyi Class layer
 │   ├── app/                 # Docs-site-specific app config/plugins
 │   ├── content/             # Documentation content
 │   ├── public/              # Site assets shipped by the docs consumer
 │   └── nuxt.config.ts       # Docs-site config
-├── layer/                   # Reusable TockDocs Nuxt layer
+├── layer/                   # Reusable Xinyi Class Nuxt layer
 │   ├── app/                 # Layouts, pages, components, composables
 │   ├── i18n/                # Locale message files
-│   ├── modules/             # TockDocs Nuxt modules
+│   ├── modules/             # Xinyi Class Nuxt modules
 │   ├── server/              # MCP tools, search, sitemap, content helpers
 │   ├── shared/              # Shared type declarations
 │   ├── utils/               # Mode, content, and metadata helpers
@@ -82,7 +82,7 @@ Important deployment facts:
 - Verification command: `pnpm run verify`
 - Site config is defined in `docs/nuxt.config.ts`
 - Nitro prerendering, sitemap generation, robots output, OG image generation, `llms.txt`, source-markdown serving (`/source`, `/raw`, and `.md` aliases), and skill manifests are configured through the layer
-- Set `NUXT_SITE_URL` to the public deployment origin for the site (for example `https://tockdocs-pi-nine.vercel.app`) and do not include a trailing slash; `nuxt-llms` concatenates `/llms-full.txt` directly from this value
+- Set `NUXT_SITE_URL` to the public deployment origin for the site and do not include a trailing slash; `nuxt-llms` concatenates `/llms-full.txt` directly from this value
 - Keep `NUXT_APP_BASE_URL=/` for the site root unless the site is hosted under a subpath
 
 ### Nuxt Studio
@@ -138,7 +138,8 @@ The local dev launcher uses port **4987** with `strictPort: true`; it does not f
 
 ## Development Guidelines
 
-- Do not run `pnpm dev`, `nuxt dev`, or other long-running app processes without user's permission.
-- Read `architecture.md` and `assistant.md` before reading anything else or writng any code.
-- Use the `deploy` skill before deploying to Vercel.
-- Use the TDD skill when asked to implement a plan. Ensure 100% test coverage. 
+- Never run `pnpm dev`, `nuxt dev`, or other long-running app processes without user's permission.
+- Must read `architecture.md` and `assistant.md` before reading anything else or writng any code.
+- Must use the `deploy` skill before deploying to Vercel.
+- Must use the TDD skill when asked to implement a plan. Ensure 100% test coverage.
+- Must use the playwright-cli skill to verify your work.
