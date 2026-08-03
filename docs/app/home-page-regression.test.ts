@@ -21,9 +21,14 @@ const expectedAssets = [
 ]
 
 const expectedElementAssets = [
+  'divider-heart-pink.webp',
+  'flowers-bloom.webp',
+  'heart-coral.webp',
   'hero-connect.webp',
   'hero-create.webp',
   'hero-thrive.webp',
+  'lavender-branch.webp',
+  'lavender-sprig.webp',
   'leaf-row.webp',
   'leaf-single.webp',
   'program-art.webp',
@@ -41,6 +46,8 @@ const expectedElementAssets = [
   'studio-creative.webp',
   'studio-groups.webp',
   'studio-light.webp',
+  'wc-lavender.webp',
+  'wc-rose.webp',
 ]
 
 function readHomePage() {

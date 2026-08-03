@@ -133,12 +133,29 @@ const isAssistantOpen = shallowRef(false)
   >
     <section class="relative isolate overflow-hidden bg-[linear-gradient(120deg,#fff8fb_0%,#f7efff_48%,#fff2ee_100%)] px-4 pb-10 pt-5 sm:px-6 lg:px-8">
       <div
-        class="absolute inset-0 -z-10 opacity-80"
+        class="absolute inset-0 -z-10"
         aria-hidden="true"
       >
-        <div class="watercolor watercolor-rose left-[-8rem] top-[-7rem]" />
-        <div class="watercolor watercolor-gold right-[-8rem] top-[-5rem]" />
-        <div class="watercolor watercolor-lavender bottom-[-8rem] left-1/3" />
+        <img
+          src="/home/elements/wc-rose.webp"
+          alt=""
+          class="absolute -left-36 -top-36 w-[32rem] max-w-none opacity-70"
+        >
+        <img
+          src="/home/elements/wc-lavender.webp"
+          alt=""
+          class="absolute -right-40 -top-24 w-[36rem] max-w-none opacity-60"
+        >
+        <img
+          src="/home/elements/wc-rose.webp"
+          alt=""
+          class="absolute -bottom-48 left-1/4 w-[30rem] max-w-none opacity-50"
+        >
+        <img
+          src="/home/elements/flowers-bloom.webp"
+          alt=""
+          class="absolute -bottom-2 right-2 w-36 opacity-90 sm:w-44 lg:right-10"
+        >
       </div>
 
       <nav
@@ -334,7 +351,12 @@ const isAssistantOpen = shallowRef(false)
           <h2 class="font-serif text-4xl font-semibold text-[#5a4380] sm:text-5xl">
             Explore Our Programs
           </h2>
-          <div class="section-divider mx-auto mt-5" />
+          <img
+            src="/home/elements/divider-heart-pink.webp"
+            alt=""
+            aria-hidden="true"
+            class="mx-auto mt-5 w-72 max-w-[70vw] object-contain"
+          >
         </div>
 
         <div class="mt-8 grid gap-8 md:grid-cols-2">
@@ -389,8 +411,14 @@ const isAssistantOpen = shallowRef(false)
 
     <section
       id="studio"
-      class="relative px-4 py-20 sm:px-6 lg:px-8 lg:py-24"
+      class="relative overflow-hidden px-4 py-20 sm:px-6 lg:px-8 lg:py-24"
     >
+      <img
+        src="/home/elements/lavender-sprig.webp"
+        alt=""
+        aria-hidden="true"
+        class="absolute -left-10 top-6 w-40 opacity-60 lg:w-52"
+      >
       <div class="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[0.78fr_1.22fr]">
         <div class="text-center">
           <div
@@ -403,7 +431,12 @@ const isAssistantOpen = shallowRef(false)
             Welcome to
             <span class="block text-[#df838d]">Our Studio</span>
           </h2>
-          <div class="section-divider mx-auto mt-5" />
+          <img
+            src="/home/elements/divider-heart-pink.webp"
+            alt=""
+            aria-hidden="true"
+            class="mx-auto mt-5 w-72 max-w-[70vw] object-contain"
+          >
           <p class="mx-auto mt-6 max-w-sm text-base leading-7 text-[#4f455b]">
             XinYi Art School &amp; XinYi Yoga — a creative community in North Toronto, where art, mindfulness, and lifelong learning come together.
           </p>
@@ -434,7 +467,13 @@ const isAssistantOpen = shallowRef(false)
         >
       </div>
 
-      <p class="mx-auto mt-12 max-w-4xl border-y border-[#e9ddec] py-6 text-center font-serif text-xl italic text-[#a283b8]">
+      <img
+        src="/home/elements/divider-heart-pink.webp"
+        alt=""
+        aria-hidden="true"
+        class="mx-auto mt-12 w-72 max-w-[70vw] object-contain"
+      >
+      <p class="mx-auto mt-6 max-w-4xl text-center font-serif text-xl italic text-[#a283b8]">
         Children&apos;s Art Classes • Adult Art Lessons • Summer Camps • Portfolio Preparation • Gentle Yoga • Meditation • Mindfulness
       </p>
     </section>
@@ -461,11 +500,30 @@ const isAssistantOpen = shallowRef(false)
       >
 
       <div class="relative mx-auto max-w-6xl text-center">
-        <h2 class="font-serif text-4xl font-semibold text-[#5a4380] sm:text-5xl">
-          Why Families Choose
-          <span class="text-[#df838d]">XinYi</span>
-        </h2>
-        <div class="section-divider mx-auto mt-5" />
+        <div class="lg:flex lg:items-end lg:justify-between lg:gap-10">
+          <div class="lg:text-left">
+            <h2 class="font-serif text-4xl font-semibold text-[#5a4380] sm:text-5xl">
+              Why Families Choose
+              <span class="text-[#df838d]">XinYi</span>
+            </h2>
+            <img
+              src="/home/elements/divider-heart-pink.webp"
+              alt=""
+              aria-hidden="true"
+              class="mx-auto mt-5 w-72 max-w-[70vw] object-contain lg:mx-0"
+            >
+          </div>
+          <NuxtLink
+            to="/contact"
+            class="mt-8 inline-flex items-center gap-3 rounded-xl bg-[#e49aa1] px-6 py-3 text-base font-bold text-[#3f304e] shadow-lg shadow-[#e49aa1]/20 transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792] lg:mt-0 lg:shrink-0"
+          >
+            <UIcon
+              name="i-lucide-mail"
+              class="size-5"
+            />
+            Join Our Community
+          </NuxtLink>
+        </div>
 
         <div class="mt-12 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           <article
@@ -489,19 +547,15 @@ const isAssistantOpen = shallowRef(false)
           </article>
         </div>
 
-        <p class="mx-auto mt-12 max-w-4xl border-t border-[#e9ddec] pt-6 font-serif text-xl italic text-[#a283b8]">
+        <img
+          src="/home/elements/divider-heart-pink.webp"
+          alt=""
+          aria-hidden="true"
+          class="mx-auto mt-12 w-72 max-w-[70vw] object-contain"
+        >
+        <p class="mx-auto mt-6 max-w-4xl font-serif text-xl italic text-[#a283b8]">
           Supporting every child and adult to discover their unique creativity and grow with confidence.
         </p>
-        <NuxtLink
-          to="/contact"
-          class="mt-8 inline-flex items-center gap-3 rounded-xl bg-[#e49aa1] px-6 py-3 text-base font-bold text-[#3f304e] shadow-lg shadow-[#e49aa1]/20 transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d98792]"
-        >
-          <UIcon
-            name="i-lucide-mail"
-            class="size-5"
-          />
-          Join Our Community
-        </NuxtLink>
       </div>
     </section>
 
@@ -513,17 +567,34 @@ const isAssistantOpen = shallowRef(false)
         class="absolute inset-x-0 top-0 h-40 bg-[radial-gradient(circle_at_20%_10%,rgba(222,189,231,0.42),transparent_35%),radial-gradient(circle_at_80%_15%,rgba(255,218,215,0.42),transparent_34%)]"
         aria-hidden="true"
       />
+      <img
+        src="/home/elements/lavender-branch.webp"
+        alt=""
+        aria-hidden="true"
+        class="absolute -left-6 top-1/3 w-36 opacity-50 lg:w-44"
+      >
+      <img
+        src="/home/elements/lavender-branch.webp"
+        alt=""
+        aria-hidden="true"
+        class="absolute -right-6 top-1/4 w-36 -scale-x-100 opacity-50 lg:w-44"
+      >
       <div class="relative mx-auto max-w-6xl text-center">
-        <div
-          class="text-3xl text-[#a883ce]"
+        <img
+          src="/home/elements/heart-coral.webp"
+          alt=""
           aria-hidden="true"
+          class="mx-auto h-12 w-auto object-contain"
         >
-          ♡
-        </div>
         <h2 class="mt-2 font-serif text-4xl font-semibold text-[#303266] sm:text-5xl">
           Handwritten Memories
         </h2>
-        <div class="section-divider mx-auto mt-5" />
+        <img
+          src="/home/elements/divider-heart-pink.webp"
+          alt=""
+          aria-hidden="true"
+          class="mx-auto mt-5 w-72 max-w-[70vw] object-contain"
+        >
         <p class="mx-auto mt-4 max-w-xl text-sm leading-6 text-[#7c6d8c]">
           Some gifts cannot be bought. These handwritten notes remind me why I chose this path.
         </p>
@@ -679,43 +750,6 @@ const isAssistantOpen = shallowRef(false)
   filter: drop-shadow(0 22px 36px rgba(130, 91, 121, 0.2));
   -webkit-mask-image: radial-gradient(ellipse 78% 88% at 50% 47%, #000 55%, transparent 95%);
   mask-image: radial-gradient(ellipse 78% 88% at 50% 47%, #000 55%, transparent 95%);
-}
-
-.watercolor {
-  position: absolute;
-  width: 22rem;
-  height: 22rem;
-  border-radius: 9999px;
-  filter: blur(28px);
-}
-
-.watercolor-rose {
-  background: rgba(248, 190, 211, 0.55);
-}
-
-.watercolor-gold {
-  background: rgba(255, 221, 180, 0.55);
-}
-
-.watercolor-lavender {
-  background: rgba(212, 196, 245, 0.58);
-}
-
-.section-divider {
-  position: relative;
-  width: min(18rem, 70vw);
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(151, 124, 177, 0.45), transparent);
-}
-
-.section-divider::after {
-  position: absolute;
-  inset: 50% auto auto 50%;
-  width: 1.25rem;
-  height: 1.25rem;
-  content: "";
-  background: radial-gradient(circle at 50% 50%, #c8a9d8 0 28%, transparent 29%), radial-gradient(circle at 20% 30%, #e59aa5 0 18%, transparent 19%), radial-gradient(circle at 80% 30%, #e59aa5 0 18%, transparent 19%);
-  transform: translate(-50%, -50%);
 }
 
 @media (max-width: 639px) {
